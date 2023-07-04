@@ -1,0 +1,140 @@
+<!--pages/workbench/index.wxml-->
+<view class="workbenchContainer">
+  <van-tabs duration="0" active="{{ topIndex }}" color="#3D7EFF" custom-class="tabBox" bind:change="tabChange" id="tabs">
+    <!-- 我的访客 -->
+    <van-tab title="我的访客" >
+      <!-- 筛选时间 -->
+      <view class="termBox">
+        <view class="timeContainer">
+          <view class="flex_c_c day {{timeTermIndex == 0 ? 'termActColor' : ''}}" data-index="0" catchtap="timeTermSwitch">今天</view>
+          <view class="flex_c_c day {{timeTermIndex == 1 ? 'termActColor' : ''}}" data-index="1" catchtap="timeTermSwitch">昨天</view>
+          <view class="filtrateTimeBox">
+            <view class="startTime" data-index="0" catchtap="timeSelect">{{startTime}}<image class="down" src="/image/workbench/down.png"></image>
+            </view>
+            <text style="margin: 0 12rpx;">至</text>
+            <view class="endTime" data-index="1" catchtap="timeSelect">{{endTime}}<image class="down" src="/image/workbench/down.png"></image>
+            </view>
+          </view>
+        </view>
+        <view class="caller">访客人数合计: <text class="NNT">{{myVisitorTotal}}人</text></view>
+      </view>
+      <!-- 访客人数列表 -->
+      <view class="visitorCountBox">
+        <view class="visitorCountTitle">
+          <!-- <view class="wx">微信</view> -->
+          <view class="phoneNumber">电话号码</view>
+          <view class="visitorTime">访问时间</view>
+        </view>
+        <view class="visitorCountListBox">
+          <scroll-view scroll-y style="height: 60vh;" refresher-enabled data-index="{{0}}" bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+            <!-- scroll-view添加内容防止有数据的时候不展示 -->
+            <view style="height:2rpx"></view>
+            <view class="visitorCountList" wx:for="{{myVisitorData}}" wx:key="index">
+              <!-- <image class="visitorWxImg" src="../../image/login/logo.png"></image> -->
+              <view class="phoneNumber">{{item.mobile}}</view>
+              <view class="visitorTime">{{item.updateTime}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </van-tab>
+    <!-- 企业访客 -->
+    <van-tab title="企业访客" wx:if="{{isAdministrator}}">
+      <!-- 筛选时间 -->
+      <view class="termBox">
+        <view class="timeContainer">
+          <view class="flex_c_c day {{timeTermIndex == 0 ? 'termActColor' : ''}}" data-index="0" catchtap="timeTermSwitch">今天</view>
+          <view class="flex_c_c day {{timeTermIndex == 1 ? 'termActColor' : ''}}" data-index="1" catchtap="timeTermSwitch">昨天</view>
+          <view class="filtrateTimeBox">
+            <view class="startTime" data-index="0" catchtap="timeSelect">{{startTime}}<image class="down" src="/image/workbench/down.png"></image>
+            </view>
+            <text style="margin: 0 12rpx;">至</text>
+            <view class="endTime" data-index="1" catchtap="timeSelect">{{endTime}}<image class="down" src="/image/workbench/down.png"></image>
+            </view>
+          </view>
+        </view>
+        <view class="caller">访客人数合计: <text class="NNT">{{firmVisitorTotal}}人</text></view>
+      </view>
+      <!-- 企业访客人数列表 -->
+      <view class="firmVisitorCountBox">
+        <view class="firmVisitorCountTitle">
+          <view class="number">编号</view>
+          <view class="staff">员工</view>
+          <view class="visitNNT">访问人数</view>
+          <view class="operate">操作</view>
+        </view>
+        <view class="firmVisitorCountListBox">
+          <scroll-view scroll-y style="height: 60vh;" refresher-enabled data-index="{{1}}" bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+            <!-- scroll-view添加内容防止有数据的时候不展示 -->
+            <view style="height:2rpx"></view>
+            <view class="firmVisitorCountList" wx:for="{{firmVisitorData}}" wx:key="index">
+              <view class="number">{{index + 1}}</view>
+              <view class="staffBox">
+                <view class="name">{{item.fullname}}</view>
+                <view class="phoneNumber">{{item.mobile}}</view>
+              </view>
+              <view class="visitNNT">{{item.number}}</view>
+              <view class="flex_c_c operate" data-userId="{{item.userId}}" catchtap="visitorPopupOpen">查看</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+      <!-- 企业访客弹窗列表 -->
+      <van-popup show="{{visitorPopup}}" custom-class="visitorCountPopup">
+        <view class="visitorCountTitle">
+          <!-- <view class="wx">微信</view> -->
+          <view class="phoneNumber">电话号码</view>
+          <view class="visitorTime">访问时间</view>
+          <image class="close" src="/image/workbench/close.png" catchtap="visitorPopupClose"></image>
+        </view>
+        <scroll-view scroll-y style="height:598rpx;" refresher-enabled="true" data-index="{{0}}" bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+          <!-- scroll-view添加内容防止有数据的时候不展示 -->
+          <view style="height:2rpx"></view>
+          <view class="visitorCountListBox">
+            <view class="visitorCountList" wx:for="{{myVisitorData}}" wx:key="index">
+              <!-- <image class="visitorWxImg" src="../../image/login/logo.png"></image> -->
+              <view class="phoneNumber">{{item.mobile}}</view>
+              <view class="visitorTime">{{item.updateTime}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </van-popup>
+    </van-tab>
+    <!-- 营销模板 -->
+    <van-tab title="营销模板">
+      <!-- 模板切换 -->
+      <scroll-view scroll-x class="templateScroll">
+        <view class="templateBox">
+          <view class="template {{templateIndex == 1 ? 'templateActColor' : ''}}" data-index="1" catchtap="templateCut">促销模板</view>
+          <view class="template {{templateIndex == 2 ? 'templateActColor' : ''}}" data-index="2" catchtap="templateCut">招聘模板</view>
+          <view class="template {{templateIndex == 3 ? 'templateActColor' : ''}}" data-index="3" catchtap="templateCut">招租模板</view>
+          <view class="template {{templateIndex == 4 ? 'templateActColor' : ''}}" data-index="4" catchtap="templateCut">我的企业模板</view>
+        </view>
+      </scroll-view>
+      <!-- 模板列表 -->
+      <scroll-view scroll-y style="height: 80vh;">
+        <!-- scroll-view添加内容防止有数据的时候不展示 -->
+        <view style="height:2rpx"></view>
+        <view class="templateListBox">
+          <view class="templateList" wx:for="{{templateAllData[templateIndex]}}" wx:key="index" data-templateImg="{{imageBaseUrl + item.templateFile}}" data-templateIndex="{{templateIndex}}" catchtap="jumpLookTemplate">
+            <image class="templateImg" src="{{imageBaseUrl + item.templateFile }}"></image>
+            <view class="templateText" wx:if="{{templateIndex == 1}}">促销模板</view>
+            <view class="templateText" wx:if="{{templateIndex == 2}}">招聘模板</view>
+            <view class="templateText" wx:if="{{templateIndex == 3}}">招租模板</view>
+            <view class="templateText" wx:if="{{templateIndex == 4}}">我的企业模板</view>
+          </view>
+        </view>
+      </scroll-view>
+    </van-tab>
+  </van-tabs>
+  <!-- 时间选择器弹窗 -->
+  <van-popup show="{{ timeSelectPopup }}" position="bottom" bind:close="timeSelectCancel">
+    <van-datetime-picker type="date" bind:input="onInput" max-date="{{ maxDate }}" bind:cancel="timeSelectCancel" bind:confirm="timeSelectConfirm" />
+  </van-popup>
+  <!-- 底部tabBar -->
+  <van-tabbar inactive-color="#777777" active-color="#777777">
+    <van-tabbar-item icon="/image/tabBar/nameCard.png" data-index="0" catchtap="bottomChange">名片设置</van-tabbar-item>
+    <van-tabbar-item icon="/image/tabBar/shop.png" data-index="1" wx:if="{{isAdministrator}}" catchtap="bottomChange">商城设置</van-tabbar-item>
+    <van-tabbar-item icon="/image/tabBar/gallery.png" data-index="2" wx:if="{{isAdministrator}}" catchtap="bottomChange">展厅设置</van-tabbar-item>
+  </van-tabbar>
+</view>

@@ -1,0 +1,18 @@
+<!--components/modal/component.wxml-->
+<view class='modal-wrapp' wx:if='{{modal.show}}'>
+  <view class='modal-main' style='height:{{(modal.height)?modal.height:modalDefault.height}}'>
+    <!-- <view class='modal-title'>{{(modal.title)?modal.title:modalDefault.title}}</view> -->
+    <!-- <scroll-view scroll-y class='modal-content'>
+      <slot></slot>
+    </scroll-view> -->
+    <view style=' padding: 20rpx; padding-bottom: 0;'>
+      <view wx:if="{{modal.icon&&!modal.image}}" class="my-icon {{modal.icon}}" style='font-size:{{modal.iconSize?modal.iconSize:"100rpx"}}'></view>
+      <image wx:elif="{{modal.image}}" src="{{modal.image}}" mode="widthFix" style='width:{{modal.imageSize?modal.imageSize:"200rpx"}}'></image>
+    </view>
+    <view class='modal-content'>{{modal.contentText?modal.contentText:modalDefault.contentText}}</view>
+    <!-- <view class='modal-button'>
+      <view class='modal-cancel' style='color:{{(modal.cancelColor)?modal.cancelColor:modalDefault.cancelColor}}' wx:if='{{modal.showCancel}}' bindtap="modalCancel">{{(modal.cancelText)?modal.cancelText:modalDefault.cancelText}}</view>
+      <view class='modal-confirm' style='color:{{(modal.confirmColor)?modal.confirmColor:modalDefault.confirmColor}}' bindtap="modalConfirm">{{(modal.confirmText)?modal.confirmText:modalDefault.confirmText}}</view>
+    </view> -->
+  </view>
+</view>

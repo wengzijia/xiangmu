@@ -1,0 +1,66 @@
+page{
+  background-color: #fff;
+  font-size: 28rpx;
+}
+.couple .title{
+ padding: 30rpx 40rpx;
+ background-color: #f4f4f4;
+ box-sizing: border-box;
+
+}
+.couple .from{
+  padding-left:80rpx;
+  padding-right:30rpx ;
+  box-sizing: border-box;
+}
+.couple .from view.inputBox{
+  /* padding-top:30rpx;
+  padding-bottom:10rpx; */
+  border-bottom:1rpx solid #f4f4f4;
+  
+  display: flex;
+}
+.couple .from view{
+  /* padding-top:30rpx;
+  padding-bottom:10rpx; */
+  box-sizing: border-box;
+}
+.couple .from view input{
+  /* border: 1rpx solid red; */
+  width: 100%;
+  flex:1;
+  height: 100rpx;
+  line-height: 100rpx;
+  /* caret-color: red; */
+  /* padding: 30rpx 0; */
+}
+.couple .from view textarea{
+  border: 1rpx solid #f4f4f4;
+  width: auto;
+}
+.couple .from view text{
+  display: inline-block;
+  /* border: 1rpx solid red; */
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+}
+.couple .from view text text{
+  display: inline-block;
+  /* border: 1rpx solid red; */
+  color: red;
+  padding-right: 5rpx;
+  box-sizing: border-box;
+}
+.couple .submit{
+  background-color: #ff0036;
+  text-align: center;
+  padding:  30rpx;
+  color:#fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}

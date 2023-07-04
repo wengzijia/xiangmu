@@ -1,0 +1,51 @@
+<!--pages/shop/index.wxml-->
+<view class="shopContainer" wx:if="{{carouselList.length || planList.length}}">
+    <!-- 轮播图 -->
+    <view class="item-box swiper-box">
+      <view style="    border-radius: 8px;overflow: hidden;">
+        <swiper wx:if='{{carouselList.length>0}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{true}}'>
+            <swiper-item wx:for='{{carouselList}}' wx:key="index">
+                <!-- catchtap="skipPage" data-val="{{item.pageUrl}}" -->
+                  <image src="{{ imageBaseUrl + item.coverPath }}" style="border-radius: 16rpx;" mode="aspectFit" data-index="{{index}}"  catchtap="checkCarouselImgs" ></image>
+            </swiper-item>
+        </swiper>
+      </view>
+    </view>
+    <!-- 包装方案分类 -->
+    <view class="item-box">
+        <block wx:for="{{planList}}" wx:key="index">
+            <view class="item-conter" wx:if="{{ item.packSchemes.length }}">
+                <view class="item-title">
+                    <text class="item-title-text">{{item.name}}</text>
+                    <view class="more-btn" data-id="{{item.id}}" data-enterpriseCode="{{item.enterpriseCode}}" data-path="{{item.path}}" data-name="{{item.name}}" catchtap="catMorePlan">
+                        更多
+                        <van-icon name="arrow" />
+                    </view>
+                </view>
+                <van-grid gutter="{{ 9 }}" column-num='2'>
+                    <!-- wx:for-item="index" -->
+                    <van-grid-item use-slot wx:for="{{ item.packSchemes }}" wx:key="index" catchtap="goodsDetails" data-id="{{item.id}}">
+                        <image class="goods-image" style="height: 300rpx;width: 300rpx;" src="{{ imageBaseUrl + item.goodsImg.secondThumbnail}}" />
+                        <view class="text-ellipsisl2 goods-name">{{item.schemeName}}</view>
+                        <view class="goods-price-box">
+                            <text class="price-box">￥ <text class="price-num">{{item.price}}</text></text>
+                            <text>元/套起</text>
+                        </view>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+        </block>
+    </view>
+    <!-- 立刻咨询 -->
+<view class="consultBox" catchtap="phoneCall">
+        <image class="consultPic" mode="widthFix" src="{{ imageBaseUrl + employeeInfo.avatar }}"></image>
+        <image class="consultImg" src="/image/shop/consult.png"></image>
+    </view>
+    <!-- 垫底用的 -->
+    <view style="background-color: #e9f0ff;width: 100%;height: 30rpx;"></view>
+</view>
+<!-- 空状态 -->
+<view class="nullBox" wx:else>
+    <image class="nullImg" src="{{staticFileBaseUrl}}/static/wxwt/iweitu/shop.png"></image>
+    <view class="nullText">暂无商城内容~</view>
+</view>

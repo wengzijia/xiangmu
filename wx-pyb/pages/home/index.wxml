@@ -1,0 +1,225 @@
+<view style="height: 100%;">
+  <!-- <view wx:if="{{bannerList.length<2}}" class='swiperView'>
+    <image wx:if="{{bannerList[0]}}" src="{{bannerList[0].imageUrl}}" mode='widthFix'></image>
+  </view> -->
+ <swiper wx:if='{{bannerList.length>0}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{bannerList.length>=2}}'  	>
+   <swiper-item wx:for='{{bannerList}}' wx:key="index" >
+    <image src="{{imgBaseUrl+item.imageUrl}}" mode='widthFix' catchtap="skipPage" data-val="{{item.pageUrl}}"></image>
+   </swiper-item>
+  </swiper>
+  <view class='home'>
+    <view class="title">
+      <image src="{{imgBaseUrl+'/static/wxpyb/home_title.png'}}" mode='widthFix'  ></image>
+     <!-- <view class="title-conter">
+      <image src="{{imgBaseUrl+'/static/wxpyb/new_logo.png'}}" mode='widthFix' class="title-logo" ></image>
+      <view class="title-text">已服务15万+包装印刷中间商</view>
+      <view  class="title-btn" style="background-image: url({{imgBaseUrl+'/static/wxpyb/btn_bg.png'}})">
+        关于拼一版
+        <image src="{{imgBaseUrl+'/static/wxpyb/icon/right0.png'}}" mode='widthFix' class="title-btn-icon" ></image>
+      </view> -->
+     <!-- </view> -->
+    <view  class="title-btn" catchtap='aboutPopupShow' ></view>
+  </view>
+  <view wx:if='{{!isProxy}}' style="height: 100%">
+    <scroll-view scroll-y="true" style="height: calc(100% - 180rpx)">
+    <van-tabs active="{{ active }}" bind:change="onChange" >
+      <van-tab wx:for="{{cartList}}" title-style="font-size:32rpx;color:#333;" title="{{item.title}}"  wx:key="index">
+        <view class="categoryContainer" style='padding:0' wx:if="{{item.styleType=='1'}}" >
+          <view wx:for="{{item.list}}" wx:for-item="item2" wx:key="index" class="categoryItem" style="background-image: url({{imgBaseUrl}}/static/wxpyb/btn_bg.png)" catchtap="selectCategory" data-reported="{{item2.reported}}" data-url="{{item2.url}}" data-val="{{item2.val}}" >
+            <view style="display: flex;align-items: center;">
+              <image mode="widthFix" src="{{imgBaseUrl+item2.img}}"></image>
+              <text>{{item2.title}}</text>
+            </view>
+            <view class="indxSign"></view>
+          </view>
+        </view>
+        <view class="categoryContainer categoryContainer2" wx:if="{{item.styleType=='2'}}" >
+          <view wx:for="{{item.list}}" wx:for-item="item2" wx:key="index" class="categoryItem2" catchtap="selectCategory" data-url="{{item2.url}}"  data-val="{{item2.val}}" data-title="{{item2.title}}">
+            <view class="categoryItem2-btn"  style="background-image: url({{imgBaseUrl}}/static/wxpyb/btn_bg2.png)" >
+              <image mode="heightFix" src="{{imgBaseUrl+item2.img}}"></image>
+              <view>{{item2.title}}</view>
+            </view>
+          </view>
+        </view>
+      </van-tab>
+    </van-tabs>
+    </scroll-view>
+  </view>
+      <!-- <button catchtap="getLocation">获取位置</button> -->
+      <!-- {{ province+    city   }}  -->
+  <!-- <web-view src="http://192.168.9.2:8070/wxpyb/h5/cutter" /> -->
+  <!-- 已废弃 -->
+  <view class="categoryContainer" style='padding:0' wx:if='{{isProxy}}' >
+    <block wx:key="index">
+      <!-- <view  class="categoryItem" catchtap="selectCategory" data-type="single" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i1.png"></image>
+          <text>拼版下单</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view>
+      <view  class="categoryItem" catchtap="selectCategory" data-type="exclusive" data-val="0" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i3.png"></image>
+          <text>卡盒专版下单</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view>
+      <view  class="categoryItem" catchtap="selectCategory" data-type="exclusive" data-val="1" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i3.png"></image>
+          <text>坑盒专版下单</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view>
+      <view  class="categoryItem" catchtap="selectCategory" data-type="exclusive" data-val="2" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i3.png"></image>
+          <text>精装盒专版下单</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view>
+      <view  class="categoryItem" catchtap="selectCategory" data-type="paper" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i0.png"></image>
+          <text>我要买纸</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view> -->
+      <!-- <view  class="categoryItem" catchtap="selectCategory" data-type="processe" wx:if='{{!isProxy}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i2.png"></image>
+          <text>单工序下单</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view> -->
+      <!-- <view  class="categoryItem" catchtap="selectCategory" data-type="print" wx:if='{{!isProxy && admin}}'>
+		    <view style="display: flex;align-items: center;">
+          <image src="../../image/home/i2.png"></image>
+          <text>印刷加工</text>
+		    </view>
+		    <view class="indxSign"></view>
+	    </view> -->
+      <view  class="categoryItem categoryItem3" catchtap="selectCategory" data-type="proxy" wx:if='{{isProxy}}'>
+        <view style="display: flex;align-items: center;">  
+          <image src="../../image/home/i1.png"></image>
+          <text>我要下单</text>
+        </view>
+        <view class="indxSign"></view>
+	    </view>
+      <!-- <cell bind:startmessage='startmessage' bind:completemessage="completemessage" plugid='5d6892650966280326fb17b83407ff74'  /> -->
+    <!-- <button bindtap="getUserProfile">获取信息</button> -->
+      <!-- <view  class="categoryItem" catchtap="selectCategory" data-type="edition">
+        <view style="display: flex;align-items: center;">  
+          <image src="../../image/home/i1.png"></image>
+          <text>整版下单</text>
+        </view>
+        <view class="indxSign"></view>
+	    </view> -->
+    </block>
+    <!-- <view style="color:#999;font-size:28rpx;margin-top:20rpx" catchtap="toDraw">下单返利说明></view> -->
+  </view>
+  <!-- <image class="footerImg" src="{{imgBaseUrl+'/static/wxpyb/home_bg.png'}}" mode='widthFix'  ></image> -->
+  <!-- <view class="orderTips" wx:if="{{false}}"> 
+    <view style="padding-left: 32rpx;">您有一个补差价订单</view>
+    <icon class="ac-icon-small" type="cancel" size="23"></icon>
+    <view><button>立即查看</button></view>
+  </view> -->
+  <!-- <view class="orderFlow">
+    <view class="red" style="margin-bottom:20rpx;display: inline-block;" catchtap='coupleBack' >反馈有奖</view>
+  </view> -->
+  <!-- <view class="orderFlow">
+    <view style="margin-bottom:20rpx">下单流程</view>
+    <view>
+      选择参数
+      <text class="ac-icon-arrow"></text>支付订单
+      <text class="ac-icon-arrow"></text>上传文件
+      <text class="ac-icon-arrow"></text>现场提货
+    </view>
+  </view> -->
+</view>
+</view>
+<modal modalPadding='{{modalPadding}}' modal='{{modal}}'></modal>
+<service></service>
+<view wx:if="{{dialog}}" class="mask">
+    <view class="alert-box">
+    <view wx:if="{{!isAlert}}" class="activebg">
+      <image src="../../image/home/draw-title.png" class="draw-title"></image>
+      <view class="activebg2">
+        <image src="../../image/home/draw-base.png" class="base-img"></image>
+        <image src="../../image/home/turntable.png" animation="{{animationData}}" class="turntable"></image>
+        <image src="../../image/home/pointer.png" class="pointer"></image>
+        <view class="draw-btn" catch:tap="draw"></view>
+      </view>
+    </view>
+    <view wx:else class="activebg">
+      <view class="draw-alert">
+        <image src="../../image/home/1.png" class="draw-alert"></image>
+        <view class="red-envelopes">
+          <image src="../../image/home/subtract.png" class="coupons-bg"></image>
+          <view class="price">
+            <view style="margin-bottom:-4px;line-height:44px;">
+              <text class="rmb">￥</text>
+              <text class="price-num">{{amount}}</text>
+            </view>
+            <view class="desc">红包券</view>
+          </view>
+          <view class="price-info">
+            <view style="line-height:24px;">幸运红包</view>
+            <view class="explain">拼版/专版满最低消费可用</view>
+            <view class="explain">有效期至:{{overdue}}</view>
+          </view>
+        </view>
+        <view class="coupons-btn" catchtap="goCoupon">去查看</view>
+      </view>
+    </view>
+      <van-icon name="close" size="28px" class="btn" catchtap="close"/>
+    </view>
+</view>
+<!-- <official-account class="official"></official-account> -->
+
+<van-popup show="{{ aboutPopup }}"  close-icon-position="top-right" bind:close='aboutPopupHide'  custom-style="" safe-area-inset-top="{{true}}" closeable="{{true}}" round='{{true}}' custom-class="about-popup">
+  <view class="about-popup-main">
+    <!-- <image mode="widthFix" class="about-popup-title-image" src="{{imgBaseUrl+'/static/wxpyb/about/about_title.png'}}" /> -->
+    <view style="height: 280rpx;">
+            
+        </view>
+    <view class="about-popup-center-box">
+      <view  class="about-popup-center">
+        <image mode="widthFix" src="{{imgBaseUrl+'/static/wxpyb/about/about_popup.png'}}" />
+     
+        <view class="about-popup-center-swiper">
+          <swiper class='swiperView2' circular interval='3500' autoplay indicator-dots='{{false}}' indicator-active-color='#ff0036'>
+          <swiper-item >
+            <image src="{{imgBaseUrl+'/static/wxpyb/about/1.png'}}"  ></image>
+          </swiper-item>
+            <swiper-item >
+            <image src="{{imgBaseUrl+'/static/wxpyb/about/2.png'}}" ></image>
+          </swiper-item>
+            <swiper-item >
+            <image src="{{imgBaseUrl+'/static/wxpyb/about/3.png'}}"  ></image>
+          </swiper-item>
+            <swiper-item >
+            <image src="{{imgBaseUrl+'/static/wxpyb/about/4.png'}}" ></image>
+          </swiper-item>
+            <swiper-item >
+            <image src="{{imgBaseUrl+'/static/wxpyb/about/5.png'}}"  ></image>
+          </swiper-item>
+        </swiper>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-popup>
+<!-- 公告展示 -->
+<view wx:if="{{noticePopup}}" class="mask">
+    <view class="alert-box">
+    <view wx:if="{{!isAlert}}" class="activebg">
+      <view class="activebg2">
+        <image src="{{imgBaseUrl}}/static/wxpyb/labor.png" class="base-img"></image>
+        <!-- <image src="./ban.png" class="base-img"></image> -->
+      </view>
+    </view>
+      <van-icon name="close" size="28px" class="btn" catchtap="closeNotice"/>
+    </view>
+</view>

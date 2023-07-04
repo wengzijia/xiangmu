@@ -1,0 +1,117 @@
+/* 公共类 */
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+page {
+  background: #f5f7fe;
+}
+
+.nameCardContainer {
+  padding-top: 100rpx;
+  padding: 100rpx 48rpx 0;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.nameBox .name {
+  font-size: 64rpx;
+  font-weight: 500;
+}
+
+.name .position {
+  font-size: 30rpx;
+}
+
+.codeContainer {
+  margin: 32rpx auto 0;
+  width: 636rpx;
+  height: 636rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.excircle {
+  width: 636rpx;
+  height: 636rpx;
+  animation: excircle 10s linear infinite;
+}
+
+@keyframes excircle {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.internal {
+  width: 596rpx;
+  height: 596rpx;
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  animation: internal 10s linear infinite;
+}
+
+@keyframes internal {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.codeBox {
+  width: 560rpx;
+  height: 560rpx;
+  border-radius: 296rpx;
+  background-color: #ffffff;
+  position: absolute;
+  top: 38rpx;
+  left: 38rpx;
+}
+
+.codeBox .code {
+  width: 400rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 80rpx;
+  left: 80rpx;
+}
+
+.firmBox {
+  position: absolute;
+  top: 708rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 184rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 184rpx);
+}
+
+.firmImg {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 4rpx;
+}
+
+.firmName{
+  width: 654rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}

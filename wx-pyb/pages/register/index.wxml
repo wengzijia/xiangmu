@@ -1,0 +1,28 @@
+<view class="registerBox">
+    <view class="registerForm">
+      <!-- <view class="registerText">认证手机号后方可正常报价下单</view>
+      <view class="registerText">请确保您的手机通畅，用于接收验证码短信</view> -->
+      <view class='registerInputBox'>
+        <input placeholder="请输入手机号码" maxlength="11" type="number" value="{{regInfo.mobile}}" data-key='regInfo.mobile' bindinput="inputFun"/>
+      </view>
+      <view class='registerInputBox codeBox'> 
+        <input class='registerCodeInput' maxlength="11" placeholder="请输入验证码" value="{{regInfo.smsVerifyCode}}" data-key='regInfo.smsVerifyCode' bindinput="inputFun"/>
+        <button catchtap="getNoteCode" disabled="{{btnBan}}"  class='{{!btnBan?"btnBan":""}} registerCodeBtn'>{{btnStr}}</button>
+      </view>
+      <!-- <view class='registerTipsBox'>仅限珠三角区域内用户使用！</view>
+
+      <view wx:if="{{!status}}" class='registerTipsBox'>对不起，您不在服务区域内，暂时无法使用！</view> -->
+      <!-- <view wx:if="{{isNew&&false}}" class='registerInputBox pwdBox'>
+        <input  password="{{pwdShow==='ac-icon-eye2'?true:false}}"  placeholder="设置密码"  maxlength="16" value="{{regInfo.pwd}}" data-key='regInfo.pwd' bindinput="inputFun"/>
+        <text catchtap="pwdShowFun" class="{{pwdShow}}"></text>
+      </view>
+      <view wx:if="{{isNew}}" class='{{pwdTipRed}} registerTipsBox'>(6~16个字符，字母加数字组合）</view> -->
+      <!-- <view wx:if="{{isNew}}" class='registerInputBox registerIReferrer'>
+      <input wx:if="{{isNew}}" placeholder="推荐人手机号" value="{{regInfo.refereeMobile}}" data-key='regInfo.refereeMobile' bindinput="inputFun"/>
+      <text wx:if="{{isNew}}" class='registerTipsBox'>(非必填)</text>
+      </view> -->
+    </view>
+   <view><button disabled="{{btnBan2}}" loading='{{loginLoading}}' class='{{!btnBan2?"btnBan":""}} registerCodeBtn' catchtap="submit" style='width:100%'>绑定</button></view>
+   <view class='protocol'><text  catchtap='checkProtocol' class='{{!btnBan2?"ac-icon-check":""}}'></text> 同意<view style='display: inline-block;color:#ff0036;'  catchtap='protocolText'>《拼一版用户注册协议》</view></view>
+   <modal modal="{{modal}}"></modal>
+</view>

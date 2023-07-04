@@ -1,0 +1,188 @@
+@import '../../../bilcommonl.wxss';
+.listname{
+  margin:8rpx 0;
+}
+.bot_color2{
+  padding: 22rpx 0;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit_btn {
+  font-size: 30rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 34rpx;
+  color: #fff;
+  padding: 0rpx 40rpx;
+  background: #E9333F linear-gradient(270deg, #FF0036 0%, #FF6842 100%);
+}
+
+.btn_bg{
+  background-color: #fff;
+  padding: 24rpx 0;
+  position: fixed;
+  bottom:0;
+  right: 0;
+  left: 0;
+
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+}
+.share_btn{
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+background: #E9333F linear-gradient(270deg, #FF0036 0%, #FF6842 100%);
+border-radius: 40rpx ;
+color: #fff;
+margin: 0 74rpx;
+text-align: center;
+}
+.none_all{
+  margin: 190rpx auto 0;
+  text-align: center;
+}
+.none_all image{
+  width: 336rpx;
+  height: 288rpx;
+}
+.none_all view{
+  font-size:30rpx ;
+color: #747577;
+margin-top: 40rpx;
+}
+
+button::after {
+  border: none;
+  border-radius: 8rpx;
+
+}
+
+button {
+ background: none;
+
+}
+.date_all{
+  font-size: 30rpx;
+  color: #333;
+}
+.date{
+  font-size: 28rpx;
+  color: #999;
+}
+.time{
+  color: #999;
+  font-size: 24rpx;
+  display: inline-block;
+  margin-left: 10rpx;
+}
+.pay{
+  display: flex;
+  align-items: center;
+  padding-bottom: 28rpx;
+  font-size: 28rpx;
+}
+.pay image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+}
+
+.marl_32{
+  margin: 0 32rpx;
+}
+.title{
+  flex: 2;
+  text-align: center;
+}
+.pop_title{
+  padding: 26rpx 0;
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+.close_img{
+  width: 40rpx;
+  height: 40rpx;
+}
+.pop_flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 38rpx 0;
+  border-bottom: 1px solid #EEEEEE;
+}
+.name_left{
+  color: #666;
+  font-size: 30rpx;
+}
+.price_r{
+  font-size: 40rpx;
+  color: #E9333F;
+  font-weight: bold;
+}
+.num_right{
+  font-size: 32rpx;
+  color: #333;
+}
+.pay_btn{
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+background: #E9333F linear-gradient(270deg, #FF0036 0%, #FF6842 100%);
+border-radius: 40rpx ;
+color: #fff;
+margin: 128rpx 74rpx 24rpx;
+text-align: center;
+
+}
+
+
+.icon_all{
+  text-align: center;
+  padding: 50rpx 0 0;
+}
+.icon_all .icon{
+  width: 185rpx;
+  height: 160rpx;
+ 
+}
+
+.pop_ti{
+color: #333;
+font-size: 34rpx;
+font-weight: bold;
+text-align: center;
+margin-top: 60rpx;
+}
+.confirm_all{
+  text-align: center;
+  padding:100rpx 0 40rpx;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm_all .confirm{
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+background-color: #E9333F;
+width: 278rpx;
+color: #fff;
+border-radius: 30rpx;
+}
+.pop_con{
+  margin-top: 30rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666666;
+}

@@ -1,0 +1,151 @@
+<view class="main">
+  <!-- tabs -->
+  <view class="tabs1">
+    <view catch:tap="changeTabs" data-type="single" class="{{tabsIndex=='single' ? 'grid' : ''}}">
+      <text>拼版购物车</text>
+    </view>
+    <view catch:tap="changeTabs" data-type="paper" class="{{tabsIndex=='paper' ? 'grid1' : ''}}">
+      <text>买纸购物车</text>
+    </view>
+  </view>
+  <!-- title 总数 -->
+  <view class="topbox">
+    <text>共 <text style="color:#FE0036">{{carts.length}}</text> 件商品</text>
+    <text style="float:right;color:#333;height: inherit;font-size:30rpx" bindtap="statusfn">{{statusnum?'完成':'管理'}}</text>
+  </view>
+  <!-- 数据 -->
+  <view wx:if="{{carts.length>0}}" style="float:left;">
+    <scroll-view scroll-y="y" class="cart-box">
+      <!-- 拼版 专版数据 -->
+      <view class="cart-list" wx:if="{{tabsIndex=='single'}}" wx:for="{{carts}}" wx:key="id">
+        <icon wx:if="{{item.ischeck}}" type="success" color="#FF0036" data-index="{{index}}" data-id="{{item.id}}" class="cart-pro-select" bindtap="selectList" data-type="single"/>
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" data-id="{{item.id}}" bindtap="selectList" data-type="single" />
+        <text class="cart-pro-name">{{item.versionType}}{{item.goodsName}}<text style="float:right;color:#9A9A9A">{{item.parkName?item.parkName:item.factoryName}}</text></text>
+        <!-- 参数详情 -->
+        <view  class="details">
+          <view  class="{{item.priceInfoMap.IsOpen?'showDot':''}}">
+            <text catch:tap="textPaste" bindlongpress="longPress" data-val="{{items}}" data-goods="{{item.newgoods}}" wx:for="{{item.newgoods}}" wx:for-item="items" wx:for-index='i' wx:key="id">
+              <text style='color:#000' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+              <text wx:else>
+                <text style='color:#666'>{{items[0]}}:</text>
+                <text style='color:#000'>{{items[1]}};</text>
+              </text>
+            </text>
+          </view>
+        </view>
+        <!-- 数量 价格 -->
+        <view class="cart-count-box no-border">
+          <view >
+            <text class="cart-pro-price"><text style="font-size:22rpx">￥</text>{{item.goodsTotal}}</text>
+          </view>
+          <view >
+            <text class="cart-count-num no-border">x{{item.num}}</text>
+          </view>
+        </view>
+        <!-- 含有自定义工艺商品 提示语 -->
+        <view wx:if="{{item.isUserDefined}}" style="font-size: 26rpx;color:#FF0036;">
+          该单有自定义工艺，勾选合并生成的订单，需待自定义工艺人工评估报价后，订单重新计价后再一起支付
+        </view>
+      </view>
+      <!-- 买纸数据 -->
+      <view class="cart-list" wx:if="{{tabsIndex=='paper'}}" wx:for="{{carts}}" wx:key="id">
+        <icon wx:if="{{item.ischeck}}" type="success" color="#FF0036" data-index="{{index}}" data-id="{{item.id}}" class="cart-pro-select" bindtap="selectList" data-type="paper"/>
+        <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" data-id="{{item.id}}" bindtap="selectList" data-type="paper"/>
+        <text class="cart-pro-name">{{item.ordertext}}_{{item.paper.paperType+'_'+item.paper.kg}}g<text style="float:right;color:#9A9A9A" wx:if="{{item.orderType==0}}">{{item.parkName?item.parkName:item.factoryName}}</text></text>
+        <view class="details">
+          <block wx:if="{{item.orderType==0}}">
+            <text style='color:#999'>纸行名称:</text>
+            <text style='color:#666'>{{item.paper.paperShop}};</text>
+            <text style='color:#999'>纸张品牌:</text>
+            <text style='color:#666'>{{item.paper.brand}};</text>
+            <text style='color:#999'>吨价/平方单价:</text>
+            <text style='color:#666'>{{item.paper.paperTonprice}}元;</text>
+          </block>
+          <text wx:for="{{item.newgoods}}" wx:for-item="items" wx:for-index='i' wx:key="id">
+            <text style='color:#666' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+            <text wx:elif="{{items[0]=='纸行名称'||items[0]=='吨价/平方单价'||items[0]=='纸张品牌'}}">
+            </text>
+            <text wx:else>
+              <text style='color:#999'>{{items[0]}}:</text>
+              <text style='color:#666'>{{items[1]}};</text>
+            </text>
+        
+          </text>
+          <block wx:if="{{item.paper.paperBaseprice>0}}">
+          <text style='color:#999'>纸张价格:</text>
+          <text style='color:#666'>{{item.paper.paperBaseprice}}{{item.paperuit}};</text>
+        </block>
+          <!-- <text style='color:#999'>印刷厂商:</text>
+                      <text style='color:#666'>{{item.factoryName}};</text> -->
+        </view>
+        <!-- <view class="details">
+                    <text style='color:#666'>纸行名称:</text>
+                    <text style='color:#000'>{{item.paper.paperShop}};</text>
+                    <text style='color:#666'>纸张品牌:</text>
+                    <text style='color:#000'>{{item.paper.brand}};</text>
+                    <text style='color:#666'>吨价/平方单价:</text>
+                    <text style='color:#000'>{{item.paper.paperTonprice}}元;</text>
+                    <text wx:for="{{item.newgoods}}" wx:for-item="items" wx:for-index='i' wx:key="index">
+                        <text style='color:#000' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+                        <text wx:elif="{{items[0]=='纸行名称'||items[0]=='吨价/平方单价'||items[0]=='纸张品牌'}}">
+                        </text>
+                        <text wx:else>
+                            <text style='color:#666'>{{items[0]}}:</text>
+                            <text style='color:#000'>{{items[1]}};</text>
+                        </text>
+                    </text>
+                    <text>
+                        <text style='color:#666'>印刷厂商:</text>
+                        <text style='color:#000'>{{item.factoryName}};</text>
+                    </text>
+                </view> -->
+        <view class="cart_flex">
+          <text class="cart-pro-price"><text style="font-size:22rpx">￥</text>{{item.goodsTotal}}</text>
+          <view class="cart-count-box borra" wx:if="{{item.orderType==0}}">
+            <view class="cart-count-down" bindtap="changeCount" data-obj="{{obj}}" data-type="minus" data-index="{{index}}" data-id="{{item.id}}">
+              <van-icon name="minus" />
+            </view>
+            <input class="cart-count-num" bindblur="bindKeyInput" bindfocus="inputFocus" type="number" maxlength="8" value="{{item.num}}" data-id="{{item.id}}" data-index="{{index}}" placeholder="" />
+            <view class="cart-count-add" bindtap="changeCount" data-type="add" data-index="{{index}}" data-id="{{item.id}}">
+              <van-icon name="plus" />
+            </view>
+          </view>
+          <view class="cart-count-box" wx:else>
+            <view>x{{item.num}}</view>
+          </view>
+        </view>
+        <view wx:if="{{item.orderType!=0}}" class="price_all">
+          <view class="paperPrice pricemar" wx:if="{{item.discountDetail.paperDiscountPrice>0}}"><text class="colorba">¥{{item.discountDetail.paperDiscountPrice}}</text><text class="cpad">(纸张费用)</text> </view>
+          <view class="paperPrice pricemar">
+            <view class="colorba">¥{{item.discountDetail.printPrice}}</view>
+            <view class=" cpad">(印刷费用)</view>
+            <view class='month {{item.monthly==0?"now_color":"month_color"}}'>{{item.monthly==0?'现结':'月结'}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="bottom_total">
+      <view class="bottom_line"></view>
+      <view class="row">
+
+        <icon wx:if="{{selectAllStatus}}" type="success" color="#FF0036" class="total-select" bindtap="selectAll" data-type="{{tabsIndex=='single'?'single':'paper'}}"/>
+        <icon wx:else type="circle" color="#000" class="total-select" bindtap="selectAll" data-type="{{tabsIndex=='single'?'single':'paper'}}"/>
+        <text class="small_text">全选</text>
+        <text hidden="{{statusnum}}">合计:<text><text style="color:#FF0036;font-size:24rpx;">￥</text> </text> </text>
+        <text hidden="{{statusnum}}" class="price">{{totalPrice}}</text>
+        <button class="button-red" wx:if="{{statusnum}}" bindtap="delGoods" data-type="{{tabsIndex=='single'?'single':'paper'}}">删除</button>
+        <button class="button-red" style="z-index:99" bindtap="orderfn" wx:else>去结算</button>
+      </view>
+    </view>
+  </view>
+  <!-- 无数据 -->
+  <view class="cart-noBox" wx:else>
+    <view class="cart-no-data">
+      <image src="../../image/cart.png" mode="cover"></image>
+    </view>
+    <view class="cart-no-data">
+      购物车还没有添加商品呢~
+    </view>
+  </view>
+  <modal modal="{{modal}}"></modal>
+</view>

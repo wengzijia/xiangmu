@@ -1,0 +1,86 @@
+/* components/popup.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 完成生产前置信息提示弹窗 */
+.doneProPopup {
+  width: 600rpx;
+  background-color: #FFFFFF;
+  padding: 40rpx;
+}
+
+.doneProHintBox .hintTitle {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 30rpx;
+}
+
+.doneProHintBox .itemBox {
+  color: #262626;
+  font-size: 26rpx;
+}
+
+.doneProHintBox .itemBox:not(:first-child) {
+  margin-top: 10rpx;
+}
+
+.doneProHintBox .itemBox .itemLeft {
+  color: #8C8C8C;
+}
+
+.doneProAffirm {
+  width: 220rpx;
+  height: 64rpx;
+  background-color: #3D7EFF;
+  border-radius: 32rpx;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin: 60rpx auto 0;
+}
+
+/* 异常信息提示弹窗 */
+.anoMsgPopup {
+  width: 600rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  font-size: 26rpx;
+}
+
+.anoMsgHintBox .anoMsghintTitle{
+  display: flex;
+  justify-content: space-between;
+  color: #333333;
+  margin-bottom: 30rpx;
+}
+
+.anoMsghintTitle .proText{
+  color: #FF4D4F;
+}
+
+.anoMsgHintBox .itemBox:not(:first-child){
+  margin-top: 10rpx;
+}
+
+.anoMsgHintBox .itemBox{
+  color: #262626;
+  display: flex;
+}
+
+.anoMsgHintBox .itemBox .itemLeft{
+  color: #8C8C8C;
+  flex-shrink: 0;
+}
+
+.anoMsgAffirm {
+  width: 220rpx;
+  height: 64rpx;
+  background-color: #3D7EFF;
+  border-radius: 32rpx;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin: 60rpx auto 0;
+}

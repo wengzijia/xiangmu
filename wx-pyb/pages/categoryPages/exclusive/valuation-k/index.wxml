@@ -1,0 +1,723 @@
+<view class="paperboard catchtou" id="j_page">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="flex">
+      <text class="name">{{title}}</text>
+      <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text>
+    </view>
+  </view>
+  <view style="text-align:center;" >
+    <image wx:if="{{auto&&!pinbanObj}}" src="{{img}}" mode="aspectFit" class="daomo-img"/>
+  </view>
+  <view wx:if="{{pinbanObj}}" style="text-align:center;" bindtap="preview" data-img="{{imgBaseUrl+pinbanObj.output_png_path}}">
+    <image src="{{imgBaseUrl+pinbanObj.output_png_path}}" mode="aspectFit" class="daomo-img"/>
+  </view>
+  <!-- 拼版费用 -->
+  <view wx:if="{{pinbanObj}}" class="pinban-info">
+    <view class="heated">
+      尺寸
+    </view>
+    <view ><text class="info-key">开纸尺寸:</text>{{pinbanObj.openSize[0]+'x'+pinbanObj.openSize[1]}}</view>
+    <view ><text class="info-key">印张尺寸:</text>{{pinbanObj.pinban_size[0]+'x'+pinbanObj.pinban_size[1]}}</view>
+    <view class="heated">
+      印张数量及坑纸{{ priceObj.priceInfo.mountingPitPrice ? '/裱坑' : ''}}费用
+    </view>
+    <view wx:if="{{priceObj.priceInfo.printedEheetNum>0}}" class="pinban-info-space">
+      <view>
+        <text class="info-key">印张数量:</text>
+        <text>{{priceObj.priceInfo.printedEheetNum}}张</text>
+      </view>
+      <view class="space-right">放损{{priceObj.priceInfo.lose}}张</view>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.paperDiscountPrice>0}}" class="pinban-info-space">
+      <view >
+        <text class="info-key">纸张费用:</text>
+        <text>{{priceObj.priceInfo.paperDiscountPrice}}元</text>
+      </view>
+      <!-- //单铜纸 -->
+      <!-- <view class="space-right" wx:if="{{offerData.materialType== '单铜纸'}}">纸张吨价{{priceObj.priceInfo.paperTonsMaterPriceStr}}</view> -->
+      <!-- //银卡纸 -->
+      <!-- <view class="space-right" wx:if="{{offerData.materialType == '银卡纸'}}">纸张平方单价{{priceObj.priceInfo.paperTonsPrice}}元/平</view> -->
+      <view class="space-right">{{priceObj.priceInfo.paperTonsMaterPriceStr2}}</view>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.pitBoxPaperPrice>0}}" class="pinban-info-space">
+      <view >
+        <text class="info-key">坑纸费用:</text>
+        <text>{{priceObj.priceInfo.pitBoxPaperPrice}}元</text>
+      </view>
+      <view class="space-right">{{priceObj.priceInfo.sqpriceStr}}</view>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.mountingPitPrice}}" class="pinban-info-space">
+      <view >
+        <text class="info-key">裱坑费用:</text>
+        <text>{{priceObj.priceInfo.mountingPitPrice}}元</text>
+      </view>
+      <view class="space-right">单价:{{priceObj.priceInfo.mountingPitSqprice}}元</view>
+    </view>
+    <view class="heated">
+      其他费用
+    </view>
+    <view wx:if="{{priceObj.priceInfo.print}}">
+      <text class="info-key">印刷费用:</text>
+      <text>{{priceObj.priceInfo.print}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.lamination>0}}" class="pinban-info-space">
+      <view>
+        <text class="info-key">表处理费用:</text>
+        <text>{{priceObj.priceInfo.lamination}}元</text>
+      </view>
+      <view class="space-right">表处理单价{{priceObj.priceInfo.laminationUnitPrice}}元</view>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.mountPrice}}" class="pinban-info-space">
+      <view>
+        <text class="info-key">裱卡费用:</text>
+        <text>{{priceObj.priceInfo.mountPrice}}元</text>
+      </view>
+      <view class="space-right">(含加工,材料,印刷及表处理费用)</view>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.gild}}">
+      <text class="info-key">烫金费用:</text>
+      <text>{{priceObj.priceInfo.gild}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.localUv}}">
+      <text class="info-key">局部UV费用:</text>
+      <text>{{priceObj.priceInfo.localUv}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.emboss}}">
+      <text class="info-key">击凸费用:</text>
+      <text>{{priceObj.priceInfo.emboss}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.concave}}">
+      <text class="info-key">击凹费用:</text>
+      <text>{{priceObj.priceInfo.concave}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.put}}">
+      <text class="info-key">贴窗费用:</text>
+      <text>{{priceObj.priceInfo.put}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.veins}}">
+      <text class="info-key">压纹费用:</text>
+      <text>{{priceObj.priceInfo.veins}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.blade}}">
+      <text class="info-key">刀版费用:</text>
+      <text>{{priceObj.priceInfo.blade}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.pi}}">
+      <text class="info-key">啤费用:</text>
+      <text>{{priceObj.priceInfo.pi}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.stick}}">
+      <text class="info-key">粘费用:</text>
+      <text>{{priceObj.priceInfo.stick}}元</text>
+    </view>
+    <view wx:if="{{priceObj.priceInfo.packPrice}}">
+      <text class="info-key">包装费:</text>
+      <text>{{priceObj.priceInfo.packPrice}}元</text>
+    </view>
+  </view>
+  <view class="content">
+    <!-- 尺寸 -->
+    <view>
+      <view class="fromItem3">
+        <view class="label">
+          <text wx:if="{{auto}}" class="mustSign red">*</text>
+          外尺寸
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;padding-right:0;">
+          <view class="sizeInput">
+            <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{offerData.sizeLength}}" bindblur='inputVal' data-key='offerData.sizeLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="宽" type="digit" value="{{offerData.sizeWidth}}" bindblur='inputVal' data-key='offerData.sizeWidth' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="高" type="digit" value="{{offerData.sizeHeight}}" bindblur='inputVal' data-key='offerData.sizeHeight' />
+            <text class="sizeTxt">mm</text>
+          </view>
+        </view>
+      </view>
+    <view wx:if="{{!auto}}" class="tips" style="padding-top:16rpx;padding-bottom:0">外尺寸非必填</view>
+    <view wx:if="{{!auto}}" class="tips" style="padding-top:16rpx;padding-bottom:0">异形盒会产生额外粘费，需要补差价，请知悉！</view>
+    </view>
+    <!-- 印张数量 -->
+    <view wx:if="{{offerData['thickness']||true}}" style="padding-top:0">
+      <view class="fromItem3" style="display:flex;align-items:center;height:120rpx;">
+        <view class="label" style="padding:0;">
+          <text class="mustSign red">*</text>
+          数量
+        </view>
+        <view class="cart-count-box" style="margin-right:100rpx;">
+            <text class="cart-count-down" catchtap="numberChange" data-type="reduce" style="font-size:70rpx">-</text>
+            <input class="cart-count-num"  type="digit" value="{{offerData.number}}" bindblur='inputVal' data-key='offerData.number'/>
+            <text class="cart-count-add" catchtap="numberChange" data-type="add">+</text>
+            <!-- <text class="unit">个</text> -->
+        </view>
+      </view>
+      <view class="tips">{{numberText}}</view>
+    </view>
+    <!-- 纸张材质 -->
+    <view>
+      <view style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>纸张</text>
+        </view>
+        <view class="button_container fromItem">
+          <block wx:for="{{offerInfo.materialType.list}}" wx:key="index">
+            <button class='{{offerData["materialType"]&&offerData["materialType"]==item.value?"checked_button":"normal_button"}}' data-key="materialType" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+            <!-- <button class='{{offerData["materialType"]&&offerData["materialType"]=="其他"?"checked_button":"normal_button"}}' data-key="materialType" data-val="其他" catchtap="radioTap">
+              其他
+            </button> -->
+        </view>
+      </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']&&offerInfo.thickness.list.length>0}}" style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>克重</text>
+        </view>
+        <view class="button_container fromItem ">
+          <block wx:for="{{offerInfo.thickness.list}}" wx:key="index">
+            <button class='{{offerData["thickness"]&&offerData["thickness"]==item.value?"checked_button":"normal_button"}}' data-key="thickness" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+        </view>
+      </view>
+      <view style="color:#ff0036;margin-left:160rpx;margin-bottom:16rpx;font-size: 24rpx;" wx:if="{{offerData['materialType']=='其他'}}">备注: 可以填写自己的纸张价格报价 </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']=='其他'}}" style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text>
+          <text>材质</text> -->
+        </view>
+        <view class="conten" style="display:flex;align-items: center;flex-wrap: wrap;">
+          <input class="input-border input-border2" placeholder-class="phcolor2" placeholder=" 请填写材质"  type="text" value="{{otherPaper.materialType}}" bindblur="inputVal" data-key='otherPaper.materialType'/>
+          <input class="input-border input-border2" placeholder-class="phcolor2" placeholder=" 请填写克重"  type="digit" value="{{otherPaper.thickness}}" bindblur="inputVal" data-key='otherPaper.thickness'/>
+          <input class="input-border input-border2" placeholder-class="phcolor2" placeholder=" 请填写单价"  type="digit" value="{{otherPaper.tonprice}}" bindblur="inputVal" data-key='otherPaper.tonprice'/>
+          <!-- <picker bindchange="bindPickerChange" value="{{unitIndex}}" range="{{unit}}">
+            <view class="normal_button unit-btn">
+              {{unit[unitIndex]}}
+              <van-icon name="arrow-down" />
+            </view>
+          </picker> -->
+          <view class="normal_button unit-btn"  catchtap="showPopup1" data-type="unitShow">
+              <!-- {{unit[unitIndex]}} -->
+              {{unit}}
+              <!-- {{offerData.procedureList.unit}} -->
+              <van-icon name="arrow-down" />
+            </view>
+          <!-- <button class='normal_button' catchtap="showPopup1" data-type="iscolorShow2">
+                <view class="but_flex">
+                  <view>    {{unit[unitIndex]}}</view>
+                  <van-icon class="select-icon" name="arrow-down" />
+                </view>
+        </button> -->
+        </view>
+      </view>
+      <!-- <view class="fromItem2" wx:if="{{offerData['materialType']=='其他'}}" style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>克重</text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaper.thickness}}" bindblur="inputVal" data-key='otherPaper.thickness'/>
+        </view>
+      </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']=='其他'}}" style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>单价</text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入单价"  type="digit" value="{{otherPaper.tonprice}}" bindblur="inputVal" data-key='otherPaper.tonprice'/>
+          <picker bindchange="bindPickerChange" value="{{unitIndex}}" range="{{unit}}">
+            <view class="normal_button unit-btn">
+              {{unit[unitIndex]}}
+              <van-icon name="arrow-down" />
+            </view>
+          </picker>
+        </view>
+      </view>  -->
+    </view>
+    <!-- 印刷 -->
+    <view style="display:flex;">
+      <view class="label">
+        <text class="mustSign red">*</text>
+        印刷
+      </view>
+      <view class="button_container fromItem" style="width:100%;">
+        <view >
+          <button class="checked_button" >单面印刷</button>
+          <view style="margin-top:0rpx;">
+            <block>
+              <button class='{{offerData["printing"]&&offerData["printing"]=="多色_CMYK"?"checked_button":"normal_button"}}' style="font-size:30rpx;" data-key="printing" data-val="多色_CMYK" catchtap="radioTap">四色</button>
+              <button class='{{offerData["printing"]&&offerData["printing"]=="无"?"checked_button":"normal_button"}}' data-key="printing" data-val="无" catchtap="radioTap">无</button>
+            </block>
+            <block wx:if="{{addColor}}">
+              <button class='{{color?"checked_button":"normal_button"}}' data-key="color" data-val="白墨" catchtap="checkTap">白墨</button>
+            </block>
+            <block>
+              <button class='{{spotColor?"checked_button":"normal_button"}}' data-key="spotColor" data-val="专色" catchtap="checkTap">专色</button>
+            </block>
+            <block wx:if="{{spotColor}}">
+              <picker bindchange="bindPickerChange" data-key="spotColor" value="{{spotColorIndex}}" range="{{spotColorArray}}" style="display:inline-block;">
+                <button class="normal_button" style="display:inline-block;">{{spotColorArray[spotColorIndex]}}      <van-icon name="arrow-down" style="margin-left:20rpx;"/></button>
+              </picker>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="tips" style="margin: 0 20rpx 14rpx 0rpx;"><text style="color: #ff0036;">温馨提示:</text> 如果您的设计文件中使用了三色或四色混合(浅灰、灰、深灰、黑)、暗红色、浅红色、墨绿色、蓝紫色、深紫色、深褐色、咖啡色等色，建议您选择专色印刷，否则出现色差问题不予受理。</view>
+    <!-- 印刷专色 -->
+    <view 
+      wx:if="{{pantoneColorList.length>0}}"
+      class="fromItem2" 
+      style="display:flex; padding-top: 0rpx;" >
+      <view class="label"></view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input
+          wx:for="{{pantoneColorList}}" 
+          wx:for-item="item2" wx:key="item2" 
+          wx:for-index="index2"  
+          style="flex:1" 
+          class="input-border input-border2" 
+          placeholder-class="phcolor2" 
+          placeholder="PANTONE号"  
+          type="text" 
+          value="{{item2.value}}" 
+          bindblur="changePantoneColor" 
+          data-index2="{{index2}}"
+          data-key="pantoneColorList"/>
+      </view>
+    </view>
+    <!-- 表处理 -->
+    <view style="display:flex;" wx:if="{{surfaceTreatment.length>0}}">
+      <view class="label">
+        表处理
+      </view>
+      <view wx:if="{{moreSurface}}" class="button_container fromItem">
+          <block wx:for="{{surfaceTreatment}}" wx:key="index">
+            <button wx:if="{{index<3}}"  class='{{offerData["surface"]&&offerData["surface"]==item.value?"checked_button":"normal_button"}}' data-key="surface" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+          <block>
+            <button  class="normal_button" catch:tap="showSurface">
+              更多  <van-icon name="arrow-down" style="color:#ccc;"/>
+            </button>
+          </block>
+      </view>
+      <view wx:else class="button_container fromItem">
+          <block wx:for="{{surfaceTreatment}}" wx:key="index">
+            <button  class='{{offerData["surface"]&&offerData["surface"]==item.value?"checked_button":"normal_button"}}' data-key="surface" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+          <block>
+            <button class='{{!offerData["surface"]?"checked_button":"normal_button"}}' data-key="surface" data-val="" catchtap="radioTap">
+              无
+            </button>
+          </block>
+          <block>
+            <button  class="normal_button" catch:tap="showSurface">
+              收起  <van-icon name="arrow-up" style="color:#ccc;"/>
+            </button>
+          </block>
+      </view>
+    </view>
+    <!-- 坑纸类型 -->
+    <view style="display:flex;">
+      <view class="label">
+        <text class="mustSign red">*</text>
+        <text>坑纸类型</text>
+      </view>
+      <view class="button_container fromItem postTreatment">
+        <block wx:for="{{offerInfo.paperType.list}}" wx:key="index">
+          <button class='{{offerData["paperType"]&&offerData["paperType"]==item.value?"checked_button":"normal_button"}}' data-key="paperType" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+          <button class='{{offerData["paperType"]&&offerData["paperType"]=="其他"?"checked_button":"normal_button"}}' data-key="paperType" data-val="其他" catchtap="radioTap">
+            其他
+          </button>
+      </view>
+    </view>
+    <!-- 里纸 -->
+    <view class="fromItem2" wx:if="{{offerInfo.inside.list.length>0&&offerData['paperType']!='其他'}}" style="display:flex;">
+      <view class="label">
+        <text class="mustSign red">*</text>
+        <text>里纸</text>
+      </view>
+      <view class="button_container fromItem ">
+        <block wx:for="{{offerInfo.inside.list}}" wx:key="index">
+          <button style="width:220rpx;" class='{{offerData["inside"]&&offerData["inside"]==item.value?"checked_button":"normal_button"}}' data-key="inside" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+    </view>
+    <!-- 芯纸 -->
+    <view class="fromItem2" wx:if="{{offerInfo.core.list.length>0&&offerData['paperType']!='其他'}}" style="display:flex;">
+      <view class="label">
+        <text class="mustSign red">*</text>
+        <text>芯纸</text>
+      </view>
+      <view class="button_container fromItem ">
+        <block wx:for="{{offerInfo.core.list}}" wx:key="index">
+          <button style="width:220rpx;" class='{{offerData["core"]&&offerData["core"]==item.value?"checked_button":"normal_button"}}' data-key="core" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+    </view>
+    <!-- 自定义里纸 -->
+    <view class="fromItem2" wx:if="{{offerData['paperType']=='其他'}}" style="display:flex;">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>里纸</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input style="flex:1;margin-right:10rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张材质"  type="text" value="{{otherPaperType.inside.materialType}}" bindblur="inputVal" data-key='otherPaperType.inside.materialType'/>
+        <input style="flex:1;margin-right:40rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaperType.inside.thickness}}" bindblur="inputVal" data-key='otherPaperType.inside.thickness'/>
+      </view>
+    </view>
+    <!-- 自定义芯纸 -->
+    <view class="fromItem2" wx:if="{{offerData['paperType']=='其他'}}" style="display:flex;">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>芯纸</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input style="flex:1;margin-right:10rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张材质"  type="text" value="{{otherPaperType.core.materialType}}" bindblur="inputVal" data-key='otherPaperType.core.materialType'/>
+        <input style="flex:1;margin-right:40rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaperType.core.thickness}}" bindblur="inputVal" data-key='otherPaperType.core.thickness'/>
+      </view>
+    </view>
+    <!-- 自定义价格 -->
+    <view class="fromItem2" wx:if="{{offerData['paperType']=='其他'}}" style="display:flex;">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>单价</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;width:550rpx;box-sizing: border-box;padding-right: 40rpx;">
+        <input style="flex:1;margin-right:20rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入单价"  type="digit" value="{{otherPaperType.tonprice}}" bindblur="inputVal" data-key='otherPaperType.tonprice'/>
+        <picker bindchange="bindPickerChange" data-key="paper" value="{{otherPaperIndex}}" range="{{unit2}}">
+          <view class="normal_button unit-btn">
+            {{unit2[otherPaperIndex]}}
+            <van-icon name="arrow-down" />
+          </view>
+        </picker>
+      
+      </view>
+    </view>
+    <!-- 坑纸类型 -->
+    <view wx:if="{{offerData['paperType']!='其他'}}" style="padding-left:12rpx;margin-bottom:20rpx;">
+      <text wx:if="{{offerData.paperType}}">坑纸类型:{{offerData.paperType}}_</text>
+      <text wx:if="{{offerData.inside}}">{{offerData.inside}}_</text>
+      <text wx:if="{{offerData.core}}">{{offerData.core}}</text>
+    </view>
+    <!-- 其他坑纸类型 -->
+    <view wx:else style="padding-left:12rpx;margin-bottom:20rpx;">
+      <text wx:if="{{otherPaperType.inside.materialType&&otherPaperType.inside.thickness}}">坑纸类型:{{otherPaperType.inside.thickness+'g'+otherPaperType.inside.materialType}}_</text>
+      <text wx:if="{{otherPaperType.core.materialType}}">{{otherPaperType.core.materialType}}_</text>
+      <text wx:if="{{otherPaperType.core.thickness}}">g{{otherPaperType.core.thickness}}_</text>
+      <text wx:if="{{otherPaperType.tonprice>0}}">{{unit2[otherPaperIndex]}}_</text>
+      <text>{{otherPaperType.tonprice}}</text>
+    </view>
+    <!-- 其他工艺 -->
+    <view wx:if="{{offerData['materialType']&&postTreatment.length>0}}">
+      <view style="display:flex;">
+        <view class="label">其他工艺</view>
+        <view class="button_container fromItem postTreatment">
+          <block wx:for="{{postTreatment}}" wx:key="index">
+            <button class='{{item.checked?"checked_button":"normal_button"}}' data-key="postTreatment" data-i="{{index}}" data-val="{{item.craftName}}" catchtap="checkTap"
+              style="{{item.craftName == '自定义工艺' ? 'width:214rpx' : ''}}">
+              {{item.craftName}}
+            </button>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- 烫金颜色 -->
+    <view wx:if="{{gold}}" >
+      <view wx:for="{{colorList}}" wx:key="i" wx:for-item="items" wx:for-index="i">
+        <view class="fromItem3">
+          <view class="label gold">烫金</view>
+          <view class="button_container fromItem">
+            <block wx:for="{{items.chiled}}" wx:key="index">
+              <button class='{{item.checked?"checked_button":"normal_button"}}' data-type="checked" data-i="{{i}}" data-index="{{index}}" data-val="{{item.name}}" catchtap="clickColor">
+                {{item.name}}
+              </button>
+            </block>
+          </view>
+        </view>
+        <!-- 烫金尺寸 -->
+        <view wx:if="{{items.showSize}}" class="fromItem3" style="padding-right:34rpx;padding-bottom: 20rpx;">
+          <view class="label">
+            <text>烫金尺寸</text>
+          </view>
+          <view class="fromItem" style="display:flex; line-height:68rpx;">
+            <view style="display: flex;">
+              <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{items.length}}" data-arr="colorList" bindblur='clickColor' data-key='length' data-i="{{i}}" data-type="digit" class="input_size" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" />
+              <text class="left ">X</text>
+              <input data-i="{{i}}" placeholder-class="phcolor" data-type="digit" placeholder="宽" data-arr="colorList" type="digit" value="{{items.width}}" bindblur='clickColor' data-key='width' class="input_size"/>
+              <text class="right">mm</text>
+              <view style="height: 68rpx;display: flex;justify-content: center;align-items: center;">
+                <image src="../../image/minus.png" catchtap="clickColor" data-key="checked" data-type="minus" data-i="{{i}}" style="width: 40rpx;height: 40rpx;margin: 0 30rpx;" mode=""/>
+                <image src="../../image/add.png" wx:if="{{colorList.length < 2}}" catchtap="clickColor" data-key="checked" data-type="add" style="width: 40rpx;height: 40rpx;" mode=""/>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{tips}}" class="tips"><text style="color: #ff0036;">温馨提示:</text>如果连续烫金面积过大，使用滚筒烫金机加工，需要另外补差价，请知悉！</view>
+    </view>
+    <!-- 击凸 -->
+    <view wx:if="{{camList.length}}">
+      <view wx:for="{{camList}}" wx:key="index" class="fromItem3" style="padding-right:34rpx;padding-bottom: 20rpx;">
+        <view class="label">
+          <text>击凸尺寸</text>
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;">
+          <view style="display: flex;">
+            <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{item.sizeLength}}"bindblur='clickColor'data-arr="camList" data-key='sizeLength' data-i="{{index}}" data-type="digit" class="input_size" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" />
+            <text class="left ">X</text>
+            <input data-i="{{index}}" placeholder-class="phcolor" data-type="digit" placeholder="宽" type="digit" value="{{item.sizeWidth}}" data-arr="camList" bindblur='clickColor' data-key='sizeWidth' class="input_size"/>
+            <text class="right">mm</text>
+            <view style="height: 68rpx;display: flex;justify-content: center;align-items: center;">
+              <image src="../../image/minus.png" catchtap="clickColor" data-key="camList" data-type="minus" data-i="{{index}}" style="width: 40rpx;height: 40rpx;margin: 0 30rpx;" mode=""/>
+              <image src="../../image/add.png" wx:if="{{camList.length < 2}}" catchtap="clickColor" data-key="camList" data-type="add" style="width: 40rpx;height: 40rpx;" mode=""/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 击凹 -->
+    <view wx:if="{{concaveList.length}}">
+      <view wx:for="{{concaveList}}" wx:key="index" class="fromItem3" style="padding-right:34rpx;padding-bottom: 20rpx;">
+        <view class="label">
+          <text>击凹尺寸</text>
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;">
+          <view style="display: flex;">
+            <input placeholder="长" data-type="digit" value="{{item.sizeLength}}" bindblur='clickColor' data-key='sizeLength' data-i="{{index}}" type="digit" data-arr="concaveList" placeholder-class="phcolor" class="input_size" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" />
+            <text class="left ">X</text>
+            <input data-i="{{index}}" data-type="digit" placeholder="宽" type="digit" value="{{item.sizeWidth}}" bindblur='clickColor' data-key='sizeWidth' data-arr="concaveList" placeholder-class="phcolor" class="input_size"/>
+            <text class="right">mm</text>
+            <view style="height: 68rpx;display: flex;justify-content: center;align-items: center;">
+              <image src="../../image/minus.png" catchtap="clickColor" data-key="concaveList" data-type="minus" data-i="{{index}}" style="width: 40rpx;height: 40rpx;margin: 0 30rpx;" mode=""/>
+              <image src="../../image/add.png" wx:if="{{concaveList.length < 2}}" catchtap="clickColor" data-key="concaveList" data-type="add" style="width: 40rpx;height: 40rpx;" mode=""/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{tips2}}" class="tips"><text style="color: #ff0036;">温馨提示:</text>请尽量避免同一位置工艺叠加，因工艺叠加产生的问题本公司不予受理。</view>
+    <!-- 贴窗尺寸 -->
+    <view wx:if="{{paste}}">
+      <view class="fromItem3" style="display:flex;">
+        <view class="label">
+          <text>贴窗尺寸</text>
+        </view>
+        <view class="fromItem" style="padding-right:0;">
+          <view class="sizeInput">
+            <input placeholder-class="phcolor" style="width:140rpx;" placeholder="长" type="digit" value="{{offerData.pasteLength}}" bindblur='inputVal' data-key='offerData.pasteLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" style="width:140rpx;" placeholder="宽" type="digit" value="{{offerData.pasteWidth}}" bindblur='inputVal' data-key='offerData.pasteWidth' />
+            <text class="sizeTxt">mm</text>
+          </view>
+          <view class="button_container postTreatment">
+            <block wx:for="{{pasteList}}" wx:key="index">
+              <button class='{{offerData["paste"]&&offerData["paste"]==item.value?"checked_button":"normal_button"}}' style="margin-top:16rpx" data-key="paste" data-val="{{item.value}}" catchtap="radioTap">
+                {{item.lable}}
+              </button>
+            </block>
+            <text style="color:red;font-size:26rpx">
+              {{'温馨提示:平台贴窗材质为PET,离折线≥12mm,用厚度为0.15±0.03mm胶片;离折线<12mm,用厚度为0.10±0.02mm胶片.如需指定胶片厚度,请联系客服!'}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 压纹 -->
+    <view wx:if="{{amboss}}" style="display:flex;">
+      <view class="label">
+        <view>压纹编号</view>
+      </view>
+      <view class="button_container fromItem postTreatment amboss-btn">
+        <block wx:for="{{ambossList}}" wx:key="index">
+          <button class='{{offerData["amboss"]&&offerData["amboss"]==item.value?"checked_button":"normal_button"}}' data-key="amboss" data-i="{{index}}" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+    </view>
+    <!-- 纹理信息 -->
+    <view wx:if='{{amboss && offerData["amboss"]}}' style="display:flex;">
+      <view class="label">
+        <view>纹理信息</view>
+        <!-- <view wx:if="{{offerData['amboss'] != '其他纹理'}}" style="margin-top:50rpx;color:#ff0036;text-decoration:underline" catchtap="jumpAmboss">压纹详情</view> -->
+      </view>
+      <view class="button_container fromItem postTreatment amboss-btn" wx:if="{{offerData['amboss'] != '其他纹理'}}" style="display:flex;">
+        <!-- <block wx:for="{{ambossInfoList}}" wx:key="index">
+          <button class='{{offerData["ambossInfo"]&&offerData["ambossInfo"]==item?"checked_button":"normal_button"}}' data-key="ambossInfo" data-i="{{index}}" data-val="{{item}}" catchtap="radioTap">
+            {{item}}
+          </button>
+        </block> -->
+        <button class='{{"checked_button"}}' style="width:auto;">
+          {{ambossInfo.embossTextureName}}
+        </button>
+        <button catchtap='showAmbossFun' style="background-color: #fff;">重新选择</button> 
+      </view>
+      <view class="button_container fromItem postTreatment" wx:else>
+        <input maxlength='10' class="input-border" placeholder-class="phcolor2" placeholder=" 请输入纹理信息"  type="text" value="{{offerData.ambossInfo}}" bindblur="inputVal" data-key='offerData.ambossInfo'/>
+      </view>
+    </view>
+    <!-- 裱卡 -->
+    <view wx:if="{{isFramedCardListShow}}">
+      <view class="fromItem2" style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>裱卡克重</text>
+        </view>
+        <view class="button_container fromItem ">
+          <block wx:for="{{framedCardList}}" wx:key="index">
+            <button data-key="framedCard" data-val="{{item.value}}" catchtap="radioTap" class='{{offerData["framedCard"]&&offerData["framedCard"]==item.value?"checked_button":"normal_button"}}'>
+              {{item.material}}
+            </button>
+          </block>
+        </view>
+      </view>
+      <view class="fromItem2" style="display:flex;" wx:if="{{offerData.framedCard}}">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>表面处理</text>
+        </view>
+        <view class="button_container fromItem ">
+          <block wx:for="{{_finish}}" wx:key="index">
+            <button data-key="framedCard_finish" data-val="{{item.value}}" catchtap="radioTap" class='{{offerData["framedCard_finish"]&&offerData["framedCard_finish"]==item.value?"checked_button":"normal_button"}}'>
+              {{item.label}}
+            </button>
+          </block>
+        </view>
+      </view>
+      <view style="display:flex;" wx:if="{{offerData.framedCard}}">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          印刷颜色
+        </view>
+        <view class="button_container fromItem">
+          <block wx:for="{{_printing}}" wx:key="index">
+            <button class='{{item.value==offerData.framedCard_printing?"checked_button":"normal_button"}}' data-key="framedCard_printing" data-val="{{item.value}}" catchtap="radioTap">{{item.label}}</button>
+          </block>
+          <view>
+            <button class='{{framedCard_spot?"checked_button":"normal_button"}}' data-key="framedCard_spot" data-val="专色" catchtap="checkTap">专色</button>
+            <block wx:if="{{framedCard_spot}}">
+              <button class='normal_button' catchtap="showPopup1" data-type="iscolorShow2">
+                <view class="but_flex">
+                  <view>{{pantoneNumber2}}</view>
+                  <van-icon class="select-icon" name="arrow-down" />
+                </view>
+              </button>
+              <view class="conten" style="display:flex;align-items: center;">
+                <block wx:for="{{pantoneColorList2}}" wx:key="index3" wx:for-index="index3" >
+                  <input type="text" placeholder="PANTONE号"
+                  class="input-border input-border2" 
+                  placeholder-class="phcolor2"  value="{{item.value}}" bindblur="changePantoneColor"
+                  data-key="pantoneColorList2"
+                  data-index2="{{index3}}"/>
+                </block>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+    <!-- 自定义工艺 -->
+    <view wx:if="{{custom}}">
+      <view>
+        <text >自定义工艺1<text style="color: #747577">(30字以内)</text></text>
+      </view>
+      <view class="custom" wx:for="{{offerData.customList}}" wx:key="index">
+        <view ><input bindblur='inputVal' data-key='customList' data-index2="{{index}}" value="{{offerData.customList[index]}}" maxlength="30" class="input_class"  placeholder="请描述工艺,等待人工估价" placeholder-class="placeholder_class" /></view>
+      </view>
+      <view class="tips">
+        <text class="">
+          <text style="color:#ff0036">温馨提示：</text><text >请准确描述其他工艺，生产环节需先理解工艺再评估报价，待订单重新计价后再支付</text>
+        </text>
+      </view>
+    </view>
+    <!-- <view wx:if="{{priceObj}}" class="freight" >
+      <view class="freight-info">
+        <text style="color:#747577;">货期:<text style="color: #333;display: inline-block;padding-left: 20rpx;">{{priceObj.days}}天</text></text>
+      </view>
+    </view> -->
+  </view>
+  <view class="distri_all" wx:if="{{pinbanObj}}">
+    <view class="distri_title">配送费用</view>
+    <view class="distri_note">只作为参考运费，实际运费以订单结算页为准</view>
+    <view class="distri_bor" catchtap="showPopup">
+      <view wx:if="{{region[1]}}">{{region[0]}}、{{region[1]}}、{{region[2]}}</view>
+      <view wx:else>请选择省、市、区</view>
+      <view> <van-icon class="select-icon" name="arrow-down" /></view>
+    </view>
+  </view>
+  <view class="brick" wx:if="{{pinbanObj}}"></view>
+  <view wx:if="{{!pinbanObj&&!showReset}}" class="start-pin">
+    <text catch:tap="valuation" class="pin-btn">开始拼版</text>
+  </view>
+  <view wx:if="{{showReset}}" class="start-pin">
+    <text catch:tap="valuation" class="pin-btn">重新计算</text>
+  </view>
+  <!-- 底部加入购物车 -->
+  <view wx:if="{{pinbanObj&&!showReset}}" class="footer">
+    <!-- 价格 -->
+    <view class="priceCount" style='{{priceObj.price>99999?"padding-right:0rpx !important;":""}}'>
+      <view class="flex1" style="justify-content: space-between;">
+        <view>
+          <view  style="width:100%;height:50rpx;">
+            <text class="f40 red"><text style="font-size:28rpx;">￥</text>{{priceObj.total_price?(price+(priceObj.shipping_fee||0)):'0.00'}}</text>
+            <text wx:if="{{unitPrice}}" class="unit-price">单价 ￥ {{unitPrice}}</text>
+            <view style="color:#999999;font-size:24rpx;">(含运费￥{{priceObj.shipping_fee || 0}})</view>
+            <!-- <text style="color:#E16D01;font-size:24rpx;" wx:if="{{priceObj.shipFee>0}}">(含运费￥{{priceObj.shipFee}})</text> -->
+          </view>
+        </view>
+        <view >
+          <text style="color:#747577;">货期:<text style="color: #333;display: inline-block;padding-left: 20rpx;">{{priceObj.days}}天</text></text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{pinbanObj}}" class="footerBox1">
+      <view class="footerBox2" catchtap="checkCart">
+        <view class="footerBoxIcon ac-icon-cart">
+          <view class="footerBuyCount">{{cartCount}}</view>
+        </view>
+        <view>购物车</view>
+      </view>
+      <view class="footerBox3" catchtap="addEditionCart">加入购物车</view>
+      <view class="footerBox4" catchtap="placeOrder">立即下单</view>
+    </view>
+  </view>
+  <modal modal="{{modal}}"></modal>
+</view>  
+<ywxx show='{{showAmboss}}' bind:hidewAmboss="hidewAmbossFun" bind:radioAmboss="radioAmbossFun"></ywxx>
+<van-popup show="{{ showLoading }}" custom-style="background:none;width:100%">
+  <image src="{{loadingImg}}" mode="" style="width: 100%;" mode="widthFix"/>
+</van-popup>
+
+<van-popup show="{{iscolorShow2}}" position="bottom" bind:close="onCancelPup" round data-type="iscolorShow2">
+  <van-picker show-toolbar title="请选择专色的数量" columns="{{inputList}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="iscolorShow2" data-key="pantoneNumber2" data-item='pantoneColorList2'></van-picker>
+</van-popup>
+<van-popup show="{{unitShow}}" position="bottom" bind:close="onCancelPup" round data-type="unitShow">
+  <van-picker show-toolbar title="请选择纸张单位" columns="{{unitList}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="unitShow" data-key="unit" data-item='unit'></van-picker>
+</van-popup>
+<van-popup
+    show="{{ show }}"
+    position="bottom"
+    custom-style="height: 42%;"
+    round
+  >
+    <van-area wx:if="{{ show }}" area-list="{{ areaList }}" item-height="{{34}}" value="{{areaListId}}" columns-num="{{ 3 }}" bind:cancel="showPopup" bind:confirm="confirmArea"/>
+</van-popup>

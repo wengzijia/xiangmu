@@ -1,0 +1,5 @@
+<view style='text-align:center;'>
+    <view style="padding:20rpx;">
+        <image style="background:#fff;width:100%;height:4000rpx;" catchtap='checkAll' src="{{imageUrl}}" />
+    </view>
+</view>

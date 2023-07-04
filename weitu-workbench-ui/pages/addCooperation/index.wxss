@@ -1,0 +1,97 @@
+/* pages/addCooperation/index.wxss */
+page{
+  background-color: #F5F7FE;
+}
+.gallery_all{
+  padding: 28rpx 36rpx;
+  background-color: #fff;
+}
+.add_bg{
+  width: 320rpx;
+  height:206rpx ;
+  background-color: #F3F3F3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.photograph-img{
+  width: 320rpx;
+  max-height: 206rpx;
+  border-radius: 8rpx !important;
+  border:1rpx solid #e0e0e0 !important;
+}
+.del-img-icon{
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  padding: 2rpx;
+  border-left:1rpx solid #e0e0e0 !important;
+  border-bottom:1rpx solid #e0e0e0 !important;
+  border-bottom-left-radius: 8rpx;
+  color: #e9333f;
+  background-color: rgba(255, 255, 255,0.5) ;
+}
+.photograph-img-box{
+  position: relative !important;
+ margin-bottom: 30rpx;
+}
+.img_flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.text_flex{
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+}
+.mar_t56{
+  margin-top: 56rpx;
+}
+.flex1{
+  /* width: 50%; */
+}
+.img_mar:nth-child(odd){
+  /* margin-right: 30rpx; */
+}
+.posi_fix{
+  position: absolute;
+  right: 2rpx;
+  top: 1rpx;
+  width: 44rpx;
+height: 44rpx;
+line-height: 44rpx;
+background: rgba(0,0,0,0.6);
+border-top-right-radius: 8rpx;
+border-bottom-left-radius: 8rpx;
+text-align: center;
+}
+.close{
+  font-size: 36rpx;
+  color: #fff;
+}
+.text_left{
+  color: #858585;
+  font-size: 30rpx;
+  margin-right: 60rpx;
+}
+.text_wid{
+  width: auto;
+  /* line-height: 1.5; */
+}
+.text_right{
+  flex: 1;
+}
+.wid_img{
+  width: 256rpx;
+  margin-right: 50rpx;
+}
+.photograph-ico{
+  width: 48rpx;
+  height: 38rpx;
+}
+.sign {
+  color: #FF4D4F;
+}

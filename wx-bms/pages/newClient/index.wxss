@@ -1,0 +1,38 @@
+.newClientContainer{
+  padding-top: 40rpx;
+  padding-left: 60rpx;
+}
+
+.newClientContainer .name{
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 700;
+}
+
+.newClientContainer .inputBox{
+    margin-top: 20rpx;
+    width: 630rpx;
+    height: 180rpx;
+}
+
+.newClientContainer .inputBox  .textarea{
+  width: 100%;
+  height: 100%;
+  background-color: #F1F3F5;
+  padding-top: 38rpx;
+  padding-left: 30rpx;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+
+.newClientContainer .save{
+  margin-top: 200rpx;
+  margin-left: 16rpx;
+  width: 600rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #E9333F;
+  color: #FFFFFF;
+  font-size: 28rpx;
+}

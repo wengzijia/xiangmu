@@ -1,0 +1,8 @@
+{
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "拼版计价",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "step": "../../components/step/index"
+}
+}

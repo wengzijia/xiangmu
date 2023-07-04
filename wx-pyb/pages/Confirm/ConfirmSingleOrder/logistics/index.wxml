@@ -1,0 +1,11 @@
+<view>
+  <view style="background-color: #fff;">
+    <van-radio-group value="{{ radio }}" bind:change="onChange">
+      <view class="item" wx:for="{{logisticsList}}"  wx:key="id" data-item="{{item}}" catchtap="click">
+        <van-radio name="{{item.id}}">
+          <view>{{item.shippingName}}</view>
+        </van-radio>
+      </view>
+    </van-radio-group>
+  </view>
+</view>

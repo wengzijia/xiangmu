@@ -1,0 +1,250 @@
+/* pages/gallerySet/index.wxss */
+/* 公共类 */
+
+/* 单行显示省略号 */
+.text-ellipsisl1{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+page{
+  background-color: #F5F7FE;
+}
+.gallery_all{
+  padding: 28rpx 36rpx;
+  background-color: #fff;
+}
+.dis_flex{
+  display: flex;
+  font-size: 30rpx;
+}
+.mar_t28{
+  margin-top: 28rpx;
+}
+.mar_b56{
+  margin-bottom: 56rpx;
+}
+.flex_left{
+  color:#777777;
+  font-size: 30rpx;
+  margin-right: 50rpx;
+}
+.flex_right{
+  font-weight: bold;
+  color: #333333;
+}
+.wid_img{
+  height: 172rpx;
+  width: 200rpx;
+}
+.photograph-ico{
+  width: 48rpx;
+  height: 38rpx;
+}
+.sign {
+  color: #FF4D4F;
+}
+.title{
+  font-size: 30rpx;
+  color: #333333;
+}
+.note{
+  color: #AAAAAA;
+  font-size: 24rpx;
+}
+.add_bg{
+  width: 320rpx;
+  height:206rpx ;
+  background-color: #F3F3F3;
+  text-align: center;
+  line-height: 206rpx;
+  border-radius: 8rpx;
+}
+.photograph-img{
+  width: 320rpx;
+  max-height: 206rpx;
+  border-radius: 8rpx !important;
+  border:1rpx solid #e0e0e0 !important;
+}
+.del-img-icon{
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  padding: 2rpx;
+  border-left:1rpx solid #e0e0e0 !important;
+  border-bottom:1rpx solid #e0e0e0 !important;
+  border-bottom-left-radius: 8rpx;
+  color: #e9333f;
+  background-color: rgba(255, 255, 255,0.5) ;
+}
+.photograph-img-box{
+  position: relative !important;
+ margin-bottom: 30rpx;
+}
+.img_flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.text_flex{
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+}
+.mar_t56{
+  margin-top: 56rpx;
+}
+.flex1{
+  /* width: 50%; */
+}
+.img_mar:nth-child(odd){
+  /* margin-right: 30rpx; */
+}
+.posi_fix{
+  position: absolute;
+  right: 5rpx;
+  top: 1rpx;
+  width: 44rpx;
+height: 44rpx;
+line-height: 44rpx;
+
+
+text-align: center;
+}
+.close{
+  font-size: 36rpx;
+  color: #fff;
+}
+.mar_t8{
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #333333;
+  width: 320rpx;
+}
+.text_left{
+  color: #858585;
+  font-size: 30rpx;
+  margin-right: 60rpx;
+}
+.text_wid{
+  width: auto;
+  /* line-height: 1.5; */
+}
+.text_right{
+  flex: 1;
+}
+
+.btn_bg {
+  background-color: #fff;
+  padding: 24rpx 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+  z-index: 10;
+}
+
+.btn {
+  text-align: center;
+  margin: 0 32rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  background: #3D7EFF;
+  border-radius: 66rpx;
+  font-size: 32rpx;
+  color: #fff;
+}
+.mrginT{
+padding-bottom:  calc(env(safe-area-inset-bottom) + 280rpx);
+}
+.clo_img{
+  width: 46rpx;
+  height: 46rpx;
+}
+.btn_flex{
+  display: flex;
+  margin: 0 36rpx;
+}
+.edit_img{
+  width: 56rpx;
+  height: 56rpx;
+  text-align: center;
+}
+
+.edit_text{
+  color: #333333;
+  font-size: 24rpx;
+}
+.btn_bg {
+  background-color: #fff;
+  padding: 24rpx 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+  z-index: 10;
+}
+.edit_all{
+  text-align: center;
+}
+.btn1{
+  text-align: center;
+  margin-left: 32rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  background: #3D7EFF;
+  border-radius: 66rpx;
+  font-size: 32rpx;
+  color: #fff;
+  flex: 1;
+}
+
+/* 企业地址 */
+.firmAddressBox{
+  display: flex;
+  margin-top: 56rpx;
+  font-size: 30rpx;
+}
+
+.firmAddressBox .text{
+  color: #858585;
+  margin-right: 60rpx;
+  flex-shrink: 0;
+}
+
+.firmAddressBox .p_class{
+  color: #AAAAAA;
+}
+
+.firmAddress{
+  display: flex;
+  position: relative;
+}
+
+.selectAddress{
+  width: 468rpx;
+}
+
+.addressContent{
+  width: 468rpx;
+}
+
+.addressName{
+  font-weight: 500;
+}
+
+.addressDetail{
+  color: #858585;
+}
+
+.rightArrow{
+  position: absolute;
+  top: 5px;
+  right: -16px;
+}

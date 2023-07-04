@@ -1,0 +1,711 @@
+/*********=============main 产品分类=============********/
+.guigeBox{
+    padding-top:30px;
+    /* overflow: hidden; */
+}
+.guigeLt,.guigeRt{
+    background-color:#fff;
+    border:1px solid #dbe0e4;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    -ms-border-radius:4px;
+    -o-border-radius:4px;
+}
+/*****left*****/
+.guigeLt{
+    width:70%;
+    float: left;
+}
+.guigeH1{
+  font-weight: normal;
+  font-size:14px;
+  justify-content: space-between;
+  padding:0 18px;
+  line-height:54px;
+}
+.geH1Lt{
+    font-size:16px;
+    font-weight: 700;
+}
+.geH1Lt em{
+    font-size:12px;
+    color:#999;
+    font-weight:normal;
+    padding-left:8px;
+}
+.lookBnt{
+    font-weight:normal;
+    cursor: pointer;
+    color:#999;
+}
+.lookBnt::after{
+    content:">>";
+    font-size:12px;
+    display: inline-block;
+    color:#999;
+    font-family:"宋体";
+    padding-left:4px;
+}
+.lookBnt:hover,.lookBnt:hover::after{
+    color:#ff0036;
+}
+/*成品外尺寸 数量 款数*/
+.guigeTop{
+    background-color:#f5f5f5;
+    padding:20px 15px 10px;
+    position: relative;
+}
+.guigeImg{
+    width:134px;
+    height:116px;
+    right:60px;
+    position: absolute;
+    top:24px;
+    /* overflow:hidden; */
+    background-color:#000;
+    cursor: pointer;
+}
+/*大图*/
+.biGeImg{
+    width:200px;
+    height:200px;
+    background-color:red;
+    position:absolute;
+    top:-30px;
+    left:-30px;
+    z-index:2;
+    display:none;
+}
+.guigeTop li{
+    margin-bottom: 8px;
+    line-height:28px;
+}
+.guigeTopDv{
+    border: 1px solid #d9d9d9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    margin-right: 6px;
+    display:flex;
+}
+.guigeTopDv input{
+    display: inline-block;
+    width: 85px;
+    background: #fcf8e3;
+    height: 28px;
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 28px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 3px;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.guige-sign{
+    padding: 0 8px;
+    height: 28px;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    background-color: #efefef;
+    text-align: center;
+    line-height: 28px;
+    font-family: verdana;
+    text-transform: lowercase;
+    display: inline-block;
+}
+.guige-sign:last-child{border-right:0;}
+.guigeLabel{
+    width:140px;
+    color:#777;
+    text-align:right;
+    padding-right:20px;
+}
+.guigeTis{
+  background-color:#d9d9d9;
+  width:14px;
+  height:14px;
+  border:1px solid #c9c9c9;
+  display: inline-block;
+  border-radius:16px;
+  position: relative;
+  top:1px;
+  font-size:10px;
+  line-height:14px;
+  text-align:center;
+  color:#fff;
+  cursor: pointer;
+
+}
+.guigeLabel .sRed{
+    font-size:10px;
+}
+.geTipstxt{
+    display:none;
+    position: absolute;
+    top: 24px;
+    left: -23px;
+    z-index: 99999;
+    padding: 12px 16px;
+    width: 260px;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    text-align: justify;
+    line-height: 18px;
+    font-weight: normal;
+    font-size: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    cursor: initial;
+    border-radius: 2px;
+    color:#666;
+}
+.geTipstxt s,.oAtrLayer em,.oddBox em,.gildingBox em{
+    position: absolute;
+    top: -19px;
+    left: 20px;
+    display: block;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    line-height: 0;
+    border-color: transparent transparent #999 transparent;
+    border-style: dashed dashed solid dashed;
+    border-width: 9px;
+}
+.geTipstxt s::before,.oAtrLayer em::before,.oddBox em::before,.gildingBox em::before{
+    position: absolute;
+    top: -9px;
+    left: -10px;
+    display: block;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    line-height: 0;
+    border-color: transparent transparent #fff transparent;
+    border-style: dashed dashed solid dashed;
+    border-width: 10px;
+    cursor: pointer;
+    content:"";
+}
+
+/*属性*/
+.guigeFoot{
+    padding:0 15px;
+}
+.attrMain{
+    padding:15px 0 20px;
+}
+.attrMain li{
+    display:flex;
+    display:-webkit-flex;
+    display:-moz-flex;
+    display:-ms-flex;
+    display:-o-flex;
+    line-height:30px;
+    /* overflow: hidden; */
+    margin-bottom:8px;
+}
+.attrMtop{
+    align-items:center;
+}
+.gAttrList{
+    width:662px;
+    position: relative;
+}
+.attrTag{
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    color: #666;
+    display: inline-block;
+    background: #fff;
+    margin-bottom:8px;
+    margin-right:6px;
+    padding:0 12px;
+    height:30px;
+    cursor: pointer;
+    position: relative;
+    font-size:13px;
+}
+.attrTag::before{
+    width:12px;
+    height:12px;
+    content:"";
+    position: absolute;
+    right:0;
+    bottom:0;
+    display:none;
+    background:url('../img/icon_new.png') no-repeat right -44px;
+}
+.attrTag.curr{
+    border: 2px solid #fe0034;
+    color: #333;
+}
+.attrTag.curr::before{
+    display:block;
+}
+/*下级*/
+.paperSilver em{
+    left:126px;
+}
+.paperCow em{
+    left:220px;
+}
+#bumf4 em{
+    left:310px;
+}
+.oAtrLayer{
+    border:1px solid #eee;
+    padding:16px 16px 10px;
+    width:646px;
+    position: relative;
+    top:-4px;
+    left:-16px;
+    background-color:#fcfcfc;
+    margin-bottom:4px;
+}
+.oAtrLayer em{
+    border-color: transparent transparent #dbdbdb transparent;
+    left:46px;
+}
+
+/*专色数量*/
+.colorNumbr{
+    display: inline-block;
+    /* padding:0 8px 0 4px; */
+    color:#666;
+}
+.colorNumbr .layui-form-item{
+    display: inline-block;
+    padding-right: 8px;
+    margin-bottom:0;
+}
+.colorNumbr .layui-input-block{
+    width:80px;
+    margin-left:74px;
+}
+.colorNumbr .layui-input{
+    height:32px;
+    position: relative;
+    border: 1px solid #dcdcdc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    border-radius:2px;
+}
+.colorNumbr .layui-form-label{
+    width:auto;
+    padding-left:2px;
+    padding-right:10px;
+}
+.colorNumbr .layui-form-select dl{
+    top: 34px; padding:0;
+}
+.colorNumbr .layui-form-select dl dd{
+    line-height: 24px;
+}
+.colorNumbr .layui-form-select dl dd.layui-this{
+    background-color: #ff0036;
+}
+.cotInpt,.PantInpt{
+    background-color: #f8f8f8;
+    height: 30px;
+    background-image: none;
+    border: 1px solid #dcdcdc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    border-radius:2px;
+    padding-left:6px;
+}
+.cotInpt{
+    position: relative;
+    top:-1px;
+    width:74px;
+}
+/*PANTONE*/
+.PantoneDv{
+  color:#666;
+  margin-top: 16px;
+}
+.PantInpt{
+    width:74px;
+}
+/*单色*/
+.oddBox{
+    border:1px dotted #fae7e7;
+    background-color:#fff7f7;
+    padding:16px 16px 10px;
+    width:610px;
+    position: relative;
+    top:-5px;
+}
+.oddBox em{
+    border-color: transparent transparent #fae7e7 transparent;
+    left:130px;
+}
+.oddBox em::before{
+    border-color: transparent transparent #fff7f7 transparent;
+}
+
+/*烫金*/
+.gildingBox{
+    border: 1px solid #eee;
+    padding: 24px 16px 6px;
+    width: 646px;
+    position: relative;
+    top: -4px;
+    left: -16px;
+    background-color: #fcfcfc;
+    margin-bottom: 4px;
+}
+.gildingBox em{
+    border-color: transparent transparent #dbdbdb transparent;
+    left:34px;
+}
+.gildingBox .guigeLabel{
+    width:100px;
+}
+.gilding .guigeTopDv{
+    width: 284px;
+}
+.addHbtn,.canlHbtn,.delHbtn{
+   padding:0 12px;
+   height:22px;
+   line-height:22px;
+   color:#fff;
+   border-radius:30px;
+   margin-top:5px;
+   margin-left:12px;
+   font-size:12px;
+   cursor: pointer;
+}
+.addHbtn{
+    background-color:#ff0036;
+}
+.delHbtn{
+    background-color:#aaa;
+}
+.delHbtn:hover{
+    background-color:#999;
+}
+.canlHbtn{
+    background-color:#000;
+}
+.addHbtn:hover{
+    background-color:#e20030;
+}
+.canlHbtn:hover{
+    background-color:#262626;
+}
+.convexTips{
+  position: relative;
+  top:-12px;
+  left:30px;
+  font-size:12px;
+  color:#666;
+}
+.crafList{
+   /* border-bottom:1px solid #eee;
+   margin-bottom:14px;*/
+   padding-bottom:10px;
+}
+
+.convexDl em{
+    left: 94px;
+}
+.uvDl em{
+    left: 160px;
+}
+.concaveDl em{
+    left:236px;
+}
+.stickDl em{
+    left:300px;
+}
+.fcardDl em{
+    left:360px;
+}
+.fcardDl .cardOdd em{
+    left: 145px;
+}
+
+/*贴窗*/
+.stickLab{
+    position: relative;
+    line-height:16px;
+}
+
+/*裱卡*/
+.cardOdd{
+    width: 510px;
+    left: -16px;
+    top:-4px;
+}
+.cardOdd i{
+    left: 144px;
+}
+/*压纹*/
+.viewVeins{
+    font-size: 12px;
+    color: #f00;
+    cursor: pointer;
+    position: relative;
+    top: -10px;
+}
+/*海绵*/
+.addParts{
+    height:18px;
+    line-height:18px;
+    color: #fff;
+    border-radius: 30px;
+    margin-top: 5px;
+    margin-left:6px;
+    font-size: 10px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #bfbfbf;
+    width:18px;
+    text-align:center;
+}
+.addParts:hover{
+    background-color:#ff0036;
+}
+
+
+/*****right*****/
+.guigeRt{
+    width:28.6%;
+    margin-left:12px;
+    float:right;
+}
+.guigeRtH2{
+    margin: 0px;
+    overflow: hidden;
+    height: 35px;
+    line-height: 35px;
+    margin-bottom: 0;
+    padding: 8px 15px;
+    background-color: #f1f3f4;
+    border-bottom: 1px solid #d8dfe3;
+    font-weight:normal;
+    font-size: 16px;
+    font-weight: bold;
+}
+.geRtList{
+    padding:0 15px;
+}
+.geRtList h4{
+    font-weight: normal;
+    font-size:15px;
+    margin:20px 0 10px;
+}
+.geRtSection{
+   color:#777;
+}
+.geRtSection a:hover{
+    color:#ff0036;
+    text-decoration:underline;
+}
+/*出货时间 价格*/
+.guigeRtUl ol{
+   border:1px solid #e0e0e0;
+   justify-content: space-between;
+   padding:0 30px;
+   line-height:36px;
+}
+.guigeRtUl li{
+    background-color:#edeef0;
+    padding:12px;
+}
+.geRtime{
+    background-color:#f5f5f5;
+    border-bottom:1px solid #edeef0;
+    line-height:40px;
+    padding:0 20px 0 14px;
+    justify-content: space-between;
+    color:#333;
+    cursor: pointer;
+}
+.geRtimeLt{
+     margin-bottom:0;
+}
+.geRtimeLt .layui-form-radio{margin-top:0;}
+.geRtimeLt .layui-input-block{
+    margin-left:0;
+}
+.geRtimeLt .layui-form-radio>i:hover, .geRtimeLt .layui-form-radioed>i{
+    color: #ff0036;
+}
+.geRtimeLt em{
+    width:17px;
+    height:17px;
+    border:1px solid #c2c2c2;
+    border-radius:20px;
+    display: inline-block;
+    margin-right:8px;
+    position: relative;
+    top:5px;
+}
+.geRtime em::before{
+    width:13px;
+    height:13px;
+    border-radius:40px;
+    content:'';
+    display:block;
+    margin:2px auto 0;
+ }
+.geRtime.curr{
+    font-weight: bold;
+    background-color:#fff;
+}
+.geRtime.curr i{font-weight:normal;}
+/* .geRtime.curr em{
+    border-color:#ff0036;
+}
+.geRtime.curr em::before{
+   background-color:#ff0036;
+} */
+
+/*配送费用*/
+.areBox .layui-form-item{
+    margin-right:12px;
+}
+.areBox .layui-form-item:last-child{margin-right:0;}
+.areBox .layui-input-block{
+     margin-left:0;
+}
+.areBox dl dd.layui-this{
+   background:#ff0036;
+}
+.geRtkg{
+  justify-content: space-between;
+  font-size:13px;
+  padding:8px 0;
+}
+
+.geRtExpect{
+    border-bottom:1px solid #f0f0f0;
+    padding: 16px 0 12px 46px;
+    position: relative;
+    font-size:13px;
+}
+.geRtExpect i{
+    width:28px;
+    height:26px;
+    background:url('../img/icon_new.png') no-repeat right top;
+    position: absolute;
+    left:6px;
+    top:20px;
+}
+/*总价*/
+.geRtotal{
+    font-size:16px;
+    font-weight: bold;
+    align-items: center;
+    padding:20px 0;
+}
+#price_total{
+    font-size: 24px;
+    font-family: verdana;
+    color: #ff0036;
+}
+.geRtotal em{
+    font-size:12px;
+    font-weight:normal;
+    padding-left:12px;
+}
+
+/*购买按钮*/
+.geRtBtnDv{
+    padding-bottom:30px;
+}
+.geRtBtnDv a{
+    flex:1;
+    text-align:center;
+    line-height:40px;
+    border:1px solid #ff0036;
+    font-size:16px;
+}
+.getBuy{
+    background-color:#ffeded;
+    color:#ff0036;
+    margin-right:4px;
+}
+.joinShoping{
+   background-color:#ff0036;
+   color:#fff;
+   margin-left:4px;
+}
+.joinShoping i{
+    width:13px;
+    height:12px;
+    display: inline-block;
+    background:url('../img/icon_new.png') no-repeat right -58px;
+    margin-right:4px;
+}
+.getBuy:hover{
+    background-color:#fae2e2;
+    color:#dd002f;
+}
+.joinShoping:hover{
+    background-color:#ea0032;
+    color:#fff;
+}
+.dd{
+    width:80px;
+    position: absolute;
+}
+
+/*********============特殊盒型  样式=============********/
+.specialBox dl{
+    display:flex;
+    display:-webkit-flex;
+    display:-moz-flex;
+    display:-ms-flex;
+    display:-o-flex;
+    align-items:center;
+    position: relative;
+    border:1px solid #eee;
+    background-color:#fff;
+    padding:12px;
+    margin-bottom:14px;
+}
+.specialBox dl:hover{background-color:#f9f9f9;}
+.specialBox dt img{
+  width:116px;
+  height:116px;
+  border:1px dotted #eee;
+  margin-right:6px;
+}
+.specialBox dd{
+    padding-left:20px;
+    color:#666;
+    font-size:12px;
+}
+.specialTx h4{
+   padding-bottom:8px;
+   color:#333;
+   font-size:14px;
+}
+.specialBtn{
+    background-color:#ff0036;
+    color:#fff;
+    width:96px;
+    border-radius:4px;
+    text-align:center;
+    line-height:40px;
+    cursor: pointer;
+    position: absolute;
+    right:12px;
+}
+.specialBtn:hover{
+    background-color:#e40030;
+    color:#fff;
+}

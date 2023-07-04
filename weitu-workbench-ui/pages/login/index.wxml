@@ -1,0 +1,50 @@
+<!--pages/login/index.wxml-->
+<view class="loginContainer">
+  <view class="loginBox">
+    <image class="logoImg" src="/image/login/logo.png"></image>
+    <view class="logoTitle">微图</view>
+  </view>
+  <view class="logoContent">用内容让企业营销更高效</view>
+  <view class="phoneBox"><input class="phoneInput" maxlength="11" type="number" placeholder="请输入手机号" data-type="{{0}}" value="{{phoneNumber}}" catchinput="getInputVal" /></view>
+  <view class="codeBox">
+    <view class="codeInputBox">
+      <input class="codeInput" maxlength="6" type="number" placeholder="请输入验证码" data-type="{{1}}" value="{{code}}" catchinput="getInputVal" />
+    </view>
+    <view class="flex_c_c getCode" wx:if="{{showCode}}" catchtap="sendCode">获取验证码</view>
+    <view class="flex_c_c sent" wx:else>已发送({{countDown}})</view>
+  </view>
+  <!-- && isCodeSuccess -->
+  <view class="flex_c_c login" wx:if="{{phoneNumber && code }}" catchtap="login">登录</view>
+  <view class="flex_c_c notLogin" wx:else>登录</view>
+  <view class="regardsWeiTu" catchtap="aboutWT">关于微图</view>
+  <view class="bottomSafetyKm hotline">服务热线:0755-36567904</view>
+  <!-- 关于微图弹窗 -->
+  <van-popup show="{{showWTPopup}}" round closeable custom-class="doneProPopup" bind:close="WTPopupClose">
+    <view class="weiTuPopupBox">
+      <view class="weiTuLogoBox">
+        <image class="wTlogoBjt" src="/image/login/logoBjt.png"></image>
+        <image class="weiTuLogoImg" src="/image/login/logo.png"></image>
+        <view class="weiTuTextBox">
+          <view class="wT">微图</view>
+          <view class="wTSlogan">用内容让企业营销更高效</view>
+        </view>
+      </view>
+      <view class="wTContentBox">
+        <view style="font-weight:700;">关于我们</view>
+        <view style="margin:16rpx 0 12rpx 0;color: #777777;font-size: 26rpx;">微图，专业的私域流量内容营销解决方案提供商。</view>
+        <view style="color: #777777;font-size: 26rpx;">微图已上线超10000套原创可商用行业包装解决方案，结合数宁名片、线上展厅、智能营销物料等内容工具，赋能包装印刷、图文广告、美妆、礼品等企业级客户，帮助企业降低营销内容产出成本、提升成单转化率。</view>
+        <view style="margin:28rpx 0 16rpx 0;font-weight:700;">收费标准</view>
+        <view style="font-size: 26rpx;color: #3D7EFF;font-weight:700;">个人版</view>
+        <view style="font-size: 26rpx;margin:6rpx 0 16rpx 0;color: #777777;">
+          <text style="color: #333333;font-weight:700;">99</text>元<text style="color: #333333;font-weight:700;">1</text>年;
+          <text style="color: #333333;font-weight:700;">149</text>元<text style="color: #333333;font-weight:700;">2</text>年
+        </view>
+        <view style="font-size: 26rpx;color: #3D7EFF;font-weight:700;">企业版</view> 
+        <view style="font-size: 26rpx;margin:6rpx 0 16rpx 0;color: #777777;"><text style="color: #333333;font-weight:700;">1999</text>元<text style="color: #333333;font-weight:700;">1</text>年(赠送5张包材订单优惠券，100元/张，订单满1000元可使用) : <text style="color: #333333;font-weight:700;">2999</text>元<text style="color: #333333;font-weight:700;">2</text>年 (赠送10张包材订单优惠券，100元/张，订单满1000元可使用) 独立部署企业小程序，免费接入在线客服系统，免费客户信息管理系统。</view>
+        <view style="font-size: 26rpx;color: #3D7EFF;font-weight:700;">企业展厅素材服务套餐</view>
+        <view style="margin-top:6rpx;color:#777777;font-size: 26rpx;"><text style="color: #333333;font-weight:700;">500</text>元，轮播图4张，合作案例4张，工厂展示图4张。</view>
+        <view style="margin-top:48rpx;color:#777777;font-size: 26rpx;text-align: center;">服务热线:0755-36567904</view> 
+      </view>
+    </view>
+  </van-popup>
+</view>

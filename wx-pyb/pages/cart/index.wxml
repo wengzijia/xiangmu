@@ -1,0 +1,94 @@
+<view class="main">
+    <view class="topbox" wx:if="{{carts.length>0}}">
+        <text>共 <text style="color:#FE0036">{{carts.length}}</text> 件商品</text>
+        <text style="float:right;color:#9A9A9A;height: inherit;" bindtap="statusfn">{{statusnum?'完成':'管理'}}</text>
+    </view>
+    <!-- <view class="scroll">
+    <text>我是一个滚动条啊滚动条</text>
+</view> -->
+    <view wx:if="{{carts.length>0}}" style="float:left;padding-bottom:200rpx;">
+        <view class="cart-box">
+            <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
+                <icon wx:if="{{item.ischeck}}" type="success" color="#FF0036" data-index="{{index}}" data-id="{{item.id}}" class="cart-pro-select" bindtap="selectList" />
+                <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" data-id="{{item.id}}" bindtap="selectList" />
+                <!-- <navigator url="../details/details?id={{item.id}}"><image class="cart-thumb" src="{{item.image}}"></image></navigator> -->
+                <text class="cart-pro-name">{{item.paper.paperType+'_'+item.paper.kg}}<text style="float:right;color:#9A9A9A">{{item.parkName?item.parkName:item.factoryName}}</text></text>
+                <!-- <text class="cart-con">{{item.goodsAttr}}</text> -->
+                <!-- <text class="cart-con">
+                    <text wx:for="{{item.newgoods}}"  wx:for-item="items" wx:for-index='i' wx:key="{{i}}">
+                        <text class="evencolor" style='color:#000' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+                        <text wx:else>
+                            <text class="evencolor">{{items[0]}}:</text>
+                            <text class="evencolor" style='color:#000'>{{items[1]}};</text>
+                        </text>
+                    </text>
+                    <text class="evencolor">印刷厂商:</text><text class="evencolor" style='color:#000'>{{item.factoryName}};</text>
+                </text> -->
+                <view class="details">
+                    <text style='color:#666'>纸行名称:</text>
+                    <text style='color:#000'>{{item.paper.paperShop}};</text>
+                    <text style='color:#666'>纸张品牌:</text>
+                    <text style='color:#000'>{{item.paper.brand}};</text>
+                    <text style='color:#666'>吨价/平方单价:</text>
+                    <text style='color:#000'>{{item.paper.paperTonprice}}元;</text>
+                    <text wx:for="{{item.newgoods}}" wx:for-item="items" wx:for-index='i' wx:key="{{i}}">
+                        <text style='color:#000' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+                        <text wx:elif="{{items[0]=='纸行名称'||items[0]=='吨价/平方单价'||items[0]=='纸张品牌'}}">
+                        </text>
+                        <text wx:else>
+                            <text style='color:#666'>{{items[0]}}:</text>
+                            <text style='color:#000'>{{items[1]}};</text>
+                        </text>
+                    </text>
+                    <text>
+                        <text style='color:#666'>印刷厂商:</text>
+                        <text style='color:#000'>{{item.factoryName}};</text>
+                    </text>
+                </view>
+
+                <text class="cart-pro-price"><text style="font-size:22rpx">￥</text>{{item.goodsTotal-item.discountDetail.colorMoney-item.discountDetail.spotMoney}}</text>
+                <view class="cart-count-box">
+                    <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}" data-id="{{item.id}}" style="font-size:70rpx">-</text>
+                    <!-- <text class="cart-count-num">{{item.num}}</text> -->
+                    <input class="cart-count-num" bindblur="bindKeyInput" bindfocus="inputFocus" type="number" maxlength="8" value="{{item.num}}" data-id="{{item.id}}" data-index="{{index}}" placeholder="" />
+                    <text class="cart-count-add" bindtap="addCount" data-index="{{index}}" data-id="{{item.id}}">+</text>
+                </view>
+                <!-- <text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text> -->
+            </view>
+        </view>
+
+        <!-- <view class="cart-footer">
+            <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
+            <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
+            <view class="order-icon">
+                <navigator url="../orders/orders"><image src="/image/icon3.png"></image></navigator>
+            </view>
+            <text>全选</text>
+            <text class="cart-toatl-price">￥{{totalPrice}}</text>
+        </view> -->
+        <view class="bottom_total">
+            <view class="bottom_line"></view>
+            <view class="row">
+                <icon wx:if="{{selectAllStatus}}" type="success" color="#FF0036" class="total-select" bindtap="selectAll" />
+                <icon wx:else type="circle" color="#000" class="total-select" bindtap="selectAll" />
+                <text class="small_text">全选</text>
+                <text hidden="{{statusnum}}">合计:<text><text style="color:#FF0036;font-size:24rpx;">￥</text> </text> </text>
+                <text hidden="{{statusnum}}" class="price">{{totalPrice}}</text>
+                <button class="button-red" wx:if="{{statusnum}}" bindtap="del">删除</button>
+                <button class="button-red" style="z-index:99" bindtap="orderfn" wx:else>去结算</button>
+            </view>
+        </view>
+    </view>
+
+    <view class="cart-noBox" wx:else>
+
+        <view class="cart-no-data">
+            <image src="../../image/cart.png" mode="cover"></image>
+        </view>
+        <view class="cart-no-data">
+            购物车还没有添加商品呢~
+        </view>
+
+    </view>
+    <modal modal="{{modal}}"></modal>
+</view>

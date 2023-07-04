@@ -1,0 +1,195 @@
+<view class="paperboard catchtou" id="j_page">
+  <!-- 头部 -->
+  <!-- <view class="header">
+    
+  </view> -->
+  <!-- 内容 -->
+  <view class="content btuBottom">
+    <view>
+      <view class="label"><text class="mustSign red">*</text>选择纸业</view>
+      <view class="button_container fromItem">
+        <block wx:for="{{paperShopList2}}" wx:key="index">
+        <button wx:if="{{offerData['paperShop2']==item.id}}" class='{{offerData["paperShop2"]&&offerData["paperShop2"]==item.id?"checked_button":"normal_button"}}' data-key="paperShop2" data-val="{{item.id}}" catchtap="radioTap" data-name='{{item.paperShop}}'>
+            {{item.paperShop}}
+        </button>  
+        </block>
+        <!-- <button class='{{offerData["paperShop2"]&&offerData["paperShop2"]=="jinfu"?"checked_button":"normal_button"}}' data-key="paperShop2" data-val="jinfu" catchtap="radioTap">
+          金福纸业
+        </button>  -->
+        <button wx:if="{{offerData['paperShop2']=='other'}}"  class='{{offerData["paperShop2"]&&offerData["paperShop2"]=="other"?"checked_button":"normal_button"}}' data-key="paperShop2" data-val="other" catchtap="radioTap">
+         其他纸业
+        </button> 
+      </view>
+    </view>
+    <view wx:if="{{offerData.paperShop2&&offerData.paperShop2!='other'&&offerData.paperShop2!='jinfu'}}">
+      <view class="label"><text class="mustSign red">*</text>选择业务员</view>
+      <view class="button_container fromItem">
+        <block wx:for="{{saleList}}" wx:key="index">
+        <button class='{{offerData["sale"]&&offerData["sale"]==item.id?"checked_button":"normal_button"}}' data-key="sale" data-val="{{item.id}}" catchtap="radioTap">
+            {{item.name}}
+          </button>  
+        </block>
+      </view>
+    </view>
+    <!-- 纸张材质 -->
+    <view>
+      <view wx:if="{{offerInfo.materialType.list.length>0}}" style="border-bottom:1rpx solid #f2f2f2;">
+      <view class="label"><text class="mustSign red">*</text>纸张材质</view>
+      <view class="button_container fromItem">
+        <block wx:for="{{offerInfo.materialType.list}}" wx:key="index">
+        <button class='{{offerData["materialType"]&&offerData["materialType"]==item.value?"checked_button":"normal_button"}}' data-key="materialType" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>  
+        </block>
+      </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']}}" style="border-color:#f6f6f6;">
+        <view class="button_container fromItem ">
+          <block wx:for="{{offerInfo.thickness.list}}" wx:key="index">
+          <button class='{{offerData["thickness"]&&offerData["thickness"]==item.value?"checked_button":"normal_button"}}' data-key="thickness" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>  
+            </block>
+        </view>
+      </view>
+      </view>
+      <view class="button_container fromItem2">
+      <view wx:if="{{offerData.paperShop2&&offerData.paperShop2==='other'}}" class="fromItem3">
+        <view class="label">
+          <text >
+            <text class="mustSign red">*</text>
+            <text>纸行名称</text>
+          </text>
+        </view>
+        <view class="conten">
+         <search bindeventP='getSearchValue' placeholder-style="phcolor" placeholder='请输入纸行名称' data-key='offerData.paperShop' list='{{paperShopList}}' inputVal='{{offerData.paperShop}}'></search>
+        </view>
+      </view>
+      <view class="fromItem3" >
+        <view class="label">
+          <text >
+            <text class="mustSign red">*</text>
+            <text>纸张品牌</text>
+          </text>
+        </view>
+        <view class="conten">
+         <search bindeventP='getSearchValue' placeholder-class="phcolor" placeholder='请输入纸张品牌' data-key='offerData.brand' list='{{brandList}}' inputVal='{{offerData.brand}}'></search>
+        </view>
+      </view>
+      <view class="fromItem3" >
+        <view class="label">
+          <text >
+            <text class="mustSign red">*</text>
+            <text>吨价/平方单价</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+         <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入吨价/平方单价"  type="digit" value="{{offerData.tonsPrice}}" bindblur='inputVal' data-key='offerData.tonsPrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+      <view class="fromItem3" wx:if="{{offerData.tonsPrice&&offerData.paperTonprice>0 && offerData.tonsPrice !=offerData.paperTonprice}}" style="margin-bottom:0">
+        <view class="label" style="width: 100%;padding-bottom: 30rpx!important;display: inline-block;line-height:30rpx;font-size: 28rpx;">
+          <text>
+            <text class="mustSign red" ></text>
+            <text class="red">结算吨价/平方单价：{{offerData.paperTonprice}} 元</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;"></view>
+      </view>
+    </view>
+
+    </view>
+   
+    <!-- 开纸尺寸 -->
+	  <view class="button_container">
+		  <view class="fromItem3" >
+			<view class="label"><text class="mustSign red">*</text>定纸尺寸</view>
+			<view class="fromItem" style="display:flex; line-height:68rpx;">
+			  <view class="sizeInput" style="margin-right:0;">
+				<input placeholder-class="phcolor" placeholder="长"  type="digit" value="{{offerData.sizeLength}}" bindblur='inputVal' data-key='offerData.sizeLength'/>
+				<text class="fork">X</text>
+				<input placeholder-class="phcolor" placeholder="宽"  type="digit" value="{{offerData.sizeWidth}}" bindblur='inputVal' data-key='offerData.sizeWidth' />
+				<text class="sizeTxt">mm</text>
+			  </view>
+			</view>
+		  </view>
+		  <view class="fromItem3" >
+			<view class="label">
+			  <text >
+				<text class="mustSign red">*</text>
+				<text>定纸数量</text>
+			  </text>
+			</view>
+			<view class="conten" style="display:flex;align-items: center;">
+			 <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入定纸数量"  type="digit" value="{{offerData.printingNum}}" bindblur="changePrintingNum1" data-key='offerData.printingNum'/>
+			  <text class="sizeTxt">张</text>
+			</view>
+		  </view>
+		  <view class="fromItem3" style="align-items: start;" >
+			<view class="label">
+			  <text>
+				<text class="mustSign red">*</text>
+				<text>印刷厂</text>
+			  </text>
+			</view>
+			<view class="conten">
+        <view wx:if="{{printList}}" class="but1">
+      <view class="button_container but1">
+        <block wx:for="{{printList}}" wx:key="index">
+        <button class='{{offerData.printId==item.id?"checked_button":"normal_button"}}' data-key="print" data-name="{{item.name}}" data-val="{{item.id}}" catchtap="radioTap">
+            {{item.name}}
+        </button>  
+        </block>
+        <block wx:if="{{offerData.paperShop=='九发纸业'}}">
+        <button class='{{offerData.printId=="other1"?"checked_button":"normal_button"}}' data-key="print" data-name="其他印刷" data-val="other1" catchtap="radioTap">
+          其他印刷
+        </button> 
+      </block>
+      </view>
+    </view>
+    <block wx:if="{{offerData.printId=='other1'}}">
+			 <search bindeventP='getSearchValue' catchtap="showBottomView" isTop='{{true}}' placeholder='请输入印刷厂名称'  placeholder-class="phcolor" data-key='offerData.factory' list='{{enterFactoryList}}' inputVal='{{offerData.factory}}'></search>
+      </block>
+			</view>
+		  </view>
+		  <view class="fromItem3" wx:if="{{false}}">
+			<view class="label">
+			  <text >
+				<text class="mustSign red"></text>
+				<text>印刷颜色</text>
+			  </text>
+			</view>
+			<view class="conten">
+			多色(CMYK)_单面印刷
+			</view>
+		  </view>
+	  </view>
+    <!-- 价格 -->
+    <view class="priceCount " style='{{priceObj.price>99999?"padding-right:0rpx !important;white-space:nowrap":"white-space:nowrap"}}'>
+		<view style="display:flex;justify-content:space-between;">
+		  <view>原价:￥{{priceObj.priceOne?priceObj.priceOne+priceObj.cuttingFee-(priceObj.colorMoney+priceObj.spotMoney):'0.00'}}</view>
+		  <view>
+			<text class="red">优惠价:￥<text class="f40">{{priceObj.price?priceObj.price-(priceObj.colorMoney+priceObj.spotMoney):'0.00'}}</text></text>
+		  </view>
+		</view>
+    </view>
+  </view>
+  <view wx:if="{{isShowBottomView}}" style="height:500rpx" ></view>
+  <!-- 底部加入购物车 -->
+  <view class="footer btuBottom">
+    <!-- <button class="footerBox1" open-type="contact" show-message-card  hover-class="none"  bindtap="ballClickEvent" >
+      <view class="footerBoxIcon ac-icon-kefu"></view>
+      <text style='display: inline-block;'>客服</text>
+    </button> -->
+    <view class="footerBox2" catchtap="checkCart">
+      <view class="footerBoxIcon ac-icon-cart">
+        <view class="footerBuyCount">{{cartCount}}</view>
+      </view>
+      <view>购物车</view>
+    </view>
+    <view class="footerBox3" catchtap="addEditionCart">加入购物车</view>
+    <view class="footerBox4" catchtap="placeOrder">立即下单</view>
+  </view>
+  
+  <modal modal="{{modal}}"></modal>
+</view>

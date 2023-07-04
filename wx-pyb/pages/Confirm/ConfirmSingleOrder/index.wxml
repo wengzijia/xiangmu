@@ -1,0 +1,417 @@
+<view class="main">
+  <view>
+    <!-- <van-notice-bar
+      left-icon="volume-o"
+      text="受疫情影响，部分订单货期可能会延误，敬请谅解。"
+    /> -->
+  </view>
+  <!-- 收货信息 -->
+  <view class="cart-box">
+    <view wx:if="{{addAddres}}" catchtap="myNavigateTo" data-url="allSingleOrder/index" class="title personageList2">
+      <view style="width:100%;border-bottom:none;">
+        <text><van-icon name="add-o" />增加收货人信息</text>
+        <view class='greaterThanSign'></view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="content" catchtap="toAddressList" wx:if="{{logistics.id != 35}}">
+        <van-icon name="location-o" />
+        <view class="info">
+          <view class="address-top">
+            <text class="name">{{address.consigneeName}}</text>
+            <text class="mobile">{{address.mobile}}</text>
+          </view>
+          <view class="addressDetailse">{{address.province+address.city+address.county+address.address}}</view>
+        </view>
+        <view catchtap="toAddressList">
+          <van-icon name="arrow" />
+        </view>
+      </view>
+      <view class="content" wx:if="{{logistics.id == 35}}">
+        <view>
+          <van-icon name="location-o" />
+        </view>
+        <view class="info" catchtap="toAddressList">
+          <view class="address-top">
+            <text class="name">{{address.consigneeName}}</text>
+            <text class="mobile">{{address.mobile}}</text>
+          </view>
+          <view class="addressDetailse">自提地址:广东省佛山市南海区里水镇麻奢拼一版档口（导航：傲彩产业园）</view>
+        </view>
+        <view>
+          <van-icon name="arrow" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 订单信息 -->
+  <view>
+    <!-- <view>
+      <van-tabs bind:click="onClickLogistics" ellipsis="{{false}}" active="{{ active }}" wx:if="{{logisticsList.length}}">
+        <van-tab wx:for="{{logisticsList}}" wx:key="index" title="{{item.shippingName}}"></van-tab>
+      </van-tabs>
+    </view> -->
+    <!-- 物流方式选择 -->
+    <view class="cart-box cart-list" style="margin-top: 20rpx;" catchtap="jumpLogistics">
+      <view class="displayFlex flexBetween ">
+        <view><text style="color: #E9333F;">*</text><text style="font-size: 32rpx;font-weight: 600;">配送方式</text></view>
+        <view style="{{logistics.shippingName ? 'color:#E9333F' : 'color:#E9333F'}}">{{logistics.shippingName ? logistics.shippingName : '请选择配送方式'}}<van-icon style="color:#777;margin-left: 10rpx;" name="arrow" /></view>
+      </view>
+      <view style="color:#747577;font-size:26rpx;margin-top:10rpx;">
+        包邮订单默认使用普通物流，如需改其他物流方式，请联系对接业务员协助更改
+      </view>
+    </view>
+    <!-- 参数信息 -->
+    <view class="cart-box">
+      <view class="cart-list" wx:for="{{carts}}" wx:key="id">
+        <view class="cart-pro-name" style="font-size: 26rpx;" wx:if="{{!item.boxtype}}">
+          <van-checkbox icon-size="36rpx" wx:if="{{from == 'canOrder'}}" checked-color="#E9333F" value="{{ item.checked }}" data-index="{{index}}" bind:change="changeBox"></van-checkbox><text style="color:{{item.checked ? '#E9333F' : '#999999'}}" wx:if="{{from == 'canOrder'}}" >{{item.checked ? '已选择翻单' : '未选择翻单'}}</text>
+          <view style="margin-left: 14rpx;">
+            <text wx:if="{{logistics.id != 35 && logistics.shippingName}}" class="parcel {{item.freeShipping==1 && freeShipping.useMoney ?'gcolor':'pcolor'}}">{{item.freeShipping==1 && freeShipping.useMoney ? '包邮' : '不包邮'}}</text>
+            <text>{{item.versionType}}{{item.goodsName}}</text>
+          </view>
+        </view>
+        <view>
+          <input type="text" placeholder-class="phcolor" data-key="{{index}}" value="{{item.customName}}" bindinput='inputName' maxlength="16" placeholder="自定义产品名字（15字以内），选填"  class="input_name" />
+        </view>
+        <view class="details">
+          <text wx:for="{{item.newgoods}}" wx:for-item="items" wx:for-index='i' wx:key="id">
+            <text style='color:#666' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+            <text wx:else>
+              <text style='color:#999'>{{items[0]}}:</text>
+              <text style='color:#666'>{{items[1]}};</text>
+            </text>
+          </text>
+        </view>
+        <view class="numbox_flex" style="display: flex;justify-content: space-between;align-items:center;color:#666;">
+          <view>
+            <text class="cart-pro-num1" wx:if="{{from!='canOrder'}}">x{{item.num}}</text>
+            <view class="cart-count-box" wx:else style="margin-right:100rpx;" >
+              <text class="cart-count-down" catchtap="numberChange" data-type="reduce" style="font-size:70rpx" data-attr="{{item.goodsAttr}}" data-index="{{index}}">-</text>
+              <input class="cart-count-num"  type="digit" value="{{item.num}}" bindblur='numberChange' data-type='input' data-attr="{{item.goodsAttr}}" data-index="{{index}}"/>
+              <text class="cart-count-add" catchtap="numberChange" data-type="add" data-attr="{{item.goodsAttr}}" data-index="{{index}}">+</text>
+            </view>
+          </view>
+          <view>
+            <text wx:if="{{logistics.id != 35}}" class="price_col"><text>￥<text style="font-size: 36rpx;font-weight:600;">{{item.goodsTotal}}</text></text></text>
+            <text wx:else><text class="price_col">￥<text style="font-size: 36rpx;font-weight:600;">{{item.ownTakeDiscountGoodsTotal}}</text></text></text>
+          </view>
+        </view>
+        <text style="color:#A6A6A6;font-size:30rpx;margin-top:10rpx" wx:if="{{item.memo}}">备注：{{item.memo}}</text>
+      </view>
+    </view>
+
+    <!-- 发票信息 -->
+    <view class="cart-box">
+      <view class="cart-list" style="padding-top: 30rpx;">
+        <view class="invoiceTitle" style="font-size: initial;font-weight: 600;">
+          发票信息
+        </view>
+        <view class="distribution">
+          <button data-key="invoiceInfo" data-val="{{null}}" catchtap="radioTap" style="padding:0 20rpx;" class='{{ invoice.invoiceInfo == null ? "checked_button":"normal_button"}}'>
+            暂不开发票
+          </button>
+          <button data-key="invoiceInfo" data-val="general" catchtap="radioTap" style="padding:0 20rpx;" class='{{ invoice.invoiceInfo == "general" ? "checked_button":"normal_button"}}'>
+            普通增值税发票
+          </button>
+          <button data-key="invoiceInfo" data-val="special" catchtap="radioTap" style="padding:0 20rpx;" class='{{ invoice.invoiceInfo == "special" ? "checked_button":"normal_button"}}'>
+            专用增值税发票
+          </button>
+        </view>
+        <view wx:if="{{invoice.invoiceInfo == null}}" style="color:#747577;font-size:26rpx">
+          仅支持三个月内的发票补开，请慎重选择
+        </view>
+        <view wx:if="{{invoice.invoiceInfo != null}}" style="margin-top: 34rpx">
+          <view class="displayFlex alignCenter borderBottom height_60rpx">
+            <view class="invoiceTitle">
+              发票类型
+            </view>
+            <view class="displayFlex flexCenter">
+              <button wx:if="{{invoice.invoiceInfo == 'general'}}" data-key="invoiceType" data-val="CRM" catchtap="radioTap" class='{{ invoice.invoiceType == "CRM" ? "checked_button2":"normal_button"}}' style="margin-right: 20rpx">
+                电子发票
+              </button>
+              <button data-key="invoiceType" data-val="paper" catchtap="radioTap" class='{{ invoice.invoiceType == "paper" ? "checked_button2":"normal_button"}}'>
+                纸质发票
+              </button>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx">
+            <view class="invoiceTitle">
+              抬头类型
+            </view>
+            <view class="displayFlex">
+              <button data-key="lookUp" data-val="firm" catchtap="radioTap" class='{{ invoice.lookUp == "firm" ? "checked_button2":"normal_button"}}'>
+                企业
+              </button>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx">
+            <view class="invoiceTitle">
+              开票金额
+            </view>
+            <view >{{logistics.price}}</view>
+          </view>
+          <view class="displayFlex alignCenter flexBetween borderBottom height_60rpx" wx:if="{{!invoiceInfo}}" catchtap="jumpInvoice">
+            <view class="invoiceTitle">
+              发票信息
+            </view>
+            <view >
+              <text style="color:#777">去选择</text><van-icon style="color:#777" name="arrow" />
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}" catchtap="jumpInvoice">
+            <view class="invoiceTitle">
+              发票抬头
+            </view>
+            <view class="flex_1 overflow_2" style="-webkit-line-clamp: 1">
+              {{invoiceInfo.invoiceName}}
+            </view>
+            <view >
+              <text style="color:#777">去选择</text><van-icon style="color:#777" name="arrow" />
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}">
+            <view class="invoiceTitle">
+              公司税号
+            </view>
+            <view >
+              <text>{{invoiceInfo.invoiceCode}}</text>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}">
+            <view class="invoiceTitle">
+              注册地址
+            </view>
+            <view class="flex_1 overflow_2">
+              <text>{{invoiceInfo.invoiceAddress}}</text>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}">
+            <view class="invoiceTitle">
+              注册电话
+            </view>
+            <view >
+              <text>{{invoiceInfo.invoiceMobile}}</text>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}">
+            <view class="invoiceTitle">
+              开户银行
+            </view>
+            <view class="flex_1 overflow_2">
+              <text>{{invoiceInfo.invoiceBank}}</text>
+            </view>
+          </view>
+          <view class="displayFlex alignCenter borderBottom height_60rpx" wx:if="{{invoiceInfo}}">
+            <view class="invoiceTitle">
+              银行账号
+            </view>
+            <view >
+              <text>{{invoiceInfo.invoiceBankcode}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 发票地址 -->
+    <view class="cart-box" wx:if="{{invoice.invoiceType == 'paper' && invoice.invoiceInfo != null}}">
+      <view class="cart-list">
+        <view class="displayFlex alignCenter borderBottom height_60rpx">
+          <view class="invoiceTitle">
+            收票地址
+          </view>
+          <van-icon name="question-o" style="font-size: 35rpx;color: #777;"  catchtap="showPopup" data-key="cityTitle" />
+        </view>
+        <view class="displayFlex alignCenter flexBetween height_60rpx" wx:if="{{location.contacts == ''}}">
+          <view class="invoiceTitle">
+            收票信息
+          </view>
+          <view catchtap="showPopup" data-key="show">
+            <text style="color:#777">点击填写</text><van-icon style="color:#777" name="edit" />
+          </view>
+        </view>
+        <view class="_content" wx:else>
+          <van-icon name="location-o" />
+          <view class="info">
+            <view class="address-top">
+              <text class="name">{{location.contacts}}</text>
+              <text class="mobile">{{location.mobile}}</text>
+            </view>
+            <view class="addressDetailse">{{location.city + location.address}}</view>
+          </view>
+          <view catchtap="showPopup" data-key="show">
+            <van-icon name="edit" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="titlebox" style="border-top:0" wx:if="{{false}}">
+      <text class="titletxt" style="width:100%;"> 订单审核通过，七天后结算印刷费</text>
+    </view>
+    <view class="coup_flex cart-list" wx:if="{{couponData.length}}">
+      <view>使用优惠券</view>
+      <view>
+        <view catchtap="goCoupon" data-coupon="{{couponData}}" style="color:#777;margin-left: 10rpx;" >
+          <text wx:if="{{!coupon.couponName}}">选择优惠券</text>
+          <text wx:else class="coup_text">{{coupon.couponName}}(优惠金额:{{coupon.discountMoney}}元)</text>
+          <van-icon  name="arrow" />
+        </view>
+      </view>
+    </view>
+    <view style="display: inline-block;width:100%;margin-bottom:140rpx">
+      <view class="cart-list cart-box">
+        <view class="invoiceTitle" style="font-size: initial;font-weight: 600;">备注</view>
+        <input class="weui-input" placeholder-class="memoPhcolor" name="remarks" bindinput='formremarks' placeholder="请输入订单备注" />
+      </view>
+    </view>
+  </view>
+  <!-- 应付金额 -->
+  <view class="btn_flex">
+    <view wx:if="{{(logistics.taxSingle || totalOrder.invoiceExpressFee) && invoice.invoiceInfo != null && !isRestart}}" class="more">
+      <text catchtap="clickMore">{{more ? '收起更多' : '展开更多'}}</text>
+      <van-icon wx:if="{{!more}}" name="arrow-up" style="margin-left:10rpx" /><van-icon style="margin-left:10rpx" wx:else name="arrow-down" />
+    </view>
+    <view wx:if="{{totalOrder.invoiceExpressFee && more}}">
+      <view class="btn_text">
+        <view >
+          <text>发票快递费:</text>
+        </view>
+        <view >
+          <text style="color:#E9333F;">¥</text><text style="color:#E9333F;">{{payDisplay ? 0 : totalOrder.invoiceExpressFee}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{logistics.taxSingle && more}}">
+      <view class="btn_text">
+        <view >
+          <text>税金:</text>
+        </view>
+        <view >
+          <text style="color:#E9333F;">¥</text><text style="color:#E9333F;">{{payDisplay ? 0 : logistics.taxSingle}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 物流费用 -->
+    <view wx:if="{{(logistics.freight && !isRestart) || logistics.msg}}">
+      <view class="btn_text">
+        <view >
+          <text wx:if="{{logistics.msg}}">{{logistics.msg}}</text>
+          <text wx:else>运费：</text>
+        </view>
+        <view wx:if="{{!logistics.msg}}">
+          <text style="color:#E9333F;">¥</text><text style="color:#E9333F;">{{payDisplay ? 0 : (logistics.freight || 0)}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{freeShipping.useMoney && freeShipping.useMoney == logistics.freeFreight}}">
+      <view class="btn_text">
+        <view >
+          <text >免邮券：</text>
+        </view>
+        <view >
+          <text style="color:#E9333F;">¥</text><text style="color:#E9333F;">{{payDisplay ? 0 : (logistics.freeFreight || 0)}}</text>
+        </view>
+      </view>
+    </view><view wx:if="{{coupon.couponName}}">
+      <view class="btn_text">
+        <view >
+          <text >优惠金额：</text>
+        </view>
+        <view >
+          <text style="color:#E9333F;">¥</text><text style="color:#E9333F;">{{payDisplay ? 0 : (coupon.discountMoney || 0)}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 应付金额 -->
+    <view class="btn_left_text orderPay" wx:if="{{!isRestart}}">
+      <view >
+        <text>应付金额:</text>
+        <text>¥</text><text>{{payDisplay ? 0 : logistics.price + (freeShipping.couponType ? 0 : (logistics.freeFreight || 0) ) - (coupon.discountMoney || 0)}}</text>
+      </view>
+      <view >
+        <view bindtap="ordernow" style="{{payDisplay ? 'background: #AAAAAA;' : ''}}" class="btn_right">{{isCustom ? '创建订单' : '立即支付'}}</view>
+      </view>
+    </view>
+    <!-- 重新拼版 -->
+    <view class="btn_left_text" wx:else>
+      <view >
+        <view bindtap="restart" class="btn_right" style="{{payDisplay ? 'background: #AAAAAA;' : ''}}width:100%">重新拼版</view>
+      </view>
+      <view style="text-align:center;color:#777777;margin-top:6rpx">
+        <van-icon name="warning-o" style="margin-right:10rpx;color:#E9333F" />订单中数量发生变化，需要重新拼版报价
+      </view>
+    </view>
+  </view>
+  <!-- <view wx:else>
+        <view class="cart-no-data">购物车是空的哦~ </view>
+    </view> -->
+  <modal modal="{{modal}}"></modal>
+</view>
+
+<van-popup title show="{{ show }}" bind:close="onClose" data-key="show" custom-style="height: 48%;width:80%;border-radius: 12rpx;">
+  <view style="height:100%">
+    <view class="popup">
+      <view class="header borderBottom">
+        <view >收票信息</view>
+        <view class="relative" catchtap="onClose" data-key="show">
+          <van-icon name="cross" />
+        </view>
+      </view>
+      <view class="displayFlex alignCenter borderBottom height_60rpx">
+        <view class="invoiceTitle">
+          收货人
+        </view>
+        <view >
+          <input type="text" data-key="contactsPopup" bindinput="inputVal" value="{{location.contactsPopup}}" maxlength="10" placeholder="请填写收货人姓名" />
+        </view>
+      </view>
+      <view class="displayFlex alignCenter borderBottom height_60rpx">
+        <view class="invoiceTitle">
+          手机号码
+        </view>
+        <view >
+          <input type="number" data-key="mobilePopup" bindinput="inputVal" value="{{location.mobilePopup}}" maxlength="30" placeholder="请填写收货人手机号" />
+        </view>
+      </view>
+      <view class="displayFlex alignCenter borderBottom height_60rpx">
+        <view class="invoiceTitle">
+          所在地区
+        </view>
+        <view class="flex_1 displayFlex flexBetween" catchtap="showPopup" data-key="saveCity">
+          <view style="color:#777" wx:if="{{location.cityPopup == ''}}">点击选择</view>
+          <view  wx:else>{{location.cityPopup}}</view>
+          <view ><van-icon style="color:#777;margin-right:18rpx" name="arrow" /></view>
+        </view>
+      </view>
+      <view class="displayFlex alignCenter borderBottom">
+        <view class="invoiceTitle" style="height: 155rpx;">
+          详细地址
+        </view>
+        <view style="width: 100%;">
+          <textarea type="text" style="width: 100%;height: 155rpx;" data-key="addressPopup" bindinput="inputVal" value="{{location.addressPopup}}" maxlength="50" placeholder="如街道、楼牌号等" />
+        </view>
+      </view>
+    </view>
+    
+    <view class="" style="padding-bottom: 40rpx;padding-top: 20rpx;">
+      <view catchtap="saveLocation" class="footerBtn" style="background:{{disabled ? '#AAAAAA' : '#ff0036'}}">
+        保存
+      </view>
+    </view>
+  </view>
+</van-popup>
+<van-popup  position="bottom" title show="{{ saveCity }}" bind:close="onClose" data-key="saveCity" custom-style="height: 42%;width:100%">
+  <van-area area-list="{{ areaList }}" bind:cancel="onClose" bind:confirm="saveCity" data-key="saveCity" value="{{location.values}}" />
+</van-popup>
+<van-popup  position="bottom" closeable round title show="{{ cityTitle }}" bind:close="onClose" data-key="cityTitle" custom-style="height: 35%;width:100%">
+  <view>
+    <view class="header borderBottom" style="padding-top:30rpx;">
+      收票地址
+    </view>
+    <view style="padding:28rpx;">
+      1、默认将发票快递费加入开票金额
+    </view>
+  </view>
+</van-popup>
+
+<paySelect bindonSelect='onSelect' bindcancel="creditHideFun" show="{{ creditShow }}" list='{{creditActions}}'></paySelect>

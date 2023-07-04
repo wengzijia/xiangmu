@@ -1,0 +1,9 @@
+<!--pages/newClient/index.wxml-->
+<view class="newClientContainer">
+<view class="name">客户名称</view>
+<view class="inputBox">
+<textarea class="textarea" auto-focus="true" placeholder="请输入客户名称" value="{{customerName}}"  bindinput="getValue"></textarea>
+</view>
+<button class="save" catchtap="save">保存</button>
+</view>
+<van-toast id="van-toast" />

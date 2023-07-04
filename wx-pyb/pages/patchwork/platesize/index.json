@@ -1,0 +1,8 @@
+{
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "下单须知",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "step": "../../../components/step/index"
+}
+}

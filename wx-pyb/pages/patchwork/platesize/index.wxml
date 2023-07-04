@@ -1,0 +1,60 @@
+<view class="paperboard catchtou" id="j_page">
+  <!-- 头部 -->
+  <step active="1"></step>
+  <view class="header">
+    <view class="flex">
+      <text class="name"> {{title}}</text>
+      <!-- <text catchtap="notice"> 下单须知<text class="ac-icon-arrow"></text></text> -->
+    </view>
+  </view>
+  <view style="text-align:center;">
+    <image src="{{info.img}}" mode="aspectFit" class="daomo-img" />
+  </view>
+ 
+
+  <view class="content">
+    <!-- 印张数量 -->
+    <view>
+      <view class="fromItem3">
+        <view class="label">
+          <text wx:if="{{auto}}" class="mustSign red">*</text>
+          外尺寸
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;padding-right:0;">
+          <view class="sizeInput">
+            <input placeholder-class="phcolor" placeholder="长" type="digit" model:value="{{size.sizeLength}}" bindblur='inputVal' data-key='size.sizeLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="宽" type="digit" model:value="{{size.sizeWidth}}" bindblur='inputVal' data-key='size.sizeWidth' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="高" type="digit" model:value="{{size.sizeHeight}}" bindblur='inputVal' data-key='size.sizeHeight' />
+            <text class="sizeTxt">mm</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!auto}}" class="tips" style="padding-top:16rpx;padding-bottom:0">外尺寸非必填</view>
+    <view wx:if="{{offerData['thickness']||true}}" style="padding-top:0">
+      <view class="fromItem3" style="display:flex;align-items:center;height:120rpx;">
+        <view class="label" style="padding:0;">
+          <text class="mustSign red">*</text>
+          数量
+        </view>
+        <view class="cart-count-box" style="margin-right:100rpx;">
+          <text class="cart-count-down" catchtap="numberChange" data-type="reduce" style="font-size:70rpx">-</text>
+          <input class="cart-count-num" type="digit" model:value="{{size.number}}" bindblur='inputVal' data-key='size.number' />
+          <text class="cart-count-add" catchtap="numberChange" data-type="add">+</text>
+          <!-- <text class="unit">个</text> -->
+        </view>
+      </view>
+      <view class="tips">{{numberText}}</view>
+    </view>
+  </view>
+
+  <view class="start-pin">
+    <text catch:tap="valuation" class="pin-btn">开始拼版</text>
+  </view>
+  <!-- <modal modal="{{modal}}"></modal> -->
+</view>
+<!-- <van-popup show="{{iscolorShow}}" position="bottom" bind:close="onCancelPup" round data-type="iscolorShow">
+  <van-picker show-toolbar title="请选择专色的数量" columns="{{inputList}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="iscolorShow" data-key="pantoneNumber" data-item='pantoneColorList'></van-picker>
+</van-popup> -->

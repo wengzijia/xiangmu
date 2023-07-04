@@ -1,0 +1,58 @@
+/* pages/login/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoBox {
+  text-align: center;
+  margin-top: 250rpx;
+}
+
+.logoBox .logoImg {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.wxLoginBox {
+  width: 492rpx;
+  height: 88rpx;
+  background: #3D7EFF;
+  box-shadow: 0rpx 10rpx 14rpx 0rpx rgba(61, 150, 255, 0.2);
+  border-radius: 68rpx;
+  margin: 120rpx auto 0;
+}
+
+.wxLoginBox .wxLogoImg {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.wxLoginBox .wxText {
+  color: #FFFFFF;
+  margin-left: 16rpx;
+}
+
+.look {
+  font-size: 28rpx;
+  color: #777777;
+  margin-top: 52rpx;
+  text-align: center;
+}
+
+.agreementBox {
+  position: fixed;
+  left: 166rpx;
+  bottom: 24rpx;
+  font-size: 28rpx;
+  color: #AAAAAA;
+  /* iPhoneX兼容 底部安全距离 */
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.agreementBox .agreement{
+  color: #3D7EFF;
+}

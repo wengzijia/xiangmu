@@ -1,0 +1,135 @@
+.container {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.ordokBox {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 30px 30px 0;
+}
+
+.ordok_h3 {
+    font-weight: normal;
+    background-color: #f9f9f9;
+    border-right: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    border-top: 1px solid #dfdfdf;
+    border-left: 2px solid #d0111b;
+    line-height: 44px;
+    padding: 0 12px;
+    position: relative;
+}
+
+.adresBox {
+    padding: 30px 0px 0px 15px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+fieldset {
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+.layui-field-title {
+    margin: 10px 0 20px;
+    border-width: 1px 0 0;
+}
+
+.layui-field-box {
+    padding: 10px 15px;
+}
+
+.layui-elem-field legend {
+    margin-left: 20px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.layui-elem-field {
+    border-color: #e6e6e6;
+    margin-bottom: 10px;
+    padding: 0;
+    border-width: 1px;
+    border-style: solid;
+} 
+
+.ordokBox .Caddress .add_mi {
+    height: 106px;
+    float: left;
+    margin-right: 5px;
+    background: url(../../index/img/mail.jpg) no-repeat;
+    padding: 6px 17px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.ordokBox .Caddress .add_mi p {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    color: #666;
+    width: 203px;
+}
+
+.ordokBox .Caddress .add_mi .consignee {
+    border-bottom: 1px dashed #ccc;
+    line-height: 28px;
+}
+
+.yangBox {
+    padding-left: 15px;
+    overflow: hidden;
+}
+
+.divider-p {
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.red {
+    color: #e60021;
+}
+
+.layui-form-mid {
+    float: left;
+    display: block;
+    padding: 9px 0 !important;
+    line-height: 20px;
+    margin-right: 10px;
+    color: #999 !important;
+}
+
+.modesign, .outbox, .sender-name {
+    border: 1px solid #e8e8e8;
+    padding: 7px 24px;
+    display: inline-block;
+    font-size: 14px;
+    margin: 10px 0 14px;
+    position: relative;
+    cursor: pointer;
+}
+
+.ordokBox .open_new {
+    padding: 10px 25px;
+    overflow: hidden;
+}
+
+.layui-card-body {
+    position: relative;
+    padding: 10px 15px;
+    line-height: 24px;
+}

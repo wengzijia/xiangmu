@@ -1,0 +1,42 @@
+<!--pages/my/index.wxml-->
+<view class="myContainer">
+  <!-- 头像信息 -->
+  <view class="imgInfoBox">
+    <image class="myImg" src="{{userInfo.operatorUrl ? imageBaseUrl + userInfo.operatorUrl : '../../image/device/disPilotImg.png'}}" data-img="{{userInfo.operatorUrl}}" catchtap="previewImage"></image>
+    <view class="pilotName" wx:if="{{userInfo.pilotName}}">机长: {{userInfo.pilotName}}</view>
+    <view class="deviceName" wx:if="{{deviceName}}">设备:{{deviceName}}</view>
+    <view class="deviceName" wx:if="{{!userInfo}}">未登录</view>
+  </view>
+  <!-- 除废操作规程 -->
+  <view class="flex_c_c jjgBox" catchtap="jumpSop">
+    <image class="inform" src="../../image/current/inform.png"></image>
+    <view class="jjgTitle">除废标准操作规程</view>
+    <view class="cat">点击查看 ></view>
+  </view>
+  <!-- 下班打卡 -->
+  <view class="flex_c_c clockOutBox" catchtap="clockOff">
+    <!-- 未登录和生产中 -->
+    <image class="closedImg" src="{{isLogin == 2 || proStatus == 2 ? '../../image/my/closedBck.png' : '../../image/my/actClosedBck.png'}}"></image>
+    <view class="textBox">
+      <view class="text" style="{{isLogin == 2 || proStatus == 2 ? 'color:#AAAAAA;' : ''}}">下班打卡</view>
+      <view class="time" style="{{isLogin == 2 || proStatus == 2 ? 'color:#C3C3C3;' : ''}}">{{time}}</view>
+    </view>
+  </view>
+  <!-- 下班打卡提示 -->
+  <!-- 生产中 -->
+  <view class="flex_c_c clockOutHint" wx:if="{{ proStatus == 2 }}">
+    <image class="warn" src="../../image/my/warn.png"></image>
+    <text class="warnInfo">当前有正在生产的订单，暂时不可以下班</text>
+  </view>
+  <!-- 下班打卡弹窗 -->
+  <van-popup show="{{ isClockOutHint }}" custom-class="ClockOutHintPop" bind:close="clockOutCatch">
+    <view class="clockOutHintBox">
+      <view class="cOHintTitle">下班提示!</view>
+      <view class="cOHintText">订单中含有急单，确认是否强制下班？</view>
+      <view class="cOHintBtnBox">
+        <view class="flex_c_c cOHintAffirm" catchtap="clockOutAffirm">确认下班</view>
+        <view class="flex_c_c cOHintCatch" catchtap="clockOutCatch">取消</view>
+      </view>
+    </view>
+  </van-popup>
+</view>

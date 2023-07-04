@@ -1,0 +1,52 @@
+<view class="L-container">
+  <view class="head">
+    <view class="top-h">
+      <image style="width:60rpx;height:60rpx;margin-right:20rpx;border:1rpx solid #f9f9f9;border-radius:50%" src="https://www.aocai.cn/static/wxpyb/logo.png" mode="contain"></image>
+      <text>欢迎使用拼一版小程序</text>
+    </view>
+    <view class="explain">
+      <text>为了给您更好的服务，在注册登陆的过程中，我们将分步获取您的头像昵称和手机号，我们将遵相关法律法规，合理收集，存储，使用以上信息</text>
+    </view>
+  </view>
+  <view wx:if="{{!hide}}" class="info">
+    <view>
+      <view style="width:84rpx;height:80rpx;margin-right:20rpx;text-align:center"><image style="width:50rpx;height:50rpx" src="../../image/tx.png" mode="contain"></image></view>
+      <view>
+        <view class="h2">微信头像昵称</view>
+        <view class="desc">将作为个人特色信息展示</view>
+      </view>
+    </view>
+    <view>
+      <view style="width:80rpx;height:80rpx;margin-right:20rpx;text-align:center"><image style="width:50rpx;height:50rpx" src="../../image/dh.png" mode="contain"></image></view>
+      <view>
+        <view class="h2">手机号</view>
+        <view class="desc">将作为您在本平台用户身份的唯一认证信息</view>
+      </view>
+    </view>
+    <view>
+      <view style="min-width:80rpx;height:80rpx;margin-right:20rpx;text-align:center"><image style="width:50rpx;height:50rpx" src="../../image/xy.png" mode="contain"></image></view>
+      <view>
+        <view class="h2">拼一版用户协议</view>
+        <view class="desc">此协议将帮助您了解您所享有的权利及实现途径，以及我们为保护您的个人信息所采用的安全技术</view>
+      </view>
+    </view>
+  </view>
+  <view class="appInfo">
+    <!-- <image bindtap="bindViewTap"  src="../../image/login.png" mode="contain"></image>   -->
+    <button wx:if="{{hide}}" loading='{{loginLoading}}' bindtap="verification">登录</button>
+    <button wx:if="{{!hide&&!userInfo&&active==1}}" loading='{{loginLoading}}' bindtap="getUserInfo">获取微信头像昵称</button>
+    <button wx:if="{{!hide&&active==2}}"  disabled="{{btnBan}}" loading='{{loginLoading}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+    <view wx:if="{{!hide&&active==2}}" class='protocol'>
+      <text class="big" catchtap='checkProtocol'>
+        <text class='{{!btnBan?"ac-icon-check":""}}' style="margin-right:16rpx;"></text>
+      </text>
+      <view catchtap='checkProtocol'>同意</view>
+      
+      <view style='display: inline-block;color:#409EFF;'  catchtap='protocolText'>《拼一版用户注册协议》</view></view>
+    <view class="no-login">
+      <text catchtap="toHome">暂不登录</text>
+    </view>
+  </view>
+   <modal modal="{{modal}}"></modal>
+</view>
+<!-- <service></service> -->

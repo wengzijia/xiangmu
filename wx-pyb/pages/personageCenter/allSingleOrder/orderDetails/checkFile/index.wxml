@@ -1,0 +1,35 @@
+<view style='text-align:center;padding:20px 0 40rpx;' >
+<!-- <swiper wx:if='{{imgList.length>1}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{true}}' indicator-active-color='#ff0036'>
+   <swiper-item wx:for='{{imgList}}' wx:key="index" >
+    <image src="{{item}}" mode='widthFix' catchtap="skipPage" data-val="{{item}}"></image>
+     <image   class="" src="{{item}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+   </swiper-item>
+  </swiper> -->
+  <image  class="" wx:for="{{imgList}}" wx:key='index' src="{{item}}" mode="aspectFit" data-url="{{item}}"  catchtap='checkAll' lazy-load="false" binderror="" bindload="" />
+  <button style='background-color: #ff0036; color: #fff;margin-top:20rpx;margin-bottom:150rpx;'  catchtap='checkAll'>
+    查看全部图片
+  </button>
+  <view class='bottom-btn-box'>
+    <button wx:if="{{(cancelTime<=0&&goodsInfo.isChe!=1)||(goodsInfo.goodsId==1616||goodsInfo.goodsId==1617||goodsInfo.goodsId==1619||goodsInfo.goodsId==1620)}}" class='bottom-btn' disabled="{{notConfirm}}"  catchtap='showDialogFun'>
+      {{btnText}}
+    </button>  
+    <view class='bottom-btn cancel-btn' catchtap="cancelConfirmFileFun" wx:else>
+      <text>取消确认</text>
+      <view class="down-text">倒计：<van-count-down class="txt"  time="{{cancelTime}}" bind:finish='countDownFinish'/>后取消确认按钮消失</view>
+    </view>
+  </view>
+   <van-dialog show="{{showDialog}}" title="确认文件操作声明" use-slot show-cancel-button bind:confirm="lookFileStatus" confirm-button-text="已确认无误"  >
+      <view style="padding: 20rpx 40rpx; font-size: 28rpx">
+        尊敬的客户：因为屏幕为RGB格式，印刷为CMYK格式，颜色仅供参考，不作为大货验收颜色。请您认真检查订单文件、订单信息，文件内容及工艺内容，盒形结构，
+        一旦确认，印刷文件立刻进入上机生产，无法再做任何修改，并一律不处理文件产生的质量问题与退货退款，请您确保已经一
+        一仔细确认。
+      </view>
+      <view
+        style="padding: 20rpx 40rpx;  font-size: 24rpx;  color: #f21f28; text-align: center; "
+      >
+        <!-- 订单确认后无法撤回，请仔细确认 -->
+        确认后，如需取消确认文件需要在15分钟内取消
+      </view>
+    </van-dialog>
+ 
+</view>

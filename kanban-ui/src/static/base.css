@@ -1,0 +1,159 @@
+/* 对一些绝对定位的元素限制最大宽度并居中 */
+.van-nav-bar__placeholder,.van-nav-bar--fixed,.van-tabbar--fixed,.van-sticky--fixed,.van-submit-bar,.notice,.footer.white,.van-goods-action{
+  right: auto !important;;
+  left: auto !important;;
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
+}
+.footer.white .btn {
+  flex:1;
+  max-width: 100px;
+  padding: 0;
+}
+/* 限制按钮最大宽度 */
+.van-button{
+  max-width: 750px;
+}
+/* 下单须知 */
+.noticeConter{
+  font-size: 15px;
+  line-height: 20px;
+  background-color: #fff;
+  padding: 10px 10px ;
+}
+.noticeConter div{
+  margin:10px 0 ;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+
+.van-radio__label{
+  margin-left: 0 !important;
+  font-size: 13px;
+  flex: 1;
+}
+/* 注册协议 */
+.registerProtocol{
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+}
+.registerProtocol .herder{
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #777777;
+}
+.registerProtocol div{
+  font-size: 15px;
+  color: #777777;
+  padding:10px 5px;
+}
+/* 注册 */
+.register .van-form{
+  padding:0 10px ;
+  border-radius: 10px;
+}
+
+/* 关联资质 */
+.order-qualifications .list-item{
+  padding:10px 16px;
+  line-height: 44px;
+  height: 44px;
+}
+/* 收款设置 */
+
+.collection .tips-text {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #969696;
+}
+.collection .tips-text div {
+  margin-bottom: 5px;
+  line-height: 14px;
+}
+/* vant的icon字体图标‘箭头’重置 */
+.van-icon-arrow::before{
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgb(100, 100, 100);
+  border-top: 1px solid rgb(100, 100, 100);
+  transform: rotate(45deg);
+  position: relative;
+  top:-1px;
+  content: '';
+}
+.van-icon-arrow-left::before{
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgb(100, 100, 100);
+  border-top: 1px solid rgb(100, 100, 100);
+  transform: rotate(225deg);
+  position: relative;
+  top:-1px;
+  content: '';
+}
+
+.van-icon-arrow-up::before{
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgb(100, 100, 100);
+  border-top: 1px solid rgb(100, 100, 100);
+  transform: rotate(-45deg);
+  position: relative;
+  top:-1px;
+  content: '';
+}
+.van-icon-arrow-down::before{
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid rgb(100, 100, 100);
+  border-top: 1px solid rgb(100, 100, 100);
+  transform: rotate(135deg);
+  position: relative;
+  top:-2px;
+  left: 6px;
+  content: '';
+}
+.van-collapse-item__title .van-cell__right-icon::before{
+  transform: rotate(135deg);
+}
+.van-notice-bar{
+  line-height: 40px !important;
+}
+
+.Printing .color-input-box /deep/ .van-cell{
+  padding: 3px 0 !important;
+}
+
+.van-overlay{
+  z-index: 9;
+}
+
+/* home页 */
+/* .home .categoryContainer .categoryItem {
+  border-radius: 5px;
+  box-shadow:  0 2px 12px 0 rgb(195, 195, 195);;
+} */
+
+.my-van-empty .van-empty__image{
+  width: 100px;
+  height: 100px;
+}
+.my-van-empty{
+  position: absolute;
+  top: 50% ;
+  left: 50% ;
+  transform: translate(-50%, -50%);
+  padding:0px !important;
+  /* width: 100%; */
+}

@@ -1,0 +1,73 @@
+
+<!-- 
+<view >
+  <view class='top'>
+    <image class="top-image" src='{{imageBaseUrl+employeeInfo.avatar}}' mode="heightFix" />
+    <text class="top-text" >微信好友 给你分享</text>
+  </view>
+  <view class="goods-info" >
+    <image  class="goods-info-img" src="{{imageBaseUrl+thumbnail}}" mode="widthFix"/>
+    <view  class="goods-info-data" >
+      <view class="goods-info-name" >
+        {{packInfo.schemeName}}
+      </view>
+    <view   >
+      <text class="goods-info-price-box" >￥ <text  class="goods-info-price"  >{{packInfo.price}}</text></text>
+      <text>元/套起</text>
+      <text class="goods-info-price-tips" >参考价格</text>
+    </view>
+    </view>
+  </view>
+  <view class="code-box">
+    <image class="code-img" src="data:image/png;base64,{{codeBase64}}" alt=""  mode="heightFix"/>
+    <view class="code-tips" >长按识别查看详情</view>
+  </view>
+</view> -->
+<canvas type="2d" class="my-canvas2" id="myCanvas2" canvas-id="myCanvas2"></canvas>
+
+<!-- <image style="width: 100%;" mode="widthFix"  wx:if="{{posterImagePath}}" src="{{posterImagePath}}"></image> -->
+
+<view style="padding:30rpx" >
+  <view class='top'>
+    <image class="top-image"  wx:if="{{employeeInfo.avatar}}" src='{{imageBaseUrl+employeeInfo.avatar}}' mode="heightFix" />
+    <text class="top-text">微信好友 给你分享</text>
+  </view>
+  <view style="border:1px solid #E6E6E6;border-radius: 4px 4px 4px 4px;overflow: hidden;z-index: 1;">
+    <canvas style="width:100%;height: 668rpx;border-radius: 4px 4px 4px 4px;border-bottom:1px solid #E6E6E6;overflow: hidden;" type="2d" id="myCanvas"></canvas>
+    <view style="color: #333333;font-weight: 500;padding:28rpx ">
+      <view style="margin-bottom: 20rpx;">
+      {{packInfo.schemeName}}
+    </view>
+    <view  >
+      <text style="color:#FF4D4F;font-size: 12px;margin-right:10rpx;">￥ <text style="font-size: 24px;font-weight: bold;">{{packInfo.price}}</text></text>
+      <text>元/套起</text>
+      <text style="font-size:24rpx;font-weight: 400;color: #333333;line-height: 14px;background: #E9E9E9;padding:8rpx;border-radius: 4px;position: relative; bottom:10rpx;left:10rpx">参考价格</text>
+    </view>
+    </view>
+  </view>
+  <view class="code-box">
+    <image style="height:260rpx;" src="data:image/png;base64,{{codeBase64}}" alt=""  mode="heightFix"/>
+    <view style="color: #333333;font-size: 12px;">长按识别查看详情</view>
+  </view>
+  <van-share-sheet show="{{ showShare }}" options="{{ options }}"  title="分享包装方案" bind:select="onSelectShare" bind:close="onCloseShare" close-on-click-overlay='{{false}}'/>
+</view>
+<van-overlay show="{{ showLoading }}" >
+<view class="wrapper">
+  <van-loading size="24px" color="#fff" vertical>{{loadingText}}</van-loading>
+</view>
+</van-overlay>
+
+
+<van-overlay show="{{ showSetTips }}">
+  <view class="wrapper">
+    <view class="block" style="width: 440rpx;">
+      <view style="text-align: center;padding: 30rpx 20rpx;">权限不足，无法添加到相册，请开启设置</view>
+     <view style="display: flex;">
+      <button class='set-btn' catchtap="hideSetTips"  style="flex:1" >取   消</button>
+      <button class='set-btn' catchtap="openSetting" style="flex:1">打开设置页</button>
+     </view>
+    </view>
+  </view>
+</van-overlay>
+
+<image wx:if="{{goodsImagePath}}" src="{{goodsImagePath}}"  mode="widthFix" style="width: 100%;"/>

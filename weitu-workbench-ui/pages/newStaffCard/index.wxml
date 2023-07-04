@@ -1,0 +1,38 @@
+<!--pages/newStaffCard/index.wxml-->
+
+<view class="content-all">
+        <view class="content_flex mar_b">
+          <view class="flex_name">姓名<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入姓名" bindinput="inputChange"  data-key="fullname" value="{{fullname}}" placeholder-class="place"  /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">职位<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入职位" placeholder-class="place" bindinput="inputChange" data-key="position" value="{{position}}" /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">电话号码<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入电话号码" maxlength="11" placeholder-class="place" bindinput="inputChange" data-key="mobile"  value="{{AdminInfo.mobile}}" /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">微信账号<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入微信账号" placeholder-class="place" bindinput="inputChange" data-key="wechatCode" value="{{AdminInfo.wechatCode}}"/> </view>
+        </view>
+        <view class="content_flex" style="align-items: center;">
+          <view class="flex_name">头像<text class="sign">*</text></view>
+          <view class="flex_input" style="flex: 1;" catchtap="headImgs">
+            <view class="head_flex">
+              <view  >
+                <image src="{{headImgs}}" class="head" wx:if="{{headImgs}}"></image>
+                <image src="/image/nameCardSeting/headImg.png" class="head" wx:else></image>
+              </view>
+              <view>
+                <image src="/image/nameCardSeting/right.png" class="right"></image>
+              </view>
+          </view>
+          </view>
+        </view>
+        <view class="dpi">(图片分辨率150*200,10M以内)</view>
+      </view>
+      <view class="btn_bg">
+        <view class="btn" catchtap="submitNote">保存</view>
+      </view>

@@ -1,0 +1,20 @@
+<!--pages/device/index.wxml-->
+<view class="deviceContainer">
+   <view class="listBox" wx:if="{{deviceList.length}}">
+      <view class="itemBox" style="{{item.chooseType == 1 ? 'background-color:#FAFAFC;color: #989898;' : ''}}" wx:for="{{deviceList}}" wx:key="id" data-supplierId="{{item.supplierId}}" data-chooseType="{{item.chooseType}}" data-deviceId="{{item.id}}"  data-deviceName="{{item.deviceName}}" catchtap="jumpPilot">
+         <image class="headPortraits" src="{{item.chooseType == 1 ? '../../image/device/disDeviceImg.png' : '../../image/device/deviceImg.png'}}"></image>
+         <view class="deviceName">{{item.deviceName}}</view>
+      </view>
+   </view>
+   <view style="height: 100rpx;"></view>
+   <!-- 设备空提示 -->
+   <view class="deviceEmptyHint" wx:if="{{!deviceList.length}}">
+      <image class="img" src="../../image/proList/empty.png"></image>
+      <view class="text">暂无其他设备，请前往包秘书进行设置</view>
+   </view>
+   <!-- 退出登录 -->
+   <view class="exitBox" wx:if="{{isLogin == 1}}" catchtap="exitLogin">
+      <image class="exitImg" src="../../image/device/exit.png" alt=""/>
+      <view class="exitText">退出登录</view>
+   </view>
+</view>

@@ -1,0 +1,10 @@
+{
+   "navigationBarBackgroundColor": "#f8f8f8",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "关联资质",
+  "backgroundColor": "#f8f8f8",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "modal": "../../../../../components/msgModal/index"
+  }
+}

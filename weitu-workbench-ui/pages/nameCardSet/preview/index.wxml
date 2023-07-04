@@ -1,0 +1,113 @@
+<!--pages/nameCard/index.wxml-->
+<view>
+  <!-- <view catch:tap="showCardListFun" style='padding-top:{{statusBarHeight*1.2}}px; text-align:center;font-size:{{fontSizeSetting}}px;padding-bottom:20rpx;'>张三三<van-icon name="arrow-down" /></view> -->
+  <view class="card-info-box">
+    <view class="card-info">
+      <view class="card-info-left">
+        <image src='{{imageBaseUrl+employeeInfo.avatar}}' />
+      </view>
+      <view class="card-info-right">
+        <view class="card-info-name">
+          {{employeeInfo.fullname}}
+          <view style="font-size: 12px;font-weight: 400;"> {{employeeInfo.position}}</view>
+        </view>
+        <view class="card-info-item card-info-mobile">
+          <view class="icon">
+            <image src="../../../image/card/mobile.png" mode="heightFix" />
+          </view>
+          <text>{{employeeInfo.mobile}}</text>
+        </view>
+        <view class="card-info-item card-info-describe">
+          <view class="icon">
+            <image src="../../../image/card/describe.png" mode="heightFix" />
+          </view>
+          <text>{{employeeInfo.slogan}}</text>
+        </view>
+        <view class="card-info-item card-info-company">
+          <view class="icon">
+            <image src="../../../image/card/company.png" mode="heightFix" />
+          </view>
+          <text style="flex:1">{{employeeInfo.enterpriseName}}</text>
+        </view>
+
+      </view>
+      <view class="card-info-right2">
+      </view>
+      <view class="card-info-right3"></view>
+    </view>
+    <view class="card-contact">
+      <view class="card-contact-left">存入手机通讯录</view>
+      <view class="card-contact-right">分享名片</view>
+    </view>
+  </view>
+  <view class="card-contact2">
+    <view class="card-contact2-left" catchtap="phoneCall">
+      <view>
+        <image src="../../../image/card/mobile2.png" mode="heightFix" />
+      </view>
+      <view>
+        <view>
+          拨打电话
+        </view>
+        <view style="font-size: 24rpx;color:#777777">
+          {{employeeInfo.mobile}}
+        </view>
+      </view>
+    </view>
+    <view class="card-contact2-right">
+      <view>
+        <image src="../../../image/card/wx.png" mode="heightFix" />
+      </view>
+      <view>
+        <view>
+          加我微信
+        </view>
+        <view style="font-size: 24rpx;color:#777777">
+          {{employeeInfo.wechatCode}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="card-my-info">
+    <view class="my-info-title" style="margin-top: 0;">
+      <image src="../../../image/card/company2.png" mode="widthFix" />
+      <text>我的企业</text>
+    </view>
+    <view class="my-info-conter">
+      <view style="padding-bottom: 28rpx;display: flex;">
+        <image src="{{employeeInfo.logo ? imageBaseUrl + employeeInfo.logo : '../../../image/card/company2.png'}}" style="height:160rpx;width: 160rpx;margin-right: 28rpx;" />
+        <view style="flex: 1;">
+          <view style="font-size: 15px;line-height: 18px;font-weight: 500;color: #333333;">
+            {{employeeInfo.enterpriseName}}
+          </view>
+          <view class="to-showroom-btn">进入展厅</view>
+        </view>
+      </view>
+      <view class="company-label-box">
+        <view class="company-label" wx:for="{{employeeInfo.sellingPoint}}" wx:key="index">{{item}}</view>
+
+      </view>
+    </view>
+    <block wx:if="{{employeeInfo.promotionalVideo}}">
+      <view class="my-info-title">
+        <image src="../../../image/card/video.png" mode="widthFix" />
+        <text>我的视频</text>
+      </view>
+      <view class="my-info-conter">
+        <video src="{{imageBaseUrl+employeeInfo.promotionalVideo}}" style="width: 623rpx;height: calc(623rpx / 16 * 9);"></video>
+      </view>
+    </block>
+  </view>
+  <!-- <view class="card-code-btn" catchtap="toPage" data-url="/pages/nameCard/cardCode/index">
+      名片码
+      <image src="../../../image/card/code.png" mode="widthFix" style="width:100%;"/>
+    </view> -->
+</view>
+
+<view class="mrginT"></view>
+<view class="btn_bg" catchtap="closePreview">
+  <view class="btn">关闭预览</view>
+</view>
+<van-action-sheet show="{{ showCardList }}" title="切换名片">
+  <view wx:for="{{cardList}}" wx:key="index" catch:tap="selectCard" class="cart-list-item {{cardInfo.name==item.name?'active':''}}" data-item='{{item}}'>{{item.name}}</view>
+</van-action-sheet>

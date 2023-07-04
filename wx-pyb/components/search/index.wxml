@@ -1,0 +1,8 @@
+<view class="search {{isTop?'top':''}}">
+  <input class="{{isShow&&list.length>0?'input li-show':'input'}}" bindinput="inputFun" bindfocus='inputFocus' bindblur='inputBlur' value="{{inputVal}}" placeholder="{{placeholder}}"/>
+  <view class="search-list" wx:if="{{isShow&&list.length>0}}" style="{{isTop?'top:'+list.length*(-68)+'rpx':''}}">
+    <block  wx:for="{{list}}"  wx:key="index" >
+      <view class="search-list-li" data-val='{{item.lable?item.lable:item}}' catchtap="selectVal">{{item.lable?item.lable:item}}</view>
+    </block>
+  </view>
+</view>

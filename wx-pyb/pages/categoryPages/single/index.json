@@ -1,0 +1,12 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "拼版报价下单",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "table": "../../../components/table/table",
+    "modal": "../../../components/msgModal/index",
+    "search": "../../../components/search/index"
+  }
+}

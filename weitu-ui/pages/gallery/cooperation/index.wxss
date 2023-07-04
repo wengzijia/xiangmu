@@ -1,0 +1,17 @@
+/* pages/gallery/cooperation/index.wxss */
+page{
+  background-color: #f5f7fe;
+}
+.van-grid-item__content--surround:after{
+  border-color: #f5f7fe !important;
+  /* display: flex; */
+ }
+ 
+ .van-grid-item__content{
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+   background:none !important;
+ }
+ .van-grid-item__content{
+   padding: 0 !important;
+ }

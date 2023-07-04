@@ -1,0 +1,32 @@
+
+  .bottom-btn-box{
+    position: fixed;
+    left: 0;
+   background-color: #fff;
+    bottom:0;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    width: 100%;
+  }
+  .bottom-btn {
+    background-color: #ff0036;
+    color: #fff;
+    font-size: 40rpx;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .cancel-btn{
+    padding:10rpx 0 ;
+    font-size: 32rpx;
+    margin-bottom: 9rpx;
+  }
+  .cancel-btn .down-text{
+    font-size: 24rpx;
+    
+  }
+  .cancel-btn .van-count-down{
+    color: #fff;
+    font-size: 24rpx;
+    display: inline;
+  }

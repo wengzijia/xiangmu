@@ -1,0 +1,303 @@
+<view class="paperboard catchtou" id="j_page">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="flex">
+      <text class="name"> 卡纸盒</text>
+      <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text>
+    </view>
+    <!-- <view class="tabs">
+      <text catchtap="tabsCrount" class="item {{ currentTab==1 ? ' active' : ''}}" data-current="1">卡盒</text>
+      <text catchtap="tabsCrount" class="item {{ currentTab==0 ? ' active' : ''}}" data-current="0">坑盒</text>
+    </view> -->
+    <!-- <text class="name">卡纸盒</text> -->
+    <!-- <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text> -->
+  </view>
+  <!-- 内容 -->
+  <view class="content">
+    <!-- 纸张材质 -->
+    <view>
+      <view class="label">
+        <text>
+          <text class="mustSign red">*</text>纸张材质</text>
+        <!-- <text catchtap="notice" class="red">下单须知 ></text> -->
+      </view>
+      <view class="button_container fromItem">
+        <block wx:for="{{offerInfo.materialType.list}}" wx:key="index">
+          <button class='{{offerData["materialType"]&&offerData["materialType"]==item.value?"checked_button":"normal_button"}}' data-key="materialType" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']}}">
+        <view class="button_container fromItem ">
+          <block wx:for="{{offerInfo.thickness.list}}" wx:key="index">
+            <button class='{{offerData["thickness"]&&offerData["thickness"]==item.value?"checked_button":"normal_button"}}' data-key="thickness" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- 印张数量 -->
+    <view>
+      <view class="fromItem3">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          印张尺寸
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;padding-right:0;">
+          <view class="sizeInput">
+            <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{offerData.sizeLength}}" bindblur='inputVal' data-key='offerData.sizeLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="宽" type="digit" value="{{offerData.sizeWidth}}" bindblur='inputVal' data-key='offerData.sizeWidth' />
+            <text class="sizeTxt">mm</text>
+          </view>
+        </view>
+      </view>
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>印张数量</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入印张数量" type="digit" value="{{offerData.printingNum}}" bindblur="changePrintingNum1" data-key='offerData.printingNum' />
+          <text class="sizeTxt">张</text>
+        </view>
+      </view>
+      <view wx:if="{{false}}" class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>整版模数</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入整版模数" type="digit" value="{{offerData.editionNum}}" bindblur="changePrintingNum1" data-key='offerData.editionNum' />
+          <text class="sizeTxt">张</text>
+        </view>
+      </view>
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>吨价/平方单价</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入吨价/平方单价" type="digit" value="{{offerData.tonsPrice}}" bindblur='inputVal' data-key='offerData.tonsPrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+      <view class="fromItem3" wx:if="{{offerData.tonsPrice&&paperTonprice>0}}" style="height: 34rpx;">
+        <view class="label between" style="width:100%;padding:0;color: #ff0036;">
+          <text>
+            <text class="mustSign" style="color:black"></text>
+            <text>面纸费用：{{paperTonprice}} 元</text>
+          </text>
+          <text wx:if="{{false}}">
+            <text class="mustSign red"></text>
+            <text class="red">成交费用：{{offerData.paperTonprice}} 元</text>
+          </text>
+        </view>
+        <!-- <view class="conten" style="display:flex;align-items: center;"></view> -->
+      </view>
+    </view>
+    <view wx:if="{{currentTab==0}}">
+      <view>
+        <view class="fromItem3" style="margin-bottom:0;margin-top:40rpx">
+          <view class="label" style="width:296rpx">
+            <text>
+              <text class="mustSign red">*</text>
+              <text>坑纸吨价/平方单价</text>
+            </text>
+          </view>
+          <view class="conten" style="display:flex;align-items: center;height:42rpx">
+            <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入坑纸吨价/平方单价" type="digit" value="{{offerData.pitPaperPrice}}" bindblur='inputVal' data-key='offerData.pitPaperPrice' />
+            <text style="width:50rpx;text-align:center;height: 68rpx;line-height: 68rpx;padding: 0px 15rpx;">元</text>
+          </view>
+        </view>
+        <view class="fromItem3" wx:if="{{offerData.pitPaperPrice&&pitPaperTonprice>0}}" style="margin-bottom:12rpx">
+          <view class="label between" style="width:100%;padding:0;margin-top:20rpx">
+            <text>
+              <text class="mustSign" style="color:black"></text>
+              <text>坑纸费用：{{pitPaperTonprice}} 元</text>
+            </text>
+            <text wx:if="{{false}}">
+              <text class="mustSign red"></text>
+              <text class="red">成交费用：{{offerData.pitPaperTonprice}} 元</text>
+            </text>
+          </view>
+          <!-- <view class="conten" style="display:flex;align-items: center;"></view> -->
+        </view>
+        <view wx:if="{{currentTab==0}}" class="fromItem3" style="margin-top:40rpx">
+          <view class="label">
+            <text>
+              <text class="mustSign red">*</text>
+              <text>裱纸费用：</text>
+            </text>
+          </view>
+          <view class="conten" style="display:flex;align-items: center;">
+            <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入裱纸费用" type="digit" value="{{offerData.laminatingPrice}}" bindblur='inputVal' data-key='offerData.laminatingPrice' />
+            <text style="width:50rpx;text-align:center;height: 68rpx;line-height: 68rpx;padding: 0px 15rpx;">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>印刷费用</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入印刷费用" type="digit" value="{{offerData.printingPrice}}" bindblur='inputVal' data-key='offerData.printingPrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>表处理费用</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入表处理费用" type="digit" value="{{offerData.surfacePrice}}" bindblur='inputVal' data-key='offerData.surfacePrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+      <view wx:if="{{UV}}">
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="逆向UV"?"checked_button":"normal_button"}}' data-key="surface" data-val="逆向UV" catchtap="radioTap">
+            逆向UV
+          </button>
+        </block>
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="UV光油"?"checked_button":"normal_button"}}' data-key="surface" data-val="UV光油" catchtap="radioTap">
+            UV光油
+          </button>
+        </block>
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="哑油"?"checked_button":"normal_button"}}' data-key="surface" data-val="哑油" catchtap="radioTap">
+            哑油
+          </button>
+        </block>
+      </view>
+      <view wx:else>
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="哑胶"?"checked_button":"normal_button"}}' data-key="surface" data-val="哑胶" catchtap="radioTap">
+            哑胶
+          </button>
+        </block>
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="光胶"?"checked_button":"normal_button"}}' data-key="surface" data-val="光胶" catchtap="radioTap">
+            光胶
+          </button>
+        </block>
+        <block>
+          <button class='{{offerData["surface"]&&offerData["surface"]=="光油"?"checked_button":"normal_button"}}' data-key="surface" data-val="光油" catchtap="radioTap">
+            光油
+          </button>
+        </block>
+      </view>
+      <!-- <view class="fromItem3" >
+          <view class="label">
+            <text >
+              <text class="mustSign red">*</text>
+              <text>覆膜/过油费用</text>
+            </text>
+          </view>
+          <view class="conten" style="display:flex;align-items: center;">
+            <input style="flex:1" class="input-border" placeholder="请输入覆膜/过油费用"  type="digit" value="{{offerData.coveredPrice}}" bindblur='inputVal' data-key='offerData.coveredPrice'/>
+            <text style="width:50rpx;text-align:center;height: 68rpx;line-height: 68rpx;padding: 0px 15rpx;">元</text>
+          </view>
+        </view> -->
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>啤费用(含刀版)</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入啤费用" type="digit" value="{{offerData.beerPrice}}" bindblur='inputVal' data-key='offerData.beerPrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+      <view class="fromItem3">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>
+            <text>粘盒费用</text>
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入粘盒费用" type="digit" value="{{offerData.stickyPrice}}" bindblur='inputVal' data-key='offerData.stickyPrice' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class="label">后道处理</view>
+      <view class="button_container fromItem">
+        <block wx:for="{{postProcessing}}" wx:key="index">
+          <button class='{{item.checked?"checked_button":"normal_button"}}' data-key="materialType" data-i="{{index}}" data-val="{{item.craftName}}" catchtap="checkTap">
+            {{item.craftName}}
+          </button>
+        </block>
+      </view>
+      <view wx:if="{{item.checked}}" class="fromItem3" wx:for="{{postProcessing}}" wx:key="index" wx:for-index="i">
+        <view class="label">
+          <text>
+            <text>{{item.priceName}}</text>  
+          </text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="{{'请输入'+item.craftName+'费用'}}" type="digit" value="{{item.value}}" bindblur='PostProcess' data-i='{{i}}' />
+          <text class="sizeTxt">元</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{false}}" class="priceCount2" style='padding:0rpx 30rpx; line-height: 80rpx;height:80rpx;{{priceObj.priceOne>99999?"padding-right:0rpx !important;":""}}'>
+      <view >
+        <view>
+          原价:
+          <text class="red">￥{{priceObj.priceOne?priceObj.priceOne:'0.00'}}</text>
+        </view>
+        <!-- <view>({{priceObj.price&&priceObj.price>999999?'纸':'纸张费用'}}￥{{priceObj.paperPriceOne?priceObj.paperPriceOne+priceObj.cuttingFee:'0.00'}};{{priceObj.price&&priceObj.price>999999?'印':'印刷费'}}￥{{priceObj.colorMoney||priceObj.colorMoney==0?priceObj.colorMoney+priceObj.spotMoney:'0.00'}})</view> -->
+      </view>
+    </view>
+    <!-- 价格 -->
+    <view class="priceCount" style='{{priceObj.price>99999?"padding-right:0rpx !important;":""}}'>
+      <view>
+        <!-- <view ><text class="red">优惠价:￥{{priceObj.price?price:'0.00'}}</text></view> -->
+        <view class="flex">
+          <text wx:if="{{orderTime}}" class="origin">货期：{{orderTime}}天</text>
+          <text class="red">总价：￥<text class="f40">{{priceObj.price?price:'0.00'}}</text></text>
+        </view>
+        <!-- <view>({{priceObj.price&&priceObj.price>999999?'纸':'纸张费用'}}￥{{priceObj.paperPrice?priceObj.paperPrice:'0.00'}};{{priceObj.price&&priceObj.price>999999?'印':'印刷费'}}￥{{priceObj.colorMoney||priceObj.colorMoney==0?priceObj.colorMoney+priceObj.spotMoney:'0.00'}})</view> -->
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{isShowBottomView}}" style="height:500rpx"></view>
+  <!-- 底部加入购物车 -->
+  <view class="footer ">
+    <!-- <button class="footerBox1" open-type="contact" show-message-card  hover-class="none"  bindtap="ballClickEvent" >
+      <view class="footerBoxIcon ac-icon-kefu"></view>
+      <text style='display: inline-block;'>客服</text>
+    </button> -->
+    <!-- <view class="footerBox2" catchtap="checkCart">
+      <view class="footerBoxIcon ac-icon-cart">
+        <view class="footerBuyCount">{{cartCount}}</view>
+      </view>
+      <view>购物车</view>
+    </view> -->
+    <!-- <view class="footerBox3" catchtap="addEditionCart">加入购物车</view> -->
+    <view class="footerBox4" catchtap="placeOrder">立即下单</view>
+  </view>
+  <modal modal="{{modal}}"></modal>
+</view>  

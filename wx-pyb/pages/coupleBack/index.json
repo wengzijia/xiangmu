@@ -1,0 +1,11 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "有奖反馈",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "modal": "../../components/msgModal/index"
+  }
+  
+}

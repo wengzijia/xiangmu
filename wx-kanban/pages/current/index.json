@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "当前订单",
+  "navigationBarTextStyle": "black",
+  "component": true,
+  "usingComponents": {
+    "popup":"/components/popup/popup"
+  }
+}

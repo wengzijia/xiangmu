@@ -1,0 +1,83 @@
+<view class="main">
+    <view class="user-box">
+        <view class="user-info">
+            <view class="title" style="border-bottom:1rpx solid #e7e7e7;">
+                <text class="titletxt"><text style="color:red;width:20rpx;">* </text>联系人姓名:</text>
+                <input class="weui-input" name="username" bindinput="formname" placeholder="请输入联系人姓名" placeholder-class="phcolor"  value="{{username}}" />
+            </view>
+            <view class="title">
+                <text class="titletxt"><text style="color:red;width:20rpx;">* </text>联系人电话:</text>
+                <input class="weui-input" type="number" name="phone" bindinput="formphone" value="{{phone}}" placeholder-class="phcolor" placeholder="请输入联系人电话" />
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="cart-box">
+            <view class="order-box"> 订单信息</view>
+            <view class="cart-list" wx:for="{{carts}}" wx:key="id" wx:for-item="item1">
+                <view wx:for="{{item1.goodsAttr}}" wx:key="index">
+                    <view class="cart-pro-name" wx:if="{{!item.boxtype}}">
+                        <text>{{item.processName}}</text>
+                    </view>
+                <view class="details">
+                        <text wx:for="{{item.newgoods}}"  wx:for-item="items" wx:for-index='i' wx:key="id">
+                            <text  style='color:#666' wx:if='{{items.length==1}}'>{{items[0]}}</text>
+                            <text wx:else>
+                                <text style='color:#999'>{{items[0]}}:</text>
+                                <text style='color:#666'>{{items[1]}};</text>
+                            </text>
+                        </text>
+                    </view>
+                    <view class="numbox" style="display: flex;justify-content: space-between;color:#666;">
+                        <text class="cart-pro-num" style="margin-top:10rpx">x{{item.number}}</text>
+                    </view>
+                </view>
+                
+            </view>
+        </view>
+        
+        <view class="desc" style="margin-top:24rpx;display: inline-block;width:100%">
+            <view class="title" >
+                <text class="titletxt" style="width:90rpx">备注</text>
+                <input class="weui-input" placeholder-class="phcolor" name="remarks" bindinput='formremarks' placeholder="订单备注"/>
+                <!-- <text class="bottomtxt" style="font-size:26rpx;color:#ACAAAA;margin-top:10rpx;">
+                （如需看色或跟色时，印刷厂会提前与您联系，请注意接听电话）
+                </text> -->
+            </view>
+        </view>
+    </view>
+     <modal modal="{{modal}}"></modal>
+</view>
+    <view wx:if="{{totalOrder.totalAmount>1}}" class="bottom_total">
+        <view class="bottom_line"></view>
+        <view class="row">
+           <!-- 应付金额:  -->
+            <view class="price" style="height:90rpx;">
+                <view class="f40" style="line-height:48rpx;">￥{{totalOrder.totalAmount}}</view>
+                <view style="color:#999;text-decoration:line-through;font-size:26rpx;line-height:36rpx;">原价:￥{{totalOrder.oldTotalAmount}}</view>
+            </view>
+            <button class="button-red" bindtap="ordernow">提交订单</button>
+        </view>
+    </view>
+<van-action-sheet
+  class="credit-action-sheet"
+  show="{{ creditShow }}"
+  description="选择支付方式"
+  cancel-text="取消"
+  bind:cancel='creditHideFun'
+>
+  <button 
+  wx:for="{{creditActions}}" 
+  wx:key="index" 
+  disabled="{{item.disabled}}" 
+  bindtap="{{ item.disabled || item.loading ? '' : 'onSelect' }}" 
+  data-index="{{ index }}" 
+  loading="{{item.loading}}" 
+  class="action-sheet">
+    <view class="credit-action">
+      <image src="{{item.img}}" mode="widthFix" class="credit-icon"/>
+      <text>{{item.name}}</text>
+    </view>
+    <view wx:if="{{item.subname}}" class="subname">{{item.subname}}</view>
+  </button>
+</van-action-sheet>

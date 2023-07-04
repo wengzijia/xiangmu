@@ -1,0 +1,9 @@
+/* subpackageA/pages/process/index.wxss */
+.processContainer{
+  text-align: center;
+}
+
+.processContainer .sop{
+  width: 572rpx;
+  height: 1618rpx;
+}

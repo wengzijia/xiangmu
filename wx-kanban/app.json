@@ -1,0 +1,87 @@
+{
+    "pages": [
+        "pages/pilot/index",
+        "pages/current/index",
+        "pages/login/index",
+        "pages/device/index",
+        "pages/openWork/index",
+        "pages/proList/index",
+        "pages/my/index",
+        "pages/test/index"
+    ],
+    "subpackages": [
+        {
+            "root": "subpackageA",
+            "pages": [
+                "pages/order/index",
+                "pages/reported/index",
+                "pages/donePromote/index",
+                "pages/process/index",
+                "pages/orderDetails/index"
+            ]
+        }
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "除废小程序",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#F4F5FC"
+    },
+    "tabBar": {
+        "color": "#747577",
+        "selectedColor": "#3D7EFF",
+        "backgroundColor": "#ffffff",
+        "position": "bottom",
+        "list": [
+            {
+                "pagePath": "pages/current/index",
+                "text": "当前订单",
+                "selectedIconPath": "image/tabBar/actCurrent.png",
+                "iconPath": "image/tabBar/current.png"
+            },
+            {
+                "pagePath": "pages/proList/index",
+                "text": "生产列表",
+                "selectedIconPath": "image/tabBar/actProList.png",
+                "iconPath": "image/tabBar/proList.png"
+            },
+            {
+                "pagePath": "pages/my/index",
+                "text": "我的",
+                "selectedIconPath": "image/tabBar/actMy.png",
+                "iconPath": "image/tabBar/my.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-count-down": "@vant/weapp/count-down/index",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+        "van-radio": "@vant/weapp/radio/index",
+        "van-radio-group": "@vant/weapp/radio-group/index",
+        "van-notice-bar": "@vant/weapp/notice-bar/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+        "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+        "van-search": "@vant/weapp/search/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-steps": "@vant/weapp/steps/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-action-sheet": "@vant/weapp/action-sheet/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-toast": "@vant/weapp/toast/index",
+        "van-submit-bar": "@vant/weapp/submit-bar/index",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "van-divider": "@vant/weapp/divider/index"
+    }
+}

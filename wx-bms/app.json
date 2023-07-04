@@ -1,0 +1,118 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/processOrder/edit/index",
+    "pages/login/index",
+    "pages/processOrder/index",
+    "pages/placeOrder/edit/index",
+    "pages/placeOrder/index",
+    "pages/orderInformation/index",
+    "pages/userCenter/index",
+    "pages/newClient/index",
+    "pages/deviceList/index",
+    "pages/infoList/index",
+    "pages/maintain/index",
+    "pages/addPilot/index",
+    "pages/customerDetails/index"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/myClient",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/device/",
+      "pages": [
+        "index",
+        "staffList/index",
+        "staffList/edit/index",
+        "staffList/add/index",
+        "deviceList/index",
+        "deviceList/edit/index"
+      ]
+    },
+    {
+      "root": "pages/bill/",
+      "pages": [
+        "index",
+        "shareBill/index",
+        "billList/index",
+        "processDetail/index",
+        "billDetail/index"
+      ]
+    },
+    {
+      "root": "pages/printingModule/bill/",
+      "pages": [
+        "index",
+        "shareBill/index",
+        "billList/index",
+        "processDetail/index",
+        "billDetail/index"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "包秘书",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#898989",
+    "selectedColor": "#FF4060",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "selectedIconPath": "image/2XtaBar/Frame.png",
+        "iconPath": "image/2XtaBar/Frame-2.png"
+      },
+      {
+        "pagePath": "pages/processOrder/index",
+        "text": "加工单",
+        "selectedIconPath": "image/2XtaBar/Frame-4.png",
+        "iconPath": "image/2XtaBar/Frame-1.png"
+      },
+      {
+        "pagePath": "pages/userCenter/index",
+        "text": "个人中心",
+        "selectedIconPath": "image/2XtaBar/Frame-5.png",
+        "iconPath": "image/2XtaBar/Frame-3.png"
+      }
+    ]
+  },
+  
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index"
+  }
+}

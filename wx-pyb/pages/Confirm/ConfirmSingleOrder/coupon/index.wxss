@@ -1,0 +1,200 @@
+
+.top{
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+  border-top: 1px solid #E7E7E7;
+}
+/* pages/personageCenter/coupon/index.wxss */
+page{
+  background-color: #F1F3F5;
+}
+.coupon_all{
+  margin: 0 20rpx;
+}
+.coupon_bg{
+  background-color: #fff;
+  border-radius: 16rpx;
+  position: relative;
+  padding: 10rpx;
+  margin-top: 30rpx;
+}
+.coupon_flex{
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #E7E7E7;
+  border-radius: 16rpx;
+}
+.line{
+  position: relative;
+  border-right: 1px dotted #E9333F;
+}
+.inner {
+  position: relative;
+  margin-left: 18rpx;
+  border: 4rpx solid #FF6800;
+  height: 30rpx;
+  width: 46rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circular:before{
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 3px;
+  left: -6px;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 100%;
+  /* background: #F1F3F5; */
+  background-color: #fff;
+  clip: rect(8rpx 20rpx 30rpx 0px);
+  border: 4rpx solid #FF6800;
+  transform: rotateZ(-90deg);
+}
+.circular::after{
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 3px;
+  right: -12rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 100%;
+  background-color: #fff;
+  clip: rect(8rpx 18rpx 18rpx 0px);
+  border: 4rpx solid #FF6800;
+  transform: rotateZ(-270deg);
+} 
+/* .coupon_flex:before{
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: -32rpx;
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 100%;
+  background: #F1F3F5;
+  margin-top: -23rpx;
+}
+.coupon_flex::after{
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: -32rpx;
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 100%;
+  background: #F1F3F5;
+  margin-top: -23rpx;
+} */
+.coupon_left{
+  align-self: center;
+  /* height: 96rpx; */
+  padding: 26rpx 16rpx 26rpx 0rpx;
+}
+.coupon_price{
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+
+}
+.use1{
+  color: #E9333F;
+}
+.coupon_price text:nth-child(1){
+  font-size: 40rpx;
+}
+.coupon_price text:nth-child(2){
+  font-size: 68rpx;
+
+}
+.min{
+  color: #999999;
+  font-size: 28rpx;
+  padding-top: 12rpx;
+}
+.coupon_right{
+  padding-left: 16rpx;
+  align-self: center;
+}
+.Deduction{
+  font-size: 30rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-weight: bold;
+}
+.ues{
+  color:#333333;
+}
+.unusable{
+  color: #999;
+}
+.nav_bg{
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+  color: #333333;
+  border-top: 1px solid #E7E7E7;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.flex{
+  flex: 1;
+}
+.select{
+  color: #E9333F;
+  border-bottom:4rpx solid #E9333F;
+}
+.img{
+  width: 136.43rpx;
+  height: 108.39rpx;
+  position: absolute;
+  right: 10rpx;
+}
+.rotate{
+  transform: rotateZ(45deg);
+  position: absolute;
+  right: 6rpx;
+  top: 28rpx;
+  font-size: 28rpx;
+  z-index: 10;
+  color: #747577;
+}
+.posi_img{
+  position: relative;
+}
+.collapse{
+  /* padding: 20rpx 20rpx 30rpx; */
+  color: #666666;
+  font-size: 26rpx;
+  line-height: 1.7;
+/*调用动画效果*/
+transition: height 0.3s;
+-moz-transition: height 0.3s;
+
+/* Opera */
+overflow: hidden;
+padding: 0 20rpx 0;
+}
+.open{
+display: block;
+height: 354rpx;
+
+}
+.close{
+/* display: none; */
+height: 0;
+
+}

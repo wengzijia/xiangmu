@@ -1,0 +1,72 @@
+{
+  "pages": [
+    "pages/workbench/index",
+    "pages/ordinaryCard/index",
+    "pages/gallerySet/index",
+    "pages/gallerySet/gallery/index",
+    "pages/nameCardSet/index",
+    "pages/login/index",
+    "pages/newStaffCard/index",
+    "pages/templateShow/index",
+    "pages/addCooperation/index",
+    "pages/shopSet/index",
+    "pages/previewPlan/index",
+    "pages/editProgram/index",
+    "pages/editPlan/index",
+    "pages/selectProgram/index",
+    "pages/addFeatCase/index",
+    "pages/staffNameCardSet/index",
+    "pages/regardsWeiTu/index",
+    "pages/nameCardSet/preview/index"
+  ],
+  "subpackages": [],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "微图工作台",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "requiredPrivateInfos": ["chooseLocation"],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "van-share-sheet": "@vant/weapp/share-sheet/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

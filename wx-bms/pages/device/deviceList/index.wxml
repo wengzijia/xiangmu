@@ -1,0 +1,13 @@
+<!--pages/myDevice/index.wxml-->
+<view class="deviceListContainer">
+  <view class="listItem" wx:for="{{deviceList}}" wx:key="device_id" data-deviceId="{{item.device_id}}" catchtap="skip">
+    <view class="imgWrap">
+      <image class="headPortrait" src="../../../image/palceOrder/avatar2.png"></image>
+      <view class="deviceName">{{item.device_name}}</view>
+    </view>
+    <!-- <view class="iconWrap">
+      <van-icon class="rightArrow" name="arrow" />
+    </view> -->
+  </view>
+  <button class="addDevice" catchtap="addDevice">添加设备</button>
+</view>

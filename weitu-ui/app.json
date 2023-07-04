@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/nameCard/index",
+    "pages/shop/index",
+    "pages/gallery/index",
+    "pages/login/index",
+    "pages/myCenter/index",
+    "pages/nameCardCode/index",
+    "pages/program/index",
+    "pages/programDetails/index",
+    "pages/nameCard/cardCode/index",
+    "pages/gallery/cooperation/index",
+    "pages/shop/goods/index",
+    "pages/shop/goods/poster/index"
+  ],
+  "subpackages": [],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "i微图",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#777777",
+    "selectedColor": "#3D7EFF",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/nameCard/index",
+        "text": "名片",
+        "selectedIconPath": "image/tabBar/nameCardAct.png",
+        "iconPath": "image/tabBar/nameCard.png"
+      },
+      {
+        "pagePath": "pages/shop/index",
+        "text": "商城",
+        "selectedIconPath": "image/tabBar/shopAct.png",
+        "iconPath": "image/tabBar/shop.png"
+      },
+      {
+        "pagePath": "pages/gallery/index",
+        "text": "展厅",
+        "selectedIconPath": "image/tabBar/exhibitionAct.png",
+        "iconPath": "image/tabBar/exhibition.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-share-sheet": "@vant/weapp/share-sheet/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

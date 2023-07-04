@@ -1,0 +1,84 @@
+<!--pages/selectProgram/index.wxml-->
+<view class="selectProgramContainer">
+  <!-- 分类展示 -->
+  <view class="sortShowBox">
+    <view class="oneSortBox">
+      <view class="oneSortText">一级分类:</view>
+      <view class="oneSortTitle">{{categories[0].name}}</view>
+    </view>
+    <view class="twoSortBox">
+      <view class="twoSortTitleBox">
+        <view class="twoSortText">二级分类{{sortIndex}}:</view>
+        <view class="twoSortTitle">{{sortName || categories[1].name}}</view>
+      </view>
+      <view class="selectedPlan {{selectDataAll.length ? 'selectedActPlan' : ''}}">已选{{schemeNum}}个方案</view>
+    </view>
+  </view>
+  <!-- 所有分类 -->
+  <view class="safetyKmW allSortBox">
+    <!-- 一级分类 -->
+    <scroll-view scroll-x class="oneJiSortScrollBox">
+      <view class="oneJiSortBox">
+        <block wx:for="{{sortList}}" wx:key="index">
+          <view class="oneJiSortList {{oneJiSortIndex == index ? 'oneJiSortActColor' : ''}}" data-index="{{index}}" catchtap="oneJiSortCut">{{item.name}}</view>
+        </block>
+      </view>
+    </scroll-view>
+    <!-- 多分类 -->
+    <view class="moreSortBox">
+      <!-- 二级分类 -->
+      <scroll-view scroll-y class="twoJiSortBox" wx:if="{{sortList[oneJiSortIndex]}}">
+        <block wx:for="{{sortList[oneJiSortIndex].children}}" wx:key="index">
+          <!-- <block wx:for="{{item.children}}" wx:key="index"> -->
+          <view class="twoJiSortList {{twoJiSortIndex == index ? 'twoJiSortActColor twoJiSortListBefore' : ''}}" data-index="{{index}}" catchtap="twoJiSortCut">
+            <view class="twoJiSortTitle">{{item.name}}</view>
+          </view>
+          <!-- </block> -->
+        </block>
+      </scroll-view>
+      <!-- 三级分类和方案 -->
+      <view class="sortPlanBox">
+        <!-- 三级分类 -->
+        <scroll-view scroll-x class="threeJiSortScrollBox" wx:if="{{sortList[oneJiSortIndex]&&sortList[oneJiSortIndex].children&&sortList[oneJiSortIndex].children[twoJiSortIndex]}}">
+          <view class="threeJiSortBox">
+            <view class="threeJiSortList {{threeJiSortIndex == index ? 'threeJiSortActColor' : ''}}" wx:for="{{sortList[oneJiSortIndex].children[twoJiSortIndex].children}}" wx:key="index" data-index="{{index}}" data-name="{{item.name}}" catchtap="threeJiSortCut">{{item.name}}</view>
+          </view>
+        </scroll-view>
+        <!-- 方案 -->
+        <view class="programContainer">
+          <!-- 头部 -->
+          <view class="programHeadBox">
+            <view class="programTilleBox">
+              <view class="programTille">{{threeJiSortName}}</view>
+              <view class="selectedProgram {{selectData.length ? 'selectedActProgram' : ''}}">已选{{selectData.length}}个方案</view>
+            </view>
+            <!-- <view class="programSelectAllBox"> -->
+              <!-- 全选按钮 一定要写在checkbox-group外面 否则会有bug-->
+              <!-- <checkbox bindtap="programSelectAll" checked="{{selectAll}}" />
+              <view class="programSelectAllText">全选</view> -->
+            <!-- </view> -->
+          </view>
+          <!-- 所有方案 -->
+          <scroll-view scroll-y class="allProgramScrollBox" refresher-enabled bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+            <view class="allProgramBox">
+              <checkbox-group class="selectGroup" bindchange="orderSelectChange">
+                <view class="allProgramList" wx:for="{{planList}}" wx:key="index">
+                  <view class="allProgramImgBox">
+                    <checkbox class="allProgramRadio" value="{{item.id}}#{{item.thumbnail}}" checked="{{item.checked}}" />
+                    <image class="allProgramImg" src="{{imageBaseUrl + item.goodsImg.secondThumbnail}}"></image>
+                  </view>
+                  <view class="text-ellipsisl2 allProgramTitle">{{item.schemeName}}</view>
+                </view>
+              </checkbox-group>
+            </view>
+            <view class="bottomLine">我是有底线的~</view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+  <view class="safetyKmN bottomBox">
+    <view class="flex_c_c save" catchtap="save">保存</view>
+  </view>
+</view>

@@ -1,0 +1,155 @@
+<!-- pages/personageCenter/allOrder/orderDetails/share/index.wxml -->
+<view class="share">
+  <view class="shareDetails">
+    <!-- <image class="shareImg" src="{{userInfo.avatarUrl}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload=""></image>
+        <text class="uname" >{{userInfo.nickName}}</text>
+        <text class="shareTo" >发给微信好友的拼一版订单</text> -->
+    <text class="shareTo" wx:if="{{isAdmin&&isShare}}">你将发给微信好友的拼一版订单</text>
+    <text class="shareTo" wx:else>微信好友分享给你的拼一版订单</text>
+  </view>
+  <view class="payMages">
+    <view class="moneyTxt">
+      <text>付款金额</text>
+    </view>
+    <view class="money">
+      <text class="moneytips">￥</text>
+      <text>{{orderDetail.amount}}</text>
+    </view>
+    <view wx:if="{{orderDetail.status=='nopaid'}}" class="howTime">剩余支付时间
+      <van-count-down class="txt" bind:finish="canel" time="{{time}}" />
+    </view>
+    <button wx:if="{{isShare&&orderDetail.status=='nopaid'}}" catchtap="heid" class="sendBtn" open-type="share">发送给客户去付款</button>
+    <button wx:if="{{orderDetail.status!=='nopaid'}}" class="sendBtn2">订单已失效</button>
+    <view class="tips">
+      如果订单申请退款，已支付金额将原路退还付款人
+    </view>
+  </view>
+  <view class="shoppMages">
+    <!-- <view class="shopp_title" >商品信息</view> -->
+    <view>
+      <view class="list-tittel">
+        <text>订单编号：</text>
+        <text>{{orderDetail.orderNo}}</text>
+      </view>
+    </view>
+    <view class="list-tittel" style="border-top: 1px solid #E7E7E7; ">
+      印刷加工_{{orderDetail.paper.paperType}}_{{orderDetail.paper.kg}}
+    </view>
+    <view class="order" style="margin-top: 10rpx">
+      <text class="details" wx:for="{{orderDetail.miniEditionGoodsInfo[0].goodsAttr}}" wx:key="id">
+        <text style="color:#666" wx:if="{{item.length==1}}">{{item[0]}};</text>
+        <text wx:else>
+          <text>{{item[0]}}:</text>
+          <text style="color:#666">{{item[1]}};</text>
+        </text>
+      </text>
+      <text>纸张分切费:<text style="color:#666;">{{orderDetail.paper.cuttingfee}};</text></text>
+    </view>
+    <view style="margin-top: 10rpx;color:#666666">
+      <text>X{{orderDetail.miniEditionGoodsInfo[0].number}}</text>
+    </view>
+    <view class="zhi">
+      <view>
+        <text wx:if="{{orderDetail.suborderDiscountDetail.paperPrice && orderDetail.suborderDiscountDetail.paperDiscountPrice != orderDetail.suborderDiscountDetail.paperPrice}}" style="color:#747577">市场价：</text>
+        <text wx:if="{{orderDetail.suborderDiscountDetail.paperPrice && orderDetail.suborderDiscountDetail.paperDiscountPrice != orderDetail.suborderDiscountDetail.paperPrice}}">￥{{orderDetail.suborderDiscountDetail.paperPrice}}</text>
+      </view>
+      <view wx:if="{{orderDetail.suborderDiscountDetail.paperDiscountPrice>0}}">
+        <text style="color:#747577">纸张费用：</text>
+        <text>￥{{orderDetail.suborderDiscountDetail.paperDiscountPrice}}</text>
+      </view>
+    </view>
+    <view class="yin">
+      <view>
+        <text wx:if="{{orderDetail.suborderDiscountDetail.printMarketPrice && orderDetail.suborderDiscountDetail.printPrice != orderDetail.suborderDiscountDetail.printMarketPrice}}" style="color:#747577">市场价：</text>
+        <text wx:if="{{orderDetail.suborderDiscountDetail.printMarketPrice && orderDetail.suborderDiscountDetail.printPrice != orderDetail.suborderDiscountDetail.printMarketPrice}}">￥{{orderDetail.suborderDiscountDetail.printMarketPrice}}</text>
+      </view>
+      <view>
+        <text wx:if="{{!orderDetail.monthly}}" class="case">现结</text>
+        <text wx:else class="case" style="color: #ff0036;border: 1px solid #ff0036;">月结</text>
+        <text style="color:#747577">印刷费用：</text>
+        <text>￥{{orderDetail.suborderDiscountDetail.printPrice}}</text>
+      </view>
+    </view>
+    <view class="border_top"></view>
+    <view class="standard" wx:for="{{orderDetail.children}}" wx:key="id">
+
+      <!-- wx:if="{{item.confirmTime > 1}}"  -->
+      <!-- wx:if="{{item.blueFileUrl && item.bluePaperConfirmTime}}" -->
+      <view class="uploade1"  >
+        <view wx:if="{{item.newconfirmTime}}">
+          <text>确认时间：</text>
+          <text>{{item.newconfirmTime}}</text>
+        </view>
+        <view class="uploade1" style="margin-top:10rpx ;" wx:if="{{item.printTime}}">
+          <text>印刷时间：</text>
+          <text>{{item.printTime}}</text>
+        </view>
+      </view>
+      <!-- <view>{{item.miniEditionGoodsInfo[0]}}</view> -->
+      <button wx:if="{{item.coverPathList.length>0&&item.coverPathList}}" catchtap="confirmedFile" data-type="view" data-sid="{{item.id}}" class="uploade-btn" style="color: #06B1FD;border: 1px solid #06B1FD;">查看兰纸</button>
+    </view>
+  </view>
+  <!-- <view wx:if="{{orderDetail.shippingName == '工厂自提'}}" class="address" >
+        <view class="titlebox">
+          <text class="titletxt">配送方式:</text>
+          <text class="titleright">工厂自提</text>
+      </view>
+      <view class="titlebox my-address">
+          <text class="titletxt">提货地点:</text>
+          <text class="titleright">广东省佛山市南海区里水镇麻奢拼一版档口（导航：傲彩产业园）</text>
+      </view>
+    </view> -->
+  <view class="address">
+    <view class="adr_human">
+      <text class="contact gary ">联系人:</text>
+      <text class="contName black">{{orderDetail.consigneeName}}</text>
+      <text class="black">{{mobile}}</text>
+    </view>
+    <view class="adr_human" style="border-top:1px solid #E0E0E0">
+      <view class="contName black adr_con">
+        <view class="adr_left"> 自提地址:</view>
+        <view>
+          <view> 广东省佛山市南海区里水镇麻奢</view>
+          <view> 拼一版档口(导航:傲彩产业园)</view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="adr_info " >
+            <text class="gary adrs" >电话:</text>
+            <text class="black" >{{' '+mobile}}</text>
+        </view> -->
+  </view>
+  <view class="address" wx:if="{{orderDetail.memo}}">
+    <view class="adr_human">
+      <text class="contact gary ">备注:</text>
+      <text style="color: #999;">{{orderDetail.memo}}</text>
+    </view>
+  </view>
+  <view class="brick btuBottom"></view>
+  <view class="allPay btuBottom">
+    <view class="amountOld_box">
+      <view>
+        <text>合计：</text>
+        <text style="font-size:18px;color:#333">￥</text>
+        <text style="font-size:18px;color:#333">{{orderDetail.amountOld}}</text>
+      </view>
+    </view>
+    <view class="flex_between_center amount_box">
+      <view>
+        <text>应付金额:</text>
+        <text class="payTips">￥</text>
+        <text class="pays">{{orderDetail.amount}}</text>
+      </view>
+      <button wx:if="{{!isAdmin&&orderDetail.status=='nopaid'}}" class="pay-btn" style="line-height:68rpx;" catch:tap="getUser">支付</button>
+    </view>
+  </view>
+</view>
+<van-action-sheet class="credit-action-sheet" show="{{ creditShow }}" description="选择支付方式" cancel-text="取消" bind:cancel='creditHideFun'>
+  <button wx:for="{{creditActions}}" wx:key="index" disabled="{{item.disabled}}" bindtap="{{ item.disabled || item.loading ? '' : 'onSelect' }}" data-index="{{ index }}" loading="{{item.loading}}" class="action-sheet">
+    <view class="credit-action">
+      <image src="{{item.img}}" mode="widthFix" class="credit-icon" />
+      <text>{{item.name}}</text>
+    </view>
+    <view wx:if="{{item.subname}}" class="subname">{{item.subname}}</view>
+  </button>
+</van-action-sheet>

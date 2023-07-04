@@ -1,0 +1,108 @@
+<!-- pages/personageCenter/allOrder/orderDetails/share/index.wxml -->
+<view class="share" >
+    <view class="shareDetails" >
+        <!-- <image class="shareImg" src="{{userInfo.avatarUrl}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload=""></image>
+        <text class="uname" >{{userInfo.nickName}}</text>
+        <text class="shareTo" >发给微信好友的拼一版订单</text> -->
+        <text class="shareTo" wx:if="{{isAdmin}}">你将发给微信好友的拼一版订单</text>
+        <text class="shareTo" wx:else>微信好友分享给你的拼一版订单</text>
+    </view>
+    <view class="payMages" >
+        <view class="moneyTxt" >
+            <text >付款金额</text>
+        </view>
+        <view class="money" >
+        <text class="moneytips" >￥</text>
+            <text >{{orderDetail.amount}}</text>
+        </view>
+        <view wx:if="{{orderDetail.status=='nopaid'}}" class="howTime" >剩余支付时间 <van-count-down class="txt" bind:finish="canel" time="{{time}}" /></view>
+        <button wx:if="{{isShare&&orderDetail.status=='nopaid'}}" catchtap="heid" class="sendBtn" open-type="share">发送给客户去付款</button>
+        <button wx:if="{{orderDetail.status!=='nopaid'}}" class="sendBtn2">订单已失效</button>
+        <view class="tips" >
+            如果订单申请退款，已支付金额将原路退还付款人
+        </view>
+    </view>
+    <view class="shoppMages" >
+        <!-- <view class="shopp_title" >商品信息</view> -->
+        <view >
+            <view class="list-tittel">
+            <text>订单编号：</text>
+            <text>{{orderDetail.orderNo}}</text>
+            </view>
+        </view>
+        <view wx:for="{{orderDetail.miniEditionGoodsInfo[0].goodsAttr}}" wx:key="id" class="order">
+            <view class="order-titel">
+                <text>{{item.processName}}</text>
+            </view>
+            <view class="details">
+                <text wx:for="{{item.goodsAttr}}" wx:for-item="items" wx:for-index="i" wx:key="id">
+                <text style="color:#666" wx:if="{{items.length==1}}">{{items[0]}};</text>
+                <text>
+                    <text>{{items[0]}}:</text>
+                    <text style="color:#666">{{items[1]}};</text>
+                </text>
+                </text>
+            </view>
+            <view class="shoppMoney" >
+                <text class="shopp_sum gary" >X{{item.number}}</text>
+                <view style="color:#999;">
+                    <text class="shopptips" >原价：¥</text>
+                    <text class="shopp_money" style="text-decoration:line-through;">{{item.amount}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{orderDetail.shippingName == '工厂自提'}}" class="address" >
+        <view class="titlebox">
+          <text class="titletxt">配送方式:</text>
+          <text class="titleright">工厂自提</text>
+      </view>
+      <view class="titlebox my-address">
+          <text class="titletxt">提货地点:</text>
+          <text class="titleright">广东省佛山市南海区里水镇麻奢拼一版档口（导航：傲彩产业园）</text>
+      </view>
+    </view>
+    <view wx:else class="address" >
+        <view class="adr_human" >
+            <text class="contact gary " >联系人姓名:</text>
+            <text class="contName black" >{{orderDetail.consigneeName}}</text>
+        </view>
+        <view class="adr_info " >
+            <text class="gary adrs" >联系人电话:</text>
+            <text class="black" >{{' '+mobile}}</text>
+        </view>
+    </view>
+    <view class="brick btuBottom" ></view>
+    <view class="allPay btuBottom" >
+        <view >
+            <text >应付金额:</text>
+            <text class="payTips" >￥</text>
+            <text class="pays" >{{orderDetail.amount}}</text>
+        </view>
+        <!-- <text class="paySend gary" >免运费</text> -->
+        <button wx:if="{{!isAdmin&&orderDetail.status=='nopaid'}}" class="pay-btn" style="line-height:68rpx;" catch:tap="getUser">支付</button>
+        <!-- <button wx:if="{{isAdmin&&isShare&&orderDetail.status=='nopaid'}}" class="pay-btn" style="line-height:68rpx;" catchtap="heid" open-type="share">发客户付款</button> -->
+    </view>
+</view>
+<van-action-sheet
+  class="credit-action-sheet"
+  show="{{ creditShow }}"
+  description="选择支付方式"
+  cancel-text="取消"
+  bind:cancel='creditHideFun'
+>
+  <button 
+  wx:for="{{creditActions}}" 
+  wx:key="index" 
+  disabled="{{item.disabled}}" 
+  bindtap="{{ item.disabled || item.loading ? '' : 'onSelect' }}" 
+  data-index="{{ index }}" 
+  loading="{{item.loading}}" 
+  class="action-sheet">
+    <view class="credit-action">
+      <image src="{{item.img}}" mode="widthFix" class="credit-icon"/>
+      <text>{{item.name}}</text>
+    </view>
+    <view wx:if="{{item.subname}}" class="subname">{{item.subname}}</view>
+  </button>
+</van-action-sheet>

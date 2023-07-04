@@ -1,0 +1,3 @@
+<!--pages/tool/cutter/index.wxml-->
+<!-- <web-view  bindmessage="bindGetMsg" src="{{imgBaseUrl+'/wxpyb/h5/cutter'}}" /> -->
+<web-view bindmessage="bindGetMsg" wx:if="{{webUrl}}" src="{{webUrl}}" />

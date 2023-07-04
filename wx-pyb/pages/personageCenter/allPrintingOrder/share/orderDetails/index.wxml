@@ -1,0 +1,441 @@
+<scroll-view style="margin-bottom: 20rpx;" wx:if="{{announcementText}}">
+  <van-notice-bar
+  left-icon="volume-o"
+  text="{{announcementText}}"
+/>
+</scroll-view>
+<view class="concenta">
+  <view class="address">
+    <view wx:if="{{!lift}}" class="titlebox">
+      <text class="titletxt">配送方式:</text>
+      <text class="titleright">{{orderDetail.shippingName}}</text>
+    </view>
+    <view wx:if="{{!lift}}" class="adrs">
+      <view class="img-box">
+        <text class="img ac-icon-location"></text>
+      </view>
+      <view>
+        <view>
+          <text class="addressee">{{orderDetail.consigneeName}}</text>
+          <text class="phnoe">{{orderDetail.mobile}}</text>
+        </view>
+        <text class="addressee addressDetailse">{{orderDetail.province}}{{orderDetail.city}}{{orderDetail.county}}{{orderDetail.address}}</text>
+      </view>
+    </view>
+    <view wx:else class="adrs">
+      <view class="img-box">
+        <text class="img ac-icon-location"></text>
+      </view>
+      <view>
+        <view>
+          <text class="addressee">{{orderDetail.consigneeName}}</text>
+          <text class="phnoe">{{orderDetail.mobile}}</text>
+        </view>
+        <text class="addressee addressDetailse">自提地址:广东省佛山市南海区里水镇麻奢拼一版档口(导航:傲彩产业园)</text>
+      </view>
+    </view>
+   
+    <view wx:if="{{orderDetail.memo}}" class="detailed-address">
+      <text style="width:80rpx;">备注:</text>
+      <text style="color: #ACAAAA">{{orderDetail.memo}}</text>
+    </view>
+  </view>
+  <view>
+    <view class="order" wx:for="{{orderDetail.children}}" wx:key="id">
+      <view class="flex_web">
+      <view class="flex1">PO编号：</view>
+      <view class="flex2">{{item.poSn}}</view>
+      <view class="copy-sn1" data-sn="{{item.poSn}}" catchtap="copyBtn">
+            <button>复制</button>
+          </view>
+    </view>
+      <view class="info-flex">
+        <view class="imgbox">
+          <image wx:if="{{item.thumbImage}}"  catchtap="previewImg" data-url="{{item.fullImage}}" mode="aspectFit" src="{{imgBaseUrl+item.thumbImage}}"/>
+          <image wx:else mode="aspectFit" src="../../../../../image/icon_20.png"/>
+        </view>
+        <view >
+          <view class="order-titel">
+            <text wx:if="{{!lift&&orderDetail.createtime>1652502001}}" class="parcel {{item.freeShipping==1?'gcolor':'pcolor'}}">{{item.freeShipping==1?'包邮':'不包邮'}}</text>
+            <text style="text-width:400"> 印刷加工_{{orderDetail.paper.paperType}}_{{orderDetail.paper.kg}}</text>
+          </view>
+          <view class="lineGary">
+            <view class="details">
+              <text wx:for="{{item.goodsAttr}}" wx:for-item="items" wx:for-index="i" wx:key="id">
+                <text style="color:#666" wx:if="{{items.length==1}}">{{items[0]}};</text>
+                <text wx:else>
+                  <text>{{items[0]}}:</text>
+                  <text style="color:#666">{{items[1]}};</text>
+                </text>
+              </text>
+              <text>纸张分切费:<text style="color:#666;">{{orderDetail.paper.cuttingfee}};</text></text>
+            </view>
+            <view class="total">
+              <text style="color:#999;">X {{item.number}}</text>
+            </view>
+          </view> 
+        </view>
+      </view>
+      <view class="zhi">
+        <view>
+          <text wx:if="{{suborderDiscountDetail.paperPrice && suborderDiscountDetail.paperDiscountPrice != suborderDiscountDetail.paperPrice}}" style="color:#747577">市场价：</text>
+          <text wx:if="{{suborderDiscountDetail.paperPrice && suborderDiscountDetail.paperDiscountPrice != suborderDiscountDetail.paperPrice}}">￥{{suborderDiscountDetail.paperPrice}}</text>
+        </view>
+        <view wx:if="{{suborderDiscountDetail.paperDiscountPrice>0}}">
+          <text style="color:#747577">纸张费用：</text>
+          <text>￥{{suborderDiscountDetail.paperDiscountPrice}}</text>
+        </view>
+      </view>
+      <view class="yin">
+        <view>
+          <text wx:if="{{suborderDiscountDetail.printMarketPrice && suborderDiscountDetail.printPrice != suborderDiscountDetail.printMarketPrice}}" style="color:#747577">市场价：</text>
+          <text wx:if="{{suborderDiscountDetail.printMarketPrice && suborderDiscountDetail.printPrice != suborderDiscountDetail.printMarketPrice}}">￥{{suborderDiscountDetail.printMarketPrice}}</text>
+        </view>
+        <view>
+          <text wx:if="{{!orderDetail.monthly}}" class="case">现结</text>
+          <text wx:else class="case" style="color: #ff0036;border: 1px solid #ff0036;">月结</text>
+          <text style="color:#747577">印刷费用：</text>
+          <text>￥{{suborderDiscountDetail.printPrice}}</text>
+        </view>
+      </view>
+      <view class="order_flex">
+        <block wx:if="{{item.priceinfoMap.openSize[0]>0}}">
+          <text class="order_front">开纸尺寸:</text><text class="order_after">{{item.priceinfoMap.openSize[0] + 'X' + item.priceinfoMap.openSize[1]}};</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.pinban_size[0]>0}}">
+          <text class="order_front">印张尺寸:</text><text class="order_after">{{item.priceinfoMap.pinban_size[0] + 'X' + item.priceinfoMap.pinban_size[1]}};</text>
+        </block>
+      
+        <block wx:if="{{item.priceinfoMap.printedEheetNum>0}}">
+          <text class="order_front">印张数量:</text><text class="order_after">{{item.priceinfoMap.printedEheetNum}}张;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.lose>0}}">
+          <text class="order_front">含放损:</text><text class="order_after">{{item.priceinfoMap.lose}}张;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.paperDiscountPrice>0}}">
+          <text class="order_front">纸张费用:</text><text class="order_after">{{item.priceinfoMap.paperDiscountPrice}}元;</text>
+        </block>
+        <block>
+        <block wx:if="{{item.priceinfoMap.paperTonsMaterPriceStr}}">
+          <text class="order_front" ></text><text class="order_after">{{item.priceinfoMap.paperTonsMaterPriceStr}};</text>
+        </block>
+        <block wx:else>
+        <block wx:if="{{item.priceinfoMap.paperTonsPrice}}">
+          <block wx:if="{{item.isValue!='exist'}}"> <text class="order_front" ></text><text class="order_after">{{item.priceinfoMap.paperTonsPrice}}元/吨;</text></block>
+          <block wx:else>
+          <text class="order_front" ></text><text class="order_after">{{item.priceinfoMap.paperTonsPrice}}元/平;</text>
+        </block>
+        </block>
+      </block>
+    </block>
+    <block wx:if="{{item.priceinfoMap.pitBoxPaperPrice>0}}">
+          <text class="order_front">坑纸费用:</text><text class="order_after">{{item.priceinfoMap.pitBoxPaperPrice}}元;</text>
+      </block>
+      <block wx:if="{{item.priceinfoMap.mountingPitPrice>0}}">
+          <text class="order_front">裱坑费用:</text><text class="order_after">{{item.priceinfoMap.mountingPitPrice}}元;</text>
+      </block>
+        <block wx:if="{{item.priceinfoMap.print>0}}">
+          <text class="order_front">印刷费用:</text><text class="order_after">{{item.priceinfoMap.print}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.lamination>0}}">
+          <text class="order_front">表处理费用:</text><text class="order_after">{{item.priceinfoMap.lamination}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.laminationUnitPrice>0}}">
+          <text class="order_front">表处理单价:</text><text class="order_after">{{item.priceinfoMap.laminationUnitPrice}}元;</text>
+        </block>
+      
+        <block wx:if="{{item.priceinfoMap.gild>0}}">
+          <text class="order_front">烫金费用:</text><text class="order_after">{{item.priceinfoMap.gild}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.blade>0}}">
+          <text class="order_front">刀版费用:</text><text class="order_after">{{item.priceinfoMap.blade}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.pi>0}}">
+          <text class="order_front">啤费用:</text><text class="order_after">{{item.priceinfoMap.pi}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.emboss>0}}">
+          <text class="order_front">击凸费用:</text><text class="order_after">{{item.priceinfoMap.emboss}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.localUv>0}}">
+          <text class="order_front">局部UV费用:</text><text class="order_after">{{item.priceinfoMap.localUv}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.put>0}}">
+          <text class="order_front">贴窗费用:</text><text class="order_after">{{item.priceinfoMap.put}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.concave>0}}">
+          <text class="order_front">击凹费用:</text><text class="order_after">{{item.priceinfoMap.concave}}元;</text>
+        </block>
+        <block wx:if="{{item.priceinfoMap.stick>0}}">
+          <text class="order_front">粘费用:</text><text class="order_after">{{item.priceinfoMap.stick}}元;</text>
+        </block>
+    </view>
+    <view class="border_top"></view>
+      <!-- <view class="date-box">
+        <view>
+          <text style="color:#666">生产货期:</text>
+          <text>{{item.day*24}}小时({{item.day}}天)</text>
+        </view>
+        <view>
+          <text wx:if="{{!lift}}" style="color:#666">预计发货时间:</text>
+          <text wx:if="{{lift}}" style="color:#666">预计提货时间:</text>
+          <text>{{item.outTime}}</text>
+        </view>
+      </view> -->
+      <view class="uploade-box" wx:if="{{true}}">
+        <view class="uploade">
+          <text class="stars">*</text>
+          <text style="margin-left:5px">文件</text>
+          <text style="color:#999999;font-size:28rpx;margin-left:15rpx">(若文件大于100MB时，请联系在线客服传文件)</text>
+        </view>
+        <view class="standard">
+          <view wx:if="{{!item.isSend}}">
+            <view catchtap="UPloadFile" data-id="{{item.id}}" class="{{buttonStatu}} uploade-btn">
+              <text class="ac-icon-upload" style="font-size:40rpx;"></text>
+              <text>上传文件</text>
+            </view>
+          </view>
+          <text wx:if="{{item.customerFile}}" class="lookFile">
+            <text>文件已上传</text>
+          </text>
+          <button wx:if="{{item.blueFileUrl && item.bluePaperConfirmTime}}" catchtap="confirmedFile" data-sid="{{item.id}}" class="uploade-btn" style="color: #06B1FD;border: 1px solid #06B1FD;">查看兰纸</button>
+          <!-- <button class="uploade-btn" wx:if="{{item.blueFileUrl && !item.bluePaperConfirmTime&&admin}}" open-type="share" style="height:56rpx" >分享去确认</button> -->
+          <button class="uploade-btn" catchtap="confirmedFile" data-sid="{{item.id}}" wx:if="{{item.blueFileUrl && !item.bluePaperConfirmTime}}" style="height:56rpx" >确认兰纸</button>
+        </view>
+        <view wx:if="{{item.confirmTime > 1}}" class="uploade">
+          <text>确认时间：</text>
+          <text style="color:#999999;font-size:28rpx;">{{item.newconfirmTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="order-info" > -->
+  <view wx:if="{{orderDetail.miniDiffOrder}}" wx:for="{{orderDetail.miniDiffOrder}}" wx:key="id" class="order-info">
+    <view>
+      <view class=" notDisplay"> 
+        <text>补差价订单</text>
+      </view>
+      <view>
+        <view class="order-sn noline">
+          <view style=" margin-bottom: 0">
+            <text style="color:#999">差价订单：</text>
+            <text>{{item.orderNo}}</text>
+          </view>
+          <view class="copy-sn" data-sn="{{item.orderNo}}" catchtap="copyBtn">
+            <button>复制</button>
+          </view>
+        </view>
+        <view class="create-time">
+          <view>
+            <text style="color:#999">差价金额：</text>
+            <text style="color:#ff0036;">￥{{item.diffMoney}}</text>
+          </view>
+        </view>
+        <view class="create-time">
+          <view>
+            <text style="color:#999">差价描述：</text>
+            <text>{{item.diffDesc}}</text>
+          </view>
+        </view>
+        <view class="create-time">
+          <view>
+            <text style="color:#999">支付状态：</text>
+            <text>{{item.status=='nopaid'? '未支付' : '已支付'}}</text>
+          </view>
+          <button wx:if="{{item.status==='nopaid'  && orderDetail.status != 'cancel'}}" catchtap="DiffOrderPay" data-no="{{item.orderNo}}" data-sn="{{item.orderNo}}" class="on two-pay">
+            去支付
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+    <view class="flex_bg">
+      <view class="flex">
+        <view>商品总额</view>
+        <view class="cor_b"><text class="font_28">￥</text>{{orderDetail.amount}}</view>
+      </view>
+      <view class="flex" wx:if="{{orderDetail.bonusMoney>0}}">
+        <view>优惠券抵扣</view>
+        <view class="cor_p">-<text class="font_28">￥</text>{{orderDetail.bonusMoney}}</view>
+      </view>
+      <view class="flex" wx:if="{{orderDetail.bonusMoney>0}}">
+        <view>订单总额 </view>
+        <view class="cor_p"><text class="font_28">￥</text>{{orderDetail.amount - (orderDetail.bonusMoney || 0)}}</view>
+      </view>
+  </view>
+  <view class="order-info">
+    <view class=" notDisplay">
+      <text>订单信息</text>
+      <text wx:if="{{ orderstate!='已完成'}}" class="tips">
+        <text>20点之后确认文件，从次日开始计算货期</text>
+      </text>
+    </view>
+    <view class="order-sn noline">
+      <view>
+        <text>订单编号：</text>
+        <text class="C9">{{orderDetail.orderNo}}</text>
+      </view>
+      <view class="copy-sn" style="margin-bottom: 0" data-sn="{{orderDetail.orderNo}}" catchtap="copyBtn">
+        <button>复制</button>
+      </view>
+    </view>
+    <view class="create-time" wx:if="{{orderDetail.parentOrderNo}}">
+      <!-- <view wx:if="{{orderDetail.status != 'nopaid'&&orderDetail.status != 'cancel'}}" class="create-time"> -->
+      <view>
+        <text>支付编号：</text>
+        <text class="C9">{{orderDetail.parentOrderNo}}</text>
+        <!-- <text class="C9">{{orderDetail.parentOrderNo}}</text> -->
+      </view>
+    </view>
+    <view wx:if="{{orderDetail.payTime>0}}" class="create-time">
+      <view>
+        <text>支付方式：</text>
+        <text class="C9">{{orderDetail.payText}}</text>
+      </view>
+    </view>
+    <view class="create-time">
+      <view>
+        <text>下单时间：</text>
+        <text class="C9">{{createtime}}</text>
+      </view>
+    </view>
+    <!-- <view class="create-time">
+      <view>
+        <text>生产货期：</text>
+        <text class="C9">{{orderDetail.children[0].day*24}}小时({{orderDetail.children[0].day}}天)</text>
+      </view>
+    </view>
+    <view class="create-time">
+      <view>
+        <text>预计送货时间：</text>
+        <text class="C9">{{orderDetail.children[0].outTime}}</text>
+      </view>
+    </view> -->
+    <!-- <view class="create-time">
+      <view>
+        <text>商品金额：</text>
+        <text class="red">￥{{orderDetail.goodsAmount}}</text>
+      </view>
+    </view>
+    <view class="create-time" wx:if="{{orderDetail.shippingFee>0}}">
+      <view>
+        <text class="indent">运费：</text>
+        <text class="red">￥{{orderDetail.shippingFee}}</text>
+      </view>
+    </view> -->
+    <view wx:if="{{orderDetail.status === 'shipped'&&!lift}}" class="create-time">
+      <view>
+        <text>物流信息：</text>
+        <text catchtap="lookLogistics" data-sn="{{orderDetail.orderNo}}" class="red">点击查询物流信息</text>
+      </view>
+    </view>
+    <!-- <view class="create-time">
+      <view>
+        <text>配送费用：</text>
+        <text class="red">￥{{orderDetail.shippingFee}}</text>
+      </view>
+    </view> -->
+    <!-- <view wx:if="{{orderstate=='待审核'||orderstate=='审核成功'}}" class="create-time">
+      <view>
+        <text>审核状态：</text>
+        <text class="C9">{{orderstate}}</text>
+      </view>
+    </view> -->
+    <!-- <view wx:if="{{ orderstate=='已完成'}}" class="over-tips">
+      <text>已结印刷费用</text>
+    </view> -->
+  </view>
+  <!-- <view wx:if="{{ orderstate!='已完成'}}" class="tips">
+    <text>每天20点截单：确认文件后开始计算货期。</text>
+  </view> -->
+   <!-- <view wx:if="{{orderstate == '退款中'}}" class="order-info"> -->
+    <!-- <view class="create-time">
+        <view>
+          <text style="color:#999">印刷费用：</text>
+          <text style="color:#ff0036; font-weight:bold;">￥{{orderDetail.suborderDiscountDetail.colorMoney*1+orderDetail.suborderDiscountDetail.spotMoney*1}}</text>
+        </view>
+      </view> -->
+    <!-- <view class="create-time">
+        <view>
+          <text style="color:#999">纸张费用：</text>
+          <text style="color:#ff0036; font-weight:bold;">￥{{orderDetail.suborderDiscountDetail.paperPrice*1}}</text>
+        </view>
+      </view> -->
+    <!-- <view class="create-time">
+      <view>
+        <text style="color:#999">应退金额：</text>
+        <text style="color:#ff0036; font-weight:bold;">
+          ￥{{orderDetail.suborderDiscountDetail.paperPrice*1}}
+        </text>
+      </view>
+    </view> -->
+  <!-- </view>  -->
+  <view class="footer-brick"></view>
+</view>
+<view class="footer btuBottom">
+  <view class="amountOld">
+    <text>合计：<text style="font-size:34rpx;color:#333">¥{{orderDetail.amountOld}}</text></text>
+  </view>
+  <view wx:if="{{orderDetail.status == 'nopaid'}}" class="amount">
+    <text>应付：<text style="font-size:40rpx;color:#ff0036">¥{{orderDetail.amount}}</text></text>
+  </view>
+  <view wx:else class="amount">
+    <text>已付：<text>¥{{orderDetail.amountPaid || 0}}</text></text>
+  </view>
+  <view class="save" wx:if="{{(orderDetail.suborderDiscountDetail.paperPriceOne*1-orderDetail.suborderDiscountDetail.paperPrice*1)>0}}">
+    <text>已省：¥{{orderDetail.saving}}</text>
+  </view>
+  <view class="order-btn">
+    <view class="total-price-text" style="width:{{orderstate == '待付款'?'60%':orderstate == '已完成'?'100%':'40%'}}">
+      <text style="margin-right: 4rpx; font-size: 26rpx;">实付款:</text>
+      <text class="money" style="font-size: 26rpx;">¥</text>
+      <text class="money f40" style="font-size: 38rpx;">{{orderDetail.amount}}</text>
+      <!-- <text class="money f40" styl、e="font-size: 38rpx;">{{orderDetail.amount}}</text> -->
+    </view>
+    <!-- <view class="btn_flex" wx:if="{{totalPrice>1}}">
+        <view class="btn_left_text"><text>实付款:</text><text>¥</text><text>{{Isfreight==1 && Distribution=='0'?totalPrice + ConsignmentId.freight:totalPrice}}</text></view>
+         <view bindtap="ordernow" class="btn_right">提交订单</view>
+    </view> -->
+    <!-- <button wx:if="{{orderstate == '待配送'}}" catchtap="cgContacts" data-sn="{{orderDetail.orderNo}}">修改联系人</button> -->
+    <!-- <button wx:if="{{orderstate == '待确认'}}" catchtap="refund" data-sn="{{orderDetail.orderNo}}" style="color:#999">
+      申请退款
+    </button> -->
+    <button wx:if="{{!isSend&&orderDetail.status == 'paid'&&orderDetail.hasRefundStatus<1&&orderDetail.payText=='微信支付'}}" catchtap="refund" data-sn="{{orderDetail.parentOrderNo}}" style="color:#999">
+      申请退款
+    </button>
+    <!-- <button wx:if="{{orderstate == '已取消'}}" catchtap="delOrder" data-sn="{{orderDetail.parentOrderNo}}">
+      删除订单
+    </button> -->
+    <!-- <button wx:if="{{source == 'tx' && orderstate == '待结算' && (orderDetail.confirmedTime+7*60*60*24)-nowTime<0}}" catchtap="settlement" data-no="{{orderDetail.orderNo}}" data-sn="{{orderDetail.parentOrderNo}}" class="on" style="width:240rpx">
+      结算印刷费
+    </button> -->
+    <button wx:if="{{orderstate == '待付款'}}" catchtap="WXpay" data-no="{{orderDetail.orderNo}}" data-amount="{{orderDetail.amount}}" data-sn="{{orderDetail.parentOrderNo}}" class="on">
+      去支付
+    </button>
+  </view>
+</view>
+<service></service>
+<modal modal="{{modal}}"></modal>
+<van-toast id="van-toast" />
+
+<van-action-sheet
+  class="credit-action-sheet"
+  show="{{ creditShow }}"
+  description="选择支付方式"
+  cancel-text="取消"
+  bind:cancel='creditHideFun'
+>
+  <button 
+  wx:for="{{creditActions}}" 
+  wx:key="index" 
+  disabled="{{item.disabled}}" 
+  bindtap="{{ item.disabled || item.loading ? '' : 'onSelect' }}" 
+  data-index="{{ index }}" 
+  loading="{{item.loading}}" 
+  class="action-sheet">
+    <view class="credit-action">
+      <image src="{{item.img}}" mode="widthFix" class="credit-icon"/>
+      <text>{{item.name}}</text>
+    </view>
+    <view wx:if="{{item.subname}}" class="subname">{{item.subname}}</view>
+  </button>
+</van-action-sheet>

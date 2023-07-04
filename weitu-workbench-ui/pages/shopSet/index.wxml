@@ -1,0 +1,60 @@
+<!--pages/shopSet/index.wxml-->
+<view class="safetyKmN shopContainer">
+  <!-- 轮播图 -->
+  <view class="carouselBox">
+    <view class="carouselTitleBox">
+      <view class="carouselText">轮播图设置<text style="color:red;">*</text></view>
+      <view class="carouselTerm">（图片分辨率340*150,2M以内）</view>
+    </view>
+    <!-- <van-uploader class="uploadCarousel" upload-icon="plus" file-list="{{ fileList }}" max-count="4" bind:after-read="uploadImg" bind:delete="deleteImg" multiple="{{true}}" /> -->
+    <view class="carouselListBox">
+      <view class="carouselList" wx:for="{{carouselList}}" wx:key="index">
+        <view class="carouselImgBox">
+          <image class="carouselImg" src="{{imageBaseUrl + item.coverPath}}"></image>
+          <image class="deleteCarouselImg" src="/image/shopSet/delete.png" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{!isEdit}}" catchtap="deleteImg"></image>
+        </view>
+      </view>
+      <image class="uploadCarousel" wx:if="{{carouselList.length < 4}}" src="/image/shopSet/add.png" catchtap="uploadCarousel"></image>
+    </view>
+  </view>
+  <!-- 分类与方案设置 -->
+  <view class="sortSetBox">
+    <view class="sortSetTitleBox">
+      <view class="sortSetText">分类与方案设置</view>
+      <view class="sortSetTerm">（最多设置6个分类）</view>
+    </view>
+    <view class="smallSortBox" wx:for="{{sortList}}" wx:key="index">
+      <view class="smallSortTitle">分类{{index + 1}}<text style="color:red;" wx:if="{{index == 0}}">*</text></view>
+      <view class="smallSortContentBox">
+        <input class="smallSortContentInput" placeholder="请输入分类标题" disabled="{{isEdit}}" value="{{item.name}}" data-index="{{index}}" bindinput="sortInput"></input>
+        <!-- <view class="smallSortContent">医药保健/计生情趣医药保医最多12个字</view> -->
+        <view class="smallSortPlan {{item.schemeNum > 0 ? 'smallSortActPlan' : ''}}">已选{{item.schemeNum||0}}个方案</view>
+      </view>
+      <view class="flex_c_c smallSortEditPlan" wx:if="{{isEdit && item.id && item.name}}" data-id="{{item.id}}" data-name="{{item.name}}" data-path="{{item.path}}" data-enterpriseCode="{{item.enterpriseCode}}" catchtap="editPlan">编辑方案</view>
+    </view>
+  </view>
+  <!-- 方案水印设置 -->
+  <view class="planWatermarkSetBox">
+    <view class="planWatermarkSetTitleBox">
+      <view class="planWatermarkSetText">方案水印设置</view>
+      <view class="planWatermarkSetTerm">（支持jpg、png格式）</view>
+    </view>
+    <view style="display: flex;">
+      <image class="uploadWatermarkImg" src="{{watermark ? imageBaseUrl + watermark : '/image/shopSet/uploadWatermarkBck.png'}}" mode="aspectFit" catchtap="uploadImg"></image>
+      <canvas type="2d" id="syCanvas" style="width:280rpx;height: 200rpx;margin-top: 56rpx;margin-left: 30rpx;" wx:if="{{watermark&&isEdit}}"></canvas>
+    </view>
+  </view>
+  <!-- 用来苹果适配底部距离 -->
+  <view style="padding-bottom: 200rpx;"></view>
+  <!-- 底部 -->
+  <view class="safetyKmN bottomBox">
+    <view class="flex_c_c save" wx:if="{{!isEdit}}" catchtap="save">保存</view>
+    <view class="operateBox" wx:else>
+      <view class="editBox" catchtap="reEdit">
+        <image class="editImg" src="/image/shopSet/editImg.png"></image>
+        <view class="editText">重新编辑</view>
+      </view>
+      <view class="flex_c_c previewBtn" catchtap="previewClick">预览</view>
+    </view>
+  </view>
+</view>

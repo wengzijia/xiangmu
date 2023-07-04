@@ -1,0 +1,19 @@
+<view class="recommend-main" style="background-image:url('{{imgBaseUrl}}/static/wxpyb/recommend/1.png?time=1')">
+    <view class="code-main">
+        <view class="img-box-3" >
+            <view class="code-img">
+                <image src="data:image/png;base64,{{recommendCodeImgY}}" alt=""  mode="heightFix"/>
+            </view>
+            <view >
+                <image class="round-img img-7" src="{{imgBaseUrl}}/static/wxpyb/recommend/7.png" mode="heightFix" />
+        <image class="round-img img-8" src="{{imgBaseUrl}}/static/wxpyb/recommend/8.png" mode="heightFix"/>
+       <image class="round-img img-9" src="{{imgBaseUrl}}/static/wxpyb/recommend/9.png" mode="heightFix"/>
+          
+           </view>
+        </view>
+        <!-- <image class="img-3" src="{{imgBaseUrl}}/static/wxpyb/recommend/3.png" mode="heightFix" />
+        <image class="img-4" src="{{imgBaseUrl}}/static/wxpyb/recommend/4.png" mode="heightFix"/>
+        <image class="img-5" src="{{imgBaseUrl}}/static/wxpyb/recommend/5.png" mode="heightFix"/> -->
+
+    </view>
+</view>

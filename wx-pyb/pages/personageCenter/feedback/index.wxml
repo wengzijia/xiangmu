@@ -1,0 +1,14 @@
+<view class="name">
+  <text>姓名</text>
+  <input name="username" bindinput='formname' placeholder="请留下您的姓名" placeholder-class="placeholder" />
+</view>
+<view class="opinion">
+  <view class="title">
+    <text>意见及建议</text>
+  </view>
+  <view class="opinion-box">
+    <textarea name="proposal" bindinput='formproposal' placeholder="请留下您宝贵建议或意见" class="opinion-text" placeholder-class="placeholder" />
+  </view>  
+</view>
+<view class="btn"><button bindtap="sub">提交</button></view>
+<modal modal="{{modal}}"></modal>

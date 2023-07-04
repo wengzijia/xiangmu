@@ -1,0 +1,23 @@
+<view >
+  <van-steps
+    desc-class="desc-text"
+    steps="{{ steps }}"
+    active="1"
+    direction="vertical"
+    active-color="#ee0a24"
+    size="50px"
+  />
+  <view></view>
+  <view class="msg">
+    <view style="color: #777777;">
+      支付方式: <text style="color: #333333;margin-left: 15rpx;"> {{typeText}}</text>
+    </view>
+    <view style="color: #777777;">
+      提交时间: <text style="color: #333333;margin-left: 15rpx;">{{timeText}}</text>
+    </view>
+  </view>
+
+  <view style="text-align: center;margin-top: 300rpx">
+    <text class="btn" catch:tap="back">完成</text>
+  </view>
+</view>

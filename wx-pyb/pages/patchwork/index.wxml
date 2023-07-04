@@ -1,0 +1,44 @@
+<view class="exclusive">
+    <view class="stepbox">
+        <step active="0"></step>
+    </view>
+    <view wx:if="{{currentTab==0}}" class="sidebar-box">
+        <view class="sidebar" style="height: calc(100vh - 54px);">
+            <!-- <text class="sidebar-item">选择盒型</text> -->
+             <view class="offtext" catchtap="offtext">
+                <image mode="widthFix" src="{{imgBaseUrl}}/static/wxpyb/patchwork.png" />
+                <view >报价单</view>
+            </view>
+            <view wx:if="{{item.data.goodsId!='944' && item.data.goodsId!='943'&& item.data.goodsId!='1617'}}" wx:for="{{sidebarList}}" wx:key="id" class="{{'sidebar-item '+ (activeKey==index?'isactive':'')}}" catchtap="sidebarCrount" data-goodsid="{{item.data.goodsId}}" data-current="{{index}}" data-val="{{item.data.name}}">{{item.data.name}}</view>
+           
+        </view>
+        <!-- style="{{'height:'+height+'px;'}}" -->
+        <!-- style="height: calc(100vh - 100rpx);" -->
+        <scroll-view scroll-y style="height: calc(100vh - 54px);">
+            <view  class="sidebar-imgbox">
+            <view wx:for="{{daomoList}}" wx:key="id" wx:for-item="item2" class="daomo-item" catch:tap="toValuation" data-obj="{{item2}}" data-url="{{item2.knifeUrl}}" data-img="{{imgBaseUrl+(item2.specialImg||item2.photoPath2)}}" wx:if="{{item2.data.name!='天地盒'&&item2.data.name!='抽屉盒'}}">
+                <!-- <image src="{{imgBaseUrl+'/'+item2.data.coverPath}}" mode="aspectFit" lazy-load class="daomo-img"/> -->
+                <!-- <view class="item_btn">点击拼版</view> -->
+                <image src="{{'https://www.aocai.cn/static/wxpyb/cutter/'+item2.data.id+'.png'}}" mode="heightFix" lazy-load class="daomo-img image-vivid"/>
+                <view class="daomo-text">{{item2.data.name}}</view>
+            </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <van-popup show="{{ show }}" bind:close="onClose" closeable custom-style="width:90%;max-height:90%" round>
+        <view >
+            <view class="boxtitle" style="margin-top: 30rpx;">选择盒型</view>
+            <scroll-view  scroll-y>
+               <view class="sidebar-imgbox">
+                 <view wx:for="{{dialoglist}}" wx:key="id" wx:for-item="item2" class="daomo-item" catch:tap="tosize" data-obj="{{item2}}" data-gid="{{item2.goodsId}}" data-url="{{item2.knifeUrl}}" data-img="{{imgBaseUrl+(item2.specialImg||item2.photoPath2)}}">
+                    <image style="height: 250rpx;" src="{{'https://www.aocai.cn/'+(item2.specialImg||item2.photoPath2)}}" mode="heightFix" lazy-load class="daomo-img"/>
+                    <view class="item_btn">点击拼版</view>
+                </view>
+               </view>
+            </scroll-view>
+        </view>
+        
+    </van-popup>
+   
+</view>

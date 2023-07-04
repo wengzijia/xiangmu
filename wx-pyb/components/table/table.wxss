@@ -1,0 +1,39 @@
+.table {
+    border: 0px solid darkgray;
+    font-size: 32rpx;
+   }
+   .tr {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 60rpx;
+    align-items: center;
+   }
+   .td {
+    width:40%;
+    justify-content: center;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+   }
+   .bg-w{
+    background: snow;
+   }
+   .bg-g{
+    background: #E6F3F9;
+   }
+   .th {
+    width: 40%;
+    background: #fffbe8 !important;
+    display: flex;
+    height: 60rpx;
+    text-align: left;
+    align-items: center;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+   }
+   .t-c{
+       color: #999;
+   }
+   .red{
+    color:#FF4060;
+  }

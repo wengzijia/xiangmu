@@ -1,0 +1,15 @@
+<!--pages/login/index.wxml-->
+<view class="loginContainer">
+  <view class="logoBox">
+    <image class="logoImg" src="/image/login/logo.png" alt="" />
+  </view>
+  <button class="flex_c_c wxLoginBox" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+    <image class="wxLogoImg" src="/image/login/wx.png"></image>
+    <view class="wxText">微信登录</view>
+  </button>
+  <view class="look" catchtap="look">先去看看 ></view>
+  <view class="agreementBox">
+    <text class="agree">登录即代表同意</text>
+    <text class="agreement">《微图服务协议》</text>
+  </view>
+</view>

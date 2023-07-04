@@ -1,0 +1,27 @@
+<!--pages/addPilot/index.wxml-->
+<view class="addPilotContainer">
+  <!-- 设备 -->
+  <view class="deviceBox">
+    <image class="headPortrait" src="/image/palceOrder/avatar2.png"></image>
+    <view class="name">{{deviceName.device_name}}</view>
+  </view>
+  <!-- 添加 -->
+  <view class="addBox">
+    <view class="imgWrap">
+      <image class="profilePhoto" src="{{headPortrait ? imageBaseUrl + headPortrait : '/image/palceOrder/avatar2.png'}}"></image>
+      <button class="upload" catchtap="upload">点击上传图片</button>
+    </view>
+    <view class="inputBox">
+      <view class="pilotBox item">
+        <view class="name">机长名:</view>
+        <input class="text" type="text"  value="{{pilotName}}" bindinput="getPilotName" placeholder="请输入机长名" />
+      </view>
+      <view class="punchCardBox item">
+        <view class="text">打卡密码:</view>
+        <input class="password" type="text" value="{{password}}" bindinput="getPassword" placeholder="请设置打卡密码" />
+      </view>
+    </view>
+  </view>
+  <!-- 确认按钮 -->
+  <view class="affirm" catchtap="affirm">确定</view>
+</view>

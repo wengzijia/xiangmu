@@ -1,0 +1,40 @@
+<view class="{{show?'write':'gray'}}"style='height:100vh;'>
+<view wx:if="{{show}}">
+  <view class="content_mar">
+    <view class="con_title">请输入联系人</view>
+    <view class="con_notes">方便后续自提货物</view>
+    <view class="input_bor">
+      <input class="weui-input" name="username" maxlength="15" bindinput="formname" placeholder="请输入姓名" placeholder-class="pl_input" value="{{username}}"  />
+    </view>
+    <view class="input_bor">
+      <input name="phone" bindinput="formphone" value="{{phone}}" placeholder="请输入联系人电话" maxlength="11" placeholder-class="pl_input" />
+    </view>
+    <view catch:tap="bindNext" class="con_btn {{isLight==0 ? 'con_none' : 'con_active'}}">
+      下一步
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <van-notice-bar left-icon="volume-o"  color="#CA7C3C" background="#FFFBE8" text="大版文件：若客户大版文件大于100MB，请联系客服！" />
+  <view class="btn-box">
+    <view catchtap="UPloadFile" >
+      <text class="up-btn bor1">上传大版文件</text>
+    </view>
+    <view  class="vol_mar">
+      <!-- catch:tap="lookPdf" -->
+      <text wx:if="{{customerFile}}" >大版文件已上传</text>
+      <text wx:else>文件格式仅支持PDF/CDR/AI/PSD</text>
+    </view>
+  </view>
+  <view class="example">
+    <view style="text-align:center;">
+      <text class="tips">大版文件示例</text>
+    </view>
+    <image src="{{imgBaseUrl+'/uploads/picture/20200602/K_GS_SC_BOX002-2.png'}}" mode="aspectFit" class="example-img" />
+  </view>
+  <view style="margin:60rpx 0;text-align:center;">
+    <text wx:if="{{customerFile}}" class="next-btn" catch:tap="toValuation">提交</text>
+  </view>
+</view>
+<modal modal="{{modal}}"></modal>
+</view>

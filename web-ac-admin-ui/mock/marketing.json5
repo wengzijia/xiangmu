@@ -1,0 +1,115 @@
+{
+  // 优惠券列表
+  'couponList':{
+    'list|10': [{
+      id: '@id()', // 随机生成用户id
+      planSerial: '@protocol()', // 优惠券计划编号
+      planName: '@csentence(4, 7)', // 优惠券计划名称
+      couponType: '@pick(["a", "e", "i", "o", "u"])', // 优惠券类型
+      couponRule: '@csentence()', // 优惠券规则
+      dingdan: '@pick(["退款订单", "大货订单", "补差价订单", "打样订单"])', // 使用订单类型
+      pinlei: '@pick(["不限品类", "限卡盒,坑盒品类", "限精装盒", "大货订单"])', // 品类范围
+      systemType: '@pick(["官网", "后台", "小程序", "官网/小程序"])', // 使用平台
+      'discountType|1-5': 1, // 金额类型
+      'useEffectivityDay|1-20': 1, // 使用有效期限按天
+      startEffectivityTime: '@now()', // 开始使用有效期限
+      endEffectivityTime: '@now("day")', // 结束使用有效期限
+      'useEffectivityType|1-2': 1, // 使用有效期限 类型 1固定时间段内有效,2领取后多少天内使用
+      'roughlyMoney|1000-10000': 1000, // 预计营销费用
+      'receivedMoney|100-1000': 100, // 已领取费用
+      'spentTensor|100-1000': 100, // 已使用费用
+      'totalTensor|100-1000': 100, // 发行总张数
+      'alreadyReceivedTensor|100-1000': 100, // 已领取量
+      'spentMoney|100-1000': 100, // 已使用量
+      'status|0-2': 0, // 状态 0禁用,1启用2终止
+    }],
+    total: 2,
+    pageSize: 10,
+    pageNum: 1,
+    'rental|1000-10000': 1000
+  },
+  // 创建优惠券计划（编辑，审核，查看）
+  createCoupon: {
+    id: '@id()', // 随机生成用户id
+    planSerial: '@protocol()', // 优惠券计划编号
+    'auditStatus|0-2': 0, // 审核状态 0未审核,1审核通过,2审核失败
+    planName: '@csentence(4, 7)', // 优惠券计划名称
+    couponType: '@pick(["a", "e", "i", "o", "u"])', // 优惠券类型
+    couponRule: '@csentence()', // 优惠券规则
+    'discountType|1-5': 1, // 折扣类型 1定额,2限制金额,3限制比例,4满减卷,5折扣卷
+    'discountMoney|100-1000': 100, // 最大折扣金额金额
+    'ratio|1-20': 1, // 比列
+    'status|0-2': 0, // 状态 0禁用,1启用2终止
+    'satisfyMoney|100-1000': 100, // 满足金额
+    startGetTime: '@now()', // 开始领取时间
+    endGetTime: '@now("day")', // 结束领取时间
+    startEffectivityTime: '@now()', // 开始使用有效期限
+    endEffectivityTime: '@now("day")', // 结束使用有效期限
+    'useEffectivityType|1-2': 1, // 使用有效期限 类型 1固定时间段内有效,2领取后多少天内使用
+    'useEffectivityDay|1-20': 1, // 使用有效期限按天
+    'roughlyMoney|1000-10000': 1000, // 计划营销费用
+    'totalTensor|100-1000': 1000, // 发行总张数
+  },
+  quotaControl: {
+    'totalCost|10000-100000': 0, // 总费用
+    'typeCost|12': [{
+      typeName: '@csentence(4, 7)', // 优惠券类型
+      'limit|0-1': 0, // 是否有限制
+      'cost|0-10000': 0, // 额度
+      edit: 0, // 是否编辑
+    }]
+  },
+  configurationType: {
+    'data|5-10': [
+      {
+        couponType: '@pick(["a", "e", "i", "o", "u"])', // 优惠券类型
+        couponRule: '@csentence()', // 优惠券规则
+        'gainType|1-2': 1, // 领取规则类型
+        gainTypeList: [
+          {
+            'ruleMax|1-1000': 1, // 金额或张
+            'ruleMonth|1-10': 1, // 领取多少个月
+            ruleType: '', // 规则限制类型  1限制最大数量,2限制最大额度,3需要审核,单次金超
+            'isDel|0-1': 0, // 是否删除
+          }
+        ],
+        'useType|1-2': 1, // 使用规则类型
+        useTypeList: [
+          {
+            ruleMax: '', // 金额或张
+            ruleMonth: '', // 领取多少个月
+            ruleType: '', // 规则限制类型
+            'isDel|0-1': 0, // 是否删除
+          }
+        ]
+      }
+    ]
+  },
+  useOverview: {
+    'frame|1000-10000': 1000, // 使用张数
+    'discountsTotal|1000-10000': 1000, // 优惠总额
+    'orderTotal|10000-100000':10000, // 订单总额
+    'data|10-15': [
+      {
+        couponType: '@csentence(4, 7)', // 优惠券类型
+        'discountsTotal|100-1000': 100, // 优惠总额 
+        'ratio|1-10': 1, // 占比
+      }
+    ]
+  },
+  distributionStatistics: {
+    'data|7-10':[
+      {
+        planName: '@csentence(4, 7)', // 优惠券计划名称
+        couponType: '@csentence(4, 7)', // 优惠券类型
+        dingdan: '@pick(["退款订单", "大货订单", "补差价订单", "打样订单"])', // 使用订单类型
+        miane: '@pick(["定额", "不定额-比例", "不定额-限金额", "满减","折扣"])', // 面额
+        'totalTensor|100-1000': 1000, // 发行总张数
+        'spentMoney1|100-1000': 100, // 未领取
+        'spentMoney2|100-1000': 100, // 未使用
+        'spentMoney3|100-1000': 100, // 已使用量
+        'spentMoney4|100-1000': 100, // 已过期
+      }
+    ]
+  }
+}

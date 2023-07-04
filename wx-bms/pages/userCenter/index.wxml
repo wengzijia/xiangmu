@@ -1,0 +1,57 @@
+<view class="userCenter">
+  <!-- <image class="bkg" src="../../image/myCenter/Group 360@2x.png"></image> -->
+  <view class="userHeader">
+    <view class="tops">
+      <view wx:if="{{isLogin}}">
+        <view wx:if="{{userInfo.wx_nickname&&userInfo.wx_portrait}}" class="head">
+          <!-- <image src="../../image/myCenter/Ellipse 192@2x.png"></image> -->
+          <image src="{{userInfo.wx_portrait}}"></image>
+          <view class="uname" wx:if="{{isProcessor}}">
+            <view class="productor">{{userInfo.company}}-{{userInfo.wx_nickname}}</view>
+            <view wx:if="{{isProcessor}}" class="processors">加工商</view>
+          </view>
+          <view class="uname" wx:else="">
+            <view class="productor">{{userInfo.wx_nickname}}</view>
+            <!-- <view  class="processors">加工商</view> -->
+          </view>
+        </view>
+        <view wx:else class="head" bindtap="getHeader">
+          <image src="../../image/myCenter/header.png"></image>
+          <!-- <image src="{{userInfo.avatarUrl}}"></image> -->
+          <view class="uname">
+            <view class="productor">点击获取头像</view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="head" bindtap="myNavigateTo">
+        <image src="../../image/tabBar/unknown-user.png"></image>
+        <text>未登录</text>
+      </view>
+    </view>
+  </view>
+  <view class="userContent">
+    <view class="lis" bindtap="myNavigateTo" data-url="/pages/bill/index?isProcessor={{isProcessor}}">
+      <image src="../../image/myCenter/Frame@2x(3).png"></image>
+      <text>账单</text>
+    </view>
+    <!-- <view class="lis" bindtap="myNavigateTo" data-url="/pages/printingModule/bill/index?isProcessor={{isProcessor}}">
+      <image src="../../image/myCenter/Frame@2x(3).png"></image>
+      <text>账单</text>
+    </view> -->
+    <view class="lis" wx:if="{{isProcessor || userInfo.is_processing_supplier==1}}" bindtap="myNavigateTo" data-url="/pages/myClient/index">
+      <image src="../../image/myCenter/Frame@2x(4).png"></image>
+      <text>我的客户</text>
+      <!-- <view class='greaterThanSign'></view> -->
+    </view>
+    <view class="lis" wx:if="{{userInfo.is_processing_supplier==1}}" bindtap="myNavigateTo" data-url="/pages/printingModule/bill/index?isProcessor=0">
+      <image src="../../image/myCenter/Frame@2x(3).png"></image>
+      <text>印刷加工单账单</text>
+    </view>
+    <!-- <view class="lis" wx:if="{{isProcessor}}" bindtap="myNavigateTo" data-url="/pages/orderInformation/index">
+      <image src="../../image/myCenter/Frame@2x(5).png"></image>
+      <text>下单须知</text>
+      <view class='greaterThanSign'></view>
+    </view> -->
+  </view>
+
+</view>

@@ -1,0 +1,32 @@
+<!--pages/pilot/index.wxml-->
+<view class="pilotContainer">
+   <!-- 列表 -->
+   <view class="listBox" wx:if="{{pilotList.length}}">
+      <view class="itemBox" wx:for="{{pilotList}}" wx:key="id" data-pilotId="{{item.id}}" data-pilotName="{{item.operatorName}}" data-operatorUrl="{{item.operatorUrl}}"catchtap="openPsdPopup">
+         <image class="headPortraits " src="{{item.operatorUrl ?  imageBaseUrl + item.operatorUrl : '../../image/device/disPilotImg.png'}}"></image>
+         <view class="pilotName">{{item.operatorName}}</view>
+      </view>
+      <view style="height: 200rpx;"></view>
+   </view>
+   <!-- 打开密码弹窗 -->
+   <van-popup show="{{ showPassword }}" bind:close="onPsdClose" round custom-class="psdPopup">
+      <view class="psdBox">
+         <view class="psdText">请输入打卡密码</view>
+         <view class="flex_c_c password">
+            <input type="text" class="psdInput" placeholder="请输入打卡密码" value="{{password}}" catchinput="getInputVal" />
+            <view class="flex_c_c clearBox" wx:if="{{password}}" catchtap="clearPsdVal">
+               <image class="clear" src="../../image/proList/close.png"></image>
+            </view>
+         </view>
+         <!-- <view class="errHint">{{psdErrorMsg}}</view> -->
+         <view class="flex_c_c psdAffirm" catchtap="psdAffirm">确认</view>
+      </view>
+   </van-popup>
+   <!-- 机长空提示 -->
+   <view class="pilotEmptyHint" wx:if="{{!pilotList.length}}">
+      <image class="img" src="../../image/proList/empty.png"></image>
+      <view class="text">暂无其他机长，请前往包秘书进行设置</view>
+   </view>
+   <!-- 返回 -->
+   <view class="flex_c_c goBack" catchtap="jumpDevice">选择设备</view>
+</view>

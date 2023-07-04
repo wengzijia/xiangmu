@@ -1,0 +1,53 @@
+input[type="text"],input[type="password"]{-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0;}
+/*加入我们注册-start*/
+.main_1121{width:100%;background:#fff;}
+.zhuce_jjr{padding:40px 0;}
+.w_0915_1526_p{position:relative;width:50%;border-bottom:1px solid #ddd;}
+.w_0915_1526_p h3{position:absolute;width:50%;background:#fff;left:30px;top:-10px;text-align:center;color:#69738f;font-size:1.6rem;font-weight:bold;}
+.span_circular{background:url(../images/w_0915_002.png) no-repeat scroll 0 0;display:inline-block;width:26px;height:26px;text-align:center;line-height:26px;font-size:1.1rem;}
+.wbb09151611Span{width:28%;display:inline-block;text-align:right;height:42px;line-height:42px;font-size:1.7rem;}
+.marginBottom_0915{margin-bottom:20px;}
+.wbb_0915{width:100%;height:40px;border:1px solid #bbb;border-radius:5px;}
+.next_step_0915{background:url(../images/w_0915_004.png) no-repeat scroll 0 0;width:133px;height:53px;display:inline-block;color:#fff;text-align:center;line-height:53px;}
+.zc_bg_2{background:url(../images/w_0915_005.png) no-repeat scroll 0 0;}
+.wbb09151712Select{display:inline-block;width:28%;height:3rem;border:1px solid #bbb;border-radius:0.5rem;line-height:3rem;font-size:1.5rem;margin-right:1.5%;background:#fff;outline:none;color:#555;}
+.prev_step_0915{width:133px;height:53px;display:inline-block;background:#f2f4f7;line-height:53px;text-align:center;border-radius:5px;margin-right:10px;}
+.zc_bg_3{background:url(../images/w_0915_007.png) no-repeat scroll 0 0;}
+label.colorDd2727 {
+    color: #ff6700;
+	font-size:14px;
+}
+.zc_bg_1{margin:3rem 0;position:relative;}
+.zc_bg_1_ul{position:absolute;left:0;top:0;width:100%;}
+.zc_bg_1_ul li{float:left;width:33.3%;text-align:center;line-height:3rem;font-size:1.2rem;}
+.width80{width:60%;margin-left:2%;}
+.label_0908_1108{display:inline-block;background:url(../images/w_0908_003.png) no-repeat scroll 0 0;width:20px;height:20px;vertical-align:middle;margin-right:20px;}
+.label_0908_1108.selected{background:url(../images/w_0908_002.png) no-repeat scroll 0 0;}
+input{outline:none !important;}
+.wbb11211614Select{display:inline-block;width:70%;height:40px;border:1px solid #bbb;border-radius:5px;line-height:40px;background:#fff;outline:none;font-size:1.5rem;color:#555;}
+
+/*加入我们注册-end*/
+/*登录start*/
+.fl{float:left;}
+.fr{float:right;}
+.clear{clear:both;}
+.w_login_1124{width:100%;}
+.wbb1124_div{/*border:1px solid #ddd;border-radius:3px;*/height:3.5rem;}
+.login_input1124{height:3.3rem;line-height:3.3rem;/*修改于2018-0117*/width:55%;font-size:1.6rem;border:1px solid #ddd;border-top-left-radius:5px;border-bottom-left-radius:5px;display:inline-block;-webkit-appearance:none;}
+input.w_submit1124{width:100%;background:#08d;color:#fff;height:3.5rem;line-height:3.5rem;border-radius:0.5rem;outline:0px;-webkit-appearance:none;cursor:pointer;}
+.wbb_1124_span{line-height:3.5rem;width:22%;font-size:1.8zrem;display:inline-block;}
+.login_span1124{width:10%;height:3.5rem;text-align:center;line-height:3.5rem;border:1px solid #ddd;border-left:none;border-top-right-radius:5px;border-bottom-right-radius:5px;display:inline-block;}
+.color08d{color:#08d;}
+/*登录end*/
+/*盒型列表-start*/
+#top_search1129{width:100%;position:fixed;top:0;max-width:640px;}
+.top_search{background:#eee;padding:1rem;text-align:center;}
+.search201711291048{width:74%;border:none;border-radius:0.5rem;line-height:3rem;text-indent:1rem;text-align:left;font-size:1.6rem;}
+.hx_list_11291108{padding:1.5rem;background:#fff;}
+.ul_201711291121 li{width:47%;float:left;margin-bottom:1rem;}
+.ul_201711291121 li img{width:100%;border:1px solid #ddd;}
+.li2_1138{margin-left:6%;}
+.span_1129_1200{font-size:1.4rem;}
+.wbb91-connect-1129{width:22%;margin-left:3%;}
+#wbb91-connect_11291351{display:inline-block;background:#08d;color:#fff;width:100%;line-height:3rem;border-radius:5%;font-size:1.6rem;border:1px solid #08d;}
+/*盒型列表-end*/

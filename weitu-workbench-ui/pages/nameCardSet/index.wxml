@@ -1,0 +1,159 @@
+<!--pages/nameCardSet/index.wxml-->
+<view>
+  <van-tabs duration="0" active="{{ topIndex }}" color="#3D7EFF" custom-class="tabBox" bind:change="tabChange">
+    <van-tab title="我的名片">
+      <view class="content-all">
+        <view class="content_flex mar_b">
+          <view class="flex_name">姓名<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入姓名" placeholder-class="place" bindinput="inputChange" disabled="{{!Ishow}}" data-key="fullname" value="{{fullname}}" /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">职位<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入职位" placeholder-class="place" bindinput="inputChange" data-key="position" value="{{position}}" disabled="{{!Ishow}}" /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">电话号码<text class="sign">*</text></view>
+          <view class="flex_input"><input placeholder="请输入电话号码" placeholder-class="place" bindinput="inputChange" data-key="mobile" disabled value="{{AdminInfo.mobile}}" /> </view>
+        </view>
+        <view class="content_flex mar_b">
+          <view class="flex_name">微信账号<text class="sign">*</text></view>
+          <view class="flex_input">
+            <input wx:if="{{Ishow}}" placeholder="请输入微信账号" placeholder-class="place" bindinput="inputChange" data-key="wechatCode" value="{{AdminInfo.wechatCode}}" disabled="{{!Ishow}}" />
+            <text wx:else="{{Ishow}}">{{AdminInfo.wechatCode||'-'}}</text>
+          </view>
+        </view>
+        <view class="content_flex" style="align-items: center;">
+          <view class="flex_name">头像<text class="sign">*</text></view>
+          <view class="flex_input">
+            <view class="head_flex" catchtap="headImgs">
+              <view>
+                <image src="{{headImgs}}" class="head" wx:if="{{headImgs}}"></image>
+                <image src="/image/nameCardSeting/headImg.png" class="head" wx:else></image>
+              </view>
+              <view wx:if="{{Ishow}}">
+                <image src="/image/nameCardSeting/right.png" class="right"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="dpi">(图片分辨率150*200,10M以内)</view>
+      </view>
+      <view class="content-all">
+        <view>
+          <text class="sol_set">企业Slogan设置</text>
+          <text class="sign">*</text>
+          <text class="right_set">（最多15个字）</text>
+        </view>
+        <view class="content_flex mar_t">
+          <view class="flex_name">Slogan</view>
+          <view class="flex_input"><input placeholder="请输入企业Slogan" placeholder-class="place" data-key="slogan" bindinput="inputChange" maxlength="15" value="{{AdminInfo.slogan}}" disabled="{{!Ishow}}" class="flex" /> </view>
+        </view>
+      </view>
+      <view class="content-all">
+        <view>
+          <text class="sol_set">企业卖点设置</text>
+          <image src="/image/nameCardSeting/add.png" mode="widthFix" class="wid_30" catchtap='addList' wx:if="{{Ishow}}"></image>
+          <text class="right_set">（最多设置8个，每个卖点最多15个字）</text>
+        </view>
+        <block wx:for="{{sellingPointList}}" wx:key="index">
+          <view class="content_flex mar_t">
+            <view class="flex_name">卖点{{index+1}}
+              <text class="sign" wx:if="{{index==0}}">*</text>
+            </view>
+            <view class="flex_input">
+              <input placeholder="请输入卖点" placeholder-class="place" value="{{item}}" bindinput="sellingPoint" data-key="sellingPointList" data-index="{{index}}" disabled="{{!Ishow}}" style="flex:1" />
+              <view class="minus" catchtap="minusList" data-index="{{index}}" wx:if="{{index!=0&&Ishow}}">
+                <image src="/image/nameCardSeting/delete.png" class="del_img"></image>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="content-all">
+        <view>
+          <text class="sol_set">企业logo设置</text>
+          <text class="right_set">（图片分辨率80*80,10M以内）</text>
+        </view>
+        <image class="addLogo" src="{{logo ? logo : '/image/nameCardSet/addLogo.png'}}" catchtap="uploadImg"></image>
+      </view>
+      <view class="content-all">
+        <view>
+          <text class="sol_set">宣传视频设置</text>
+          <text class="right_set">（视频比例建议16:9，100M以内）</text>
+        </view>
+        <view class="img_all" wx:if="{{Ishow}}">
+          <view catchtap="uploadVideo">
+            <view>
+              <image src="/image/nameCardSeting/imgAdd.png" mode="widthFix" class="img_add"></image>
+            </view>
+            <view class="img_title">{{videos?"重新上传":"请上传"}}视频</view>
+          </view>
+        </view>
+        <view wx:if="{{videos}}" class="img_all1">
+          <view>
+            <view>
+              <video src="{{videos}}" class="wid_100" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls></video>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="mrginT"></view>
+      <view class="btn_bg" wx:if="{{Ishow}}">
+        <view class="btn" catchtap="submitNote">保存</view>
+      </view>
+      <view class="btn_bg" wx:else>
+        <view class="btn_flex">
+          <view class="edit_all" catchtap="editNote">
+            <view>
+              <image src="/image/nameCardSeting/edit.png" class="edit_img"></image>
+            </view>
+            <view class="edit_text">重新编辑</view>
+          </view>
+          <view class="btn1" catchtap="toPage" data-url="/pages/nameCardSet/preview/index?userId={{userId}}">预览</view>
+        </view>
+
+      </view>
+    </van-tab>
+    <van-tab title="员工名片">
+      <scroll-view scroll-y="true" style="height:calc(100vh - 1rpx)" class="list" bindscrolltolower="bindDownLoad">
+        <view class="card_all" wx:for="{{AllEmployeeList}}" wx:key="index">
+          <van-swipe-cell right-width="{{ 88 }}">
+            <view class="card_bg" style="background-image: url({{staticFileBaseUrl}}/static/wxwt/workbench/card.png);">
+              <view class="card_flex">
+                <view>
+                  <image src="{{item.avatar}}" class="card_img" catchtap="bindPreview" data-img="{{item.avatar}}"></image>
+                </view>
+
+                <view class="name_all">
+                  <view class="card_bg233"></view>
+                  <view class="name1"> {{item.fullname}}</view>
+                  <view class="name2">{{item.position}}</view>
+                  <view class="name3">
+                    <image src="/image/nameCardSeting/tel.png" class="tel_img" />{{item.mobile}}
+                  </view>
+                  <view class="name4">
+                    <image src="/image/nameCardSeting/wxchat.png" class="tel_img" />{{item.wechatCode||'-'}}
+                  </view>
+                </view>
+              </view>
+              <view class="posi_fix" catchtap="bindEdit" data-id="{{item.id}}">编辑</view>
+              <!-- <van-cell-group>
+              <van-cell title="单元格" value="内容" />
+            </van-cell-group> -->
+            </view>
+            <view slot="right" style="height: 260rpx;line-height: 260rpx;" catchtap="bindDeleteEmployee" data-id="{{item.id}}">删除</view>
+          </van-swipe-cell>
+
+        </view>
+        <view class="loading-text">
+          {{loadingType == 0 ? contentText.contentrefresh :contentText.contentnomore}}
+        </view>
+      </scroll-view>
+      <view class="mrginT"></view>
+      <view class="btn_bg" catchtap="bindNew">
+        <view class="btn">新建</view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>

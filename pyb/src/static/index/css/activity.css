@@ -1,0 +1,130 @@
+/* CoueseUI base*/
+.actyBox{
+  background-color:#f4f4f4;
+  padding:20px 0;
+}
+.acybaner{
+	height:288px;
+	background: url(../img/index/activity_banner.png) no-repeat center;
+}
+.acybaner2{
+	height:288px;
+	background: url(../img/index/activity_banner2.png) no-repeat center;
+}
+.actyUl{
+	width:66px;
+	float: left;
+}
+.actyUl li{
+	padding:12px;
+	text-align: center;
+	background-color:#fff;
+	cursor: pointer;
+}
+.actyUl li.curr{
+  background-color:#bd9b88;
+  color:#fff;
+}
+.actyTabDv{
+	float: left;padding-left:14px;
+	width:1120px;
+}
+.actytile{
+   background-color:#fff;
+   padding:18px 30px 30px;
+}
+.actytile p{
+	padding-top:10px;
+}
+.actytabUl li{
+  background-color:#fff;		
+  border:1px solid #dcdcdc;
+  padding:40px;
+  margin-top:20px;
+  overflow: hidden;
+}
+.actytabUl li:hover{
+	background-color:#fefefe;
+}
+.actytabUl li a{
+	display: block;
+	position: relative;
+	cursor: pointer;
+}
+.actyGh{
+	width:160px;
+    height:170px;
+    background: url('../img/list0.png') no-repeat;
+    background-size: 100%;
+    text-align: center;
+    margin-right:30px;
+    position:absolute;
+}
+.actyGh h3{
+	color:#fff8bb;
+	padding:22px 0 0;
+}
+.actyGh p{
+  color:#ffebb3;
+}
+.actyGh p b{font-size:50px;font-weight: normal;}
+.actyGh_sp{
+	color:#333;font-size:14px;
+	padding-top:10px;
+	display: block;
+}
+.actytx_Rt{
+  border-left:1px solid #dcdcdc;
+  margin-left:180px;
+  font-size:15px;
+  line-height:40px;
+  padding-left:20px;
+}
+.actytx_Rt h2{
+	font-size:18px;
+}
+.actyBtn{
+	background-color:#337ab8;
+	color:#fff;
+	border-radius:4px;
+	text-align: center;
+	line-height:34px;
+	width:130px;
+	margin-top:8px;
+}
+.actyBtn:hover{
+	background-color:#216aaa;
+}
+
+.layui-row{
+	margin:10px 0px 12px 0px;
+}
+.layui-col-md2{
+	width:13.8%;
+	height:105px;
+	text-align:center;
+	background:#fff;
+	margin:2px;
+}
+.md_seleced{
+	border:3px #d0111b solid;
+	background:#FFF url(../img/sel.png) no-repeat right bottom;
+}
+.layui-col-md{
+	height:125px;
+	line-height:125px;
+	background:#fff;
+	padding:5px 25px;
+}
+.grid-demo p{
+	margin-top:12px;
+}
+.ac-status{
+	font-size:16px;
+	font-weight:bold;
+	color:#e11459;
+}
+.ac-time{
+	font-weight:bold;
+	font-size:16px;
+}

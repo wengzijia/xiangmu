@@ -1,0 +1,13 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "专版",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "table": "../../../../components/table/table",
+    "modal": "../../../../components/msgModal/index",
+    "search": "../../../../components/search/index",
+    "ywxx":"../../../../components/ywxx/index"
+  }
+}

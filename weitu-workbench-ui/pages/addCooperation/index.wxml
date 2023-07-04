@@ -1,0 +1,22 @@
+<view class="gallery_all mar_t28">
+   
+    <view class="img_flex">
+      <view class="img_flex" wx:for="{{CooperationList}}" wx:key="index">
+        <view class="photograph-img-box img_mar">
+          <image src="{{item.tempFilePath}}" class="photograph-img " catchtap="checkCarouseImgs" data-index="{{index}}" />
+          <view></view>
+          <view class="posi_fix" bindtap="delCarouseImg" data-index="{{index}}">
+            <text class="close">X</text>
+          </view>
+        </view>
+      </view>
+      <view class="img_flex flex1 " wx:if="{{CooperationList.length!=4&&CooperationList.length<=4}}">
+        <view class="add_bg img_mar" bindtap="bindCarousel">
+        <view> 
+        <image src="/image/nameCardSeting/imgAdd.png" class="photograph-ico" mode="widthFix" />
+        <view>上传图片</view>
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>

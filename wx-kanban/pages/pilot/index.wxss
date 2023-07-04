@@ -1,0 +1,150 @@
+/* pages/pilot/index.wxss */
+page {
+  width: 100%;
+  background-color: #F4F5FC;
+}
+
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pilotContainer {
+  padding: 0 16rpx;
+}
+
+/* .listBox {
+} */
+
+.itemBox {
+  width: 718rpx;
+  height: 100rpx;
+  background-color: #FFFFFF;
+  border-radius: 8rpx;
+  display: flex;
+  margin-top: 20rpx;
+  align-items: center;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.itemBox .headPortraits {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 4rpx;
+  flex-shrink: 0;
+}
+
+.itemBox .pilotName {
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-left: 16rpx;
+}
+
+/* 密码弹窗 */
+.psdPopup {
+  /* 去除背景色 */
+  /* background-color: transparent !important; */
+  margin-top: -200rpx;
+}
+
+.psdBox {
+  width: 600rpx;
+  /* height: 410rpx; */
+  border-radius: 20rpx;
+  padding-top: 50rpx;
+  padding-bottom: 50rpx;
+  display: block;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.psdBox .psdText {
+  font-size: 34rpx;
+}
+
+.psdBox .password {
+  width: 500rpx;
+  height: 88rpx;
+  background-color: #F2F3F7;
+  border-radius: 44rpx;
+  margin: 50rpx auto 0;
+}
+
+.password .psdInput{
+  width: 65%;
+}
+
+.password .clearBox{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.psdBox .errHint {
+  text-align: center;
+  color: red;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.psdBox .psdAffirm {
+  width: 220rpx;
+  height: 64rpx;
+  background-color: #3D7EFF;
+  border-radius: 32rpx;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin: 60rpx auto 0;
+}
+
+/* 清除图标 */
+.clearBox {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 78rpx;
+}
+
+.clearBox .clear {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  /* margin-right: 24rpx; */
+}
+
+/* 机长空提示 */
+.pilotEmptyHint {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 510rpx;
+  text-align: center;
+}
+
+.pilotEmptyHint .img {
+  width: 336.51rpx;
+  height: 288.02rpx;
+}
+
+.pilotEmptyHint .text {
+  color: #747577;
+  font-size: 30rpx;
+  margin-top: 40rpx;
+}
+/* 返回 */
+.goBack {
+  position: fixed;
+  right: 70rpx;
+  bottom: 60rpx;
+  background-color: #3D7EFF;
+  width: 610rpx;
+  height: 80rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+}

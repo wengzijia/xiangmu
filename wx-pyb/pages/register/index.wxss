@@ -1,0 +1,112 @@
+view,text,button{
+  font-size:28rpx;
+}
+.registerBox{
+  padding: 0 40rpx;
+}
+.registerForm{
+    padding: 0 20rpx;
+    margin-bottom:20rpx;
+}
+.registerText{
+  height:60rpx;
+  line-height:60rpx;
+  color:rgb(83, 83, 83);
+}
+
+.registerInputBox{
+  border-bottom:1rpx solid rgb(240, 240, 240);
+  padding:22rpx 0;
+}
+.registerInputBox input{
+  /* border:1rpx solid rgb(240, 240, 240); */
+  height:72rpx;
+  line-height:72rpx;
+}
+.codeBox{
+  display:flex;
+}
+
+.registerCodeBtn{
+  background-color:#d1d1d1 !important;
+  color:#ffffff !important;
+  height:90rpx;
+  line-height:90rpx;
+  font-size:32rpx;
+}
+.registerCodeInput{
+  flex:1;
+   
+}
+
+.registerTipsBox{
+  display: inline-block;
+   color: rgb(200, 200, 200);
+   font-size: 26rpx;
+   padding: 24rpx 0 60rpx;
+}
+
+.registerIReferrer{
+   display:flex;
+  height:90rpx;
+  line-height:90rpx;
+}
+.registerIReferrer input{
+ flex:1;
+
+}
+.pwdBox{
+  display:flex;
+}
+.pwdBox input{
+  flex:1;
+}
+.pwdBox text{
+  height:90rpx;
+  line-height:90rpx;
+  font-size: 60rpx;
+  margin-right: 30rpx;
+  color:#acaaaa
+}
+
+.registerTipsBox.red{
+  color:#ff0036 !important;
+}
+
+.btnBan{
+   background-color:#ff0036 !important;
+   color:#ffffff !important;
+}
+
+.protocol{
+  padding:20rpx 0;
+  font-size:26rpx;
+  color:#999;
+}    
+.protocol view{
+  font-size:30rpx;
+}
+.protocol text{
+  display:inline-block;
+  width:30rpx;
+  
+  height:30rpx;
+  border:1rpx solid #d1d1d1;
+  color:#d1d1d1;
+  border-radius:50%;
+}
+.protocol text.ac-icon-check{
+  color:#ffffff;
+  background-color:#ff0036;
+  border:1rpx solid #ff0036;
+}
+
+.codeBox button.registerCodeBtn{
+  padding:0 28rpx;
+  border-radius:40rpx;height:62rpx;line-height:62rpx;
+  background-color:inherit!important;
+  font-size:28rpx;
+  border: 1rpx solid #ff0036;
+  color:#ff0036!important;
+  margin-top: 4rpx;
+}

@@ -1,0 +1,6 @@
+<!--components/mages/index.wxml.wxml-->
+<view class="mages">
+  <!-- <image class="song" src=""></image> -->
+  <text class="song ac-icon-notice"></text>
+  <text>下单后，请及时上传设计文件。如有疑问，请咨询客服。</text>
+</view>

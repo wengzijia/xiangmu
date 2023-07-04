@@ -1,0 +1,6 @@
+ <!-- <image class="image-style" src="../../image/kefu.png" bindtap="ballClickEvent" style="bottom:{{ballBottom?ballBottom+'px':'120rpx'}};right:{{ballRight?ballRight+'px':'30rpx'}};" catchtouchmove="ballMoveEvent">  
+</image> 
+ <button class="button-style" hover-class="none"  bindtap="ballClickEvent" style="bottom:{{ballBottom?ballBottom+'px':'120rpx'}};right:{{ballRight?ballRight+'px':'30rpx'}};" catchtouchmove="ballMoveEvent" open-type="contact" show-message-card >-->
+ <button class="button-style" hover-class="none"  bindtap="ballClickEvent" style="bottom:{{ballBottom?ballBottom+'px':'120rpx'}};right:{{ballRight?ballRight+'px':'30rpx'}};" catchtouchmove="ballMoveEvent" >
+ <image class="image-style" src="{{imgBaseUrl}}/static/wxpyb/service.png"> </image>
+ </button>

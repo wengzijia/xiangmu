@@ -1,0 +1,48 @@
+# .DS_Store
+# dist/
+# node_modules/
+# npm-debug.log*
+# /node_modules
+# yarn-debug.log*
+# yarn-error.log*
+# **/*.log
+
+# tests/**/coverage/
+# tests/e2e/reports
+# selenium-debug.log
+
+# # Editor directories and files
+# .idea
+# .vscode
+# *.suo
+# *.ntvs*
+# *.njsproj
+# *.sln
+# *.local
+
+# package-lock.json
+# yarn.lock
+.DS_Store
+node_modules
+/miniprogram_npm
+/jsconfig.json
+# local env files
+.env.local
+.env.*.local
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history
+# vue.config.js

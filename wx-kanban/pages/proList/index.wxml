@@ -1,0 +1,193 @@
+<!--pages/proList/index.wxml-->
+<view class="proListContainer">
+  <!-- 搜索框 -->
+  <view class="searchBox" style='position: fixed;top:0; right: 0;left: 0;font-size:{{fontSizeSetting}}px;padding-top:{{statusBarHeight+fontSizeSetting/2}}px;'>
+    <view class="searchBar">
+      <image class="searchIcon" wx:if="{{!searchVal}}" src="../../image/proList/searchIcon.png"></image>
+      <input class="searchInput" value="{{searchVal}}" type="text" confirm-type="search" placeholder="请输入大版号" catchinput="searchInput" bindconfirm="search" />
+      <!-- <van-icon wx:if="{{searchVal}}" name="close" size="20px"  catchtap="clearSearchVal" /> -->
+      <view class="flex_c_c clearBox" wx:if="{{searchVal}}" catchtap="clearSearchVal">
+        <image class="clear" src="../../image/proList/close.png"></image>
+      </view>
+    </view>
+    <!-- <view class="search" catchtap="search">搜索</view> -->
+  </view>
+  <!-- 主体 -->
+  <view class="mainBody" style="margin-top: {{(statusBarHeight+fontSizeSetting/2) + 36}}px;">
+    <van-tabs duration="0" active="{{ activeIndex }}" color="#3D7EFF" custom-class="tabBox" bind:change="tabChange">
+      <!-- 待排产 -->
+      <van-tab title="待排产"></van-tab>
+      <!-- 异常 -->
+      <van-tab title="异常({{abnormalNum}})"></van-tab>
+      <!-- 已完成 -->
+      <van-tab title="已完成"></van-tab>
+    </van-tabs>
+    <block wx:if="{{(searchCode == '000000' && activeIndex == 0 && waitProData.length) || ( searchCode == '000000' && activeIndex == 1 && anomalyData.length) ||( searchCode == '000000' &&  activeIndex == 2 && doneData.length)}}">
+      <scroll-view scroll-y style="height:calc(100vh - {{(statusBarHeight+fontSizeSetting/2) + 110}}px);" refresher-enabled lower-threshold="150" bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+        <!-- 待排产列表 -->
+        <view class="waitAPSBox" wx:if="{{!searchValue && activeIndex == 0 && waitProData.length }}">
+          <view class="proListBox" wx:for="{{waitProData}}" wx:key="mainId" data-mainId="{{item.mainId}}" catchtap="jumpDetails">
+            <!-- 待排产订单号和状态  -->
+            <view class="proTextBox">
+              <view class="proLeftText">大版编号:{{item.groupSn}}</view>
+              <view class="proRightText" style="{{item.productStatusName == '待排产' ? 'color: #F9AC14;' : 'color:#FF4D4F'}}">{{item.productStatusName}}</view>
+            </view>
+            <!-- 待排产信息 -->
+            <view class="proInfoBox">
+              <view class="proImgBox">
+                <image class="proImg" src="{{item.groupSmallImage.length ? imageBaseUrl + item.groupSmallImage[0] : item.groupImg.length ? imageBaseUrl + item.groupImg[0] :'../../image/current/noBigImg.png'}}" data-imgList="{{item.groupImg}}" catchtap="previewImage"></image>
+              </view>
+              <view class="proInfo">
+                <view class="poNumBox">
+                  <text class="proLText">PO个数:</text>
+                  <view class="flex_c_c proJiBox">
+                    <text>{{item.poCount}}</text>
+                    <!-- <image class="proJi" src="../../image/current/ji.png"></image> -->
+                    <text class="flex_c_c proJi" wx:if="{{item.urgentFlag == 'Y'}}">急</text>
+                  </view>
+                </view>
+                <view class="proItem">
+                  <text class="proLText">上工序良品数:</text>
+                  <text>{{item.nearCount != null ? item.nearCount : '无'}}</text>
+                </view>
+                <view class="proItem">
+                  <text class="proLText">截止时间:</text>
+                  <text>{{item.deadline ? item.deadline : item.productStatusName}}</text>
+                </view>
+                <view class="proItem">
+                  <text class="proLText">交货日期:</text>
+                  <text>{{item.deliveryDate}}</text>
+                </view>
+                <view class="proItem proLText">X {{item.orderNum}}</view>
+              </view>
+            </view>
+            <!-- 待排产按钮 -->
+            <view class="proInfoBtn">
+              <view class="flex_c_c startPro" data-groupNo="{{item.groupSn}}" data-mainId="{{item.mainId}}" data-onCount="{{item.onCount}}" catchtap="startPro">开始生产</view>
+            </view>
+          </view>
+        </view>
+        <!-- 异常列表 -->
+        <view class="anoBox" wx:if="{{!searchValue && activeIndex == 1 && anomalyData.length }}">
+          <view class="anoListBox" wx:for="{{anomalyData}}" wx:key="index">
+            <!-- 异常订单号和状态 -->
+            <view class="anoTextBox">
+              <view class="anoLeftText">大版编号:{{item.groupSn}}</view>
+              <view class="anoRightText">异常中止中</view>
+            </view>
+            <!-- 异常信息 -->
+            <view class="anoInfoBox">
+              <view class="anoImgBox" data-imgList="{{item.groupImg}}" catchtap="previewImage">
+                <image class="anoImg" src="{{item.groupImg.length ? imageBaseUrl + item.groupImg[0] : '../../image/current/noSmallImg.png'}}"></image>
+              </view>
+              <view class="anoInfo">
+                <view class="anoItem">
+                  <text class="anoLText">PO个数:</text>
+                  <text>{{item.poCount}}</text>
+                </view>
+                <view class="anoItem">
+                  <text class="anoLText">异常原因:</text>
+                  <text style="margin-right: 10rpx;" wx:for="{{item.attributeExceptionType}}" wx:key="index">{{anoTypeMap[item]}}</text>
+                </view>
+                <view class="anoItem">
+                  <text class="anoLText">异常数量:</text>
+                  <text>{{item.lossType == 0 ? '全部' : item.lossNum}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 异常备注 -->
+            <view class="anoRemarkBox" wx:if="{{item.reason}}">
+              <view class="text">异常备注:</view>
+              <view class="content">{{item.reason}}</view>
+            </view>
+            <!-- 异常图片 -->
+            <view class="anoPicBox" wx:if="{{item.photoPath1.length}}">
+              <view class="anoPicText">异常图片:</view>
+              <view class="anoPicListBox">
+                <block wx:for="{{item.photoPath1}}" wx:for-item="i" wx:key="index">
+                  <image class="anoPic" src="{{i ? imageBaseUrl + i : '../../image/current/noSmallImg.png'}}" data-index="{{index}}" data-imgList="{{item.photoPath1}}" catchtap="previewImage"></image>
+                </block>
+              </view>
+            </view>
+            <!-- 异常按钮 -->
+            <view class="anoBtnBox">
+              <view class="flex_c_c recPro" wx:if="{{item.orderSource == 1}}" data-idProcessLoss="{{item.id}}" catchtap="recoverPro">恢复生产</view>
+              <view class="flex_c_c disRecPro" wx:else>恢复生产</view>
+            </view>
+          </view>
+        </view>
+        <!-- 已完成列表 -->
+        <view class="doneBox" wx:if="{{!searchValue && activeIndex == 2 && doneData.length }}">
+          <view class="doneListBox" wx:for="{{doneData}}" wx:key="mainId">
+            <!-- 已完成订单号和状态 -->
+            <view class="doneTextBox">
+              <view class="doneLeftText">大版编号:{{item.groupSn}}</view>
+              <view class="doneRightText">已完成</view>
+            </view>
+            <!-- 已完成信息 -->
+            <view class="doneInfoBox">
+              <view class="doneImgBox" data-imgList="{{item.groupImg}}" catchtap="previewImage">
+                <image class="doneImg" src="{{item.groupImg.length ? imageBaseUrl + item.groupImg[0] : '../../image/current/noSmallImg.png' }}"></image>
+              </view>
+              <view class="doneInfo">
+                <view class="donePoNumBox">
+                  <text class="doneLText">PO个数:</text>
+                  <text>{{item.poCount}}</text>
+                </view>
+                <view class="doneItem">
+                  <text class="doneLText">上工序良品数:</text>
+                  <text>{{item.nearCount != null ? item.nearCount : '无'}}</text>
+                </view>
+                <view class="doneItem">
+                  <text class="doneLText">良品数:</text>
+                  <text>{{item.onCount != null ? item.onCount : '无'}}</text>
+                </view>
+                <view class="doneItem">
+                  <text class="doneLText">完成日期:</text>
+                  <text>{{item.onFinishTime}}</text>
+                </view>
+                <view class="doneItem doneLText">X {{item.orderNum}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view style="text-align: center;">
+           <view style="width: 100%;"></view>
+           已经到底了
+        </view> -->
+        <van-divider dashed  contentPosition="center" customStyle="margin-top:-20px;padding-bottom:10px;color:#333333;border-color:#333333;">已经到底了</van-divider>
+      </scroll-view>
+    </block>
+    <!-- 没登录图片 -->
+    <view class="empty" wx:if="{{isLogin != 1}}">
+      <image class="emptyImg" src="../../image/proList/empty.png"></image>
+    </view>
+    <!-- 无订单 -->
+    <view class="empty" wx:if="{{(searchCode == '000000' && activeIndex == 0 && !waitProData.length) || (searchCode == '000000' && activeIndex == 1  && !anomalyData.length)  || (searchCode == '000000' && activeIndex == 2 &&  !doneData.length) }}">
+      <image class="emptyImg" src="../../image/proList/empty.png"></image>
+      <view class="emptyText">
+        <text wx:if="{{searchCode == '000000' && activeIndex == 0 && !waitProData.length }}">目前无生产订单，请稍后～</text>
+        <text wx:if="{{searchCode == '000000' && activeIndex == 1 && !anomalyData.length }}">还没有发现有异常订单呢~</text>
+        <text wx:if="{{searchCode == '000000' && activeIndex == 2 && !doneData.length}}">还没有已完成生产的订单哟~</text>
+      </view>
+    </view>
+    <!-- 无搜索结果 -->
+    <view class="noSearch" wx:if="{{(searchCode == '910021' && activeIndex == 0 && !waitProData) || (searchCode == '910021' && activeIndex == 1 && !anomalyData) || (searchCode == '910021' && activeIndex == 2 && !doneData)}}">
+      <image class="noSearchImg" src="../../image/proList/noSearch.png"></image>
+      <view class="noSearchText">{{searchMessage}}</view>
+    </view>
+    <!-- 提示弹窗 -->
+    <van-popup show="{{ isShowHint }}" custom-class="hintPopup">
+      <view class="hintBox">
+        <view class="hintTitle">提示!</view>
+        <view class="hintText">订单已被其他机长开始生产，请重新选择！</view>
+        <view class="flex_c_c hintAffirm" catchtap="hintAffirm">确认</view>
+      </view>
+    </van-popup>
+    <!-- 搜索状态提示 -->
+    <view class="searchStatusBox" wx:if="{{(searchCode == '910020' && activeIndex == 0 &&!waitProData.length) ||(searchCode == '910020' && activeIndex == 1 && !anomalyData.length )||(searchCode == '910020' &&activeIndex == 2 && !doneData.length )}}">
+      <image class="searchStatusImg" src="../../image/proList/searchStatus.png"></image>
+      <view class="SSHintTextBOX">{{searchMessage}}</view>
+    </view>
+  </view>
+</view>

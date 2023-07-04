@@ -1,0 +1,13 @@
+<view class="qr-box">
+  <view style="padding-bottom:120rpx;">
+    <view style="text-align:center;top:-100rpx;" class="tips">
+        <text style="font-size:32rpx;margin-right:8rpx;">应付款金额 :</text>
+        <text style="color:#ff0036;font-weight:600;font-size:40rpx;">￥{{amount}}</text>
+    </view>
+    <image  src="data:image/png;base64,{{imgUrl}}" class="qr-img"/>
+    <view style="text-align:center;" class="tips">
+      <image mode="aspectFit" src="../../../../image/wxpay.png" class="wx-img" />
+      <text>微信扫码付款</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,5 @@
+<!--subpackageA/pages/process/index.wxml-->
+<view class="processContainer">
+  <!-- <image  class="sop" src="{{requestUrl + '/api/consumer/file/downloadSOP/48'}}" catchtap="previewImage"></image> -->
+  <image  class="sop" src="{{requestUrl + '/api/mes/bw/file/downloadSOP/48'}}" catchtap="previewImage"></image>
+</view>

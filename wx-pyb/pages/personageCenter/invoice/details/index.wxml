@@ -1,0 +1,140 @@
+<view>
+    <view class="backgroundBox" style="{{type !=1 ? 'background-color: #21BA66;' : ''}}">
+        <view class="textIcon" wx:if="{{type == 1}}">
+            <van-icon name="clock" class="icon" />
+            <text >开票中</text>
+        </view>
+        <view class="textIcon" wx:else>
+            <van-icon name="checked" class="icon" />
+            <text >开票成功</text>
+        </view>
+    </view>
+    <view class="content">
+        <scroll-view scroll-y="y" class="noAdmin">
+            <view class="background_fff padding_28 borderRadius">
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        发票抬头
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceName}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        公司税号
+                    </view>
+                    <view class="color_333 flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceCode}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        发票类型
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceType == 1 ? '专用增值税发票' : '普通增值税发票'}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        抬头类型
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        企业
+                </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        发票介质
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceCategory == 1 ? '纸质发票' : '电子发票'}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        发票金额
+                    </view>
+                    <view class="color_FF0036 marginLeft_10rpx flex_1">
+                        ￥{{orderData.invoiceAmount}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        注册地址
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceAddress}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        注册电话
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceMobile}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        开户银行
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceBank}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        银行账户
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.miniInvoiceVo.invoiceVo.invoiceBankcode}}
+                    </view>
+                </view>
+            </view>
+            <view class="background_fff padding_28 borderRadius" style="margin-top:20rpx" wx:if="{{orderData.miniInvoiceVo.invoiceCategory == 1}}">
+                <view style="font-size: large;">
+                    收票地址
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        收货人
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.invoiceAddress.contacts}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        收货电话
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.invoiceAddress.mobile}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        省市区
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.invoiceAddress.city}}
+                    </view>
+                </view>
+                <view class="displayFlex padding_16_0 border_bottom">
+                    <view class="color_AAA width_160">
+                        详细地址
+                    </view>
+                    <view class="color_333 marginLeft_10rpx flex_1">
+                        {{orderData.invoiceAddress.address}}
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+	<view class="footer left_transform">
+		<view catchtap="back" class="footerBtn" style="background:#ff0036">
+			返回订单列表
+		</view>
+	</view>
+</view>

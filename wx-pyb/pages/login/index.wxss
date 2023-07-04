@@ -1,0 +1,113 @@
+.L-container{
+  padding: 0 32rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.appInfo{
+  width:100%;
+  height: 260rpx;
+  position: fixed;
+  bottom: 58rpx;
+  left: 0;
+  padding: 10rpx 32rpx 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* .appInfo image{
+  width:133rpx;
+  height:214rpx;
+} */
+
+.appInfo button{
+  border:1px solid rgb(7, 193, 96);
+  background-color:rgb(7, 193, 96);
+  /* margin-top:210rpx; */
+  width:684rpx;
+  height: 86rpx;
+  border-radius: 86rpx;
+  line-height: 86rpx;
+  color:#fff;
+  font-size:32rpx;
+}
+.appInfo button[disabled]{
+  border:1px solid rgb(174, 230, 203);
+  background-color:rgb(174, 230, 203);
+  color:#fff;
+}
+.authorization{
+  color: #fff;
+}
+
+.protocol{
+ width: 100%;
+ height: 40rpx;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding:16rpx 0;
+ font-size:26rpx;
+ color:#999;
+ text-align: center;
+}    
+.protocol view{
+ font-size:30rpx;
+}
+.protocol text{
+ display:inline-block;
+ width:30rpx;
+ height:30rpx;
+ overflow: hidden;
+ border:1rpx solid #d1d1d1;
+ color:#d1d1d1;
+ border-radius:50%;
+}
+.protocol text.ac-icon-check{
+ color:#ffffff;
+ background-color:#909399;
+ border:1rpx solid #909399;
+ font-size: 28rpx;
+}
+.head{
+  min-height: 200rpx;
+  width: 100%;
+  color: #303133;
+}
+.info{
+  width: 100%;
+  height: 360rpx;
+  margin-top: 24rpx;
+}
+.info>view{
+  height: 120rpx;
+  width: 100%;
+  display: flex;
+}
+.desc{
+  color: #909399;
+  font-size: 24rpx;
+}
+.no-login{
+  padding: 28rpx 0 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #909399;
+}
+.explain{
+  font-size: 26rpx;
+  margin-top: 60rpx;
+}
+.h2{
+  color: #303133;
+  font-weight: 500;
+}
+.top-h{
+  display: flex;
+  font-size: 36rpx;
+  margin-top: 20rpx;
+  align-items: center;
+}
+.protocol .big{
+  padding: 12rpx;
+  border: none;
+}

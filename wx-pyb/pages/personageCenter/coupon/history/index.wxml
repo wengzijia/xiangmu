@@ -1,0 +1,45 @@
+<!--pages/personageCenter/coupon/index.wxml-->
+<view class="nav_bg">
+  <block wx:for="{{navTitle}}" wx:key="index">
+    <view class="flex {{navId==item.id?'select':''}}" catchtap="tabSwitch" data-id='{{item.id}}'>{{item.name}}</view>
+  </block>
+</view>
+<view class="coupon_all btuBottom">
+  <block wx:if="{{couponList.length>0}}">
+    <view class="coupon_bg"  wx:for="{{couponList}}" wx:key="index">
+      <!-- 已使用 -->
+      <!-- <view class="posi_img">
+  <text class="rotate">已使用</text>
+  </view> -->
+      <image src="../../../../image/use.png" mode="widthFix" class="img" wx:if="{{navId==3}}"></image>
+        <image src="../../../../image/overdue.png" mode="widthFix" class="img" wx:if="{{navId==2}}"></image> 
+      <!-- 已过期 -->
+      <!-- <image src="../../../../image/overdue.png" mode="widthFix" class="img"></image> -->
+      <view class="coupon_flex">
+        <view class="coupon_left">
+          <view class="coupon_price">
+            <text>优惠券</text>
+            <view class="coupon_sign">
+              <text style="color: #FF6000;font-size: 20rpx;font-weight: 600;">{{item.discountType != 4 ? '1次' : '满减'}}</text>
+              <view class="coupon_sign_cir"></view>
+            </view>
+          </view>
+          <view class="min">最高优惠{{item.discountMoney}}元</view>
+        </view>
+        <view class="line">
+          <view class="circular"></view>
+        </view>
+        <view class="coupon_right">
+          <view class="Deduction">{{item.couponTypeName}}</view>
+          <view class="min">有效期：{{item.startEffectivityTime}} - {{item.endEffectivityTime}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+    <block wx:else>
+        <view class="none_all">
+          <image src="../../../../image/none.png" mode="widthFix"></image>
+          <view>{{navId==3?'暂无已使用券':'暂无过期券'}}</view>
+        </view>
+      </block>
+</view>

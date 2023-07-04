@@ -1,0 +1,63 @@
+<view wx:if="{{selsect}}">
+    <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索姓名"
+      clearable
+      bind:search="onSearch"
+      bind:change="onNameChange"
+      bind:cancel="onCancel"
+    />
+  </view>
+<view class="body" wx:if='{{addressList.length>0}}'>
+  <van-radio-group value="{{ radio }}" bind:change="onChange" direction="horizontal">
+    <view class="containers">
+      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{addressList}}" wx:key="id">
+        <view class="content">
+          <view wx:if="{{selsect}}" style="display:flex;">
+            <!-- <view wx:if="{{selsect}}" class="radio"> -->
+              <van-radio name="{{item.id}}" checked-color="#ff0036" icon-size="20px">
+            <!-- </view> -->
+            <view class="info">
+              <view class="address-top">
+                <text class="name">{{item.consigneeName}}</text>
+                <text class="mobile">{{item.mobile}}</text>
+                <text wx:if='{{item.isDefault==1}}' class="mobile">（默认地址）</text>
+              </view>
+              <view class="addressDetailse" style="">{{item.province+item.city+item.county+item.address}}</view>
+            </view>
+            </van-radio>
+          </view>
+          <view wx:else style="display:flex;">
+            <view class="info">
+              <view class="address-top">
+                <text class="name">{{item.consigneeName}}</text>
+                <text class="mobile">{{item.mobile}}</text>
+                <text wx:if='{{item.isDefault==1}}' class="mobile">（默认地址）</text>
+              </view>
+              <view class="addressDetailse" style="">{{item.province+item.city+item.county+item.address}}</view>
+            </view>
+          </view>
+          <view catchtap="add" data-id="{{item.id}}" style='line-height:80rpx;;width: 100rpx; text-align: center;font-size:32rpx'>
+          <van-icon name="edit" />
+          </view>
+        </view>
+        <view class="menu">
+          <view class="default" catchtap="default" data-index="{{index}}" data-id="{{item.id}}">设为默认</view>
+          <view class="del" catchtap="del" data-index="{{index}}" data-id="{{item.id}}">删除</view>
+        </view>
+      </view>
+    </view>
+  </van-radio-group>
+</view>
+<view wx:else class="order-null">
+  <image src="../../../../image/personage6.png" />
+  <view style="text-align:center;color:#999;font-size:28rpx;"><text>您还未添加收货地址呢~</text></view>
+</view>
+<view  class='enter-box'> 
+  <!-- <view wx:if="{{selsect}}" class="enter  " catchtap="confirmSelect" data-type="add">确认</view> -->
+  <view  class="enter" catchtap="add" data-type="add">新增收货地址</view>
+</view>
+    
+
+
+<!-- <modal modal="{{modal}}"></modal> -->

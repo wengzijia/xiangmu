@@ -1,0 +1,64 @@
+/* page {
+  background-color: #f8f8f8;
+} */
+
+.login {
+  display: flex;
+  /* 改变主轴方向 */
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #f8f8f8; */
+  margin-top: 244rpx;
+}
+
+/* .header {} */
+
+.header image {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  /* border: 2rpx solid red; */
+}
+
+.btn button {
+  height: 80rpx;
+  width: 430rpx;
+  border: none;
+  border-radius: 40rpx;
+  background-color: #E9333F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 30rpx;
+  margin-top: 144rpx;
+  margin-bottom: 70rpx;
+}
+
+.btn image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+
+.tolook {
+  font-size: 30rpx;
+  color: #ccc
+}
+
+.agree {
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.agree text {
+  color: #E9333F;
+
+}
+
+.footer {
+  position: fixed;
+  bottom: 160rpx;
+  left: 168rpx;
+}

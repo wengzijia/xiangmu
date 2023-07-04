@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>拼一版-3D</title>
+    <script type="text/javascript" src="/static/3d/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/3d/js/lodash-4.17.4.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/cm.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/vue.js"></script>
+    <script type="text/javascript" src="/static/3d/js/axios.min.js"></script>
+    <script src="/static/3d/files/polyfill-6.23.0.min.js"></script>
+    <link href="/static/3d/files/iview-4.0.2.min.css" rel="stylesheet" type="text/css">
+    <script src="/static/3d/files/iview-4.0.2.min.js"></script>
+    <script src="/static/3d/files/en-us-4.0.2.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/art.min.js"></script>
+    <link href="/static/3d/files/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="/static/3d/files/vue-slider-component.umd-7.0.1.min.js"></script>
+
+
+    <link href="/static/3d/files/vue-slider-component-default-7.0.1.min.css" rel="stylesheet" type="text/css">
+    <script src="/static/3d/js/tween-16.3.4.min.js"></script>
+    <script src="/static/3d/files/three-110.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/trackballcontrols.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/for3d.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/lin3d.min.js"></script>
+    <script type="text/javascript" src="/static/3d/js/pdf-2.0.550.min.js"></script>
+    <script src="/static/3d/files/gl-vignette-background.min.js"></script>
+    <script src="/static/3d/files/farbtastic.min.js"></script>
+    <link href="/static/3d/files/farbtastic.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/3d/files/iconfont.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        *,:after,:before{box-sizing:inherit;}
+        body {
+            overflow:inherit!important;
+            touch-action: none;
+            line-height:inherit;
+        }
+
+        .ctrl {
+            position: absolute;
+            width: 100%;
+            height: 45px;
+            z-index: 9;
+        }
+
+        .slideDown {
+            text-align: center;
+            height: 32px;
+            width: 100%;
+            max-width: calc(100vw - 10px);
+            padding: 2px 0px;
+            margin: 0 auto;
+        }
+
+        .cvs {
+            width: 100%;
+            height: 100%;
+        }
+
+        i[data-simple-color] {
+            outline: none;
+            border: 1px solid gray;
+            background-color: #eee;
+            color: #eee;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <!--3d主体-->
+    <canvas id="cvs3D" class="cvs" style="width:320px;height:320px;"></canvas>
+    <!--工具条-->
+    <div id="divCtrl" class="ctrl" v-cloak style="display: none">
+        <div class="slideDown">
+            <vue-slider v-model="fold" v-on:drag-start="autoFold=0" tooltip="none" v-bind:min="0" v-bind:max="1"
+                        v-bind:width="100" v-bind:duration="0" v-bind:interval=".001" v-bind:dot-size="22"
+                        style="margin-left:15px;margin-right:15px;margin-bottom:-10px;display:none;">
+            </vue-slider>
+            <i-button style="background-color:inherit;border:0;;" type="default" size="small" class="small_knife"
+                      shape="circle" onClick="javascript:replay(this)">
+                <icon custom="fa icon icon-refresh"
+                      style="font-size:2rem;position: relative;top: -.05rem;font-weight: bold;opacity: 0.8;}"></icon>
+            </i-button>
+        </div>
+    </div>
+    <style>
+        .BOX li {
+            width: 46px;
+            height: 46px;
+        }
+
+        .BOX li img {
+            width: 46px;
+            height: 46px;
+            padding: 3px;
+        }
+    </style>
+</div>
+
+<script> window.$Lan = {code: 'zh', data: {}}; </script>
+
+<!--vue参数检查-->
+<script>
+    var id = "";
+    var d3data = {};
+    var param = '';
+    var vue = new Vue({
+        el: "#cvs3D",
+        data: {
+            boxParam: {},
+            message: '',
+        },
+        methods: {
+            //获取参数
+            getArgs() {
+                var query = $('.itext').val();
+                return query;
+            },
+            get3DData: function (param) {
+                axios.post("knife_php",param).then(function (res) {
+                    if (res.data.errcode == 0) {
+                        d3data = res.data;
+                        id = res.data.data.id;
+                        init2();
+                    } else {
+                        console.log('请重新加载')
+                    }
+                }).catch(function (err) {
+                    console.log(err);
+                })
+            },
+        },
+        mounted() {
+            param = this.getArgs();
+            this.get3DData(param);
+        }
+    })
+
+</script>
+
+<script>
+
+
+    function init2() {
+        var d = new Cm.viewDialog(new Vue);
+        var Win = window;
+        var $win = $(Win);
+        var D3 = _.get(Win, 'D3');
+        var d3box = JSON.parse(d3data.data.data.data);
+        var boxData = {
+            box3D: eval('(' + _.get(d3box, 'B.Box3D') + ')'),
+            boxJson: eval('(' + _.get(d3box, 'B.BoxJson') + ')'),
+        };
+        //窗口大小改变
+        var fn = function () {
+            var w = $win.width()
+            var h = $('#cvs3D').height();
+            D3 && D3.isLoaded && D3.changeSize();//3D插件改变尺寸
+            _.invoke(Win, 'effect.resize');
+            $("#divCtrl").css("top", (h - 170) + "px");//工具条的位置
+        };
+        fn();//先执行一次，初始化3D容器的尺寸
+        var deFn = _.debounce(fn, 50);
+        $(Win).resize(deFn);//窗口尺寸改变
+        //混入vue
+        var mix = {
+            el: '#divCtrl',
+            data: function () {
+                return {
+                    n: 1,
+                }
+            },
+            components: {VueSlider: Win['vue-slider-component']},
+        };
+        Cm.vueUse("D3", D3);//组件
+        Cm.vueUse("Win", Win);//组件
+        D3 && D3.init({
+            el_3d: '#cvs3D',//放置3D的DIV
+            el_vue: '#divCtrl',//VUE绑定的DOM
+            el_vue_mixins: [mix],//VUE绑定的混入接口
+        });
+        if (d.isLoading()) return;
+        D3.load({
+            boxID: null,
+            boxPms: null,
+            boxData: boxData,//盒型的数据
+            currentTexture: null,
+        }, function () {
+            setTimeout(function () {
+                D3.control.autoFold = 1
+            }, 10);
+            var imgSrc = this.d3data.data.data.cover;
+            Cm.xmlReq({src: imgSrc}, function (r) {
+                var img = Cm.genImageFromXmlReq(r);
+                img.onload = function () {
+                    var cvs = document.createElement('CANVAS');
+                    cvs.width = img.width;
+                    cvs.height = img.height;
+                    var ctx = cvs.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
+                    D3.changeImageA(cvs, 1);
+                    d.closeMsg();//关闭‘正在执行’
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

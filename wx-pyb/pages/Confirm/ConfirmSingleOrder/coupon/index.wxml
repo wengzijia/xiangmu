@@ -1,0 +1,39 @@
+<!--pages/personageCenter/coupon/index.wxml-->
+<view class="btuBottom" style="background-color: #FFFFFF;">
+  <view style="margin-left: 32rpx;">
+    <van-radio-group value="{{ radio }}">
+      <van-radio data-index="{{index}}" name="{{index}}" catchtap="usCoupon" wx:for="{{couponList}}" wx:key="index">
+        <view style="display: flex;height: 160rpx;align-items: center;border-bottom: 1rpx solid #EEEEEE;">
+          <view style="width: 220rpx;margin-left: 20rpx;">
+            <view style="display: flex;align-items: center;">
+              <text style="font-size: 40rpx;font-weight: 600;color: #E9333F;">优惠券</text>
+              <view class="inner">
+                <text style="color: #FF6000;font-size: 20rpx;font-weight: 600;">{{item.discountType != 4 ? '1次' : '满减'}}</text>
+                <view class="circular"></view>
+              </view>
+            </view>
+            <view style="margin-top: 10rpx;color: #999999;font-weight: 400;">
+              <text>{{item.couponName}}</text>
+            </view>
+          </view>
+          <view style="flex: 1;margin-left: 20rpx;">
+            <view style="color: #E9333F;font-size: 28rpx;">
+              优惠金额：{{item.discountMoney}}元
+            </view>
+            <view style="color: #666666;font-size: 30rpx;">
+              最高优惠金额{{item.maximumAmount}}元
+            </view>
+            <view style="color: #999999;font-size: 24rpx;">
+              有效期：{{item.startEffectivityTime}} - {{item.endEffectivityTime}}
+            </view>
+          </view>
+        </view>
+      </van-radio>
+      <van-radio data-index="{{-1}}" name="{{-1}}" catchtap="usCoupon">
+        <view style="margin: 58rpx 0rpx;">
+          暂不使用优惠券
+        </view>
+      </van-radio>
+    </van-radio-group>
+  </view>
+</view>

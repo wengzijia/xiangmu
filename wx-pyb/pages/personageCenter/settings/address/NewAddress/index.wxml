@@ -1,0 +1,82 @@
+<!--pages/my/my-add-address/index.wxml-->
+<view class="redact-address">
+  <view class="possess-layout">
+    <view class="mains">
+      <view class="address-msg">
+        <view class="item-msg">收货人</view>
+        <view class="section">
+          <input type="text" name="name" placeholder="请填写收货人姓名" value="{{consigneeName}}" data-key="consigneeName" bindblur="blurInput"/>
+        </view>
+        <!-- <view class="address-right">
+          <image src="../../../img/icon/ac-icon-add-address-user.png"></image>
+        </view> -->
+      </view>
+      <view class="address-msg">
+        <view class="item-msg">手机号码</view>
+        <view class="section">
+          <input type="number" placeholder="请填写收货人手机号码" value="{{mobile}}" data-key="mobile" bindblur="blurInput" maxlength="11"/>
+          <!-- <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入粘盒费用" type="digit"  bindblur='inputVal' /> -->
+        </view>
+      </view>
+      <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}"> -->
+        <view class="address-msg" catchtap="showPopup">
+          <view class="item-msg">所在地区</view>
+          <view class="section">
+            {{region[0]}}，{{region[1]}}，{{region[2]}}
+          </view>
+        </view> 
+        <!-- custom-style="height: 600rpx;" -->
+        <van-popup
+          show="{{ show }}"
+          position="bottom"
+          bind:close='showPopup'
+          round
+        >
+          <van-area wx:if="{{ show }}" area-list="{{ areaList }}" value="{{areaListId}}" bind:cancel="showPopup" bind:confirm="confirmArea"/>
+        </van-popup>
+      <!-- </picker> -->
+      <view class="address-msg">
+        <view class="item-msg">详细地址</view>
+        <view class="section" style='position: relative; height: 19px;'>
+          <input type="text" name="address" placeholder="街道、楼牌号等" value="{{address}}" data-key="address" bindblur="blurInput"/>
+          <!-- <textarea name="address" value="{{address}}" data-key="address" bindblur="blurInput" placeholder="街道、楼牌号等" nmaxlength='60' style='position: absolute;height: 61px;top: 0;width: 100%;' /> -->
+        </view>
+      </view>
+      <view class="address-msg default-setting">
+        <view class="defaul-setting-left">
+          <view>设置默认地址</view>
+          <view>提醒：每次下单会默认推荐使用该地址</view>
+        </view>
+        <view class="body-view">
+                <switch checked="{{isDefault}}" bindchange="switchChange"/>
+        </view>
+        <!-- <image class="defaul-setting-right" src="../../../img/icon/ac-icon-off-by-default.png"></image> -->
+      </view>
+    </view>
+  </view>
+  <view class="btn" bindtap="submitadd">保存</view>
+</view>
+<van-toast id="van-toast" />
+
+ 
+<!-- <view class="picker" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+  <view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+    确认取消按钮
+    <view class='gangedBtn'>
+      <text class="city-cancel" catchtap="cityCancel">取消</text>
+      <text style="float: right" catchtap="citySure">确定</text>
+    </view>
+    选择地址
+    <picker-view indicator-style="height: 50px;" style="width:100%; height: 400rpx;" bindchange="bindChange">
+	     <picker-view-column class="selectItem">
+             <view class="tooth" wx:for="{{province}}" wx:key="this">{{item.name}}</view>
+         </picker-view-column>
+         <picker-view-column class="selectItem">
+             <view class="tooth" wx:for="{{city}}" wx:key="this">{{item.name}}</view>
+         </picker-view-column>
+        <picker-view-column class="selectItem">
+             <view class="tooth" wx:for="{{county}}" wx:key="this">{{item.name}}</view>
+         </picker-view-column>
+	 </picker-view>
+  </view>
+</view> -->

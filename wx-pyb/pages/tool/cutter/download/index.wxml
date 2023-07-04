@@ -1,0 +1,15 @@
+<!--pages/tool/cutter/download/index.wxml-->
+<!-- <web-view bindmessage="bindGetMsg" src="{{imgBaseUrl+'/wxpyb/h5/cutter/download'}}" /> -->
+
+<!-- <web-view bindmessage="bindGetMsg" src="{{webUrl}}" /> -->
+<view >
+  <view  class="cutter-steps">
+    <van-steps steps="{{ steps }}" active="2"  active-color="#f03b47"/>
+  </view>
+  <view wx:if="{{cutterInfo&&cutterInfo.img}}" class="cutter-img-box">
+    <image class="cutter-img" src="{{cutterInfo.img}}" mode="heightFix" style="" />
+  </view>
+  <view class="t-footer">
+    <button catchtap="dowCutter">下载刀模</button>
+  </view>
+</view>

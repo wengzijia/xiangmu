@@ -1,0 +1,9 @@
+<view class="list">
+  <text>手机号</text>
+  <text style="color:#666;">{{mobile}}</text>
+</view>
+<!-- <view class="list" catchtap="changePwd" data-mobile="{{userInfo.qqMobile}}">
+  <text>登录密码</text>
+  <text>修改</text>
+</view> -->
+<!-- <view class="btn btuBottom"><button bindtap="sub">退出登录</button></view> -->

@@ -1,0 +1,40 @@
+<!--pages/previewPlan/index.wxml-->
+<view class="previewContainer">
+      <!-- 轮播图 -->
+      <swiper autoplay circular class="carouselPreviewBox">
+        <block wx:for="{{carouselList}}" wx:key="index">
+          <swiper-item data-index="{{index}}" data-imgList="">
+            <image class="carouselPreview" mode="aspectFit" src="{{imageBaseUrl + item.coverPath}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- 商品 -->
+      <view class="goodsAllBox">
+        <view class="goodsBox" wx:for="{{planList}}" wx:key="index">
+          <view class="goodsTopBox">
+            <view class="goodsSortTitle">{{item.name}}</view>
+            <view class="goodsMoreText">
+              <text class="more">更多</text>
+              <image class="rightArrowImg" src="/image/shopSet/rightArrow.png"></image>
+            </view>
+          </view>
+          <view class="goodsListBox">
+            <view class="goodsList" wx:for="{{item.packSchemes}}" wx:key="index">
+              <image class="goodsImg" src="{{imageBaseUrl + item.goodsImg.secondThumbnail}}"></image>
+              <view class="text-ellipsisl2 goodTitle">{{item.schemeName}}</view>
+              <view class="priceBox">
+                <view class="price">
+                  <text class="rmb">¥</text>
+                  <text class="money">{{item.price}}</text>
+                </view>
+                <view class="unit">元/套起</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 底部 -->
+      <!-- <view class="safetyKmN previewBottomBox">
+        <view class="flex_c_c closePreviewBtn" catchtap="closePreview">关闭预览</view>
+      </view> -->
+    </view>

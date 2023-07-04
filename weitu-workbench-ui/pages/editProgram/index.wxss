@@ -1,0 +1,159 @@
+/* pages/editProgram/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.oneSortContainer {
+  background-color: #FFFFFF;
+  padding: 20rpx 36rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+/* 一级分类 */
+.oneSortBox {
+  display: flex;
+}
+
+.oneSortBox .oneSortText {
+  color: #777777;
+}
+
+.addSortBox {
+  display: flex;
+  align-items: center;
+  margin-top: 28rpx;
+}
+
+.addSortBox .addSortImg {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.addSortBox .addSortText {
+  color: #3D7EFF;
+  font-size: 28rpx;
+  margin-left: 8rpx;
+}
+
+/* 二级分类 */
+.twoSortContainer {
+  padding-bottom: 260rpx;
+}
+
+.twoSortBox {
+  width: 750rpx;
+  background-color: #FFFFFF;
+  margin-top: 28rpx;
+  padding: 28rpx 36rpx;
+  box-sizing: border-box;
+}
+
+.twoSortHeadBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.twoSortTitleBox {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+}
+
+.twoSortTitleBox .twoSortText {
+  color: #777777;
+}
+
+.twoSortTitleBox .twoSortInput {
+  width: 376rpx;
+}
+
+.delSortBox {
+  display: flex;
+}
+
+.delSortBox .delSortImg {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.delSortBox .delSortText {
+  color: #FF4D4F;
+  font-size: 28rpx;
+  margin-left: 8rpx;
+}
+
+.selectedPlan {
+  font-size: 24rpx;
+  color: #777777;
+  margin-top: 4rpx;
+}
+
+.selectedActPlan {
+  font-size: 24rpx;
+  line-height: 50rpx;
+  color: #3D7EFF;
+  margin-top: 10rpx;
+}
+
+.planImgListBox {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  margin-top: 56rpx;
+}
+
+.planImgList {
+  margin-bottom: 20rpx;
+}
+
+/* .planImgList:nth-child(even) {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+} */
+
+.planImgList .planImg {
+  width: 212rpx;
+  height: 212rpx;
+  border-radius: 8rpx;
+}
+
+.twoSortBox .addPlanImg {
+  width: 212rpx;
+  height: 212rpx;
+}
+
+/* 底部 */
+.bottomBox {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 112rpx;
+  background-color: #FFFFFF;
+  z-index: 999;
+}
+
+.bottomBox .save {
+  width: 678rpx;
+  height: 84rpx;
+  background-color: #3D7EFF;
+  color: #FFFFFF;
+  border-radius: 66rpx;
+  margin: 14rpx auto;
+}

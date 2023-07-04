@@ -1,0 +1,13 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "付款详情",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "paySelect": "../../../../components/paySelect/index",
+    "modal": "../../../../components/msgModal/index"
+  }
+
+
+}

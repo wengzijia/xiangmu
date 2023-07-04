@@ -1,0 +1,10 @@
+<!--components/modal/component.wxml-->
+<view class='modal-wrapp' wx:if='{{modal.show}}'>
+  <view class='modal-main' style='height:{{(modal.height)?modal.height:modalDefault.height}}'>
+    <view wx:if="{{modal.icon||modal.image}}" >
+      <view wx:if="{{modal.icon||!modal.image}}" class="my-icon {{modal.icon}}" style='font-size:{{modal.iconSize?modal.iconSize:"100rpx"}}'></view>
+      <image wx:elif="{{modal.image}}" src="{{modal.image}}" mode="widthFix" style='width:{{modal.imageSize?modal.imageSize:"200rpx"}}'></image>
+    </view>
+    <view class='modal-content' style='font-size:30rpx'>{{modal.contentText?modal.contentText:modalDefault.contentText}}</view>
+  </view>
+</view>

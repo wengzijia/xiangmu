@@ -1,0 +1,598 @@
+<view class="paperboard catchtou" id="j_page">
+  <view class="stepbox">
+    <step active="1"></step>
+  </view>
+  <!-- 头部 -->
+  <view class="header">
+    <view class="flex">
+      <!-- <text class="name">{{title}}</text> -->
+      <!-- <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text> -->
+    </view>
+  </view>
+  <view style="text-align:center;" >
+    <image wx:if="{{auto&&!pinbanObj}}" src="{{img}}" mode="aspectFit" class="daomo-img"/>
+  </view>
+  <view wx:if="{{pinbanObj}}" style="text-align:center;" bindtap="preview" data-img="{{imgBaseUrl+pinbanObj.output_png_path}}">
+    <image src="{{imgBaseUrl+pinbanObj.output_png_path}}" mode="aspectFit" class="daomo-img"/>
+  </view>
+  <view class="content">
+    <!-- 印张数量 -->
+    <view>
+      <view class="fromItem3">
+        <view class="label">
+          <!-- <text wx:if="{{auto}}" class="mustSign red">*</text> -->
+          外尺寸
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;padding-right:0;">
+          <view class="sizeInput" wx:if="{{pinbanObj}}">
+            {{offerData.sizeLength}}x{{offerData.sizeWidth}}x{{offerData.sizeHeight}}mm
+          </view>
+          <view class="sizeInput" wx:else>
+            <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{offerData.sizeLength}}" bindblur='inputVal' data-key='offerData.sizeLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="宽" type="digit" value="{{offerData.sizeWidth}}" bindblur='inputVal' data-key='offerData.sizeWidth' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="高" type="digit" value="{{offerData.sizeHeight}}" bindblur='inputVal' data-key='offerData.sizeHeight' />
+            <text class="sizeTxt">mm</text>
+          </view>
+        </view>
+      </view>
+    <view wx:if="{{!auto}}" class="tips" style="padding-top:16rpx;padding-bottom:0">外尺寸非必填</view>
+    </view>
+    
+    
+
+    
+
+    <view wx:if="{{offerData['thickness']||true}}" style="padding-top:0">
+      <view class="fromItem3" style="display:flex;align-items:center;margin-top:20rpx">
+        <view class="label" style="padding:0;">
+          <!-- <text class="mustSign red">*</text> -->
+          数量
+        </view>
+        <view class="cart-count-box" style="margin-right:100rpx;">
+            <text class="cart-count-down" catchtap="numberChange" data-type="reduce" style="font-size:70rpx">-</text>
+            <input class="cart-count-num"  type="digit" value="{{offerData.number}}" bindblur='inputVal' data-key='offerData.number'/>
+            <text class="cart-count-add" catchtap="numberChange" data-type="add">+</text>
+            <!-- <text class="unit">个</text> -->
+        </view>
+      </view>
+      <view class="tips">{{numberText}}</view>
+    </view>
+
+    <!-- 开纸尺寸 -->
+    <view wx:if="{{pinbanObj.openSize.length}}">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>开纸尺寸</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{pinbanObj.openSize[0]+'x'+pinbanObj.openSize[1]}}mm
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 印张尺寸 -->
+    <view wx:if="{{pinbanObj.pinban_size.length}}">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>印张尺寸</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{pinbanObj.pinban_size[0]+'x'+pinbanObj.pinban_size[1]}}mm
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- 放损数量 -->
+    <view class="mb-20"  wx:if="{{pinbanObj}}">
+      <view style="display:flex;;margin-top:20rpx">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>放损数量</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp" style="margin-bottom: 0rpx;">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输放损数量" type="digit" value="{{offerData2.dlossPrice}}" bindblur='inputVal' data-key='offerData2.dlossPrice' />
+            <text class="sizeTxt">张</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 印张数量 -->
+    <view class="mb-20" wx:if="{{priceObj.priceInfo.printedEheetNum}}">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>印张数量</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{priceObj.priceInfo.printedEheetNum}}张
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 纸张材质 -->
+    <view>
+      <view style="display:flex;" wx:if="{{!pinbanObj}}">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>面纸</text>
+        </view>
+        <view class="button_container txtitem" wx:if="{{pinbanObj}}">
+          {{offerData.materialType}}
+        </view>
+        <view class="button_container fromItem" wx:else>
+          <block wx:for="{{offerInfo.materialType.list}}" wx:key="index" wx:if="{{item.lable!='自定义纸价'}}">
+            <button class='{{offerData["materialType"]&&offerData["materialType"]==item.value?"checked_button":"normal_button"}}' data-key="materialType" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+            <!-- <button class='{{offerData["materialType"]&&offerData["materialType"]=="其他"?"checked_button":"normal_button"}}' data-key="materialType" data-val="其他" catchtap="radioTap">
+              其他
+            </button> -->
+        </view>
+      </view>
+      <view class="fromItem2" wx:if="{{!pinbanObj&&offerData['materialType']&&offerInfo.thickness.list.length>0}}" style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>克重</text>
+        </view>
+        <view class="button_container txtitem" wx:if="{{pinbanObj}}">
+          {{offerData.thickness}}g
+        </view>
+        <view class="button_container fromItem " wx:else>
+          <block wx:for="{{offerInfo.thickness.list}}" wx:key="index">
+            <button class='{{offerData["thickness"]&&offerData["thickness"]==item.value?"checked_button":"normal_button"}}' data-key="thickness" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}}
+            </button>
+          </block>
+        </view>
+      </view>
+      <view style="display:flex;" wx:if="{{pinbanObj}}">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>面纸材质</text>
+        </view>
+        <view class="button_container txtitem" wx:if="{{pinbanObj}}">
+          {{offerData.materialType}}_{{offerData.thickness}}g
+        </view>
+       
+      </view>
+      <!-- <view style="color:#ff0036;margin-left:160rpx;margin-bottom:16rpx;font-size: 24rpx;" wx:if="{{offerData['materialType']=='其他'}}">备注: 可以填写自己的纸张价格报价 </view> -->
+      <view class="fromItem2" wx:if="{{pinbanObj&&offerData['materialType']&&offerInfo.thickness.list.length>0}}" style="display:flex;margin-top:16rpx;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text>-->
+          <text>纸张单价</text> 
+        </view>
+        <view class="conten" style="display:flex;align-items: center;flex-wrap: wrap;">
+          <!-- <input class="input-border input-border2" placeholder-class="phcolor2" placeholder=" 请填写材质"  type="text" value="{{otherPaper.materialType}}" bindblur="inputVal" data-key='otherPaper.materialType'/>
+          <input class="input-border input-border2" placeholder-class="phcolor2" placeholder=" 请填写克重"  type="digit" value="{{otherPaper.thickness}}" bindblur="inputVal" data-key='otherPaper.thickness'/> -->
+          <input class="input-border input-border2" placeholder-class="phcolor2" placeholder="请填写单价"  type="digit" value="{{otherPaper.tonprice}}" bindblur="inputVal" data-key='otherPaper.tonprice'/>
+          <!-- <picker bindchange="bindPickerChange" value="{{unitIndex}}" range="{{unit}}">
+            <view class="normal_button unit-btn">
+              {{unit[unitIndex]}}
+              <van-icon name="arrow-down" />
+            </view>
+          </picker> -->
+          <view class="normal_button unit-btn"  catchtap="showPopup1" data-type="unitShow">
+              <!-- {{unit[unitIndex]}} -->
+              {{unit}}
+              <!-- {{offerData.procedureList.unit}} -->
+              <van-icon name="arrow-down" />
+            </view>
+        </view>
+      </view>
+      <!-- <view class="fromItem2" wx:if="{{offerData['materialType']=='其他'}}" style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>克重</text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaper.thickness}}" bindblur="inputVal" data-key='otherPaper.thickness'/>
+        </view>
+      </view>
+      <view class="fromItem2" wx:if="{{offerData['materialType']=='其他'}}" style="display:flex;">
+        <view class="label">
+          <text class="mustSign red">*</text>
+          <text>单价</text>
+        </view>
+        <view class="conten" style="display:flex;align-items: center;">
+          <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入单价"  type="digit" value="{{otherPaper.tonprice}}" bindblur="inputVal" data-key='otherPaper.tonprice'/>
+          <picker bindchange="bindPickerChange" value="{{unitIndex}}" range="{{unit}}">
+            <view class="normal_button unit-btn">
+              {{unit[unitIndex]}}
+              <van-icon name="arrow-down" />
+            </view>
+          </picker>
+        </view>
+      </view>  -->
+    </view>
+    <!-- 面纸费用 -->
+    <view class="mb-20" wx:if="{{pinbanObj}}">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>面纸费用</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{otherPaper.tonprice?(priceObj.priceInfo.paperDiscountPrice||0):0}}元
+          </block>
+        </view>
+      </view>
+    </view>
+
+
+    <view 
+      wx:if="{{pantoneColorList.length>0}}"
+      class="fromItem2" 
+      style="display:flex; padding-top: 0rpx;" >
+      <view class="label"></view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input
+          wx:for="{{pantoneColorList}}" 
+          wx:for-item="item2" wx:key="item2" 
+          wx:for-index="index2"  
+          style="flex:1" 
+          class="input-border input-border2" 
+          placeholder-class="phcolor2" 
+          placeholder="PANTONE号"  
+          type="text" 
+          value="{{item2.value}}" 
+          bindblur="changePantoneColor" 
+          data-index2="{{index2}}"
+          data-key="pantoneColorList"/>
+      </view>
+    </view>
+    <view style="display:flex;" wx:if="{{!pinbanObj}}">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>坑纸类型</text>
+      </view>
+      <view class="button_container fromItem postTreatment">
+        <block wx:for="{{offerInfo.paperType.list}}" wx:key="index">
+          <button class='{{offerData["paperType"]&&offerData["paperType"]==item.value?"checked_button":"normal_button"}}' data-key="paperType" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+          <!-- <button class='{{offerData["paperType"]&&offerData["paperType"]=="其他"?"checked_button":"normal_button"}}' data-key="paperType" data-val="其他" catchtap="radioTap">
+            其他
+          </button> -->
+      </view>
+    </view>
+    <view class="fromItem2" wx:if="{{!pinbanObj&&offerInfo.inside.list.length>0&&offerData['paperType']!='其他'}}" style="display:flex;">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>里纸</text>
+      </view>
+      <view class="button_container fromItem ">
+        <block wx:for="{{offerInfo.inside.list}}" wx:key="index">
+          <button style="width:220rpx;" class='{{offerData["inside"]&&offerData["inside"]==item.value?"checked_button":"normal_button"}}' data-key="inside" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+    </view>
+    <view class="fromItem2" wx:if="{{!pinbanObj&&offerInfo.core.list.length>0&&offerData['paperType']!='其他'}}" style="display:flex;">
+      <view class="label">
+        <!-- <text class="mustSign red">*</text> -->
+        <text>芯纸</text>
+      </view>
+      <view class="button_container fromItem ">
+        <block wx:for="{{offerInfo.core.list}}" wx:key="index">
+          <button style="width:220rpx;" class='{{offerData["core"]&&offerData["core"]==item.value?"checked_button":"normal_button"}}' data-key="core" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+            {{item.lable}}
+          </button>
+        </block>
+      </view>
+    </view>
+    <view class="fromItem2" wx:if="{{offerData['paperType']=='其他'}}" style="display:flex;">
+      <view class="label">
+        <text>里纸</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input style="flex:1;margin-right:10rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张材质"  type="text" value="{{otherPaperType.inside.materialType}}" bindblur="inputVal" data-key='otherPaperType.inside.materialType'/>
+        <input style="flex:1;margin-right:40rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaperType.inside.thickness}}" bindblur="inputVal" data-key='otherPaperType.inside.thickness'/>
+      </view>
+    </view>
+    <view class="fromItem2" wx:if="{{offerData['paperType']=='其他'}}" style="display:flex;">
+      <view class="label">
+        <text>芯纸</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;">
+        <input style="flex:1;margin-right:10rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张材质"  type="text" value="{{otherPaperType.core.materialType}}" bindblur="inputVal" data-key='otherPaperType.core.materialType'/>
+        <input style="flex:1;margin-right:40rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张克重"  type="digit" value="{{otherPaperType.core.thickness}}" bindblur="inputVal" data-key='otherPaperType.core.thickness'/>
+      </view>
+    </view>
+    
+    <view wx:if="{{offerData['paperType']!='其他'}}" style="padding-left:12rpx;margin-bottom:20rpx;font-size:28rpx">
+      <text wx:if="{{offerData.paperType}}">见坑纸类型：{{offerData.paperType}}_</text>
+      <text wx:if="{{offerData.inside}}">{{offerData.inside}}_</text>
+      <text wx:if="{{offerData.core}}">{{offerData.core}}</text>
+    </view>
+    <view wx:else style="padding-left:12rpx;margin-bottom:20rpx;font-size:26rpx">
+      <text wx:if="{{otherPaperType.inside.materialType&&otherPaperType.inside.thickness}}">见坑纸类型:{{otherPaperType.inside.thickness+'g'+otherPaperType.inside.materialType}}_</text>
+      <text wx:if="{{otherPaperType.core.materialType}}">{{otherPaperType.core.materialType}}_</text>
+      <text wx:if="{{otherPaperType.core.thickness}}">g{{otherPaperType.core.thickness}}_</text>
+      <text wx:if="{{otherPaperType.tonprice>0}}">{{unit2}}_</text>
+      <text>{{otherPaperType.tonprice}}</text>
+    </view>
+    <view class="fromItem2" style="display:flex;" wx:if="{{pinbanObj}}">
+      <view class="label">
+        <text>坑纸单价</text>
+      </view>
+      <view class="conten" style="display:flex;align-items: center;width:550rpx;box-sizing: border-box;padding-right: 40rpx;">
+        <input style="flex:1;margin-right:20rpx;" class="input-border" placeholder-class="phcolor" placeholder="请输入单价"  type="digit" value="{{otherPaperType.tonprice}}" bindblur="inputVal" data-key='otherPaperType.tonprice'/>
+        <!-- <picker bindchange="bindPickerChange" data-key="paper" value="{{otherPaperIndex}}" range="{{unit2}}">
+          <view class="normal_button unit-btn">
+            {{unit2[otherPaperIndex]}}
+            <van-icon name="arrow-down" />
+          </view>
+        </picker> -->
+        <view class="normal_button unit-btn"  catchtap="showPopup1" data-type="unitShow2">
+             
+              {{unit2}}
+              
+              <van-icon name="arrow-down" />
+            </view>
+      </view>
+    </view>
+    <block wx:if="{{pinbanObj}}">
+     <!-- 坑纸费用 -->
+     <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>坑纸费用</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{otherPaperType.tonprice?(priceObj.priceInfo.pitBoxPaperPrice||0):0}}元
+          </block>
+        </view>
+      </view>
+    </view>
+
+    
+    <!-- 裱坑费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>裱坑费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入裱坑费用" type="digit" value="{{offerData2.mountingpitPrice}}" bindblur='priceinp' data-key='offerData2.mountingpitPrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 印刷费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>印刷费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入印刷费用" type="digit" value="{{offerData2.printingPrice}}" bindblur='priceinp' data-key='offerData2.printingPrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 表处理费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>表处理费</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入表处理费用" type="digit" value="{{offerData2.surfacePrice}}" bindblur='priceinp' data-key='offerData2.surfacePrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他工艺 -->
+
+    <view>
+      <view style="display:flex;">
+        <view class="label">其他工艺</view>
+        <view class="button_container fromItem postTreatment">
+          <block wx:for="{{postProcessing}}" wx:key="index">
+            <button class='{{item.checked?"checked_button":"normal_button"}}' data-key="postTreatment" data-i="{{index}}" data-val="{{item.craftName}}" catchtap="checkTap2">
+              {{item.craftName}}
+            </button>
+          </block>
+        </view>
+
+
+      </view>
+      <view wx:if="{{tips}}" class="tips" style="font-size:22rpx">如面积过大时，会额外产生50元费用，则需要补差价，请知悉。</view>
+    </view>
+
+    <!-- 其他工艺下级 -->
+
+    <view wx:if="{{item.checked}}" class="fromItem3 mb-20" wx:for="{{postProcessing}}" wx:key="index" wx:for-index="i">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>{{item.craftName}}</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="{{'请输入'+item.craftName+'费用'}}" type="digit" value="{{item.value}}" bindblur='PostProcess' data-i='{{i}}' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 刀版费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>刀版费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入刀版费用" type="digit" value="{{offerData2.knifePrice}}" bindblur='priceinp' data-key='offerData2.knifePrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+      <text class="inpright" wx:if="{{pinbanObj.cut_lines}}">刀线长度{{pinbanObj.cut_lines}}米</text>
+    </view>
+
+    <!-- 啤费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>啤费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入啤费用" type="digit" value="{{offerData2.beerPrice}}" bindblur='priceinp' data-key='offerData2.beerPrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 粘费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>粘费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入粘费用" type="digit" value="{{offerData2.stickPrice}}" bindblur='priceinp' data-key='offerData2.stickPrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 配送费用 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>配送费用</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入配送费用" type="digit" value="{{offerData2.deliveryPrice}}" bindblur='priceinp' data-key='offerData2.deliveryPrice' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+      <view class="inpright" wx:if="{{priceObj.priceInfo.weight}}">重量:{{priceObj.priceInfo.weight}}kg</view>
+    </view>
+
+    <!-- 利润 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>利润</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入利润" type="digit" value="{{offerData2.profit}}" bindblur='priceinp' data-key='offerData2.profit' />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 不含税价格 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>不含税价</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{price||0}}元 <text wx:if="{{unitPrice}}">（单价：{{unitPrice||0}}）</text>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 税率 -->
+    <view class="mb-20">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>税率</text>
+        </view>
+        <view class="button_container fromItem">
+          <view class="priceinp">
+            <input class="input-border" placeholder-class="phcolor" placeholder="请输入税率" type="digit" value="{{offerData2.taxrate}}" bindblur='priceinp' data-key='offerData2.taxrate' />
+            <text class="sizeTxt">%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 含税价格 -->
+    <view wx:if="{{taxprice}}">
+      <view style="display:flex;">
+        <view class="label">
+          <!-- <text class="mustSign red">*</text> -->
+          <text>含税价</text>
+        </view>
+        <view class="button_container txtitem">
+          <block>
+            {{taxprice||0}}元 <text wx:if="{{taxunitPrice}}">（单价：{{taxunitPrice||0}}）</text>
+          </block>
+        </view>
+      </view>
+    </view>
+
+  </block>
+
+
+
+  </view>
+  <view class="start-pin">
+    <text catch:tap="valuation" wx:if="{{!pinbanObj}}" data-key="1" class="pin-btn">开始拼版</text>
+    <text catch:tap="valuation" wx:if="{{pinbanObj}}"  data-key="2" class="pin-btn">生成报价单</text>
+  </view>
+
+
+</view>  
+<van-toast id="van-toast" />
+
+<!-- <van-popup show="{{unit}}" position="bottom" bind:close="onCancelPup" round data-type="unit">
+  <van-picker show-toolbar title="请选择纸张单位" columns="{{offerData.paperList}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="unit" data-key="unit" data-item='unit'></van-picker>
+</van-popup> -->
+<van-popup show="{{unitShow}}" position="bottom" bind:close="onCancelPup" round data-type="unitShow">
+  <van-picker show-toolbar title="请选择纸张单位" columns="{{unitList}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="unitShow" data-key="unit" data-item='unit'></van-picker>
+</van-popup>
+<van-popup show="{{unitShow2}}" position="bottom" bind:close="onCancelPup" round data-type="unitShow">
+  <van-picker show-toolbar title="请选择纸张单位" columns="{{unitList2}}" value-key="name" default-index="{{0}}" bind:cancel="onCancelPup" bind:confirm="changeSelect" data-type="unitShow2" data-key="unit2" data-item='unit2'></van-picker>
+</van-popup>

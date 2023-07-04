@@ -1,0 +1,11 @@
+{
+  "navigationBarBackgroundColor": "#f8f8f8",
+ "navigationBarTextStyle": "black",
+ "navigationBarTitleText": "查看兰纸文件",
+ "backgroundColor": "#f8f8f8",
+ "backgroundTextStyle": "light",
+ "usingComponents": {
+   "modal": "../../../../../components/msgModal/index",
+   "van-dialog": "@vant/weapp/dialog/index"
+ }
+}

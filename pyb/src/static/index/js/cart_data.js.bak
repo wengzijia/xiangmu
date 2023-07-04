@@ -1,0 +1,747 @@
+var layerId = '';
+jQuery.support.cors = true;
+$(function(){
+    var host = window.location.protocol+'//'+window.location.host;
+    
+    //全选
+    $("#selectAll").click(function(){
+        if($(this).is(':checked')){
+            $('input[name="cart_id"]').each(function(){
+                //此处如果用attr，会出现第三次失效的情况
+                $(this).prop("checked",true);
+            });
+        }else{
+            $('input[name="cart_id"]').each(function(){
+                $(this).removeAttr("checked",false);
+            });
+        }
+        $(".DiscountMoneyClass").html("- ¥ 0");
+        $(".CuttingPrice").html("¥ 0");
+        $(".lementMoney").hide();
+        $(".PanelTable").hide();
+        compute();
+    });
+    //单独选择
+    $('input[name="cart_id"]').click(function(){
+        $(".DiscountMoneyClass").html("- ¥ 0");
+        $(".CuttingPrice").html("¥ 0");
+        $(".lementMoney").hide();
+        $(".PanelTable").hide();
+
+        $('.confPriceBx').show();
+        $('.akeupBox').hide();
+        $('.manualTable').addClass('none');
+        $('.manualBtn').addClass('hidediv');
+        compute();
+    });
+    //批量删除
+    $('.batch-delete').click(function () {
+        var eles = $('.el-checkbox__input').find('input[name="cart_id"]:checked');
+        if(eles.length <= 0) return;
+        var carts = [];
+        var url = host+'/index.php/index/cart/batchdelete';
+        $('.el-checkbox__input').find('input[name="cart_id"]:checked').each(function () {
+            var cartId = $(this).val();
+            carts.push(cartId);
+        });
+        layer.open({
+             content: '您确定要批量把'+eles.length+'个商品移出购物车吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {carts:carts.join(',')},
+                    success: function(data) {
+                        if (data.code) {
+                            layer.msg(data.msg, {icon: 1,time:800}, function () {
+                                location.href = data.url;
+                            });
+                        } else {
+                            layer.msg(data.msg, {icon: 2});
+                        }
+                    },
+                    error: function(request) {
+                        layer.msg('页面错误', {icon: 2});
+                    }
+                });
+
+            }
+        });
+    })
+
+    //删除
+    $(".deletegoods").click(function(){
+        var cart_id = $(this).attr('data-id');
+        var url = host+'/index.php/index/cart/delete';
+        layer.open({
+            content: '您确定要把该商品移出购物车吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                $.ajax({
+                    cache: true,
+                    type: "POST",
+                    url: url,
+                    data: {id:cart_id},
+                    async: false,
+                    success: function(data) {
+                        if (data.code) {
+                            layer.msg(data.msg, {icon: 1});
+                            setTimeout(function () {
+                                location.href = data.url;
+                            }, 1000);
+                        } else {
+                            layer.msg(data.msg, {icon: 2});
+                        }
+
+                    },
+                    error: function(request) {
+                        layer.msg('页面错误', {icon: 2});
+                    }
+                });
+
+            }
+        });
+    });
+    //增加
+    $(".addBtn").click(function(){
+
+        var cart_id     = $(this).attr('data-id');
+        var gid         = $(this).attr('data-gid');
+        var goodstype   = $(this).attr('data-type');
+        var nian_num 	= $(this).attr('data-nian');
+        var auto_lock 	= $(this).attr('data-lock');
+        var _extends	= $(this).attr('data-extends');
+        var goods_attr	= $(".gattr"+cart_id).html();
+
+        var attr        = goods_attr.split(';');
+
+        var number = $("#number"+cart_id).val();
+        var num = 0;
+
+        if (number < 1000){
+            num = parseInt(number) + 50;
+        } else {
+            num = parseInt(number) + 100;
+        }
+
+        if (num < 100) {
+            num = 100;
+        }
+
+        $("#number"+cart_id).val(num);
+
+        $(".DiscountMoneyClass").html("- ¥ 0");
+        $(".CuttingPrice").html("¥ 0");
+        $(".lementMoney").hide();
+        $(".PanelTable").hide();
+
+        $('.manualTable').hide();
+        $('.akeupBox').hide();
+        $('.confPriceBx').show();
+        $('.manualBtn').addClass('hidediv');
+
+        var total_price = get_final_compute(_extends, gid, goodstype, goods_attr, num, nian_num, auto_lock);
+        cart_update(cart_id, total_price, num);
+    });
+    //减少
+    $(".deleteBtn").click(function(){
+
+        var cart_id     = $(this).attr('data-id');
+        var gid     = $(this).attr('data-gid');
+        var goodstype   = $(this).attr('data-type');
+        var nian_num 	= $(this).attr('data-nian');
+        var auto_lock 	= $(this).attr('data-lock');
+        var _extends	= $(this).attr('data-extends');
+        var goods_attr	= $(".gattr"+cart_id).html();
+
+        var attr        = goods_attr.split(';');
+
+        var number      = $("#number"+cart_id).val();
+
+        var num = 0;
+        if (number <= 1000) {
+            num = parseInt(number) - 50;
+        } else {
+            num = parseInt(number) - 100;
+        }
+        if (num<100) {
+            num = 100;
+        }
+
+        $("#number"+cart_id).val(num);
+
+        $(".DiscountMoneyClass").html("- ¥ 0");
+        $(".CuttingPrice").html("¥ 0");
+        $(".lementMoney").hide();
+        $(".PanelTable").hide();
+
+        $('.manualTable').hide();
+        $('.akeupBox').hide();
+        $('.confPriceBx').show();
+        $('.manualBtn').addClass('hidediv');
+
+        var total_price = get_final_compute(_extends, gid, goodstype, goods_attr, num, nian_num, auto_lock);
+
+        cart_update(cart_id, total_price, num);
+    });
+
+    /**
+     * 去结算
+     */
+    $(document).on('click', '.SettlementBtn', function(){
+        var id_array = new Array();
+
+        $('input[name="cart_id"]:checked').each(function(){
+
+            id_array.push($(this).val());//向数组中添加元素
+
+        });
+
+        if(id_array.length == 0){
+
+            layer.msg("请选择数据",{icon:2});
+            return false;
+
+        }
+
+        var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串
+
+        $.cookie("cart_id", JSON.stringify(idstr),{expires:1, path: "/" });
+
+        $.cookie("grouptag", 'false', {expires:1, path: "/" });
+
+        var url = host+'/index.php/index/cart/checkorder';
+        location.href = url;
+    });
+    /** 去合版 */
+    $(document).on('click', '.lementPrice', function(){
+        $(".PanelTable").hide();
+        $('.manualTable').hide();
+
+        $(".DiscountMoneyClass").html('- ¥ 0');
+        $(".CuttingPrice").html('¥ 0');
+
+        $.cookie("isAuto", 0,{expires:1, path: "/" }); //重置拼版模式
+
+        var id_array = new Array();
+        var pid_array = new Array();
+        var url = host+'/index.php/index/cart/plywood';
+
+        $('input[name="cart_id"]:checked').each(function(){
+            id_array.push($(this).val());//向数组中添加元素
+        });
+
+        $(".layui-badge").each(function() {
+            pid_array.push($(this).attr('data-id'));
+        });
+        
+        if(id_array.length == 0){
+            return layer.msg("请选择数据",{icon:2});
+        }
+
+        if(id_array.length == 0){
+            return layer.msg("暂时没有符合拼版的数据",{icon:2});
+        }
+
+        layerId = layer.msg('核算中，请稍后～请勿刷新浏览器～',
+            {
+                icon: 16,
+                shade: 0.4,
+                time:false
+            });
+        var ids_array = getTheSame(id_array, pid_array);
+        var idsstr = ids_array.join(',');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {ids:idsstr},
+            success: function(data) {
+                if (data.code) {
+                    data['data']       = data.data;
+                    data['source']     = 0;
+                    data['paper_type'] = 0; //0 => 分切纸 1=>卷装纸 上下文决定
+                    cutting(JSON.stringify(data));
+                } else {
+                    layer.msg(data.msg, {icon: 2});
+                }
+            },complete:function(){
+                if(parseInt(permission) > 0) {
+                    $('.manualBtn').removeClass('hidediv');
+                }
+                $('.lementPrice').text('重新计价')
+            },
+            error: function(request) {
+                layer.msg('页面错误', {icon: 2});
+            }
+        });
+    });
+    //手动计价
+    $('.manufotBtnOk').click(function(){
+        var width  = $('.ManualUlDv .config-width').val(); //大版宽
+        var height = $('.ManualUlDv .config-height').val();//大版高
+        var sheetTotal = $('.sheetTotal').val();      //印张数
+        if(/^[\d\.]+$/.test(width) && /^[\d\.]+$/.test(height)  && /^\d+$/.test(sheetTotal)){}else{
+            return layer.msg('请输入完整的参数', {icon: 2})
+        }
+        var makeTotal = 0;        //总模数
+        $('input[name="cart_id"]:checked').each(function(){
+            let isPin = $(this).data('pin');
+            let modNum = $(this).closest('tr').find('.MuInput').val();
+            if(parseInt(isPin) > 0) {
+                makeTotal += parseInt(modNum);
+            }
+        });
+
+        $(".PanelTable").hide();
+        $(".manual .DiscountMoneyClass").html('- ¥ 0.00');
+        $(".manual .CuttingPrice").html('¥ 0.00');
+        var id_array = new Array();
+        var pid_array = new Array();
+        var url = host+'/index.php/index/cart/manualPlywood';
+        $('input[name="cart_id"]:checked').each(function(){
+            id_array.push($(this).val());//向数组中添加元素
+        });
+        $(".layui-badge").each(function() {
+            pid_array.push($(this).attr('data-id'));
+        });
+        if(id_array.length == 0){
+            return layer.msg("请选择数据",{icon:2});
+        }
+        if(id_array.length == 0){
+            return layer.msg("暂时没有符合拼版的数据",{icon:2});
+        }
+
+        $('html,body').removeClass('ovfHiden');
+        $('.comLayer').hide();
+
+        layerId = layer.msg('核算中，请稍后～请勿刷新浏览器～',
+            {
+                icon: 16,
+                shade: 0.4,
+                time:false
+            });
+        var ids_array = getTheSame(id_array, pid_array);
+        var idsstr = ids_array.join(',');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {ids:idsstr},
+            success: function(data) {
+                if (data.code) {
+                    let param = {
+                        'width':width,
+                        'height':height,
+                        'totalMod':makeTotal,
+                        'printNum':sheetTotal,
+                        'data':data.data
+                    };
+                    manualGroupcart(param);
+                } else {
+                    if(parseInt(permission) > 0) {
+                        $('.manualBtn').removeClass('hidediv');
+                    }
+                    layer.msg(data.msg, {icon: 2});
+                }
+            },
+            error: function(request) {
+                layer.msg('页面错误', {icon: 2});
+            }
+        });
+    });
+
+    //核算价格
+    manualGroupcart = function(data) {
+        var requestUrl = host+'/index.php/index/cart/manualGroupcart';
+        var id_array = [];
+        $('input[name="cart_id"]:checked').each(function(){
+            id_array.push($(this).val());//向数组中添加元素
+        });
+        var idstr = id_array.join(",");
+        $.ajax({
+            type: "POST",
+            url: requestUrl,
+            data: {"group": JSON.stringify(data), "idstr": idstr},
+            success: function(data) {
+                if(data.code) {
+                    $(".PanelTable").show();
+                    $('.confPriceBx').show().siblings('.akeupBox').hide();
+                    $(".manualTable tbody").html("");
+                    var totalPrice = 0;
+                    var actualprice = 0;
+                    var discount = 0;
+                    $.each(data.data.data, function(i, v) {
+                        var total = Math.round(v.price * 100) / 100;
+                        var tempPrice = total*1 + v.boxtotal*1;
+                        totalPrice  += tempPrice*1;
+                        actualprice += v.actualprice*1;
+                        var number = v.number - 300;
+                        var panelTbody = '<tr>'+
+                            '<td width="34%" class="selectLeft">'+
+                            '<span class="inline"><a class="panelAimg" href="javascript:void(0);"><img class="goodImg panelImg" src="/static/index/img/cart_manual.jpg" /></a></span>'+
+                            '</td>'+
+                            '<td width="24%" class="danPrice panelSize">'+v.areasize+'</td>'+
+                            '<td class="panelNum">'+number+'</td>'+
+                            '<td class="boxtotal">￥'+(v.boxtotal).toFixed(2)+'</td>'+
+                            '<td>'+
+                            '<p class="totalPrice panelTotal">￥'+total.toFixed(2)+'</p>'+
+                            '</td>'+
+                            '</tr>';
+                        $(".manualTable").removeClass("none");
+                        $(".manualTable tbody").append(panelTbody);
+                    });
+
+                    $('.akeupBox').show().siblings('.confPriceBx').hide();
+                    $(".lementMoney,.manualTable").show();
+
+                    discount = actualprice*1 - totalPrice*1;
+                    discount = discount.toFixed(2);
+
+                    totalPrice = totalPrice*1 + data.data.exp_price*1;
+                    totalPrice = totalPrice.toFixed(2);
+
+                    if(discount < 0) {
+                        discount = 0;
+                        $(".lementMoney").hide();
+                    }
+
+                    $(".manual .DiscountMoneyClass").html('- ¥ '+discount)
+                    $(".manual .CuttingPrice").html('¥ '+totalPrice);
+                    $(".lementMoney").show();
+
+                    return false;
+                } else {
+                    layer.msg("主人，没有拼出来哦～您可以减少拼版款数再试试～～～", {icon: 2});
+                }
+            },
+            error: function(request) {
+                layer.msg('页面错误', {icon: 2});
+            },
+            complete:function () {
+                layer.closeAll();
+            }
+        });
+    };
+
+    $(document).on('click', '.lementBtn', function(){
+        location.href = "/index.php/index/cart/panel";
+    });
+
+    /** 去合版 */
+    $(document).on('click', '.lementPriceTest', function(){
+        layerId = layer.msg('核算中，请稍后',
+                            {
+                                icon: 16,
+                                shade: 0.4,
+                                time:false
+                            });
+        var url = host+'/index.php/index/cart/groupcart';
+        var group_sn = 'P2019032510154575';
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {group_sn:group_sn},
+            success: function(data) {
+                if (data.code) {
+                    data['data'] = data.data;
+                    var data = JSON.stringify(data);
+                    console.log(data);
+                    //cutting(data);
+                } else {
+                    layer.msg(data.msg, {icon: 2});
+                }
+
+            },
+            error: function(request) {
+                layer.msg('页面错误', {icon: 2});
+            }
+        });
+
+    });
+});
+//获取数组相同的值
+getTheSame = function (attendUid, dataattendUid) {
+    
+    var result = new Array();
+    var c = dataattendUid.toString();
+    for (var i = 0; i < attendUid.length; i++) {
+        if (c.indexOf(attendUid[i].toString()) > -1) {
+            for (var j = 0; j < dataattendUid.length; j++) {
+                if (attendUid[i] == dataattendUid[j]) {
+                    result.push(attendUid[i]);
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+//生产刀模
+cutting = function(data) {
+    url = window.location.protocol+'//pb.xiaocaiyin.com/gen_cut/';
+    //url = 'http://192.168.6.162:8899/gen_cut/';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function(data) {
+            var data = $.parseJSON(data);
+            if(data.code == 1000) {
+                var data = JSON.stringify(data.msg);
+                makeupt(data);
+            } else {
+                layer.msg("呜呜呜～出错了，快找客服小姐姐帮忙～～～", {icon: 2});
+            }
+        },
+        error: function(request) {
+            layer.msg('呜呜呜～出错了，快找客服小姐姐帮忙～～～', {icon: 2});
+        }
+    });
+
+}
+//拼版
+makeupt = function(data) {
+    var httpurl = window.location.protocol+'//pb.xiaocaiyin.com/makeup/';
+    //var httpurl = 'http://192.168.6.162:8899/makeup/';
+    var datas = [];
+    $.ajax({
+        type: "POST",
+        url: httpurl,
+        data: data,
+        success: function(data) {
+            var data = $.parseJSON(data);
+            if(data.code == 1000) {
+                var tempdata = JSON.stringify(data.msg);
+                groupcart(tempdata);
+            } else {
+                layer.msg("呜呜呜～出错了，快找客服小姐姐帮忙～～～", {icon: 2});
+            }
+        },
+        error: function(request) {
+            layer.msg('哇～主人，我打了个盹，您可以刷新页面再试试～～～', {icon: 2});
+        }
+    });
+
+}
+//核算价格
+groupcart = function(data) {
+    var httpurl = host+'/index.php/index/cart/groupcart';
+    // layer.close(layerId);
+    var id_array = new Array();
+    $('input[name="cart_id"]:checked').each(function(){
+        id_array.push($(this).val());//向数组中添加元素
+    });
+    var idstr = id_array.join(",");
+    $.ajax({
+        type: "POST",
+        url: httpurl,
+        data: {"group": data, "idstr": idstr},
+        success: function(data) {
+            if(data.code) {
+                $(".PanelTable").show();
+                $('.confPriceBx').show().siblings('.akeupBox').hide();
+                $(".PanelTable tbody").html("");
+                var totalPrice = 0;
+                var actualprice = 0;
+                var discount = 0;
+                $.each(data.data.data, function(i, v) {
+                    var total = Math.round(v.price * 100) / 100;
+                    var tempPrice = total*1 + v.boxtotal*1;
+                    totalPrice  += tempPrice*1;
+                    actualprice += v.actualprice*1;
+                    var number = v.number - 300;
+                    var panelTbody = '<tr>'+
+                        '<td width="34%" class="selectLeft">'+
+                            '<span class="inline"><a class="panelAimg" href="'+v.images+'" target="_blank"><img class="goodImg panelImg" src="'+v.images+'" /></a></span>'+
+                        '</td>'+
+                        '<td width="24%" class="danPrice panelSize">'+v.areasize+'</td>'+
+                        '<td class="panelNum">'+number+'</td>'+
+                        '<td class="boxtotal">￥'+(v.boxtotal).toFixed(2)+'</td>'+
+                        '<td>'+
+                            '<p class="totalPrice panelTotal">￥'+total.toFixed(2)+'</p>'+
+                        '</td>'+
+                    '</tr>';
+                    
+                    $(".PanelTable tbody").append(panelTbody);
+
+                });
+                discount = actualprice*1 - totalPrice*1;
+                discount = discount.toFixed(2);
+
+                totalPrice = totalPrice*1 + data.data.exp_price*1;
+                totalPrice = totalPrice.toFixed(2);
+
+                if(discount < 0) {
+                    discount = 0;
+                    $(".lementMoney").hide();
+                }
+
+                $(".DiscountMoneyClass").html('- ¥ '+discount)
+                $(".CuttingPrice").html('¥ '+totalPrice);
+                $(".lementMoney").show();
+                return false;
+            } else {
+                layer.msg("主人，没有拼出来哦～您可以减少拼版款数再试试～～～", {icon: 2});
+            }
+        },
+        error: function(request) {
+            layer.msg('页面错误', {icon: 2});
+        },
+        complete:function () {
+            layer.closeAll();
+        }
+    });
+
+}
+/**
+ * 拼版去结算
+ */
+$(document).on('click', '.lementMoney', function(){
+    var id_array = new Array();
+    var pid_array = new Array();
+
+    $('input[name="cart_id"]:checked').each(function(){
+        id_array.push($(this).val());//向数组中添加元素
+    });
+
+    if(id_array.length == 0){
+        layer.msg("请选择数据",{icon:2});
+        return false;
+
+    }
+    $(".layui-badge").each(function() {
+        pid_array.push($(this).attr('data-id'));
+    });
+
+    var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串
+    var pidstr = pid_array.join(',');
+
+    $.cookie("cart_id", JSON.stringify(idstr),{expires:1, path: "/" });
+    $.cookie("pid_id", JSON.stringify(pidstr),{expires:1, path: "/" });
+    $.cookie("grouptag", 'true',{expires:1, path: "/" });
+    if($('.akeupBox').length > 0){
+        if ($('.auto > .cartChkBox.curr').length > 0) { //自动拼版
+            $.cookie("isAuto", 0, {expires: 1, path: "/"});
+        } else { //手动拼版
+            let target = $('.mTipsLayer');
+            let curWidth = $('.ManualLayer .config-width').val();
+            let curHeight = $('.ManualLayer .config-height').val();
+            let curModTotal = 0;
+
+            $('input[name="cart_id"]:checked').each(function(){
+                let modNum = $(this).closest('tr').find('.MuInput').val();
+                let isPin = $(this).data('pin');
+                if(parseInt(isPin) > 0) {
+                    curModTotal += parseInt(modNum);
+                }
+            });
+            target.find('.mTipDl > dd').first().find('.pinSize').text(curWidth + "*" + curHeight);
+            target.find('.mTipDl > dd').first().find('.pinMod').text(curModTotal);
+            let sysWidth    = $('#makeUp_pdf_file').data('width');
+            let sysHeight   = $('#makeUp_pdf_file').data('height');
+            let sysModTotal = $('#makeUp_pdf_file').data('modNum');
+            sysModTotal = parseInt(sysModTotal) <= 0 ? 'N/A' : sysModTotal;
+            target.find('.mTipDl > dd').last().find('.pinSize').text(sysWidth + "*" + sysHeight);
+            target.find('.mTipDl > dd').last().find('.pinMod').text(sysModTotal);
+
+            target.find('.manualFoot').show();
+            $('.mTipsLayer').removeClass('none').show();
+            $.cookie("isAuto", 1, {expires: 1, path: "/"});
+            return;
+        }
+    }
+    var url = host+'/index.php/index/cart/checkorder';
+    location.href = url;
+});
+//继续结算
+$('.mTipBtnOk').on('click',function () {
+    let cartLst = [];
+    let pdfFile    = $('#makeUp_pdf_file').data('pdfPath');
+    let url = host+'/index.php/index/cart/checkorder';
+
+    let sysWidth    = $('#makeUp_pdf_file').data('width');
+    let sysHeight   = $('#makeUp_pdf_file').data('height');
+    let sysModTotal = $('#makeUp_pdf_file').data('modNum');
+    $('input[name="cart_id"]:checked').each(function(){
+        cartLst.push($(this).val());//向数组中添加元素
+    });
+    let pinData = {
+        'pdfFile' : pdfFile,
+        'width'   : sysWidth,
+        'height'  : sysHeight,
+        'modTotal': sysModTotal
+    };
+    let data = {
+        'cartIdx'  :cartLst.join(','),
+        'pinData': JSON.stringify(pinData)
+    };
+    let requestUrl = host + '/index.php/index/cart/updatecart';
+    $.post(requestUrl, data, function () {
+        location.href = url;
+    });
+});
+//取消结算
+$('.manuLyBtnCal').on('click',function () {
+    $('.mTipsLayer').addClass('none');
+});
+//选择事件
+compute = function(){
+    var total_price = 0;
+    var num = 0;
+    $('input[name="cart_id"]').each(function(){
+        if($(this).is(':checked')){
+            num++;
+            total_price += parseFloat($(this).attr('data-val'));
+        }
+    });
+    $(".goodsNum").html(num);
+    total_price = total_price.toFixed(2);
+    $(".totalMoneyClass").html('￥'+total_price);
+};
+//更新购物车数据
+cart_update = function(cart_id, goods_price, number){
+    var url = host+'/index.php/index/cart/cartupdate';
+    $.ajax({
+        // cache: true,
+        type: "POST",
+        url: url,
+        data: {id:cart_id,goods_price:goods_price,number:number},
+        async: true,
+        success: function(data) {
+            $(".price"+cart_id).html('￥'+goods_price);
+            $("#cart_id"+cart_id).attr('data-val',goods_price);
+            compute();
+        },
+        error: function(request) {
+            layer.msg('页面错误', {icon: 2});
+        }
+    });
+};
+//更新数量
+checkCartNum = function(cart_id, obj){
+    var _obj       = $(obj);
+    var number     = _obj.val();
+    var cart_id    = _obj.attr('data-id');
+    var gid        = _obj.attr('data-gid');
+    var goodstype  = _obj.attr('data-type');
+    var _extends   = _obj.attr('data-extends');
+    var goods_attr = $(".gattr"+cart_id).html();
+
+    if ((number*1 % 100) > 0) {
+        var count  = parseInt(number*1 / 100);
+        number     = count * 100;
+    }
+    if (number*1 < 100) {
+        number = 100;
+    }
+    _obj.val(number);
+    var total_price = get_final_compute(_extends, gid, goodstype, goods_attr, number, 0, 0);
+
+    cart_update(cart_id, total_price, number);
+};

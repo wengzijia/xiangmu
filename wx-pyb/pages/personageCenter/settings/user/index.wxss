@@ -1,0 +1,37 @@
+page{
+  background-color: rgb(240, 240, 240);
+}
+view{
+  background-color: rgb(255, 255, 255);
+}
+.list{
+  padding: 0 40rpx 0 32rpx;
+  height: 100rpx;
+  font-size: 30rpx;
+  line-height: 94rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  margin-top:26rpx;
+}
+.btn,.btn button{
+  /* padding: 12rpx 0; */
+  background-color: #ff0036;
+  color: #fff;
+  position: fixed;
+  left: 35rpx;
+  bottom: calc(constant(safe-area-inset-bottom) + 20rpx);
+  bottom: calc(env(safe-area-inset-bottom) + 20rpx);
+  width: 680rpx;
+  border-radius: 41.5rpx;
+  font-size:32rpx;
+}
+.ac-icon-arrow{
+  height: 68rpx;
+  line-height: 100rpx;
+  font-size: 35rpx;
+  color: #969696;
+}
+.btuBottom{
+ 
+}

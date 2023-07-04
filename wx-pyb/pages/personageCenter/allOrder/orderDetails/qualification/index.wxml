@@ -1,0 +1,17 @@
+
+<view class="body">
+<view class="containers">
+  <checkbox-group catchchange="checkboxChange">
+    <view class="touch-item" data-index="{{index}}" wx:for="{{name}}" wx:key="{{item}}">
+      <text class="content">{{item.name}}</text>
+      <checkbox class="box" value="{{item.id}}"></checkbox>
+    </view>
+  </checkbox-group>
+</view>
+<button class="enter" catchtap="bind">确定关联</button>
+</view>
+<view wx:if="{{name.length<1}}" class="order-null">
+  <image src="../../../../../image/personage6.png" />
+  <view style="text-align:center;color:#999;font-size:28rpx;"><text>您还未添加资质资料呢~</text></view>
+</view>
+<modal modal="{{modal}}"></modal>

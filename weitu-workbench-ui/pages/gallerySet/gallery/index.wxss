@@ -1,0 +1,256 @@
+/* pages/gallery/index.wxss */
+page {
+    background: linear-gradient(180deg, #DBE7FF 0%, #F5F7FE 100%);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item-box {
+    padding: 36rpx 36rpx 0;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.swiper-box {}
+
+.swiper-box swiper {
+    border-radius: 16rpx;
+    overflow: hidden;
+}
+
+.swiper-box image {
+    height: 300rpx;
+    width: 100%;
+
+}
+
+/* 圆点的样式  因为大小不一样。所以按钮设置大小之后，背景色记得设置完全透明*/
+swiper .wx-swiper-dot {
+    width: 10rpx;
+    height: 10rpx;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+}
+
+/* 未选中 */
+swiper .wx-swiper-dot::before {
+    width: 10rpx;
+    height: 10rpx;
+    content: '';
+    border-radius: 50%;
+    flex-grow: 1;
+    background: rgba(26, 23, 23, 0.267);
+}
+
+/* 选中 */
+swiper .wx-swiper-dot-active::before {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+}
+
+image {
+    image-rendering: -moz-crisp-edges;
+    /* Firefox */
+    image-rendering: -o-crisp-edges;
+    /* Opera */
+    image-rendering: -webkit-optimize-contrast;
+    /* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    /* IE (non-standard property) */
+}
+
+.item-title {
+    display: flex;
+    align-items: center;
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 20rpx;
+    margin-top: 36rpx;
+}
+
+.item-title image {
+    width: 52rpx;
+    margin-right: 10rpx;
+}
+
+.van-grid-item__content--surround:after {
+    border-color: #fff !important;
+    /* display: flex; */
+}
+
+.van-grid-item__content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.more {
+    position: absolute;
+    right: 0;
+    font-size: 15px;
+    color: #777777;
+}
+
+.cooperation-item-box {
+    background-color: #fff;
+    padding: 28rpx 10rpx;
+    border-radius: 8rpx;
+}
+
+.cooperation-item-image {
+    width: 100%;
+    height: 228rpx;
+    border-radius: 8rpx;
+    margin-bottom: 10rpx;
+}
+
+.cooperation-item-text {
+    font-size: 14px;
+    height: 38px;
+    overflow: hidden;
+}
+
+.contact-box {
+    background-color: #fff;
+    padding: 10rpx 28rpx;
+    border-radius: 8rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-box .tel-btn {
+    width: 152rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    background: #3D7EFF;
+    border-radius: 2px 2px 2px 2px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
+
+.map-box {
+    width: 100%;
+    height: 238px;
+    border-radius: 16rpx;
+    overflow: hidden;
+    margin-top: 16rpx;
+}
+
+.enterprise-present-box {
+    background-color: #fff;
+    padding: 28rpx;
+    border-radius: 8rpx;
+}
+
+.enterprise-present-box .enterprise-name {
+    margin-bottom: 16rpx;
+    padding-left: 12rpx;
+    border-left: 2px solid #3D7EFF;
+    font-size: 30rpx;
+    font-weight: 500;
+    line-height: 30rpx;
+}
+
+.enterprise-present-center {
+    font-size: 14px;
+    color: #333333;
+}
+
+/* 空状态 */
+.nullBox {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nullImg {
+    width: 400rpx;
+    height: 245rpx;
+}
+
+.nullText {
+    font-size: 28rpx;
+    color: #777777;
+    font-weight: 500;
+}
+.mrginT{
+  padding-bottom:  calc(env(safe-area-inset-bottom) + 280rpx);
+  }
+  .btn_bg {
+    background-color: #fff;
+    padding: 24rpx 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+    z-index: 999;
+  }
+  .btn {
+    text-align: center;
+    margin: 0 32rpx;
+    height: 84rpx;
+    line-height: 84rpx;
+    background: #EA5354;
+    border-radius: 66rpx;
+    font-size: 32rpx;
+    color: #fff;
+  }
+  .van-grid-item__content{
+    padding: 0 !important;
+  }
+
+  /* 地图 */
+.map {
+    width: 100%;
+    height: 280rpx;
+    border-radius: 16rpx;
+    margin-top: 16rpx;
+}
+
+/* 联系地址 */
+.contactAddressBox {
+    margin-top: 8rpx;
+    background-color: #FFFFFF;
+    padding: 16rpx 28rpx;
+    font-size: 28rpx;
+}
+
+.contactAddress {
+    font-weight: 500;
+}
+
+.addressContainer {
+    display: flex;
+    align-items: center;
+    /* margin-top: 14rpx; */
+}
+
+.addressContainer .location {
+    width: 30rpx;
+    height: 32rpx;
+    flex-shrink: 0;
+}
+
+.addressBox {
+    margin-left: 8rpx;
+}
+
+.addressName {
+    font-weight: 500;
+}
+
+/* .addressDetail {
+    color: #777777;
+} */

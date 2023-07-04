@@ -1,0 +1,25 @@
+<van-action-sheet
+  class="credit-action-sheet"
+  show="{{ show }}"
+  description="选择支付方式"
+  cancel-text="取消"
+  bind:cancel='cancel'
+>
+	<block wx:for="{{list}}" wx:key="index">
+		<button 
+			wx:if="{{!item.disabled}}" 
+			bindtap="onClick"
+			data-index="{{ index }}"
+			data-item="{{ item }}"
+			loading="{{item.loading}}"
+			style="{{item.status == 0 ? 'background:#f4f4f4' : ''}}"
+			class="action-sheet">
+			<view class="credit-action" style="{{item.status == 0 ? 'color: rgba(0,0,0,.3);' : '' }}">
+				<image src="{{item.img}}" mode="widthFix" class="credit-icon"/>
+				<text>{{item.name}}</text>
+			</view>
+			<view wx:if="{{item.status == 1}}" class="subname">{{item.subname}}</view>
+			<view wx:elif="{{item.status == 0}}" class="subname"> <text>余额不足,</text><text style="color:cornflowerblue">前往充值</text></view>
+		</button>
+	</block>
+</van-action-sheet>

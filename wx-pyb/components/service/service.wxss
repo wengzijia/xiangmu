@@ -1,0 +1,23 @@
+.image-style{ 
+    /* position: fixed; 
+    right:30rpx;
+    bottom:90rpx; */
+    width:120rpx;
+    height:120rpx;
+    /* z-index: 100;  */
+   } 
+
+   .button-style{
+    position: fixed; 
+    padding: 0;
+    right:30rpx;
+    bottom:90rpx;
+    width:120rpx;
+    height:120rpx;
+    z-index: 100; 
+    border: 0rpx;
+    background-color:rgba(0, 0, 0, 0) ;
+   }
+   .button-style::after{
+    border:0;
+  }

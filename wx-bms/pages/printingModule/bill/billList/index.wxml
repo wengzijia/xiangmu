@@ -1,0 +1,53 @@
+<!--pages/bill/bill/index.wxml-->
+<!-- //区分两种情况，傲彩账单和其他客服账单 -->
+<view class="safe_bot">
+  <view class="mar_r32" wx:if="{{isShow}}">
+    <view class="posi_re">
+      <image src="../../../../image/bill/billbanner.png" class="wid_100" mode="widthFix"></image>
+      <!-- <view class="share_ab">
+      <image src="../../../image/bill/share.png" ></image>
+      </view> -->
+      <view class="pose_abt">
+        <view class="topf">
+
+          <block wx:if="{{customer.customer_info.wx_portrait}}">
+            <image src="{{customer.customer_info.wx_portrait}}" mode="widthFix" class="headImg"> </image>
+          </block>
+          <block wx:else>
+            <image src="../../../../image/palceOrder/avatar.png" mode="widthFix" class="headImg" wx:if="{{customer.customer_type=='2'}}"> </image>
+            <image src="../../../../image/palceOrder/avatar2.png" mode="widthFix" class="headImg" wx:else> </image>
+          </block>
+          <text class="fontV" wx:if="{{customer.customer_name}}">{{customer.customer_name}}</text>
+        </view>
+        <view class="botflex">
+          <view class="cont_all">
+            <view>总金额(元)</view>
+            <view>{{BillMonthList.total_price}}</view>
+          </view>
+          <view class="cont_all">
+            <view>待支付(元)</view>
+            <view>{{BillMonthList.unpaid_price}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 时间列表 -->
+    <block wx:if="{{BillMonthList.data.length>0}}">
+      <view class="dateFlex" catchtap="myNavigateTo" data-detail="{{item}}" wx:for="{{BillMonthList.data}}" wx:key="index">
+        <view>{{item.years_month}}</view>
+        <view>
+        已结: {{item.paid_price}}元
+        </view>
+        <view>待结: {{item.unpaid_price}}元</view>
+        <view>  <image src="../../../../image/bill/back.png" class="wid_back" mode="widthFix"></image></view>
+      </view>
+    </block>
+    <!-- 没有账单~ -->
+    <block wx:else>
+      <view class="none_all">
+        <image src="../../../../image/bill/none.png" mode="widthFix"></image>
+        <view>小主，您还没有账单呢~</view>
+      </view>
+    </block>
+  </view>
+</view>

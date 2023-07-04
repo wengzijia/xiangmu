@@ -1,0 +1,24 @@
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 49">
+<path id="Rectangle 954" d="M0 0H49C52.866 0 56 3.13401 56 7V56L30.3333 30.3333L0 0Z" fill="#F2F2F2"/>
+<g id="Mask group">
+<mask id="mask0_10_102" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
+<path id="Rectangle 955" d="M0 0H49C52.866 0 56 3.13401 56 7V56L30.3333 30.3333L0 0Z" fill="#D8EEE9"/>
+</mask>
+<g mask="url(#mask0_10_102)">
+<g id="Group 48">
+<g id="Frame">
+<path id="Vector" d="M29.5 8.5H20.5V17.5H29.5V8.5Z" stroke="#338F7A" stroke-width="2" stroke-linejoin="round"/>
+<path id="Vector_2" d="M29.5 26.5H20.5V35.5H29.5V26.5Z" stroke="#338F7A" stroke-width="2" stroke-linejoin="round"/>
+<path id="Vector_3" d="M47.5 26.5H38.5V35.5H47.5V26.5Z" stroke="#338F7A" stroke-width="2" stroke-linejoin="round"/>
+<path id="Vector_4" d="M47.5 8.5H38.5V17.5H47.5V8.5Z" stroke="#338F7A" stroke-width="2" stroke-linejoin="round"/>
+<path id="Vector_5" d="M34 8.5V22" stroke="#338F7A" stroke-width="2"/>
+<path id="Vector_6" d="M34 26.5V35.5" stroke="#338F7A" stroke-width="2"/>
+<path id="Vector_7" d="M34 22H20.5" stroke="#338F7A" stroke-width="2"/>
+<path id="Vector_8" d="M47.5 22H38.5" stroke="#338F7A" stroke-width="2"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

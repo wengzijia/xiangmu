@@ -1,0 +1,310 @@
+/* pages/selectProgram/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 两行显示省略号 */
+.text-ellipsisl2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*弹性伸缩盒子模型显示*/
+  display: -webkit-box;
+  /*限制在一个块元素显示的文本的行数*/
+  -webkit-line-clamp: 2;
+  /*设置或检索伸缩盒对象的子元素的排列方式*/
+  -webkit-box-orient: vertical;
+}
+
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 分类展示 */
+.sortShowBox {
+  height: 144rpx;
+  background-color: #FFFFFF;
+  padding: 22rpx 36rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.oneSortBox,
+.twoSortTitleBox {
+  display: flex;
+}
+
+.oneSortText,
+.twoSortText {
+  color: #777777;
+}
+
+.twoSortBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.selectedPlan {
+  font-size: 24rpx;
+  color: #777777;
+}
+
+.selectedActPlan {
+  color: #3D7EFF;
+}
+
+/* 所有分类 */
+.allSortBox {
+  margin-top: 28rpx;
+  padding-bottom: 100rpx;
+}
+
+.oneJiSortScrollBox {
+  line-height: 84rpx;
+  background-color: #FFFFFF;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.oneJiSortBox {
+  display: flex;
+  margin-right: 10rpx;
+  box-sizing: border-box;
+}
+
+.oneJiSortList {
+  margin-left: 36rpx;
+  font-size: 34rpx;
+  white-space: nowrap;
+}
+
+.oneJiSortActColor {
+  color: #3D7EFF;
+}
+
+.moreSortBox {
+  display: flex;
+}
+
+/* 二级分类 */
+.twoJiSortBox {
+  width: 198rpx;
+  height: 80vh;
+  flex-shrink: 0;
+}
+
+.twoJiSortList {
+  font-size: 30rpx;
+  position: relative;
+  padding: 22rpx 38rpx;
+  text-align: center;
+}
+
+.twoJiSortActColor {
+  color: #3D7EFF;
+  background-color: #FFFFFF;
+}
+
+.twoJiSortListBefore::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8rpx;
+  height: 44rpx;
+  background-color: #3D7EFF;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  content: '';
+}
+
+/* 三级分类和方案 */
+.sortPlanBox {
+  width: 100%;
+  padding-left: 28rpx;
+  background-color: #fff;
+}
+
+.threeJiSortScrollBox {
+  width: 524rpx;
+  height: 86rpx;
+  /* border: 2rpx solid red; */
+  padding-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.threeJiSortBox {
+  display: flex;
+}
+
+.threeJiSortList {
+  white-space: nowrap;
+  margin-right: 24rpx;
+  background-color: #F0F0F0;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 8rpx 28rpx;
+  margin-top: 16rpx;
+  height: 56rpx;
+  box-sizing: border-box;
+}
+
+.threeJiSortActColor {
+  color: #3D7EFF;
+  background-color: #E5EEFF;
+  border: 2rpx solid #3D7EFF;
+}
+
+/* 方案 */
+.programContainer {
+  border-top: 2rpx solid #E6E6E6;
+  margin-right: 36rpx;
+}
+
+.programHeadBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28rpx;
+}
+
+.programTilleBox {
+  display: flex;
+  align-items: center;
+}
+
+.programTilleBox .programTille {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.selectedProgram {
+  font-size: 24rpx;
+  color: #777777;
+  margin-left: 8rpx;
+}
+
+.selectedActProgram {
+  color: #3D7EFF;
+}
+
+.programSelectAllBox {
+  display: flex;
+  align-items: center;
+}
+
+.programSelectAllBox .programSelectAllText {
+  font-size: 24rpx;
+  color: #777777;
+  margin-top: 4rpx;
+}
+
+/* 所有方案 */
+.allProgramScrollBox {
+  height: 70vh;
+}
+
+.allProgramBox {
+  display: flex;
+}
+
+.selectGroup {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.allProgramList {
+  width: 236rpx;
+  height: 326rpx;
+  /* border: 2rpx solid red; */
+  margin-top: 20rpx;
+  box-sizing: border-box;
+}
+
+.allProgramList:nth-child(even) {
+  margin-left: 16rpx;
+}
+
+.allProgramImgBox {
+  position: relative;
+}
+
+.allProgramRadio {
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
+}
+
+.allProgramImg {
+  width: 236rpx;
+  height: 236rpx;
+  border-radius: 4rpx;
+}
+
+.allProgramTitle {
+  font-size: 26rpx;
+}
+
+/* 微信原生多选样式 */
+checkbox .wx-checkbox-input {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+/*checkbox选中后样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #1989fa;
+  border-color: #1989fa;
+}
+
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+/* 底部 */
+.bottomBox {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 112rpx;
+  background-color: #FFFFFF;
+  z-index: 999;
+}
+
+.bottomBox .save {
+  width: 678rpx;
+  height: 84rpx;
+  background-color: #3D7EFF;
+  color: #FFFFFF;
+  border-radius: 66rpx;
+  margin: 14rpx auto;
+}
+
+/* 底线 */
+.bottomLine {
+  text-align: center;
+  margin-top: 64rpx;
+  margin-bottom: 28rpx;
+  font-size: 24rpx;
+  color: #777777;
+}

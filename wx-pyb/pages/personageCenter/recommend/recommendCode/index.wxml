@@ -1,0 +1,69 @@
+<view class="tab">
+    <view>
+    <view style="height: 300rpx;"></view>
+    <view class="document ">
+        <view class="document_view1">
+            <image src="data:image/png;base64,{{recommendCodeImgY}}" style="    width: 300rpx;height: 300rpx;"></image>
+        </view>
+        <view class="document_view2" >流程</view>
+        <view class="document_view3" >
+            <view class="recommendCodeProcess">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode01.png" class="recommendCodeImg"></image>
+                </view>
+                <view>展示给好友</view>
+            </view>
+
+            <view class="recommendCodeProcessArrow">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode02.png" class="recommendCodeImgArrow" ></image>
+                </view>
+            </view>
+            <view class="recommendCodeProcess">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode03.png" class="recommendCodeImg" ></image>
+                </view>
+                <view>扫码注册</view>
+            </view>
+            <view class="recommendCodeProcessArrow">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode02.png" class="recommendCodeImgArrow" ></image>
+                </view>
+            </view>
+            <view class="recommendCodeProcess">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode04.png"  class="recommendCodeImg"  ></image>
+                </view>
+                <view>注册成功</view>
+            </view>
+            <view class="recommendCodeProcessArrow">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode02.png" class="recommendCodeImgArrow" ></image>
+                </view>
+            </view>
+            <view class="recommendCodeProcess">
+                <view>
+                    <image src="../../../../image/recommendCode/recommendCode05.png" class="recommendCodeImg" ></image>
+                </view>
+                <view>好友下单你赚钱</view>
+            </view>
+        </view>
+        <view class="document_view4" >规则</view>
+        <view class="document_view5" >
+            <view>
+                <view>
+                    1.订单须满足以下条件：
+                </view>
+                <view style="margin-left:20rpx;">
+                    订单付款足额付款；订单完结，无纠纷
+                </view>
+            </view>
+            <view>
+                <view>
+                    2.推荐人收益说明：次月7号结算收益。
+                </view>
+            </view>
+        </view>
+    </view>
+    </view>
+</view>

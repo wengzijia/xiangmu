@@ -1,0 +1,16 @@
+<view class="table">
+ <view class="tr bg-w">
+ <view class="th">项目</view>
+ <view class="th">价格</view>
+ <view class="th ">减免</view>
+ <view class="th ">应付</view>
+ </view>
+ <block wx:for="{{list}}" wx:key="{[code]}">
+  <view class="tr">
+    <view class="td t-c">{{item.title}}</view>
+    <view class="td">￥{{item.original}}</view>
+    <view class="td red"><text wx:if="{{item.discount!==''}}">-￥{{item.discount}}</text></view>
+     <view class="td">￥{{item.count}}</view>
+  </view>
+ </block>
+</view>

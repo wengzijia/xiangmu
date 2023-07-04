@@ -1,0 +1,141 @@
+/* pages/bill/billList/index.wxss */
+page {
+  background-color: #F1F3F5;
+}
+
+.mar_r32 {
+  margin: 42rpx 32rpx;
+}
+
+.posi_re {
+  position: relative;
+  margin: 0rpx auto 10rpx;
+}
+
+.pose_abt {
+  position: absolute;
+  top: 20rpx;
+  left: 40rpx;
+
+  right: 40rpx;
+}
+
+.topf {
+  color: #FECFCA;
+  font-size: 28rpx;
+}
+
+.botf {
+  color: #fff;
+  margin-top: 10rpx;
+  font-size: 56rpx;
+}
+
+.wid_100 {
+  width: 100%;
+  height: 240rpx;
+}
+
+.headImg {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 10rpx;
+  vertical-align: middle;
+  border-radius: 6rpx;
+}
+
+.fontV {
+  font-size: 28rpx;
+  vertical-align: middle;
+}
+
+.botflex {
+  display: flex;
+
+  margin-top: 36rpx;
+}
+
+.cont_all {
+  flex: 1;
+  text-align: center;
+}
+
+.cont_all:nth-child(1) {
+  border-right: 1px solid #F58074;
+}
+
+.cont_all view:nth-child(1) {
+  font-size: 28rpx;
+  color: #FECFCA;
+  margin-bottom: 20rpx;
+}
+
+.cont_all view:nth-child(2) {
+  font-size: 40rpx;
+  color: #fff;
+  margin-bottom: 4rpx;
+  font-weight: bold;
+}
+
+.dateFlex {
+  background: #fff;
+  height: 120rpx;
+  line-height: 120rpx;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10rpx;
+  border-radius: 8rpx;
+  align-items: center;
+  font-size: 28rpx;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.dateFlex view:nth-child(1) {
+  color: #333;
+  padding: 0 22rpx 0 21rpx;
+}
+
+.dateFlex view:nth-child(2) {
+  color: #999;
+  flex: 1;
+  text-align: center;
+}
+
+.dateFlex view:nth-child(3) {
+  color: #666;
+  flex: 1;
+  text-align: center;
+}
+
+.none_all {
+  margin: 190rpx auto 0;
+  text-align: center;
+}
+
+.none_all image {
+  width: 336rpx;
+  height: 288rpx;
+}
+
+.none_all view {
+  font-size: 30rpx;
+  color: #747577;
+  margin-top: 40rpx;
+}
+
+.share_ab image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.share_ab {
+  position: absolute;
+  right: -1rpx;
+  top: -1rpx;
+}
+.wid_back{
+  width: 44rpx;
+  vertical-align: middle;
+height: 44rpx;
+}

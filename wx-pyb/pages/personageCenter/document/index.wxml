@@ -1,0 +1,9 @@
+<view class="document">
+    <view><text class="b">1. 推荐人资格：</text>每月推荐来的用户在拼一版小程序平台上的合格订单至少达到20吨纸量，否则取消推荐人资格；</view>
+    <view><text class="b">2. 推荐人收益：</text>每吨纸返利50元；</view>
+    <view><text class="b">3. 合格订单定义：</text>目前须满足以下条件：</view>
+    <view><text>1）订单付款足额付款；</text></view>
+    <view><text>2）订单文件上传；</text></view>
+    <view><text>3）印刷费周结；</text></view>
+    <view><text>4）订单完结，无纠纷。</text></view>
+</view>

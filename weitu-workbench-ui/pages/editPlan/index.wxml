@@ -1,0 +1,22 @@
+<!--pages/editPlan/index.wxml-->
+<view class="editPlanContainer">
+  <view id="sortPlanBox" style="margin-top: 28rpx;">
+    <view class="twoJiSortBox">
+      <view class="twoJiSortText">二级分类{{sortIndex}}:</view>
+      <view class="twoJiSortTitle">{{sortName}}</view>
+    </view>
+    <view class="selectedPlan">已选{{schemeNum}}个方案</view>
+  </view>
+  <scroll-view scroll-y class="planScrollBox" refresher-enabled bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}" style="height: {{scrollViewHeight - 14}}px;">
+    <view class="twoJiSortImgListBox">
+      <view class="twoJiSortImgList" wx:for="{{planData}}" wx:key="index">
+        <image class="twoJiSortImg" src="{{ imageBaseUrl + item.goodsImg.secondThumbnail }}"></image>
+      </view>
+      <!-- <image class="addPlan" src="/image/shopSet/addPlan.png"></image> -->
+    </view>
+  </scroll-view>
+  <!-- 底部 -->
+  <!-- <view class="safetyKmN bottomBox">
+    <view class="flex_c_c save">保存</view>
+  </view> -->
+</view>

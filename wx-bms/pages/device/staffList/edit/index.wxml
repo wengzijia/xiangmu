@@ -1,0 +1,27 @@
+<!--pages/maintain/index.wxml-->
+<view class="maintainContainer">
+  <!-- 机长(头像,名字)容器 -->
+  <!-- <view class="pilotBox">
+    <image class="headPortrait" src="../../image/palceOrder/avatar2.png"></image>
+    <view class="name">{{deviceInfo.device_name}}</view>
+  </view> -->
+  <!-- 编辑容器 -->
+  <view class="editBox">
+    <view class="edit" catchtap="editImg">
+      <view class="imgWrap">
+        <image class="headPortrait" src="{{headPortrait ? imageBaseUrl + headPortrait : '/image/palceOrder/avatar2.png'}}"></image>
+        <view class="textBox">
+          <image class="lucency" src="../../image/device/editBgc.png"></image>
+          <view class="text">点击编辑图片</view>
+        </view>
+      </view>
+    </view>
+    <input type="text" value="{{pilotName}}" bindinput="getPilotName" class="pilotName" />
+    <view class="punchCardBox">
+      <view class="text">打卡密码:</view>
+      <input class="password" value="{{password}}" type="text" bindinput="getPassword"  placeholder="请设置打卡密码" />
+    </view>
+  </view>
+  <!-- 确认按钮 -->
+  <view class="affirm" catchtap="affirm">确定</view>
+</view>

@@ -1,0 +1,128 @@
+/* pages/maintain/index.wxss */
+page {
+  background-color: #F1F3F5;
+}
+
+
+.maintainContainer {
+  padding-top: 18rpx;
+  padding-left: 32rpx;
+}
+
+/* 机长(头像,名字)*/
+.pilotBox {
+  width: 686rpx;
+  height: 140rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.pilotBox .headPortrait {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 18.3rpx;
+  margin-left: 24rpx;
+}
+
+.pilotBox .name {
+  margin-left: 40rpx;
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: 700;
+}
+
+/* 编辑 */
+.editBox {
+  width: 686rpx;
+  height: 604rpx;
+  border-radius: 16rpx;
+  background-color: #FFFFFF;
+  margin-top: 20rpx;
+  padding-top: 42rpx;
+  box-sizing: border-box;
+}
+
+.editBox .edit {
+  width: 280rpx;
+  height: 280rpx;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* .editBox  .edit .imgWrap{
+} */
+
+.editBox .edit .imgWrap .headPortrait {
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: 50%;
+}
+
+.editBox .edit .imgWrap .textBox {
+  position: absolute;
+  bottom: -10rpx;
+}
+
+.editBox .edit .imgWrap .textBox .lucency {
+  width: 300rpx;
+  height: 44rpx;
+}
+
+.editBox .edit .imgWrap .text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22rpx;
+  color: #333333;
+}
+
+/* 机长名 */
+.editBox .pilotName {
+  margin-top: 40rpx;
+  text-align: center;
+  font-weight: 700;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+/* 打卡密码 */
+.editBox .punchCardBox {
+  display: flex;
+  align-items: center;
+  margin-top: 60rpx;
+  margin-left: 30rpx;
+  height: 80rpx;
+}
+
+
+.editBox .punchCardBox .text {
+  font-size: 30rpx;
+}
+
+.editBox .punchCardBox .password {
+  width: 494rpx;
+  height: 80rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  border: 2rpx solid #999999;
+  margin-left: 8rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+/* 确认按钮 */
+.maintainContainer .affirm{
+  width: 600rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #E9333F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  margin: 100rpx 42rpx 0 44rpx;
+}

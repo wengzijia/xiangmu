@@ -1,0 +1,116 @@
+<view class="main">
+    <scroll-view style="background:#fffbd6;padding:10rpx 0;position:fixed;z-index:99;top:0;">
+        <view class="msg-icon notice-icon">
+            <view class="ac-icon-notice"></view>
+            <text class="msgIcoTxt">下单后，请在订单详情页上传设计文件。</text>
+        </view>
+    </scroll-view>
+    <view style="margin-top:80rpx">
+        <view class="title">
+            <text class="titletxt"><text style="color:red;width:20rpx;">* </text>联系人姓名:</text>
+            <input class="weui-input" name="username" bindinput="formname" placeholder="请输入联系人姓名" placeholder-class="phcolor"  value="{{username}}" />
+        </view>
+        <!-- <view class="title">
+            <text class="titletxt"><text style="color:red;width:20rpx;">* </text>联系人电话:</text>
+            <input class="weui-input" name="phone" bindinput="formphone" value="{{phone}}" placeholder="" />
+        </view> -->
+    </view>
+    
+        <view class="cart-box">
+            <view class="cart-list" wx:for="{{carts}}" wx:key="id">
+                <!-- <text class="cart-pro-name" wx:if="{{!item.boxtype}}">
+                    {{item.paper.paperType+'_'+item.paper.kg}}<text style="float:right;color:#000">{{item.parkName?item.parkName:item.factoryName}}</text>
+                </text> -->
+                <text class="cart-pro-name">{{item.boxtype+'_'+item.newgoods[0][1]+'g'}}
+                    <!-- <text style="float:right;color:#000">{{item.parkName?item.parkName:item.factoryName}}</text> -->
+                </text>
+                <!-- <text class="cart-con">{{item.goodsAttr}}</text> -->
+               <view class="details">
+                    <text wx:for="{{item.newgoods}}"  wx:for-item="items" wx:for-index='i' wx:key="id">
+                        <text  style='color:#333' wx:if='{{items.length==1}}'>{{items[0]}};</text>
+                        <text wx:elif="{{items[0]=='纸行名称'||items[0]=='吨价/平方单价'||items[0]=='纸张品牌'}}">
+                        </text>
+                        <text wx:else>
+                            <text style='color:#999;'>{{items[0]}}:</text>
+                            <text style='color:#666;'>{{items[1]}};</text>
+                        </text>
+                    </text>
+                </view>
+                <view class="numbox">
+                    <text class="cart-pro-num">x{{item.num}}</text>
+					<text class="cart-pro-num" >总价:<text style="color:#FF0036">￥<text class="f40">{{item.goodsTotal}}</text></text></text>
+                </view>
+                <!-- <view wx:if="{{false}}">
+                    <view class="numbox">
+                        <text class="cart-pro-num" style="color:#000;">优惠价:<text style="color:#FF0036">￥{{item.goodsTotal}}</text></text>
+                    </view> 
+                    <view class="numbox">
+                        <text class="cart-pro-num" style="color:#000;margin-top:10rpx">原价:<text style="color:#FF0036">￥{{differ}}</text></text>
+                    </view>
+                </view> -->
+             
+                <!-- <text class="cart-address">提货地址：{{item.factoryAddress}}</text> -->
+                <text class="bottomtxt" wx:if="{{item.memo}}">备注：{{item.memo}}</text>
+            </view>
+        </view>
+        <view style="clear:both;padding-top:24rpx;">
+            <view class="fayBox">
+                <view class="titlebox">
+                    <text class="titletxt">支付方式:</text>
+                    <text class="titleright">微信支付</text>
+                </view>
+                <view class="titlebox">
+                    <text class="titletxt">生产货期:</text>
+                    <text class="titleright" style="color:#ff0036;">{{orderTime}}天</text>
+                </view>
+                <view class="titlebox">
+                    <text class="titletxt">预计提货日期:</text>
+                    <text class="titleright">{{pickUpDate}}</text>
+                </view>
+            </view>
+            <!-- <view class="titlebox">
+                <text class="titletxt">优惠明细:</text>
+                <text class="titleright">纸费￥{{discountsPaperprice}}; 切纸费￥{{cuttingFeeprice}}</text>
+            </view> -->
+            <!-- <view class="titlebox">
+                <text class="titletxt">配送方式:</text>
+                <text class="titleright">自提</text>
+            </view> -->
+            <view class="titlebox" style="border-top:0" wx:if="{{false}}">
+                <!-- <text class="titletxt"></text> -->
+                <!-- <text class="titleright">2~3天</text> -->
+                <!-- <text class="cart-address" style="font-size:26rpx;padding-bottom:25rpx;border-top:0">（每天20点截单：支付完成，上传文件后开始计算货期。）</text> -->
+                <text class="titletxt"  style="width:100%;"> 订单审核通过，七天后结算印刷费</text>
+            </view>
+        </view>
+
+        <view style="margin-top:26rpx;display: inline-block;width:100%;">
+            <view class="title">
+                <text class="titletxt" style="width:90rpx">备注</text>
+                <input class="weui-input" placeholder-class="phcolor" name="remarks" bindinput='formremarks' placeholder="订单备注"/>
+            </view>
+			<view class="bottomtxt">如需看色或跟色时，印刷厂会提前与您联系，请注意接听电话</view>
+        </view>
+    
+    <!-- <table list='{{priceArr}}'></table> -->
+    <view wx:if="{{false}}" class="cpreice">
+        <view class="row">
+            <!-- <text>优惠金额:<text style="color:red;font-size:24rpx;">￥</text> </text> -->
+            已省:
+            <text class="price">￥{{pitCprice}}</text>
+        </view>
+    </view>
+    <view wx:if="{{totalOrder>1}}" class="bottom_total">
+        <view class="bottom_line"></view>
+        <view class="row">
+            <!-- <text>需付款:<text style="color:red;font-size:24rpx;">￥</text> </text> -->
+           应付金额:
+           <text class="price">￥<text class="f40">{{totalOrder}}</text></text>
+            <button class="button-red" bindtap="ordernow">提交订单</button>
+        </view>
+    </view>
+
+    <!-- <view wx:else>
+        <view class="cart-no-data">购物车是空的哦~ </view>
+    </view> -->
+</view>

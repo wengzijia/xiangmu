@@ -1,0 +1,24 @@
+page{
+ background-color: #e52822;
+  /* padding-bottom: 92rpx; */
+  
+}
+
+.shareBtn{
+  background-color: rgba(0, 0, 0, 0);
+  /* background-image: linear-gradient(#fddeb2  , #f3be6d); */
+  
+  
+
+  width: 80%;
+  border-radius: 0;
+  color: #a36016  ;
+  box-sizing: border-box;
+  /* padding: 15rpx ; */
+  height: 200rpx;
+  
+  font-size: 32rpx;
+  position: absolute;
+  left:10%;
+  top: 700rpx;
+}

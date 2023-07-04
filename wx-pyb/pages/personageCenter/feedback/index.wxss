@@ -1,0 +1,53 @@
+page{
+  background-color: rgb(240, 240, 240);
+}
+.name{
+  background-color: rgb(255, 255, 255);
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  border-top: 1px solid rgb(228, 228, 228);
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+.name text{
+  vertical-align: middle;
+  margin-right: 32rpx;
+}
+.name input{
+  height: 32rpx;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 8rpx;
+}
+.title{
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+}
+.opinion-box{
+   border-top: 1px solid rgb(228, 228, 228);
+  border-bottom: 1px solid rgb(228, 228, 228);
+  background-color: #fff;
+  height: 500rpx;
+  padding: 20rpx 40rpx;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+.opinion-text{
+ width: 100%;
+}
+.placeholder{
+  font-size:32rpx;
+  text-align: left;
+  padding: 0;
+  margin-top: 0;
+}
+.btn,.btn button{
+  padding: 12rpx 0;
+  background-color: #ff0036;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-radius: 0;
+}

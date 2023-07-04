@@ -1,0 +1,40 @@
+/* pages/tool/cutter/download/index.wxss */
+.cutter-steps .van-steps--horizontal {
+  padding: 32rpx 76rpx 10rpx ;
+}
+.cutter-steps .van-icon.van-icon-checked{
+  height: 15px;
+}
+.cutter-steps{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 99;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.05);
+}
+.t-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 10px 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 4%);
+  box-sizing: border-box;
+}
+.t-footer button{
+  width: 100%;
+  background-color: #e9333f;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 32rpx;
+}
+.cutter-img-box{
+  text-align: center;
+  padding-top: 20rpx;
+}
+.cutter-img{
+  width:100%;
+  box-sizing: border-box;
+}

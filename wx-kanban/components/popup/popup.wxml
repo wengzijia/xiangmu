@@ -1,0 +1,51 @@
+<!--components/popup.wxml-->
+  <!-- 完成生产前置信息提示弹窗 -->
+  <van-popup show="{{ isDoneProHint }}" round custom-class="doneProPopup" bind:close="doneProHintClose">
+    <view class="doneProHintBox">
+      <view class="hintTitle">上工序未完成，本工序不能点击完成,请先完成上工序。</view>
+      <view class="itemBox stepUpBox">
+        <text class="itemLeft">上工序：</text>
+        <text class="itemContent">{{doneProHintData.preAttrName}}</text>
+      </view>
+      <view class="itemBox proDeviceBox">
+        <text class="itemLeft">生产设备：</text>
+        <text class="itemContent">{{doneProHintData.deviceName}}</text>
+      </view>
+      <view class="itemBox pilotBox">
+        <text class="itemLeft">机长：</text>
+        <text class="itemContent">{{doneProHintData.operatorName}}</text>
+      </view>
+      <view class="flex_c_c doneProAffirm" catchtap="doneProHintAffirm">确认</view>
+    </view>
+  </van-popup>
+  
+  <!-- 异常信息提示弹窗 -->
+  <van-popup show="{{ isAnoMsgHint }}" round custom-class="anoMsgPopup" bind:close="anoMsgHintClose">
+    <view class="anoMsgHintBox">
+      <view class="anoMsghintTitle">
+        <view class="time">2022/10/20 20:32</view>
+        <view class="proText">停止生产</view>
+      </view>
+      <view class="itemBox deviceBox">
+        <text class="itemLeft">设备：</text>
+        <text class="itemContent">手动模切1100mm</text>
+      </view>
+      <view class="itemBox pilotBox">
+        <text class="itemLeft">机长：</text>
+        <text class="itemContent">张三</text>
+      </view>
+      <view class="itemBox anoProcessBox">
+        <text class="itemLeft">异常工序：</text>
+        <text class="itemContent">印刷</text>
+      </view>
+      <view class="itemBox anoNumBox">
+        <text class="itemLeft">异常数量：</text>
+        <text class="itemContent">全部</text>
+      </view>
+      <view class="itemBox anoRemarkBox">
+        <text class="itemLeft">异常备注：</text>
+        <text class="itemContent">PO20221024759373经过沟通废弃此订单</text>
+      </view>
+      <view class="flex_c_c anoMsgAffirm" catchtap="anoMsgHintAffirm">我知道了</view>
+    </view>
+  </van-popup>

@@ -1,0 +1,11 @@
+<!--pages/infoList/index.wxml-->
+<view class="infoListContainer">
+  <!-- 机长列表 -->
+  <view class="pilotListBox" >
+    <view class="itemBox"  wx:for="{{pilotList}}" wx:key="operator_id" data-pilotId="{{item.operator_id}}" catchtap="skip">
+      <image class="headPortrait" src="{{item.operator_url ? imageBaseUrl + item.operator_url : '../../../image/palceOrder/avatar2.png'}}"></image>
+      <view class="name">{{item.operator_name}}</view>
+    </view>
+    <button class="addPilot flex_c_c" catchtap="jump">添加机长</button>
+  </view>
+</view>

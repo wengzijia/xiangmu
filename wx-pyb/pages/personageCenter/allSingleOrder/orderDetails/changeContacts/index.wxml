@@ -1,0 +1,21 @@
+<view class="scroll-top" wx:if="{{false}}" style="background: #fffbd6;">
+  <view>
+    <view class="msg-icon notice-icon">
+      <text class="ac-icon-notice" style="font-size:54rpx; color:#e0620d"></text>
+    </view>
+    <view class="scrollbar" style="transform: translateX(- {{distance}}px )">
+      <text>订单仅支持修改一次，敬请谅解</text>
+    </view>
+  </view>
+</view>
+<view class="name">
+  <text>姓名</text>
+  <input placeholder="请留下您的姓名" bindinput="cgname"/>
+</view>
+<view class="name">
+  <text>电话</text>
+  <input placeholder="请留下您的电话" bindinput="cgmobile" />
+</view>
+<view class="btn"><button bindtap="submit">提交</button></view>
+
+<modal modal="{{modal}}"></modal>

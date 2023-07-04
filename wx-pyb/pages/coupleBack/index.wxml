@@ -1,0 +1,21 @@
+<view class='couple'>
+  <view class="title">
+    请提供纸张信息：
+  </view>
+  <view class="from">
+    <view class="inputBox">
+      <text><text class="red">*</text>纸行名称</text>
+      <input value="{{info.shopName}}" placeholder='请输入纸行名称' placeholder-style='color:#929292' auto-height data-key='shopName' bindblur='setInfo'/>
+    </view>
+    <view class="inputBox">
+      <text> <text>*</text>联系电话</text>
+      <input value="{{info.mobile}}"  placeholder='请输入手机号'  auto-height type="number" placeholder-style='color:#929292' maxlength="11" data-key='mobile' bindblur='setInfo' />
+    </view>
+    <view >
+      <text><text class="red">*</text>纸张信息</text>
+      <textarea value="{{info.paperInfo}}" placeholder='例如：材质、克重、品牌、吨价等'  placeholder-style='color:#929292' data-key='paperInfo' style="{{phoneType?'':'padding:10rpx'}}" bindblur='setInfo' />
+    </view>
+  </view>
+<view class="submit" catchtap="submit">提交</view>
+</view>
+<modal modal="{{modal}}"></modal>

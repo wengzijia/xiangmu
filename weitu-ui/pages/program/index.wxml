@@ -1,0 +1,29 @@
+<!--pages/program/index.wxml-->
+<view class="safetyKmN programContainer">
+  <!-- 分类滚动 -->
+  <scroll-view scroll-x class="sortScrollBox">
+    <view class="sortBox">
+      <block wx:for="{{sortData}}" wx:key="index">
+        <view class="sortList {{sortIndex == index ? 'sortActColor' : ''}}" wx:for="{{item.children}}" wx:key="index" data-index="{{index}}" data-id="{{item.id}}" data-enterpriseCode="{{item.enterpriseCode}}" data-path="{{item.path}}"  catchtap="sortCut">{{item.name}}</view>
+      </block>
+    </view>
+  </scroll-view>
+  <!-- 方案滚动列表 -->
+  <scroll-view scroll-y class="sortScrollList" refresher-enabled="true" bindscrolltolower="scrollLoadMore" bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}">
+    <!-- 分类列表 -->
+    <view class="sortListBox">
+      <view class="sortItemBox" wx:for="{{planData}}" wx:key="index" data-id="{{item.id}}" catchtap="goodsDetails">
+        <image class="sortItemImg" src="{{ imageBaseUrl + item.goodsImg.secondThumbnail }}"></image>
+        <view class="text-ellipsisl2 sortItemTitle">{{ item.schemeName }}</view>
+        <view class="priceUnitBox">
+          <view class="priceBox">
+            <text class="rmb">¥</text>
+            <text class="price">{{item.price}}</text>
+          </view>
+          <view class="unit">元/套起</view>
+        </view>
+      </view>
+    </view>
+    <view class="onEarth">我是有底线的~</view>
+  </scroll-view>
+</view>

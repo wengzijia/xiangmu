@@ -1,0 +1,13 @@
+<!--pages/orderInformation/index.wxml-->
+<view class="noticeContainer">
+<view class="orderInformationText">
+  <view>
+    1、包秘书仅作为下单记账平台，不对生产质量、文件、数量进行核实，请自行核实，如因
+    有质量问题概不负责；
+  </view>
+  <view class="marginTop">
+    2、经纪人用户在支付加工费后，我们会在第二天将货款结算付款到加工商提供的收款账号
+    中，如需更改收款账号，请提前告知3天告知包秘书运营人员；
+  </view>
+</view>
+</view>

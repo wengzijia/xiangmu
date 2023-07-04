@@ -1,0 +1,120 @@
+<view class="body">
+  <view class="head">
+    <image src="../../../image/save.jpg" class="bg-img"></image>
+    <view class="date">
+      <picker
+        mode="date"
+        value="{{date}}"
+        start="2021-06-01"
+        fields="year"
+        bindchange="bindDateChange"
+        >
+          <view class="picker">
+          <text>{{date}}年</text>
+          <text class='greaterThanSign2'></text>
+          </view>
+        </picker>
+    </view>
+    <!-- <view class="tabs">
+      <text catchtap="tabsCrount" class="item {{ currentTab==1 ? ' active' : ''}}" data-current="1">返利明细</text>
+      <text catchtap="tabsCrount" class="item {{ currentTab==0 ? ' active' : ''}}" data-current="0">待结印刷费</text>
+    </view> -->
+    <view wx:if="{{currentTab==1}}">
+      <view class="total">
+        <view class="total-head">
+          <text class="total-left t">订单总数</text>
+          <text class="total-left t">返利总金额</text>
+          <text class="total-center t">待返金额</text>
+        </view>
+        <view class="total-head">
+          <text class="total-left amount">{{rebateOrder.orderCount*1}}<text class="sm">单</text></text>
+          <text class="total-right amount">{{rebatesaveTotal*1}}<text class="sm">元</text></text>
+          <text class="total-right amount">{{returnTotal*1}}<text class="sm">元</text></text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{currentTab==0}}" class="show-box">
+      <view class="total">
+        <view class="total-head">
+          <text class="total-left t">订单总数</text>
+          <text class="total-center t">总印刷费</text>
+          <text class="total-right t">待结印刷费</text>
+        </view>
+        <view class="total-head">
+          <text class="total-left amount">{{order.orderCount*1}}<text class="sm">单</text></text>
+          <text class="total-center amount">{{order.amount?order.amount*1:0}}<text class="sm">元</text></text>
+          <text class="total-right amount">{{order.toBeReturnAmount*1}}<text class="sm">元</text></text>
+        </view>
+      </view>
+    </view> 
+  </view>
+  <view wx:if="{{currentTab==1}}">
+    <view class="content">
+      <view class="title">
+        <text class="month">月份</text>
+        <text class="order-amount">订单数</text>
+        <text class="save-total">返利金额</text>
+        <text class="order-statue">状态</text>
+      </view>
+      <view class="month-item" wx:for="{{rebate}}" wx:key="{{item}}">
+        <view class="month-list" data-index="{{index}}" catchtap="showInfo">
+          <text class="month">{{item.data.month}}月</text>
+          <text class="order-amount">{{item.data.orderCount*1}}单</text>
+          <text class="save-total">{{item.data.amount*1}}元</text>
+          <text class="order-statue"></text>
+        </view>
+        <text wx:if="{{item.children.length>0}}" class='greaterThanSign {{active==index?"active-gt":""}}'></text>
+        <view wx:if="{{active==index}}" class="month-info">
+          <view class="info justifty" wx:if="{{childItem.rebate.amount}}" style="{{childItem.red?'color:red;':''}}" wx:for="{{item.children}}" wx:for-item="childItem"  wx:for-index="childIndex" wx:key="{{childItem}}" data-index="{{index}}" data-i="{{childIndex}}" catchtap="viewPO">
+            <text wx:if="{{childItem.checked}}" class="bubble">{{childItem.orderSn}}</text>
+            <view class="sn draw">
+              <!-- <text style="width:16%">{{childIndex+1}}</text> -->
+              <text>{{childItem.weight}}吨</text>
+              <text>{{childItem.rebate.amount?childItem.rebate.amount+'元/吨':'未抽奖'}}</text>
+            </view>
+            <text class="save-total">{{childItem.amount*1}}元</text>
+            <text class="return-total">{{childItem.status=='4'?'已返':'待返'}}</text>
+          </view>
+        </view>
+      </view>    
+    </view>
+  </view>
+  <view wx:if="{{currentTab==0}}">
+    <view class="content">
+      <view class="title">
+        <text class="month">月份</text>
+        <text class="return-total">订单数</text>
+        <text class="return-total">印刷费</text>
+        <!-- <text class="return-total">待结</text> -->
+        <text class="return-total">状态</text>
+      </view>
+      <view class="month-item" wx:for="{{month}}" wx:key="id">
+        <view class="month-list" data-index="{{index}}" catchtap="showInfo">
+          <text class="month">{{item.data.month}}月</text>
+          <text class="return-total">{{item.data.orderCount*1}}单</text>
+          <text class="return-total">{{item.data.amount*1}}元</text>
+          <!-- <text class="return-total">{{item.data.toBeReturnAmount*1}}元</text> -->
+          <text class="return-total"></text>
+        </view>
+        <text wx:if="{{item.children.length>0}}" class='greaterThanSign three {{active==index?"active-gt":""}}'></text>
+        <view wx:if="{{active==index}}">
+          <view class="info" wx:for="{{item.children}}" wx:for-item="childItem"  wx:key="id">
+            <text class="sn">{{childItem.orderSn}}</text>
+            <text class="save-total">{{childItem.amount*1}}元</text>
+            <!-- <text class="return-total">{{childItem.amount*1}}元</text> -->
+            <text class="return-total">{{childItem.toBeReturnAmount*1==childItem.amount*1?'待结':'已结'}}</text>
+          </view>
+        </view>
+      </view>    
+    </view>
+  </view>
+</view>
+<view wx:if="{{month.length<1&&currentTab==0}}" class="order-null">
+  <image src="../../../image/personage6.png" />
+  <view style="text-align:center;color:#999;font-size:26rpx;padding: 20rpx 0;"><text>您还没有相关订单呢~</text></view>
+</view>
+<view wx:if="{{rebate.length<1&&currentTab==1}}" class="order-null">
+  <image src="../../../image/personage6.png" />
+  <view style="text-align:center;color:#999;font-size:26rpx;padding: 20rpx 0;"><text>您还没有相关订单呢~</text></view>
+</view>
+<modal modal="{{modal}}"></modal>

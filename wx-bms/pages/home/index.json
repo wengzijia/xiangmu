@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#f8f8f8",
+ "navigationBarTextStyle": "black",
+ "navigationBarTitleText": "包秘书",
+ "backgroundColor": "#f8f8f8",
+ "backgroundTextStyle": "light",
+ "navigationStyle":"custom",
+ "usingComponents": {
+  "van-image": "@vant/weapp/image/index"
+}
+
+}

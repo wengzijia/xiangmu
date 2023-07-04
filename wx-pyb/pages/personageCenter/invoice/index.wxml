@@ -1,0 +1,75 @@
+<view >
+	<!-- 标签 -->
+	<view >
+		<van-tabs swipeable active="{{ active }}" tab-active-class="active" bind:change="onChange">
+			<van-tab title="抬头簿"></van-tab>
+			<van-tab title="开票中"></van-tab>
+			<van-tab title="已开票"></van-tab>
+		</van-tabs>
+	</view>
+	<!-- 抬头簿 -->
+	<view wx:if="{{active == 0}}">
+		<view class="explanation color_777" style="padding-top: 28rpx;padding: right 28rpx;">
+			<text >开票说明</text><van-icon catchtap="explanation" name="question-o" />
+		</view>
+		<view wx:if="{{list.length}}" class="content">
+			<scroll-view scroll-y="true" class="{{admin?'admin':'noAdmin'}}" bindscrolltolower="loading">
+				<van-swipe-cell right-width="{{ 65 }}" wx:for="{{list}}" wx:key="index">
+					<view class="displayFlex back_fff flexCenter padding_28rpx marginBottom_20rpx borderRadius">
+						<view class="swipeIcon">
+							<van-icon name="star" wx:if="{{item.defaultTemp}}" />
+						</view>
+						<view class="flex_1" catchtap="update" data-id="{{item.id}}">
+							<view >
+								{{item.invoiceVo.invoiceName}}
+							</view>
+							<view class="color_777 marginTop_20">
+								税号：{{item.invoiceVo.invoiceCode}}
+							</view>
+						</view>
+						<view class="swipeEdit color_777" catchtap="edit" data-item="{{item}}">
+							编辑
+						</view>
+					</view>
+					<view slot="right" catchtap="_delete" data-id="{{item.id}}" data-defaultTemp="{{item.defaultTemp}}">删除</view>
+				</van-swipe-cell>
+			</scroll-view>
+		</view>
+		<view wx:else class="whitespace">
+			暂无发票抬头，点击添加吧！
+		</view>
+		<view class="footer left_transform">
+			<view catchtap="add" class="footerBtn">
+				新增发票抬头
+			</view>
+		</view>
+	</view>
+	<!-- 开票中 -->
+	<view wx:if="{{active == 1}}">
+    	<orderList bindloading="loading" active="{{active}}"></orderList>
+	</view>
+	<!-- 已开票 -->
+	<view wx:if="{{active == 2}}">
+		<!-- <time bindonSeach="onSeach" type="{{active}}"></time> -->
+    	<orderList bindloading="loading" active="{{active}}"></orderList>
+	</view>
+</view>
+
+<van-popup
+  show="{{ showExplanation }}"
+  round
+  position="bottom"
+  custom-style="height: 40%"
+  bind:close="onClose"
+>
+    <view style="padding:25rpx;">
+        <view style="position: absolute;right: 41rpx;">
+            <van-icon name="cross" bind:tap="onClose" />
+        </view>
+        <view class="popup_title" style="margin-bottom: 40rpx;font-size: 38rpx;font-weight: 600;">
+            开票说明
+        </view>
+        
+        <text class="popup_label" wx:if="{{explanationText}}">{{explanationText}}</text>
+    </view>
+</van-popup>

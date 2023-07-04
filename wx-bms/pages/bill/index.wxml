@@ -1,0 +1,169 @@
+<view class="safe_bot all">
+  <view>
+    <!-- //判断是否是加工商 -->
+    <view class="billtab" wx:if="{{isProcessor==1}}">
+      <view bindtap="currentTab" class="{{currentTab==0 ? 'cur' : ''}}" data-current="0">
+        <text>客户账单</text>
+      </view>
+      <view bindtap="currentTab" class="{{currentTab==1 ? 'cur1' : ''}}" data-current="1">
+        <text>加工商账单</text>
+      </view>
+    </view>
+
+    <!-- 客户账单 -->
+    <view hidden="{{currentTab!=0}}" class="cus_mar">
+
+      <!-- //待结算金额总计 -->
+      <view class="mar_r32 " wx:if="{{isInit}}">
+        <view class="posi_re">
+          <image src="../../image/bill/billbanner.png" class="wid_100" mode="widthFix"></image>
+          <view class="pose_abt">
+            <view class="topf"> 待结算金额总计: </view>
+          </view>
+          <view class="botf">
+
+            <text class="unit">¥</text>{{allList.pending_settlement}}
+          </view>
+        </view>
+        <!-- 客户列表 -->
+        <view class="marb_15">
+          <block wx:if="{{allList.supplier_customer.length>0}}">
+            <view class="list_flex" catchtap="myNavigateTo" data-customer="{{item}}" data-url="billList" wx:for="{{allList.supplier_customer}}" wx:key="index" wx:for-item="item">
+              <view class="headImg">
+                <view wx:if="{{item.customer_info.wx_portrait}}">
+                  <image src="{{item.customer_info.wx_portrait}}" mode="widthFix" class="headImg"> </image>
+                </view>
+                <view wx:else>
+                  <image src="../../image/palceOrder/avatar.png" mode="widthFix" class="headImg" wx:if="{{item.customer_type=='2'}}"> </image>
+                  <image src="../../image/palceOrder/avatar2.png" mode="widthFix" class="headImg" wx:else> </image>
+                </view>
+              </view>
+
+              <view class="mid_font overflow" wx:if="{{item.customer_name}}">
+                {{item.customer_name}}
+              </view>
+
+              <view class="right_font " wx:if="{{item.customer_info.wx_nickname}}">
+              <view class="mar_10 overflow"> 
+              
+                {{item.customer_info.wx_nickname}}</view>
+              
+              </view>
+
+              <view>
+                <image src="../../image/bill/back.png" class="wid_back" mode="widthFix" style="margin-right: -15rpx;"></image>
+              </view>
+
+            </view>
+
+          </block>
+          <block wx:else>
+            <view class="none_all">
+              <image src="../../image/bill/none.png" mode="widthFix" class="img"></image>
+              <view class="none_text">小主，您还没有账单呢~</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <!-- 加工商账单 -->
+    <view hidden="{{currentTab!=1}}">
+      <view class="bg" style="display:{{isbg}}"></view>
+      <view class="mar_r32">
+        <!-- //判断是否是加工商 -->
+        <view class="tabNav" style="margin:0 {{marginrl}}rpx;top:{{tabTop}}rpx">
+          <view wx:for="{{billList}}" wx:key="index" data-idx="{{index}}" bindtap="detailTap" class="{{is_pay==index ? 'cur' : ''}}">
+            <text class="text">{{item.name}}</text>
+          </view>
+        </view>
+        <!-- billInfo1 -->
+        <view class="" wx:if="{{isShow}}" style="margin-top: {{contMart}}rpx;">
+          <block wx:if="{{supplierList.length>0}}">
+            <!-- catch会阻止事件向上冒泡 -->
+            <view class="billInfo-item" wx:key="index" wx:if="{{true}}" wx:for="{{supplierList}}" catchtap="myNavigateTo" data-customer="{{item}}" data-url="processDetail">
+              <view class="infoFlex bor_bot pad_all1">
+                <view>{{item.supplier_name}}</view>
+                <view class="time_right">
+                  <text class="infoDate">{{item.years_month}}</text>
+                </view>
+                <view>   <image src="../../image/bill/back.png" class="wid_back" mode="widthFix"></image></view>
+              </view>
+              <!-- 判断是待支付还是已付清 -->
+              <block wx:if="{{is_pay==0}}">
+                <view class="total t_color">
+                  <text class="insb">总金额:</text>
+                  <text>¥{{item.total_price}}</text>
+                </view>
+                <view class="t_color bor_bot pad-b20">
+                  <text class="insb">已支付:</text>
+                  <text>¥{{item.paid_price}}</text>
+                </view>
+                <view class="infoFlex pad_all2">
+                  <view>
+                    <text class="insb">待支付:</text>
+                    <text class="price">¥{{item.unpaid_price}}</text>
+                  </view>
+                  <view>
+                    <view class="btn" catchtap="bindPay" data-pay="{{item}}" data-status="gopay">
+                      去支付
+                    </view>
+                  </view>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="total t_color">
+                  <text class="insb">付款总额：</text>
+                  <text>¥{{item.paid_price}}</text>
+                </view>
+              </block>
+            </view>
+
+            <!-- <view style="height:34px;"></view> -->
+
+          </block>
+          <block wx:else="">
+            <!-- 没有账单~ -->
+            <view class="none_all">
+              <image src="../../image/bill/none.png" mode="widthFix" class="img"></image>
+              <view class="none_text">小主，您还没有账单呢~</view>
+            </view>
+          </block>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- //底部弹框 -->
+  <!-- 支付成功状态 -->
+  <van-popup show="{{ show1 }}" bind:close="onClose" data-status="middle" custom-style="width:86%;border-radius:20rpx">
+    <view class="pop_bg">
+      <view class="icon_all">
+        <image src="../../image/bill/icon.png" class="icon" mode="widthFix"></image>
+      </view>
+      <view class="pop_ti">订单支付成功！</view>
+      <view class="confirm_all">
+        <view bindtap="onClose" data-status="middle" class="confirm">确认</view>
+      </view>
+    </view>
+  </van-popup>
+  <van-popup show="{{show}}" round position="bottom" bind:close="onClose" data-status="bottom">
+    <view class="marl_32">
+      <view class="pop_title">
+        <view class="title"> 确认支付</view>
+        <image src="../../image/bill/close.png" class="close_img" bindtap="onClose" data-status="bottom" mode="widthFix"></image>
+      </view>
+      <view class="pop_flex">
+        <view class="name_left">需付金额</view>
+        <view class="price_r">¥{{payVal.price}}</view>
+      </view>
+      <view class="pop_flex">
+        <view class="name_left">订单笔数</view>
+        <view class="num_right">{{payVal.number}}</view>
+      </view>
+      <view class="pay_btn" bindtap="orderPaySuccess" data-status="middle">
+        立即支付
+      </view>
+    </view>
+  </van-popup>
+</view>

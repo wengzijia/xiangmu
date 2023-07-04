@@ -1,0 +1,70 @@
+<!--subpackageA/pages/donePromote/index.wxml-->
+<view class="doneProContainer">
+  <!-- 主体 -->
+  <view class="mainBody">
+  <!-- <scroll-view scroll-y style="height: 1150rpx;"> -->
+    <!-- 异常订单 -->
+    <view class="excOrderBox">
+      <view class="excOrderTitle">
+        <view class="excOrderText"><text style="color: red;">*</text>异常订单</view>
+        <view class="flex_c_c selectAllBox">
+          <!-- 全选按钮 一定要写在checkbox-group外面 否则会有bug-->
+          <checkbox bindtap="orderSelectAll" checked="{{selectAll}}" />
+          <view class="selectAllText">全选</view>
+        </view>
+      </view>
+      <checkbox-group class="checkAllBox" bindchange="orderSelectChange">
+        <block wx:for="{{orderNumList}}" wx:key="value">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}">{{item.value}}</checkbox>
+        </block>
+      </checkbox-group>
+    </view>
+    <!-- 异常相关内容 -->
+    <view class="excContainer">
+      <!-- 异常原因 -->
+      <view class="excTypeText">
+        <text style="color: red;">*</text>
+        <text>异常原因</text>
+      </view>
+      <van-checkbox-group class="excTypeSelect" value="{{ anoType }}" bind:change="expTypeChange">
+        <van-checkbox name="{{item.type}}" wx:for="{{anomalyType}}" wx:key="type">{{item.name}}</van-checkbox>
+      </van-checkbox-group>
+      <!-- 异常纸张数 -->
+      <view class="excPaperNum">
+        <text style="color: red;">*</text>
+        <text>异常纸张数</text>
+      </view>
+      <van-radio-group class="excPaperSelect" value="{{ reportedParam.lossType }}" bind:change="excPaperChange">
+        <van-radio name="0">全部</van-radio>
+        <van-radio name="1" style="margin-left:128rpx">
+          <view class="excNumCustomBox">
+            <input class="excNumCustom" type="text" placeholder="请输入数量" value="{{reportedParam.lossNum}}" data-type="1" catchinput="getInputVal" />
+          </view>
+        </van-radio>
+      </van-radio-group>
+      <!-- 异常图片 -->
+      <view class="excImgBox">
+        <view class="excImgTitle">异常图片 ({{fileList.length}}/4)</view>
+        <van-uploader file-list="{{ fileList }}" max-count="4" bind:after-read="uploadImg" bind:delete="deleteImg" multiple="{{true}}" />
+      </view>
+      <!-- 异常备注 -->
+      <view class="excRemarkBox">
+        <view class="excRemarkTitle">异常备注</view>
+        <view class="excRemarkInputBox">
+          <view class="inputBox">
+            <textarea style="width: 98%;height: 90%;" maxlength="200" placeholder="请输入说明" value="{{reportedParam.reason}}" data-type="2" catchinput="getInputVal"></textarea>
+          </view>
+          <view class="excRemarkLength">{{reportedParam.reason.length}}/200</view>
+        </view>
+      </view>
+    </view>
+  <!-- </scroll-view> -->
+  
+  </view>
+  <!-- <view style="height: 120rpx;"></view> -->
+  <!-- 底部 -->
+  <view class="bottomBox">
+    <view class="flex_c_c goPro" data-type="1" catchtap="production">继续生产</view>
+    <view class="flex_c_c stopPro" data-type="2" catchtap="production">停止生产</view>
+  </view>
+</view>

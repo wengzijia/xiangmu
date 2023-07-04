@@ -1,0 +1,178 @@
+<!--pages/current/index.wxml-->
+<!-- 解决滚动穿透 -->
+<page-meta page-style="{{ isShowHint || isDoneProHint ? 'overflow: hidden;' : '' }}" />
+<view class="orderContainer">
+  <!-- 整体 -->
+  <view class="overall" wx:if="{{orderData}}">
+    <!-- 内容主体 -->
+    <view class="contentBody">
+      <!-- 大图 -->
+      <view class="bigImgBox">
+        <swiper circular="{{true}}" class="bImgS" bindchange="picChange" wx:if="{{orderData.groupImg.length}}">
+          <block wx:for="{{orderData.groupImg}}" wx:key="index">
+            <swiper-item data-index="{{index}}" data-imgList="{{orderData.groupImg}}" catchtap="previewImage">
+              <view>
+                <image class="bigImg" mode="aspectFit" src="{{item ? imageBaseUrl + item : '../../../image/current/noBigImg.png' }}"></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <image style="width: 100%;height: 546rpx;" mode="aspectFit" src="../../../image/current/noBigImg.png" wx:else></image>
+        <view class="flex_c_c picNum" wx:if="{{orderData.groupImg.length}}">{{picNum + 1}}/{{orderData.groupImg.length}}</view>
+      </view>
+      <!-- 大信息 -->
+      <view class="bigInfoBox">
+        <!-- 左边标题 -->
+        <view class="leftTitle">
+          <view>大版编号:</view>
+          <view>PO个数:</view>
+          <view>订单数量:</view>
+          <view>上工序良品数:</view>
+          <view>截止时间:</view>
+          <view>交货日期:</view>
+        </view>
+        <!-- 右边信息 -->
+        <view class="rightInfo">
+          <view class="flex_c_c">
+            <text>{{orderData.groupSn}}</text>
+            <!-- <image class="ji" src="../../../image/current/ji.png"></image> -->
+            <text class="flex_c_c ji" wx:if="{{orderData.urgentFlag == 'Y'}}">急</text>
+          </view>
+          <view>{{orderData.poCount}}</view>
+          <view>{{orderData.orderNumStr}}</view>
+          <view>{{orderData.nearCount != null ? orderData.nearCount : '无'}}</view>
+          <view>{{orderData.deadline ? orderData.deadline : orderData.productStatusName}}</view>
+          <view>{{orderData.deliveryDate}}</view>
+        </view>
+      </view>
+      <!-- 除废操作规程 -->
+      <view class="flex_c_c jjgBox" catchtap="jumpSop">
+        <image class="inform" src="../../../image/current/inform.png"></image>
+        <view class="jjgTitle">除废标准操作规程</view>
+        <view class="cat">点击查看 ></view>
+      </view>
+      <!-- 内容切换 -->
+      <view class="contextSwitch">
+        <view class="details {{contentIndex == 1 ? 'actColor' : ''}}" data-index="1" catchtap="switch">详情</view>
+        <view class="remarks {{contentIndex == 2 ? 'actColor' : ''}}" data-index="2" catchtap="switch">备注</view>
+        <view class="info {{contentIndex == 3 ? 'actColor' : ''}}" data-index="3" catchtap="switch">异常信息({{abnormalData.length}})</view>
+      </view>
+      <!-- 详情 -->
+      <view class="detailsBox" wx:if="{{contentIndex == 1 && detailData.length}}">
+        <view class="itemBox" wx:for="{{detailData}}" wx:key="index">
+          <view class="bigImgBox" data-index="{{index}}" data-imgList="{{item.poImg}}" catchtap="previewImage">
+            <view class="tag" wx:if="{{item.subjectStatus != 4 && item.nextAttributeId !=null}}">{{processMap[item.nextAttributeId]}}</view>
+          <image class="stopImg" wx:if="{{item.subjectStatus == 4}}" src="../../../image/current/Frame.png"></image>
+            <image class="bigImg" src="{{item.poSmallImg.length ? imageBaseUrl + item.poSmallImg[0] : item.poImg.length ? imageBaseUrl + item.poImg[0] :'../../../image/current/noBigImg.png'}}" data-imgList="{{item.poImg}}" catchtap="previewImage"></image>
+          </view>
+          <view class="info">
+            <view class="poNumber">
+              <text class="{{item.subjectStatus == 4 ? 'stopColor' : 'noStopColor' }}">{{item.poSn}}</text>
+              <!-- <image class="sd" src="../../../image/current/sd.png"></image> -->
+            </view>
+            <view class="poNumBox">
+              <!-- <view class="flex_c_c stop" wx:if="{{item.subjectStatus == 4}}">已终止</view> -->
+              <view class="{{item.subjectStatus == 4 ? 'poNum stopColor' : 'poNum' }}">PO订单数量: {{item.poNumber}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 备注 -->
+      <view class="remarksBox" wx:if="{{contentIndex == 2 && (remarkData.groupRemark.content ||  remarkData.attentionRemark.content || showProRemarks.length || showMassContent.length)}}">
+        <view class="item flatRemarksBox" wx:if="{{remarkData.groupRemark.content}}">
+          <view class="flatRemarks">大版备注:</view>
+          <view class="flatContent">{{remarkData.groupRemark.content}}</view>
+        </view>
+        <view class="item matterBox" wx:if="{{remarkData.attentionRemark.content}}">
+          <view class="matter">注意事项:</view>
+          <view class="matterContent">{{remarkData.attentionRemark.content}}</view>
+        </view>
+        <view class="item proRemarksBox" wx:if="{{showProRemarks.length}}">
+          <view class="proRemarks">生产备注:</view>
+          <block wx:if="{{showProRemarks.length}}">
+            <view class="proContent" wx:for="{{remarkData.productionPoRemarks}}" wx:key="index">
+              <block wx:if="{{item.poSn && item.content}}">
+                <text>{{item.poSn}}</text>
+                <text>{{',' + item.content + '。'}}</text>
+              </block>
+            </view>
+          </block>
+        </view>
+        <view class="item massRemarksBox" wx:if="{{showMassContent.length}}">
+          <view class="massRemarks">质量要求备注:</view>
+          <view class="massContent" wx:for="{{remarkData.qualityPoRemarks}}" wx:key="index">
+            <block wx:if="{{item.poSn && item.content}}">
+              <text>{{item.poSn}}</text>
+              <text>{{',' + item.content + '。'}}</text>
+            </block>
+          </view>
+        </view>
+      </view>
+      <!-- 异常信息 -->
+      <block wx:if="{{contentIndex == 3 && abnormalData.length}}">
+        <view class="anoInfoBox" wx:for="{{abnormalData}}" wx:key="index">
+          <view class="time">{{item.createTime}}{{item.addUserName ? '-' + item.addUserName : ""}}</view>
+          <view class="anoPro">
+            <view class="itemText">异常工序:</view>
+            <view class="itemContent">{{processMap[item.machiningAttributeId]}}</view>
+          </view>
+          <view class="anoCause">
+            <view class="itemText">异常原因:</view>
+            <view class="itemContent">{{item.attributeExceptionTypeName || '暂无'}}</view>
+          </view>
+          <view class="anoNum">
+            <view class="itemText">异常数量:</view>
+            <view class="itemContent">{{item.lossType==0 ? '全部' : item.lossNum}}</view>
+          </view>
+          <view class="anoRemark">
+            <view class="itemText">异常备注:</view>
+            <text class="itemContent">{{item.reason ? item.reason : '暂无'}}</text>
+          </view>
+          <block wx:for="{{item.photoPath1}}" wx:for-item="i" wx:key="index">
+            <image class="anoInfoImg" mode="aspectFit" src="{{i ? imageBaseUrl + i : '../../../image/current/noSmallImg.png' }}" data-index="{{index}}" data-imgList="{{item.photoPath1}}" catchtap="previewImage"></image>
+          </block>
+        </view>
+      </block>
+      <!-- 空提示 -->
+      <view class="emptyHintBox" wx:if="{{ (contentIndex == 1 && !detailData.length) || (contentIndex == 2 && !remarkData.groupRemark.content &&  !remarkData.attentionRemark.content && !showProRemarks.length && !showMassContent.length) || (contentIndex == 3 &&!abnormalData.length) }}">
+        <image class="emptyImg" src="../../../image/proList/empty.png"></image>
+        <view class="emptyHintText">
+          <text wx:if="{{contentIndex == 1}}">暂时没有内容哟~</text>
+          <text wx:if="{{contentIndex == 2}}">没有备注哟~</text>
+          <text wx:if="{{contentIndex == 3}}">没有异常信息哟~</text>
+        </view>
+      </view>
+    </view>
+    <view style="height: 200rpx;"></view>
+    <!-- 底部 -->
+    <view class="bottomBox">
+      <view class="reportBox" data-reportDetail="1" catchtap="jumpReported">
+        <view class="reportImgBox">
+          <image class="reportImg" src="../../../image/current/abnormal.png"></image>
+        </view>
+        <view class="reportText">异常报备</view>
+      </view>
+      <view class="proBtn">
+        <view class="flex_c_c startPro" wx:if="{{orderData.productStatus == 0 || orderData.productStatus == 1}}" catchtap="startPro">开始生产</view>
+        <view class="flex_c_c donePro" wx:if="{{orderData.productStatus == 2}}" data-groupNo="{{orderData.groupSn}}" data-mainId="{{orderData.mainId}}" data-poList="{{orderData.poList}}" data-nearCount="{{orderData.nearCount}}" catchtap="donePro">完成生产</view>
+      </view>
+    </view>
+  </view>
+  <!-- 提示弹窗 -->
+  <van-popup show="{{ isShowHint }}" custom-class="hintPopup">
+    <view class="hintBox">
+      <view class="hintTitle">提示!</view>
+      <view class="hintText">订单已被其他机长开始生产，请重新选择！</view>
+      <view class="flex_c_c hintAffirm" catchtap="hintAffirm">确认</view>
+    </view>
+  </van-popup>
+  <!-- 弹窗组件 -->
+  <popup isDoneProHint="{{isDoneProHint}}" isAnoMsgHint="{{isAnoMsgHint}}" doneProHintData="{{doneProHintData}}" bind:doneProHintClose="doneProHintClose" bind:anoMsgHintClose="anoMsgHintClose" bind:doneProHintAffirm="doneProHintAffirm" bind:anoMsgHintAffirm="anoMsgHintAffirm"></popup>
+  <!-- 无订单 -->
+  <view class="noOrderBox" wx:if="{{!orderData}}">
+    <view class="noOrderImgBox">
+      <image class="noOrderImg" src="../../../image/proList/empty.png"></image>
+    </view>
+    <view class="noOrderText">目前无生产订单，请稍后～</view>
+  </view>
+</view>

@@ -1,0 +1,63 @@
+<view class="doneProContainer">
+  <!-- 主体 -->
+  <view class="mainBody">
+    <!-- <scroll-view scroll-y style="height: 1150rpx;"> -->
+      <!-- 下机数量 -->
+      <view class="planeNumberBox">
+        <view class="planeNumTitle">
+          <text style="color: red;">*</text>
+          <text>下机数量</text>
+        </view>
+        <!-- 单个订单号 -->
+        <view class="bigBox">
+          <view class="bigOrderNumber">{{doneProParam.groupNo}}</view>
+          <view class="bigInputBox">
+            <view class="flex_c_c bigInput">
+              <input type="number" value="{{doneProParam.onCount}}" placeholder="请输入大版的良品数" data-type="{{1}}" catchinput="getInputVal" />
+            </view>
+            <view class="flex_c_c bigInput">
+              <input type="number" value="{{doneProParam.lossCount}}" placeholder="请输入校版纸" data-type="{{2}}" catchinput="getInputVal" />
+            </view>
+          </view>
+          <!-- <button>确认</button> -->
+        </view>
+        <!-- 更多订单号  -->
+        <view class="moreOrderNumBox" wx:if="{{poList.length}}">
+          <view class="itemBox" wx:for="{{poList}}" wx:key="idBwGroupSubject">
+            <view class="moreOrderNumber">
+              <text>{{item.poSn}}</text>
+            </view>
+            <view class="moreOrderInputBox">
+              <view class="flex_c_c moreOrderInput">
+                <input type="number" data-index="{{index}}" data-type="{{1}}" value="{{item.onCount}}" placeholder="良品数" catchinput="poListVal" />
+              </view>
+              <view class="flex_c_c moreOrderInput">
+                <input type="number" data-index="{{index}}" data-type="{{2}}" value="{{item.lossCount}}" placeholder="校版纸" catchinput="poListVal" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 下机图片 -->
+      <view class="planeImgBox">
+        <view class="planeImgTitle">下机图片</view>
+        <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="uploadImg" bind:delete="deleteImg" multiple="{{true}}" />
+      </view>
+    <!-- </scroll-view> -->
+  </view>
+
+  <!-- 底部 -->
+  <view class="bottomBox">
+    <view class="flex_c_c cancel" catchtap="cancel">取消</view>
+    <view class="flex_c_c affirm"  catchtap="affirm">确认</view>
+  </view>
+
+  <!-- 提示弹窗 -->
+  <van-popup show="{{ showDeplane }}" bind:close="deplaneClose" custom-class="hintPopup">
+    <view class="hintBox">
+      <view class="hintTitle">提示!</view>
+      <view class="hintText">请完善PO的下机数量</view>
+      <view class="flex_c_c hintAffirm" catchtap="deplaneClose">确认</view>
+    </view>
+  </van-popup>
+</view>

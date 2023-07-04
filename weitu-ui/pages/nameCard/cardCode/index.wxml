@@ -1,0 +1,33 @@
+<!--pages/nameCard/cardCode/index.wxml-->
+<view class="nameCardContainer" style="background-image: url({{staticFileBaseUrl}}/static/wxwt/iweitu/card_bg.png);">
+  <!-- <view style="margin: 0 auto 80rpx;background-color: #fff;width: 86%;padding: 60rpx 70rpx;box-sizing: border-box;border-radius: 16rpx;">
+    <view style="font-weight:500;color: #333333;font-size: 64rpx;line-height: 90rpx;">
+      {{employeeInfo.fullname}}
+    </view>
+    <view style="font-size: 15px;color: #333333;">
+      {{employeeInfo.position}}
+    </view>
+    <image src="data:image/png;base64,{{codeBase64}}" mode="heightFix" style="width: 100%;margin-top: 20rpx;" />
+  </view>
+  <view style="text-align: center;" wx:if="{{employeeInfo.avatar}}">
+    <image src="{{imageBaseUrl+employeeInfo.avatar}}" style="width:120rpx;height:120rpx;margin-bottom: 20rpx;" />
+    <view style="font-size: 15px;font-weight: 500;color: #333333;">
+      {{employeeInfo.enterpriseName}}
+    </view>
+  </view> -->
+  <view class="nameBox">
+    <view class="name">{{employeeInfo.fullname}}</view>
+    <view class="position">{{employeeInfo.position}}</view>
+  </view>
+  <view class="codeContainer">
+    <image class="excircle" src="/image/nameCardCode/excircle.png" />
+    <image class="internal" src="/image/nameCardCode/internal.png" />
+    <view class="codeBox">
+      <image class="code" src="data:image/png;base64,{{codeBase64}}" mode="heightFix"/>
+    </view>
+    <view class="firmBox">
+      <image class="firmImg" src="{{imageBaseUrl+employeeInfo.avatar}}" mode="heightFix" />
+      <view class="firmName">{{employeeInfo.enterpriseName}}</view>
+    </view>
+  </view>
+</view>

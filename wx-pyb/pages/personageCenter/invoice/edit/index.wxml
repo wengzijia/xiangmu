@@ -1,0 +1,109 @@
+<view >
+	<view class="card">
+		<view class="">			
+			<view class="displayFlex borderBottom paddingBottom_10rpx" style="padding-bottom: 20rpx">
+				<view class="title">
+					<text >发票抬头</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<textarea type="text" style="width: 100%;" value="{{invoiceVo.invoiceName}}" data-key="invoiceName" data-val="{{invoiceVo.invoiceName}}" auto-height bindinput="inputVal" maxlength="100" placeholder="请填写公司名称" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceName}}" class="error color_FF0036">
+				抬头最多输入100个汉字，不支持数字及冒号
+			</view>
+		</view>
+		<view class="">			
+			<view class="displayFlex borderBottom row paddingBottom_10rpx">
+				<view class="title">
+					<text >公司税号</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<input type="text" value="{{invoiceVo.invoiceCode}}" data-key="invoiceCode" data-val="{{invoiceVo.invoiceCode}}" bindinput="inputVal" maxlength="20" class="input" placeholder="请输入纳税人识别号" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceCode}}" class="error color_FF0036">
+				请输入15位或18位或20位的税号
+			</view>
+		</view>
+		<!-- <view class="">
+			<view class="displayFlex borderBottom row">
+				<view class="title">
+					<text >注册地址</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<input type="text" value="{{invoiceVo.invoiceAddress}}" data-key="invoiceAddress" data-val="{{invoiceVo.invoiceAddress}}" bindinput="inputVal" maxlength="100" class="input" placeholder="请填写公司地址" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceAddress}}" class="error color_FF0036">
+				公司地址最多输入100个字符 
+			</view>
+		</view> -->
+		<view class="">
+			<view class="displayFlex borderBottom paddingBottom_10rpx" style="padding: 20rpx 0">
+				<view class="title">
+					<text >注册地址</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<textarea type="text" style="width: 100%;" value="{{invoiceVo.invoiceAddress}}" data-key="invoiceAddress" data-val="{{invoiceVo.invoiceAddress}}" auto-height bindinput="inputVal" maxlength="100" placeholder="请填写公司地址" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceAddress}}" class="error color_FF0036">
+				公司地址最多输入100个字符 
+			</view>
+		</view>
+		<view class="">			
+			<view class="displayFlex borderBottom row paddingBottom_10rpx">
+				<view class="title">
+					<text >注册电话</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<input type="number" value="{{invoiceVo.invoiceMobile}}" data-key="invoiceMobile" data-val="{{invoiceVo.invoiceMobile}}" bindinput="inputVal" maxlength="30" class="input" placeholder="请填写公司电话" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceMobile}}" class="error color_FF0036">
+				公司电话最多输入30个数字
+			</view>
+		</view>
+		<view class="">			
+			<view class="displayFlex borderBottom paddingBottom_10rpx" style="padding: 20rpx 0">
+				<view class="title">
+					<text >开户银行</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<textarea style="width: 100%;" type="text" auto-height value="{{invoiceVo.invoiceBank}}" data-key="invoiceBank" data-val="{{invoiceVo.invoiceBank}}" bindinput="inputVal" maxlength="100" placeholder="请输入购买方开户行" />
+					
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceBank}}" class="error color_FF0036">
+				开户银行最多输入100个字符
+			</view>
+		</view>
+		<view class="">			
+			<view class="displayFlex borderBottom row paddingBottom_10rpx">
+				<view class="title">
+					<text >银行账户</text><text class="color_FF0036">*</text>
+				</view>
+				<view style="width: 70%;">
+					<input type="number" value="{{invoiceVo.invoiceBankcode}}" data-key="invoiceBankcode" data-val="{{invoiceVo.invoiceBankcode}}" bindinput="inputVal" maxlength="30" class="input" placeholder="请输入购买方银行卡号" />
+				</view>
+			</view>
+			<view wx:if="{{error.invoiceBankcode}}" class="error color_FF0036">
+				银行账户最多输入30个数字
+			</view>
+		</view>
+	</view>
+	<view class="displayFlex row flex_between card" style="padding-right:40rpx;">
+		<view class="">
+			设为常用抬头
+		</view>
+		<view class="switch">
+			<van-switch checked="{{ checked }}" active-color="#55BA38" bind:change="onChange" />
+		</view>
+	</view>
+	<view class="footer left_transform">
+		<view catchtap="save" class="footerBtn" style="background:{{disabled ? '#AAAAAA' : '#ff0036'}}">
+			保存
+		</view>
+	</view>
+</view>

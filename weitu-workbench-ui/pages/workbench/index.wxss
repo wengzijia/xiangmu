@@ -1,0 +1,271 @@
+/* pages/workbench/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+page {
+  background-color: #F5F7FE;
+}
+
+/* 我的访客 */
+/* 筛选时间 */
+.termBox {
+  background-color: #FFFFFF;
+  padding: 16rpx 0 16rpx 36rpx;
+  box-sizing: border-box;
+}
+
+.timeContainer {
+  display: flex;
+  align-items: center;
+}
+
+.timeContainer .day {
+  width: 112rpx;
+  height: 56rpx;
+  background-color: #F0F0F0;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+.timeContainer .day:nth-child(2) {
+  margin-left: 24rpx;
+}
+
+.timeContainer .termActColor {
+  color: #3D7EFF;
+  background-color: #E5EEFF;
+  border: 2rpx solid #3D7EFF;
+}
+
+.filtrateTimeBox {
+  font-size: 26rpx;
+  margin-left: 36rpx;
+  display: flex;
+  align-items: center;
+}
+
+.filtrateTimeBox .down {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.termBox .caller {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #AAAAAA;
+}
+
+.termBox .caller .NNT {
+  color: #FF4D4F;
+}
+
+/* 访问人数列表  */
+.visitorCountBox {
+  margin-top: 20rpx;
+  padding: 28rpx 36rpx;
+  background-color: #FFFFFF;
+}
+
+.visitorCountTitle {
+  display: flex;
+  color: #3D7EFF;
+  font-size: 30rpx;
+  font-weight: 500;
+  width: 678rpx;
+  height: 66rpx;
+  background-color: #E9F0FF;
+  border-radius: 4rpx;
+  padding: 12rpx 0 12rpx 26rpx;
+  box-sizing: border-box;
+}
+
+.visitorCountTitle .phoneNumber {
+  margin-left: 42rpx;
+}
+
+.visitorCountTitle .visitorTime {
+  margin-left: 116rpx;
+}
+
+.visitorCountTitle .close {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 142rpx;
+}
+
+.visitorCountList {
+  padding: 8rpx 0;
+  margin-left: 16rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #E6E6E6;
+}
+
+.visitorCountList .visitorWxImg {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 4rpx;
+}
+
+.visitorCountList .phoneNumber {
+  margin-left: 32rpx;
+  width: 210rpx;
+  word-break: break-all;
+}
+
+.visitorCountList .visitorTime {
+  margin-left: 32rpx;
+}
+
+/* 企业访客人数列表 */
+.firmVisitorCountBox {
+  background-color: #FFFFFF;
+  margin-top: 20rpx;
+  padding: 28rpx 36rpx;
+}
+
+.firmVisitorCountTitle {
+  width: 678rpx;
+  height: 66rpx;
+  color: #3D7EFF;
+  background-color: #E9F0FF;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.firmVisitorCountTitle .number {
+  margin-left: 26rpx;
+}
+
+.firmVisitorCountTitle .staff {
+  margin-left: 42rpx;
+}
+
+.firmVisitorCountTitle .visitNNT {
+  margin-left: 180rpx;
+}
+
+.firmVisitorCountTitle .operate {
+  margin-left: 62rpx;
+}
+
+.firmVisitorCountList {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #E6E6E6;
+  font-size: 30rpx;
+  height: 96rpx;
+}
+
+.firmVisitorCountListBox .number {
+  width: 114rpx;
+  text-align: center;
+  word-break: break-all;
+}
+
+.firmVisitorCountListBox .staffBox {
+  width: 220rpx;
+  margin-left: 14rpx;
+  font-size: 30rpx;
+}
+
+.firmVisitorCountListBox .staffBox .phoneNumber {
+  font-size: 24rpx;
+  color: #777777;
+}
+
+.firmVisitorCountListBox .visitNNT {
+  width: 130rpx;
+  margin-left: 24rpx;
+  font-size: 30rpx;
+  text-align: right;
+  word-break: break-all;
+}
+
+.firmVisitorCountListBox .operate {
+  margin-left: 62rpx;
+  width: 92rpx;
+  height: 58rpx;
+  border-radius: 4rpx;
+  color: #3D7EFF;
+  font-size: 30rpx;
+  border: 2rpx solid #3D7EFF;
+}
+
+/* 企业访客弹窗列表 */
+.visitorCountPopup {
+  border-radius: 8rpx;
+}
+
+/* 营销模板 */
+.templateScroll {
+  background-color: #FFFFFF;
+  padding-right: 24rpx;
+  /* 内边距得设置这个 不然无效 */
+  box-sizing: border-box;
+}
+
+.templateBox {
+  height: 92rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.templateBox .template {
+  line-height: 56rpx;
+  background-color: #F0F0F0;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 0 28rpx;
+  white-space: nowrap;
+  margin-left: 24rpx;
+}
+
+/* 模板激活颜色 */
+.templateActColor {
+  color: #3D7EFF;
+  border: 2rpx solid #3D7EFF;
+}
+
+/* 模板列表 */
+.templateListBox {
+  display: flex;
+  flex-wrap: wrap;
+  /* iPhoneX兼容 底部安全距离 */
+  padding-bottom: calc(60rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(60rpx + env(safe-area-inset-bottom));
+}
+
+.templateList {
+  width: 324rpx;
+  height: 420rpx;
+  border-radius: 8rpx;
+  margin: 25rpx;
+  position: relative;
+}
+
+.templateList .templateImg {
+  width: 100%;
+  height: 100%;
+}
+
+.templateList .templateText {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  color: #FFFFFF;
+  font-size: 26rrpx;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,13,38,0.47) 100%);
+  padding-bottom: 12rpx;
+}

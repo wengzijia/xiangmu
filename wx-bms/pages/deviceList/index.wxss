@@ -1,0 +1,62 @@
+/* pages/myDevice/index.wxss */
+page {
+  background-color: #F1F3F5;
+}
+
+.deviceListContainer {
+  padding: 8rpx 32rpx 200rpx 32rpx;
+
+}
+
+.listItem {
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 686rpx;
+  height: 140rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  border-radius: 19.54rpx;
+  padding-left: 24rpx;
+}
+
+.listItem .imgWrap {
+  display: flex;
+  align-items: center;
+}
+
+.listItem .imgWrap .headPortrait {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 18.3rpx;
+  flex: none;
+}
+
+.listItem .imgWrap .deviceName {
+  font-weight: 700;
+  margin-left: 40rpx;
+  font-size: 34rpx;
+  color: #333333;
+}
+
+/* .listItem  .iconWrap .rightArrow{
+  font-weight: 700;
+} */
+
+.deviceListContainer .addDevice {
+  margin-top: 180rpx;
+  border-radius: 40rpx;
+  background-color: #E9333F;
+  color: #FFFFFF;
+  width: 600rpx;
+  height: 80rpx;
+  margin-left: 44rpx;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* iPhoneX兼容 底部安全距离 */
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}

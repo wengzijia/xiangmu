@@ -1,0 +1,54 @@
+<view >
+  <van-cell-group>
+    <van-cell title="{{'订单编号：'+orderNo}}" custom-class="bg"/>
+  </van-cell-group>
+  <van-tabs animated active="{{ active }}" bind:change="onChange"  wx:if="{{PoList.length>0}}">
+    <van-tab wx:for="{{PoList}}" wx:key="id" title="{{PoList.length>1?'商品 '+(index+1)+' 进度':item.poSn}}" swipe-threshold="{{3}}">
+      <view  wx:if="{{item.id&&item.steps||(item.miniOrderGoodsShipment&&item.miniOrderGoodsShipment.expressNo)}}">
+        <van-cell-group>
+          <van-cell>
+            <view slot="title" style="min-width:520rpx;">
+              {{(item.shipping||item.miniOrderGoodsShipment.expressType)+'：'+(item.expressNo||item.miniOrderGoodsShipment.expressNo)}}
+            </view>
+            <van-button type="default" round size="mini" catchtap="copy" data-sn="{{item.expressNo||item.miniOrderGoodsShipment.expressNo}}" style="color:#ccc">复制</van-button>
+          </van-cell>
+        </van-cell-group>
+        <view class="logi_all">
+          <view class="logi_title">物流清单</view>
+          <view class="logi_content">
+              <view class="logi_wid">实际出货量:</view>
+              <view class="logi_price">{{item.miniOrderGoodsShipment.actNum || '无'}}</view>
+          </view>
+          <view class="logi_content">
+              <view  class="logi_wid">箱数:</view>
+              <view  class="logi_price">{{item.miniOrderGoodsShipment.pkgNum || '无'}}</view>
+          </view>
+          <view class="logi_content">
+              <view  class="logi_wid">装箱信息:</view>
+              <view  class="logi_price">{{item.miniOrderGoodsShipment.pkgListNum || '无'}}</view>
+          </view>
+          <view class="logi_content">
+              <view  class="logi_wid">实际发货时间:</view>
+              <view  class="logi_price">{{item.miniOrderGoodsShipment.shipTime || '无'}}</view>
+          </view>
+          <view class="logi_content">
+              <view  class="logi_wid">备注:</view>
+              <view  class="logi_price">{{item.miniOrderGoodsShipment.remark || '暂无备注'}}</view>
+          </view>
+        </view>
+        <van-steps
+          steps="{{ item.steps }}"
+          active="{{ 0 }}"
+          direction="vertical"
+          active-color="#ff0036"
+        />
+      </view>
+      <view wx:else>
+        <van-empty description="暂无物流信息" />
+      </view>
+    </van-tab>
+  </van-tabs>
+  <!-- <view wx:else>
+    <van-empty description="暂无物流信息" />
+  </view> -->
+</view>

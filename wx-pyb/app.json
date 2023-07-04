@@ -1,0 +1,210 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/patchwork/index",
+    "pages/patchwork/platesize/index",
+    "pages/patchwork/plateinfo/index",
+    "pages/patchwork/valuation/index",
+    "pages/patchwork/valuation-k/index",
+    "pages/patchwork/quotation/index",
+    "pages/patchwork/quotationlist/index",
+    "pages/login/index",
+    "pages/tabBar/personageCenter/index",
+    "pages/share/index",
+    "pages/coupleBack/index",
+    "pages/cart/index",
+    "pages/register/registerProtocol/index",
+    "pages/login/registerProtocol/index",
+    "pages/register/index",
+    "pages/singleCart/index",
+    "pages/orderNotice/index",
+    "pages/tool/cutter/index",
+    "pages/tool/three/index",
+    "pages/tool/cutter/download/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/categoryPages/",
+      "pages": [
+        "exclusive/index",
+        "print/index",
+        "printUpload/index",
+        "exclusive/valuation/index",
+        "exclusive/valuation-k/index",
+        "exclusive/webview/index",
+        "single/index",
+        "singleTab/index",
+        "processe/index",
+        "processe/notice/index",
+        "proxy/index",
+        "proxy/tips/index",
+        "paperboard/index",
+        "edition/index",
+        "edition/tips/index",
+        "exclusive/valuation-jing/index",
+        "exclusive/ambossDetails/index"
+      ]
+    },
+    {
+      "root": "pages/Confirm/",
+      "pages": [
+        "ConfirmProcesseOrder/index",
+        "ConfirmProcessePaperOrder/index",
+        "ConfirmOrder/index",
+        "ConfirmPaperOrder/index",
+        "ConfirmSingleOrder/index",
+        "ConfirmSingleOrder/coupon/index",
+        "ConfirmProxyOrder/index",
+        "Confirmcredit/index",
+        "ConfirmSingleOrder/logistics/index"
+      ]
+    },
+    {
+      "root": "pages/personageCenter/",
+      "pages": [
+        "allPrintingOrder/share/checkFile/index",
+        "credit/index",
+        "coupon/index",
+        "coupon/history/index",
+        "newOrder/index",
+        "newOrder/orderDetails/index",
+        "newOrder/qrPay/index",
+        "settings/address/index",
+        "settings/address/NewAddress/index",
+        "allProcessOrder/index",
+        "allProcessOrder/orderDetails/index",
+        "allProcessOrder/share/index",
+        "allProcessOrder/shareList/index",
+        "allSingleOrder/orderDetails/index",
+        "allSingleOrder/logistics/index",
+        "allSingleOrder/orderDetails/webView/index",
+        "allSingleOrder/orderDetails/checkFile/index",
+        "allSingleOrder/orderDetails/changeContacts/index",
+        "allSingleOrder/share/index",
+        "allSingleOrder/share/orderDetails/index",
+        "allSingleOrder/shareList/index",
+        "allSingleOrder/index",
+        "recommend/index",
+        "recommend/recommendDetails/index",
+        "recommend/withdrawalHistrys/index",
+        "recommend/recommendCode/index",
+        "recommend/mycode/index",
+        "feedback/index",
+        "settings/user/modify/index",
+        "settings/user/verification/index",
+        "settings/user/index",
+        "settings/index",
+        "allOrder/orderDetails/index",
+        "allOrder/orderDetails/standard/index",
+        "allOrder/orderDetails/qualification/index",
+        "allOrder/orderDetails/changeContacts/index",
+        "allOrder/index",
+        "allPaperOrder/orderDetails/index",
+        "save/index",
+        "allPaperOrder/orderDetails/changeContacts/index",
+        "allPaperOrder/index",
+        "document/index",
+        "allPrintingOrder/index",
+        "allPrintingOrder/logistics/index",
+        "allPrintingOrder/orderDetails/index",
+        "allPrintingOrder/share/index",
+        "allPrintingOrder/monthly/index",
+        "allPrintingOrder/monthly/details/index",
+        "allPrintingOrder/orderDetails/checkFile/index",
+        "allPrintingOrder/shareList/index",
+        "allPrintingOrder/orderDetails/webView/index",
+        "allPrintingOrder/share/orderDetails/index",
+        "stored/index",
+        "stored/accountBill/index",
+        "stored/webView/index",
+        "stored/result/index",
+        "invoice/index",
+        "allSingleOrder/before/index",
+        "invoice/edit/index",
+        "invoice/details/index",
+        "invoice/einvoice/index",
+        "allOfflineSingleOrder/index"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "拼一版",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#898989",
+    "selectedColor": "#FF4060",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "selectedIconPath": "image/tabBar/home.png",
+        "iconPath": "image/tabBar/home1.png"
+      },
+      {
+        "pagePath": "pages/singleCart/index",
+        "text": "购物车",
+        "selectedIconPath": "image/tabBar/bay.png",
+        "iconPath": "image/tabBar/bay1.png"
+      },
+      {
+        "pagePath": "pages/tabBar/personageCenter/index",
+        "text": "个人中心",
+        "selectedIconPath": "image/tabBar/conter.png",
+        "iconPath": "image/tabBar/conter1.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "downloadFile": 300000,
+    "uploadFile": 300000
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "根据您的位置确认我们是否能为您提供服务"
+    }
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-stepper": "@vant/weapp/stepper/index"
+  },
+  "plugins": {
+    "contactPlugin": {
+      "version": "1.4.5",
+      "provider": "wx104a1a20c3f81ec2"
+    }
+  }
+}

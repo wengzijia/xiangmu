@@ -1,0 +1,12 @@
+{
+   "navigationBarBackgroundColor": "#f8f8f8",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "个人中心",
+  "backgroundColor": "#f8f8f8",
+  "backgroundTextStyle": "light",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "modal": "../../../components/msgModal/index",
+    "service": "../../../components/service/service"
+  }
+}

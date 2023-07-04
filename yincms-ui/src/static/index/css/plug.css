@@ -1,0 +1,259 @@
+*{margin:0;padding:0;}
+ul,ol,li{list-style-type:none;}
+body{
+    font-family:"微软雅黑",HELVETICA;
+}
+/*颜色*/
+.red{
+    color:#ff0000;
+}
+.Awbanner{
+    width:100%;
+    height:462px;
+    background:#cebcb2 url('../img/images/Atop.gif') no-repeat center;
+}
+.AwbannerTxt{width:500px;padding-top:90px;float:right;}
+.AwbannerTxt h2{font-size:38px;}
+.AwbannerTxt_p{
+    font-size:22px;color:#3b3b3b;
+    padding-top:10px;
+}
+.AwbannerTxtDv{
+    margin-top:18px;
+}
+.AwbannerTxtDv a,.AwbannerTxtDv a:hover{color:#fff;}
+.Txtips{
+    font-size:13px;
+    padding-top:6px;
+    display:inline-block;
+}
+.AwbannerTxt_bnt{
+    width:148px;height:46px;line-height:46px;
+    font-size:18px;
+    color:#fff;text-align: center;
+    display:inline-block;
+    background: -webkit-linear-gradient(right,  #c91e23,#f03d42); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right,  #c91e23,#f03d42); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right,  #c91e23, #f03d42); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right,#c91e23, #f03d42);
+    text-decoration: none;
+    border-radius:4px;
+    margin-right:16px;
+    float: left;
+}
+.AwbannerTxt_bnt:hover{
+    background: -webkit-linear-gradient(left,  #c10f14,#fb2229); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(left,  #c10f14,#fb2229); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(left,  #c10f14, #fb2229); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to left,#c10f14, #fb2229);
+    color:#000;
+}
+.AwbannerTxt_bnt::after{
+    font-size:14px;
+    font-family:'宋体';
+    content:'>>';
+    padding-left:14px;
+}
+.AwbannerTxt_f16{
+    padding-top:12px;
+    color:#e60021;
+    clear: both;
+}
+.AwbannerTxt_f16 a{
+    font-size:15px;
+    color:#e60021;
+    text-decoration:none;
+    padding:0 5px;
+}
+.AwbannerTxt_f16 a:hover{color:#000;text-decoration: underline;}
+
+.Awaper{background-color:#fafafa;}
+.Awaper_cont,.Aw_cont{
+    width: 1200px;
+    margin:0 auto;
+}
+.Awaper_cont{
+    padding: 50px 0;
+}
+.Awaper_cont li{
+    display: block;
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+}
+.Awaper_cont-left{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:-800px;
+    visibility: hidden;
+    text-align:right;
+}
+.Awaper_make .Awaper_cont-left{
+    right:-800px;
+    left:inherit;
+    text-align: left;
+}
+.Awaper_make .Awaper_cont-right{left:-800px;}
+.Awaper_cont-left em{
+    width: 32px;
+    height: 32px;
+    margin-top: 170px;
+    background-image:url('../img/images/Aicon.png');
+    background-repeat:no-repeat;
+    background-position: -698px 0px;
+    display: inline-block;
+}
+.Awaper_make .Awaper_cont-left em{
+    background-position: -698px -638px;
+}
+.Awaper_order .Awaper_cont-left em{
+    background-position: -698px -1276px;
+}
+.Awaper_cont-left h3{
+    font-weight:400;
+    margin-top: 10px;
+    font-size: 32px;
+}
+.Awaper_cont-left h6{
+    font-weight: 400;
+    margin-top: 10px;
+    font-size:18px;
+    color:#626262;
+}
+.Awaper_cont-left p{
+    margin-top: 14px;
+    line-height: 1.5;
+    word-break: break-all;
+    font-size: 16px;
+    color: #c2c2c2;
+}
+
+.Awaper_cont-right{
+    width: 730px;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:-800px;
+    visibility: hidden;
+    background-image:url('../img/images/Aicon.png');
+    background-repeat: no-repeat;
+    background-position: 0px -35px;
+}
+.Awaper_make .Awaper_cont-right{
+    background-position: 0px -673px;
+}
+.Awaper_order .Awaper_cont-right{
+    background-position: 0px -1311px;
+}
+
+.Awfoot{
+    width:100%;
+    height:282px;
+    background:url('../img/images/Afot.jpg') no-repeat center;
+    text-align:center;
+}
+.Awfoot h2{
+    font-size:38px;
+    padding-top:50px;
+}
+.Awfoot h3{
+    font-size:25px;
+    font-weight:400;
+    color:#2c2c2c;
+    padding-top:6px;
+}
+.Awfoot_bnt{
+    width:180px;height:44px;line-height:44px;
+    font-size:18px;
+    color:#fff;text-align: center;
+    display:block;
+    background: -webkit-linear-gradient(left,  #c91e23,#f03d42); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(left,  #c91e23,#f03d42); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(left,  #c91e23, #f03d42); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to left,#c91e23, #f03d42);
+    text-decoration: none;
+    border-radius:4px;
+    margin:34px auto 12px;
+}
+.Awfoot_bnt:hover{
+    background: -webkit-linear-gradient(left,  #b4060b,#fb2229); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(left,  #b4060b,#fb2229); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(left,  #b4060b, #fb2229); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to left,#b4060b, #fb2229);
+}
+/* .Awfoot_bnt::after{
+    width:14px;
+    height:19px;
+    background:url('/static/index/img/images/Aicon.png');
+    background-repeat:no-repeat;
+    background-position:0 0;
+    content:'';
+    display: inline-block;
+    position: relative;
+    top:3px;
+    margin-left:8px;
+} */
+.Awfoot p{font-size:16px;color:#525151;}
+
+/*****教程安装****/
+.wtBox{
+    width: 1240px;
+    margin: 30px auto;
+    clear: both;
+}
+.wtBj{background: #f6f6f6;}
+.wtBoxWappr{
+    /*  display: flex;
+     display: -webkit-flex;
+     display: -moz-flex;
+     display: -ms-flex;
+     display: -o-flex;
+     align-items: flex-start; */
+    /* margin: 30px 0; */
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    position: relative;overflow: hidden;
+}
+.wtBoxLt{position: relative;width: 250px;float: left;}
+.wtBoxLt ul{
+    width: 250px;
+    position: relative;
+    top:31px;
+}
+.wtBoxLt ul li{
+    height:58px;line-height:58px;
+    padding-left:42px;
+}
+.wtBoxLt ul li.curr{
+    background-color:#fff4f4;
+}
+.wtBoxLt ul li.curr a{color:#ff0000;}
+.wtBoxLt ul li a{text-decoration:none;color:#000;font-size:14px;}
+.wtBoxRg{
+    /* flex:2; */
+    padding:4px 28px 16px;
+    /* margin-left:252px; */
+    border-left: 1px solid #eee;
+    width:930px;
+    float:right;
+}
+.wtBoxRg h2{
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    padding-top:20px;
+}
+.wtBoxRg_tx{
+    font-size: 16px;
+    color:#000;
+    padding:28px 0 0;
+}
+.wtBoxRg_tx img{display:block;margin: 30px auto 15px;}
+.wtBoxRg_C7{
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #777;
+}

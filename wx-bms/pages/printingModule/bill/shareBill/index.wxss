@@ -1,0 +1,21 @@
+@import '../../../../bilcommonl.wxss';
+
+.listname {
+  margin: 16rpx 0 18rpx;
+}
+.bot_color2 {
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit_btn {
+  font-size: 30rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 34rpx;
+  color: #fff;
+  padding: 0rpx 40rpx;
+  background: #E9333F linear-gradient(270deg, #FF0036 0%, #FF6842 100%);
+}

@@ -1,0 +1,294 @@
+/* pages/customerDetails/index.wxss */
+page{
+  background-color: #F1F3F5;
+}
+
+
+/* 备注名 */
+.noteContainer{
+  height: 120rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.noteContainer .remarkName{
+  margin-left: 32rpx;
+  color: #333333;
+  font-size: 30rpx;
+  width: 110rpx;
+}
+
+.noteContainer  .name{
+  /* margin-left: 32rpx; */
+  color: #666666;
+  font-size: 30rpx;
+  /* width: 40vh; */
+}
+
+/* 绑定微信 */
+.bindWechatContainer{
+  background-color: #fff;
+  margin-top: 22rpx;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+/* 绑定微信提示 */
+.bindWechatBox{
+  padding-top: 30rpx;
+  padding-bottom: 28rpx;
+}
+
+.bindWechat{
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.bindWechatText{
+  margin-left: 20rpx;
+  color: #999999;
+  font-size: 24rpx
+}
+
+/* 没有客户 */
+.nullClient{
+  font-size: 28rpx;
+  border-top: 2rpx solid #EEEEEE;
+  padding-top: 20rpx;
+  text-align: center;
+}
+
+/* 客户列表 */
+.client{
+  border-top: 2rpx solid #EEEEEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 0;
+}
+
+.clientInfo{
+  display: flex;
+}
+
+.profilePhoto{
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 4rpx;
+  flex: none;
+}
+
+.profilePhoto image{
+  width: 100%;
+  height: 100%;
+}
+
+.clientInfo .name{
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.client .checkBox{
+  position: relative;
+}
+
+/* 修改单选框背景色 */
+.client .checkBox .van-radio__icon{
+  background-color: #e0e0e0;
+}
+
+.client .checkBox .item{
+  width: 48rpx;
+  height: 48rpx;
+}
+
+
+.client .checkBox  .check{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* 头像和手机号 */
+.phoneNumberBox{
+  border-top: 2rpx solid #EEEEEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 0;
+}
+
+.phoneNumberInfo{
+  display: flex;
+}
+
+.profilePhoto{
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 4rpx;
+}
+
+.profilePhoto image{
+  width: 100%;
+  height: 100%;
+}
+
+.phoneNumberInfo .phoneNumber{
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+.phoneNumberBox .checkBox{
+  position: relative;
+}
+.phoneNumberBox .checkBox .item{
+  width: 48rpx;
+  height: 48rpx;
+}
+.phoneNumberBox .checkBox  .check{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* 保存按钮 */
+.saveButton{
+  margin-top: 148rpx;
+  padding: 0 74rpx 0 76rpx;
+  position: fixed;
+  bottom: 148rpx;
+}
+
+.saveButton image{
+  width: 600rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.saveButton .save{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%);
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.customerDetailsContainer .van-popup{
+  /* 去除背景色 */
+  background-color:transparent !important;
+}
+
+.customerDetailsContainer .overlay-index--van-overlay {
+  background-color: #000000 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 保存弹窗 */
+.savePopup{
+  width: 600rpx;
+  height: 410rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 50rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.savePopup  .hint{
+  text-align: center;
+  font-size: 40rpx;
+  color: #E9333F;
+  font-weight: 500;
+}
+
+.savePopup .promptMessage{
+  margin-top: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.savePopup .buttonBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 66rpx;
+}
+
+.buttonBox .item{
+  width: 220rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.buttonBox .cancel{
+  background-color: #E0E0E0;
+  color: #999999;
+}
+
+.buttonBox .affirm{
+  background-color: #E9333F;
+  color: #FFFFFF;
+}
+
+
+/* 返回弹窗 */
+.backPopup{
+  width: 600rpx;
+  height: 410rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 50rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.backPopup  .hint{
+  text-align: center;
+  font-size: 40rpx;
+  color: #E9333F;
+  font-weight: 500;
+}
+
+.backPopup .promptMessage{
+  margin-top: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.backPopup .buttonBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 66rpx;
+}
+
+.buttonBox .item{
+  width: 220rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.buttonBox .noSave{
+  background-color: #E0E0E0;
+  color: #999999;
+}
+
+.buttonBox .saveExit{
+  background-color: #E9333F;
+  color: #FFFFFF;
+}
+

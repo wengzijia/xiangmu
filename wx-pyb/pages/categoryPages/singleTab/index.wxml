@@ -1,0 +1,188 @@
+<view class="paperboard catchtou btuBottom" id="j_page">
+  <!-- 头部 -->
+  <view class="header">
+    <!-- <view class="flex">
+      <text class="name"> 卡纸盒</text>
+      <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text>
+    </view> -->
+    <!-- <view class="tabs">
+      <text catchtap="tabsCrount" class="item {{ currentTab==1 ? ' active' : ''}}" data-current="1">卡盒</text>
+      <text catchtap="tabsCrount" class="item {{ currentTab==0 ? ' active' : ''}}" data-current="0">坑盒</text>
+    </view> -->
+    <text class="name">坑纸内托</text>
+    <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text>
+  </view>
+  <!-- <view class="tabs1">
+        <view catchtap="tabsCrount" class="{{currentTab=='single' ? 'grid' : ''}}" data-current="single">
+            <text>卡纸盒</text>
+        </view>
+        <view  class="{{currentTab=='singleTab' ? 'grid1' : ''}}" >
+            <text>坑纸内托</text>
+        </view>
+    </view> -->
+  <!-- 内容 -->
+  <!-- <view class="volume-o-box">
+      <view style="color: #666;flex:1;"><van-icon name="volume-o" custom-style="font-weight:600"/> 坑纸内托下单须知 </view>
+      <view catchtap="notice" class="notice" style=""> 点击查看<van-icon name="arrow" /></view>
+    </view> -->
+  <view class="content">
+     <!-- 坑纸内托 -->
+    <!-- <view style="padding-bottom:20rpx;padding-top:20rpx;">
+      <text>
+       
+      </text>
+      <text catchtap="notice" class="notice"> 下单须知<text class="ac-icon-arrow"></text></text>
+    </view> -->
+    <view >
+    <!-- 纸张材质 -->
+    <view>
+      <view class="fromItem3" style="margin:0">
+        <view class="label">
+          <text>
+            <text class="mustSign red">*</text>材质</text>
+        </view>
+        <view class="fromItem">
+          <block wx:for="{{offerInfo.materialType.list}}" wx:key="index">
+            <button class='{{offerData["materialType"]&&offerData["materialType"]==item.value?"checked_button":"normal_button"}}' data-key="materialType" data-val="{{item.value}}" catchtap="radioTap">
+              {{item.lable}} 
+            </button>
+          </block>
+          <view class="fromItem3" wx:if="{{offerData['materialType']}}" style="margin:0">
+            <view class="fromItem ">
+              <block wx:for="{{offerInfo.thickness.list}}" wx:key="index">
+                <button class='{{offerData["thickness"]&&offerData["thickness"]==item.value?"checked_button":"normal_button"}}' data-key="thickness" data-id="{{item.id}}" data-val="{{item.value}}" catchtap="radioTap">
+                  {{item.lable}}白面白坑
+                </button>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 印张数量 -->
+    <view>
+      <view class="fromItem3" style="margin-bottom:0px;padding-bottom:24rpx;">
+        <view class="label">
+          <text class="mustSign red">*</text>展开尺寸
+        </view>
+        <view class="fromItem" style="display:flex; line-height:68rpx;padding-right:0;">
+          <view class="sizeInput">
+            <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{offerData.sizeLength}}" bindblur='inputVal' data-key='offerData.sizeLength' />
+            <text class="fork">X</text>
+            <input placeholder-class="phcolor" placeholder="宽" type="digit" value="{{offerData.sizeWidth}}" bindblur='inputVal' data-key='offerData.sizeWidth' />
+            <text class="sizeTxt">mm</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{offerData['thickness']}}" style="padding-bottom:10rpx">
+      <view class="fromItem3" style="margin-bottom:0">
+        <view class="label" style="padding:0;"><text class="mustSign red">*</text>数量</view>
+        <view class="cart-count-box" style="margin-right:100rpx;">
+            <text class="cart-count-down" catchtap="numberChange" data-type="reduce" style="font-size:70rpx">-</text>
+            <input class="cart-count-num"  type="digit" value="{{offerData.number}}" bindblur='inputVal' data-key='offerData.number'/>
+            <text class="cart-count-add" catchtap="numberChange" data-type="add">+</text>
+        </view>
+      </view>
+      <view style="margin-left: 50px;margin-right: 25px;" class="tips">{{numberText}}</view>
+    </view>
+
+    <!-- 服务 -->
+    <view class="fromItem3"  style="margin-bottom:0;">
+      <view class="label"><text class="mustSign red">*</text>包装服务</view>
+      <view class="button_container fromItem">
+        <button data-key="saasBox" data-val="{{false}}" catchtap="radioTap" class='{{offerData.saasBox == false?"checked_button":"normal_button"}}' style="width: 200rpx;">牛皮纸+蛇皮袋</button>
+        <button data-key="saasBox" data-val="{{true}}" catchtap="radioTap" class='{{offerData.saasBox ? "checked_button":"normal_button"}}' style="width: 200rpx;">纸箱</button>
+      </view>
+    </view>
+    
+    <!-- <view class="allPay" wx:if="{{priceObj}}">
+      <view class="label" style="padding:0;margin-bottom: 40rpx;">配送费用</view>
+      <view class="button_container fromItem">
+        <view class="address-msg" catchtap="showPopup">
+          <view class="section">
+            {{region[0]}}
+          </view>
+          <text style="color:#E0E0E0;">—</text>
+          <view class="section">
+            {{region[1]}}
+          </view>
+        </view>
+        <view  class="freight" wx:if="{{priceObj}}">
+          <view class="freight-info">
+            <text style="color:#747577;">重量:{{priceObj.priceInfo.weight}}kg</text>
+            <text style="color:#E9333F;font-size:26rpx">￥<text style="font-size:36rpx;">{{priceObj.shipFee}}</text></text>
+          </view>
+        </view>
+        <van-popup
+          show="{{ show }}"
+          position="bottom"
+          custom-style="height: 600rpx;"
+          round
+        >
+          <van-area wx:if="{{ show }}" area-list="{{ areaList }}" item-height="{{34}}" value="{{areaListId}}" columns-num="{{ 2 }}" bind:cancel="showPopup" bind:confirm="confirmArea"/>
+        </van-popup>
+      
+      </view>
+    </view> -->
+    </view>
+    <view wx:if="{{priceObj}}" class="freight" style="padding-right: 34rpx;padding-top:20rpx">
+      <view class="freight-info" >
+        <!-- <text style="color:#747577;">货期:{{priceObj.days}}天</text> -->
+        <text style="color:#E9333F;font-size:26rpx">￥<text style="font-size:36rpx;">{{priceObj.total_price}}</text></text>
+      </view>
+      <!-- <view class="freight-info" style="padding:8rpx 30rpx;background-color:#F6F6F6;">
+        <text style="color:#747577;">金额:</text>
+        <text style="color:#E9333F;font-size:26rpx">￥<text style="font-size:36rpx;">{{priceObj.total_price}}</text></text>
+      </view> -->
+    </view>
+  </view>
+  <view class="distri_all">
+    <view class="distri_title">配送费用</view>
+    <view class="distri_note">只作为参考运费，实际运费以订单结算页为准</view>
+    <view class="distri_bor" catchtap="showPopup">
+      <view wx:if="{{region[1]}}">{{region[0]}}、{{region[1]}}、{{region[2]}}</view>
+      <view wx:else>请选择省、市、区</view>
+      <view> <van-icon class="select-icon" name="arrow-down" /></view>
+    </view>
+  </view>
+  <!-- <view class="brick"></view> -->
+  <!-- 底部加入购物车 -->
+  <view class="footer">
+    <!-- 价格 -->
+    <view class="priceCount" style='{{priceObj.price>99999?"padding-right:0rpx !important;":""}}'>
+    <view style="block">
+      <view class="flex">
+        <view>
+          <!-- <text  class="origin">货期：5天</text> -->
+          <text style="color:#FF0036">总计:</text>
+          <text class="f40 red">￥{{priceObj.total_price?(price+(priceObj.shipping_fee||0)):'0.00'}}</text>
+          <view style="color:#999999;font-size:24rpx;">(含运费￥{{priceObj.shipping_fee || 0}})</view>
+        </view>
+        <view wx:if="{{priceObj.days}}">
+          <text style="color:#747577;">货期:{{priceObj.days}}天</text>
+        </view>
+      </view>
+    </view>
+    </view>
+    <view class="footerBox1">
+      <view class="footerBox2" catchtap="checkCart">
+        <view class="footerBoxIcon ac-icon-cart">
+          <view class="footerBuyCount" >{{cartCount}}</view>
+        </view>
+        <view>购物车</view>
+      </view>
+      <view class="footerBox3" catchtap="addEditionCart">加入购物车</view>
+      <view class="footerBox4" catchtap="placeOrder">立即下单</view>
+    </view>
+  </view>
+  <van-popup
+          show="{{ show }}"
+          position="bottom"
+          custom-style="height: 42%;"
+          round
+        >
+          <van-area wx:if="{{ show }}" area-list="{{ areaList }}" item-height="{{34}}" value="{{areaListId}}" columns-num="{{ 3 }}" bind:cancel="showPopup" bind:confirm="confirmArea"/>
+        </van-popup>
+  <modal modal="{{modal}}"></modal>
+</view>  

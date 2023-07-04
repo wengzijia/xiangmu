@@ -1,0 +1,117 @@
+/* pages/program/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 两行显示省略号 */
+.text-ellipsisl2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*弹性伸缩盒子模型显示*/
+  display: -webkit-box;
+  /*限制在一个块元素显示的文本的行数*/
+  -webkit-line-clamp: 2;
+  /*设置或检索伸缩盒对象的子元素的排列方式*/
+  -webkit-box-orient: vertical;
+}
+
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 分类滚动 */
+.sortScrollBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  line-height: 84rpx;
+  background-color: #FFFFFF;
+  padding-right: 20rpx;
+  z-index: 999;
+  box-sizing: border-box;
+}
+
+.sortBox {
+  display: flex;
+  margin-right: 10rpx;
+  box-sizing: border-box;
+}
+
+.sortList {
+  margin-left: 36rpx;
+  color: #777777;
+  white-space: nowrap;
+}
+
+.sortActColor {
+  color: #3D7EFF;
+  border-bottom: 4rpx solid #518BFF;
+}
+
+/* 方案滚动列表 */
+.sortScrollList {
+  height: 96vh;
+  margin-top: 84rpx;
+}
+
+/* 分类列表 */
+.sortListBox {
+  padding: 36rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.sortItemBox {
+  width: 324rpx;
+  font-size: 30rpx;
+  margin-bottom: 36rpx;
+}
+
+.sortItemImg {
+  width: 324rpx;
+  height: 324rpx;
+  border-radius: 8rpx;
+}
+
+.sortItemTitle {
+  margin-top: 16rpx;
+  font-weight: 500;
+}
+
+.priceUnitBox {
+  display: flex;
+  margin-top: 6rpx;
+}
+
+.priceUnitBox .priceBox {
+  color: #FF4D4F;
+}
+
+.priceUnitBox .rmb {
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+
+.priceUnitBox .unit {
+  color: #777777;
+  margin-left: 12rpx;
+}
+
+.onEarth {
+  margin-top: 44rpx;
+  text-align: center;
+  color: #777777;
+  padding-bottom: 30rpx;
+}

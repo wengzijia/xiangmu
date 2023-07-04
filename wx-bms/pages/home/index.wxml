@@ -1,0 +1,23 @@
+<view class='personage'  wx:if="{{isInit}}">
+  <view class="herder">
+    <!-- <swiper autoplay="true" interval="1000" circular="true" class="swi_hei">
+<swiper-item>
+    <image src="../../image/bill/banner2.png" class=" ban_img" mode='widthFix' wx:if="{{isProcessor==1}}"></image>
+    <image src="../../image/bill/banner.png" class=" ban_img" mode='widthFix' wx:else></image>
+  </swiper-item>
+  </swiper> -->
+  <image src="{{img}}" class=" ban_img" mode='widthFix'></image>
+
+    <view class="navName" catchtap="myNavigateTo" data-url="settings/index" style='top:{{statusBarHeight+fontSizeSetting/2}}px; position: fixed;right: 0;left: 0;text-align:center;font-size:{{fontSizeSetting}}px;color: #fff;'>
+      包秘书
+    </view>
+  </view>
+  <view class="main">
+    <view>
+      <image src="../../image/bill/place.png" class="wid_100 mar_t" mode="widthFix" mode="widthFix" bindtap="login" data-type='place' wx:if="{{isProcessor==1}}"></image>
+      <image src="../../image/bill/mine.png" class="wid_100 mar_t" mode="widthFix" mode="widthFix" bindtap="login" data-type="bill"></image>
+      <image src="../../image/bill/myDevice.png" class="wid_100 mar_t" mode="widthFix" mode="widthFix" bindtap="login" data-type="deviceList" wx:if="{{isProcessor==1&&supplierType==1}}"></image>
+      <image src="../../image/bill/staff.png" class="wid_100 mar_t" mode="widthFix" mode="widthFix" bindtap="login" data-type="staffList" wx:if="{{isProcessor==1&&supplierType==1}}"></image>
+    </view>
+  </view>
+</view>

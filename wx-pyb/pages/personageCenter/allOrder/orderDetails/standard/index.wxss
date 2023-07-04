@@ -1,0 +1,39 @@
+page{
+  background-color: rgb(240, 240, 240);
+}
+.document{
+  background-color: #fff;
+  padding: 32rpx 20rpx;
+  font-size: 28rpx;
+  color: #777;
+}
+.title{
+  font-size: 36rpx;
+  text-align: center;
+  margin-top: 0;
+  color: black;
+}
+.document view{
+  margin-bottom: 20rpx;
+}
+.b{
+  font-weight: bold;
+}
+.red{
+  color: #ff0036;
+}
+.h2{
+  font-size: 38rpx;
+  font-weight: bold;
+}
+.centent{
+  text-align: center;
+}
+.null{
+  display: inline-block;
+  width: 2rem;
+  height: 20rpx;
+}
+.document .mb{
+  margin-bottom: 40rpx;
+}

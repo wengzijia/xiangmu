@@ -1,0 +1,248 @@
+<view class="paperboard catchtou" id="j_page">
+  <van-popup show="{{ show }}" bind:close="onClose" custom-style="width:90%;max-height:90%" round closeable>
+    <view class="popup-title">报价单详情：{{offerData.orderNo}}</view>
+    <view style="overflow: hidden; height: calc(90vh - 100rpx);">
+      <view class="content">
+      <!-- 报价单标题 -->
+      <view class="boxborder">
+        <view>
+          <view style="display:flex;">
+            <view class="label">
+              <text>报价单标题</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.orderTitle}}
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="boxborder">
+        <!-- 采购单位 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>采购单位</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.contactCompany}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 联系人 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>联系人</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.contactName}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 联系电话 -->
+        <view>
+          <view style="display:flex;">
+            <view class="label">
+              <text>联系电话</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.contactMobile}}
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="boxborder">
+        <!-- 销售单位 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>销售单位</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.saleCompany}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 联系人 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>联系人</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.saleName}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 联系电话 -->
+        <view>
+          <view style="display:flex;">
+            <view class="label">
+              <text>联系电话</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.saleMobile}}
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="boxborder">
+        <!-- 产品名称 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>产品名称</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.productName}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 盒子尺寸 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <!-- <text class="mustSign red">*</text> -->
+              <text>盒子尺寸</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.area}}mm
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 材质工艺 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>材质工艺</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.paperType}}
+                {{offerData.craft}}
+              </block>
+              <!-- <view class="priceinp">
+          <input class="input-border" placeholder-class="phcolor" placeholder="请输入材质工艺" type="digit" value="{{offerData.craft}}" bindblur='inputVal' data-key='offerData.craft' />
+        </view> -->
+            </view>
+          </view>
+        </view>
+
+        <!-- 数量 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <!-- <text class="mustSign red">*</text> -->
+              <text>数量</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.number}}个
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 销售价格 -->
+        <view>
+          <view style="display:flex;">
+            <view class="label">
+              <!-- <text class="mustSign red">*</text> -->
+              <text>销售价格</text>
+            </view>
+            <view class="button_container fromItem">
+              <block>
+                {{offerData.amount}}元
+              </block>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+      <view class="boxborder" wx:if="{{offerData.remark}}">
+        <!-- 备注 -->
+        <view>
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text>备注</text>
+            </view>
+            <view class="button_container fromItem" style="text-align: right;color: red;">
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{offerData.remark}}" wx:for="{{offerData.remark}}" wx:key="index">
+          <view style="display:flex;" class="border-b">
+            <view class="label">
+              <text wx:if="{{item[0]}}">{{item[0]}}</text>
+            </view>
+            <view class="button_container fromItem">
+              <block wx:if="{{item[1]}}">
+                {{item[1]}}
+              </block>
+            </view>
+          </view>
+        </view>
+
+     
+
+      </view>
+
+
+
+
+    </view>
+    </view>
+  </van-popup>
+
+  <view class="box">
+    <view wx:if="{{!qlist.length}}">
+      <van-empty
+        class="custom-image"
+        image="{{imgBaseUrl}}/static/wxpyb/cutter/patchwork_list_null.png"
+        description="小主，您还没有报价单呢~"
+      />
+    </view>
+    <view wx:if="{{qlist.length}}" class="qbox" wx:for="{{qlist}}" wx:key="index">
+      <view class="title">{{item.orderTitle}}</view>
+      <view class="orderNo">({{item.orderNo}})</view>
+      <van-row>
+        <van-col span="10"><text class="createTime">{{item.createTime}}</text></van-col>
+        <van-col span="3" offset="7">
+          <text catchtap="preview" data-obj="{{item}}" class="buootmbtn">详情</text>
+        </van-col>
+        <van-col span="3" offset="1">
+          <text catchtap="downl" class="buootmbtn" data-id="{{item.id}}" data-no='{{item.orderNo}}'>下载</text>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+</view>
+<van-toast id="van-toast" />

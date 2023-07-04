@@ -1,0 +1,192 @@
+/*设计师后台css开始*/
+
+.pagination a {
+    border: 1px solid #d2d6de;
+    padding: 5px 10px;
+    float: left;
+    border-left: none;
+}
+
+.pagination a:first-child {
+    border-left: 1px solid #d2d6de;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.pagination a.selected {
+    background: #337ab7;
+    color: #fff;
+}
+
+.user-panel {
+    overflow: hidden;
+    padding: 10px 10px 10px 30px;
+    position: relative;
+    width: 100%;
+}
+
+.user-panel>.info {
+    left: 55px;
+    line-height: 1;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
+}
+
+.user-panel>.info>a {
+    font-size: 11px;
+    margin-top: 3px;
+    padding-right: 5px;
+    text-decoration: none;
+}
+
+
+/*设计师后台-订单详情开始*/
+
+.wbb_box {
+    background: #ffffff none repeat scroll 0 0;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.wbb_box .wbb_title {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #d2d6de;
+}
+
+.wbb_box .wbb_title .title {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid #d2d6de;
+    line-height: 38px;
+    border-top: 2px solid #20a0ff;
+    background: #fff;
+}
+
+.wbb_box .wbb_table_0718 {
+    padding: 10px;
+}
+
+.wbb_box .wbb_table_0718 table td,
+.wbb_box .wbb_table_0718 table {
+    border-color: #eee;
+    line-height: 35px;
+}
+
+.wbb_box .wbb_table_0718 table td.text_right {
+    text-align: right;
+    padding-right: 30px;
+}
+
+.wbb_box .wbb_table_0718 table td.text_left {
+    padding-left: 30px;
+}
+
+.wbb_box .wbb_fileup_0718 {
+    padding: 30px 0;
+}
+
+.wbb_box .wbb_fileup_0718 table th {
+    line-height: 35px;
+}
+
+.wbb_box .wbb_fileup_0718 table td {
+    line-height: 35px;
+}
+
+.wbb_box .wbb_fileup_0718 table .text_ct {
+    text-align: center;
+}
+
+.wbb_box .wbb_fileup_0718 .upfile_td {
+    position: relative;
+}
+
+.pass-portrait-filebtn-0612 {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ff6700;
+    color: #ff6700;
+    height: 23px;
+    text-align: center;
+    width: 80px;
+    line-height: 23px;
+    font-size: 12px;
+}
+
+.pass-portrait-file-0612 {
+    display: inline-block;
+    height: 23px;
+    line-height: 23px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 6px;
+    width: 80px;
+}
+
+
+/*设计师后台-订单详情结束*/
+
+
+/*设计师后台-基本上设置start*/
+
+.job-tags span {
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 16px;
+    color: #666;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 4px 5px;
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+.job-tags span.selected {
+    color: #ff6700;
+    border: 1px solid #ff6700;
+}
+
+
+/*设计师后台-基本上设置end*/
+
+
+/*头像设置start*/
+
+.w_avatarsettings {
+    width: 500px;
+    height: 500px;
+    margin: 20px 20px 40px;
+    background: url(../img/w_0718_001.png) repeat scroll 0 0;
+}
+
+.w_avatarsettings p {
+    text-align: center;
+}
+
+.w_0718_button {
+    width: 500px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.w_0718_button .btn_wbb {
+    margin-right: 10px;
+    background: #eee;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+
+/*头像设置end*/
+
+
+/*设计师后台css结束*/

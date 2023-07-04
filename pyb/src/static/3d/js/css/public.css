@@ -1,0 +1,138 @@
+*{margin:0;padding:0;}
+body,html{
+    font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+    font-family: '微软雅黑';
+}
+body{
+    background-color:#f5f5f3;
+}
+ul,ol,li{list-style-type:none;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+
+em,i{
+    font-style: normal;
+    border:none;
+    font-family:none;
+}
+a{text-decoration:none;}
+input{border:0;}
+input,textarea,select,a:focus{
+    outline: none;
+}
+
+/*宽*/
+.comBox{
+    width:1250px;
+    margin:0 auto;
+}
+
+/*颜色*/
+.red{color:#fa3817;}
+.hide{display:none}
+.en{
+    font-family: verdana;
+}
+
+/*********=============刀模 样式=============********/
+.dieListUL,.dieLylikeUl{
+    display:flex;
+    display:-webkit-flex;
+    display:-moz-flex;
+    display:-ms-flex;
+    display:-o-flex;
+    flex-wrap:wrap;
+}
+.dieListUL li{
+    width:282px;margin:30px 30px 0 0;
+    /* -moz-box-shadow:0px 2px 3px #d8d8d8; -webkit-box-shadow:0px 2px 3px #d8d8d8; box-shadow:0px 2px 3px #d8d8d8; */
+}
+.dieListUL li,.dieLylikeUl li{
+  /* background-color:#fdfdfd; */
+  border-radius:4px;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  -ms-border-radius:4px;
+  -o-border-radius:4px;
+  /* box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; */
+}
+
+.dieListT{position: relative;padding:6px 0;}
+.dieAbs{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color:rgba(0, 0, 0, 0.2);
+    top:0;
+    border-radius:4px 4px 0 0; 
+    -webkit-border-radius:4px 4px 0 0;
+    -moz-border-radius:4px 4px 0 0;
+    -ms-border-radius:4px 4px 0 0;
+    -o-border-radius:4px 4px 0 0;
+    text-align:center;
+    display:none;cursor: pointer;
+}
+.dieListUL li:hover .dieAbs{display:block;}
+/* .dieListUL li:hover{
+    -moz-box-shadow:0px 5px 8px #2e2e2e; -webkit-box-shadow:0px 5px 8px #2e2e2e; box-shadow:0px 5px 8px #2e2e2e; 
+} */
+.dieListTmg{
+    /* background-color:#efefef; */
+    width:268px;height:226px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+}
+.dieListTmg,.dieListTmg img,.dieLyer,.dieLylikeimg,.dieLylikeimg img{
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    -ms-border-radius:4px;
+    -o-border-radius:4px;
+}
+.dieListTmg img{
+    transform: scale(0.85);
+    object-fit: cover;
+    /* width: 100%; */
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+.diebtns{
+    width:324px;
+    height:52px;line-height:52px;
+    font-size:20px;
+    border:1px solid #db0020;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    display:block;
+    text-align:center;color:#fff;
+    background: linear-gradient(top left, #e30020, #bc001b);
+    background: -ms-linear-gradient(top left, #e30020, #bc001b);
+    background: -webkit-linear-gradient(top left, #e30020, #bc001b);
+    background: -moz-linear-gradient(top left, #e30020, #bc001b);
+    -moz-box-shadow:1px 1px 1px #ff0000 inset; 
+    -webkit-box-shadow:1px 1px 1px #ff0000 inset; 
+    box-shadow:1px 1px 1px #ff0000 inset;
+    position: relative;
+    margin:50px auto;
+}
+.diebtns:hover{background:#bc001b;color:#fff;}
+
+.detaismg{
+    width:100%;
+    text-align:center;
+}
+.detaismg img{width:80%;margin:0 auto;border:1px solid #ddd;background-color:#fff;}
+.detaismg p{
+    text-align: center;
+    padding:14px 0 40px;
+    font-size:17px;
+}

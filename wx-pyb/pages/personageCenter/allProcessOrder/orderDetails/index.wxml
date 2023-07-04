@@ -1,0 +1,208 @@
+
+<scroll-view style="margin-bottom: 20rpx;" wx:if="{{announcementText}}">
+  <van-notice-bar left-icon="volume-o" text="{{announcementText}}" />
+</scroll-view>
+<view class="top" wx:if="{{false}}"></view>
+<view class="concenta">
+  <view class="order" wx:for="{{orderDetail.miniEditionGoodsInfo[0].goodsAttr}}" wx:key="id">
+    <view class="order-titel">
+      <text>{{item.processName}}</text>
+      <view class="order-state">
+        <text wx:if="{{orderDetail.status == 'nopaid'}}" style="color:#ff0036">待付款</text>
+        <text wx:if="{{orderDetail.status == 'refunding'||orderDetail.status == 'stoped'}}" style="color:#ff0036">
+          退款中
+        </text>
+        <text wx:if="{{orderDetail.status == 'refunded'}}" style="color:#999999">退款完成</text>
+        <text wx:if="{{orderDetail.status == 'paid'||orderDetail.status == 'confirmed'}}" style="color:#ff0036">
+          进行中
+        </text>
+        <text wx:if="{{orderDetail.status == 'shipped'||orderDetail.status == 'SHIPPED'}}">
+          <text style="color:#999">已完成</text>
+        </text>
+        <text wx:if="{{orderDetail.status=='cancel'}}" style="color:#ff0036;">
+          <text>已取消</text>
+        </text>
+      </view>
+    </view>
+    <view class="details">
+      <text wx:for="{{item.goodsAttr}}" wx:for-item="items" wx:for-index="i" wx:key="id">
+        <text style="color:#666" wx:if="{{items.length==1}}">{{items[0]}};</text>
+        <text wx:else>
+          <text>{{items[0]}}:</text>
+          <text style="color:#666">{{items[1]}};</text>
+        </text>
+      </text>
+    </view>
+    <view class="total">
+      <text style="color:#999;">X {{item.number}}</text>
+      <text style="color:#999;text-decoration:line-through;">原价: {{orderDetail.amountOld}}</text>
+      <view class="discount">
+        <view style="display:flex;justify-content: space-between;flex-wrap: nowrap; color:#999999;">
+          <view style="display:flex;justify-content: space-between;  flex-wrap: nowrap;">
+            <view style="width:140rpx; display: inline-block;">优惠价格:</view>
+            <view style="color:#333333; font-size: 28rpx; white-space:nowrap">
+              ￥<text style="font-weight:bold;">{{orderDetail.amount*1}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="file-box" wx:if="{{true}}">
+    <view class="uploade">
+      <view class="stars1">
+        <text>
+          若文件大于<text class="stars">100MB</text>时，请联系在线客服传文件。
+        </text>
+      </view>
+    </view>
+    <view class="standard">
+      <view>
+        <!-- <web-view wx:if="{{xh}}" src="https://www.aocai.cn/static/pybupload/pybuploadfile.html?token={{xhToken}}&sn={{orderDetail.orderNo}}"></web-view> -->
+        <view bindtap="UPloadFile" data-sn="{{orderDetail.orderNo}}" class="{{buttonStatu}} button">
+          <text class="ac-icon-upload" style="font-size:40rpx;"></text>
+          <text>上传文件</text>
+        </view>
+      </view>
+      <text wx:if="{{orderDetail.miniEditionGoodsInfo[0].fileUrl!==null}}">
+        <!-- <text wx:if="{{isLook}} catchtap="lookPdf" data-url="{{orderDetail.miniEditionGoodsInfo[0].fileUrl}}" class="lookFile"">查看文件</text> -->
+        <text wx:if="{{!isLook||true}}">文件已上传</text>
+      </text>
+    </view>
+  </view>
+  <view wx:if="{{orderDetail.miniDiffOrderList}}" wx:for="{{orderDetail.miniDiffOrderList}}" wx:key="id" class="order-info" style="margin-top: 12px;">
+    <view class="order-sn" style="border-bottom: 1rpx solid #e7e7e7;padding-bottom: 20rpx;padding-top: 20rpx;">
+      <view class="prl">
+        <text>补差价信息</text>
+      </view>
+    </view>
+    <view>
+      <view class="create-time prl">
+        <view style="padding-top: 20rpx;">
+          <text style="color:#999">差价价格：</text>
+          <text style="color:#ff0036;">￥{{item.diffMoney}}</text>
+        </view>
+      </view>
+      <view class="create-time prl">
+        <view>
+          <text style="color:#999">差价描述：</text>
+          <text>{{item.diffDesc}}</text>
+        </view>
+      </view>
+      <view class="create-time prl" style="display:flex;align-items:center;">
+        <view>
+          <text style="color:#999">差价付款状态：</text>
+          <text style="color:#FF0036">{{item.status=='nopaid'?'未支付':'已支付'}}</text>
+        </view>
+        <button wx:if="{{item.status==='nopaid'}}" catchtap="DiffOrderPay" data-no="{{item.orderNo}}" data-sn="{{item.orderNo}}" class="on">
+            去支付
+          </button>
+      </view>
+    </view>
+  </view>
+  <view class="order-info" style="margin-top: 12px;">
+    <view class="order-sn123 prl">
+      <view>
+        <text>订单信息</text>
+      </view>
+    </view>
+    <view class="order-sn prl">
+      <view>
+        <text>订单编号：</text>
+        <text class="C9">{{orderDetail.orderNo}}</text>
+      </view>
+      <view class="copy-sn" style="margin-bottom: 0" data-sn="{{orderDetail.orderNo}}" catchtap="copyBtn">
+        <button>复制</button>
+      </view>
+    </view>
+    <view class="prl" style=" margin-top: 14rpx;" wx:if="{{orderDetail.status == 'refunded'}}">
+      <text>支付编号：</text>
+      <text class="C9">{{orderDetail.orderNo}}</text>
+    </view>
+    <view wx:if="{{orderDetail.payTime>0}}" class="create-time prl">
+      <view>
+        <text>支付方式：</text>
+        <text class="C9">{{orderDetail.payText}}</text>
+      </view>
+    </view>
+    <view class="create-time prl">
+      <view>
+        <text>下单时间：</text>
+        <text class="C9">{{createtime}}</text>
+      </view>
+    </view>
+    <view class="create-time prl" wx:if="{{orderDetail.status == 'nopaid'}}">
+      <view>
+        <text>商品金额：</text>
+        <text class="C9">￥{{orderDetail.amount}}</text>
+      </view>
+    </view>
+    <view class="koo prl" wx:if="{{orderDetail.refundMoney&&orderDetail.refundMoney>0}}">
+      <text>退款金额：</text>
+      <text class="C9" style="color:#ff0036;">￥{{orderDetail.refundMoney*1}}</text>
+    </view>
+  </view>
+  <view wx:if="{{orderDetail.memo}}" style="margin-top:24rpx;display: inline-block;width:100%">
+    <view class="title">
+      <text class="titletxt" style="width:90rpx">备注</text><view class="weui-input">{{orderDetail.memo}}</view>
+    </view>
+  </view>
+  <!-- <view wx:if="{{orderstate == '退款中'}}" class="order-info">
+    <view class="create-time">
+      <view>
+        <text style="color:#999">应退金额：</text>
+        <text style="color:#ff0036; font-weight:bold;">
+          ￥{{orderDetail.amount*1}}
+        </text>
+      </view>
+    </view>
+  </view> -->
+  <view class="footer-brick"></view>
+</view>
+<view class="footer">
+  <!-- <view class="save" wx:if="{{(orderDetail.suborderDiscountDetail.paperPriceOne*1-orderDetail.suborderDiscountDetail.paperPrice*1)>0}}">
+    <text>已省：¥{{orderDetail.saving}}</text>
+  </view> -->
+  <view class="order-btn">
+    <view class="total-price-text" style="width:{{orderstate == '待付款'?'60%':orderstate == '已完成'?'100%':'40%'}}">
+      <text wx:if="{{orderstate == '待付款'}}" style="font-size: 24rpx;">应付金额：</text>
+      <text wx:if="{{orderstate !== '待付款'}}" style="font-size: 24rpx;">订单金额：</text>
+      <text class="money">¥<text class="f40">{{orderDetail.amount}}</text></text>
+    </view>
+    <!-- <button wx:if="{{orderstate == '进行中'}}" catchtap="cgContacts" data-sn="{{orderDetail.orderNo}}">修改联系人</button> -->
+    <button wx:if="{{orderDetail.status!='nopaid'&&orderDetail.status!='refunding'&&orderDetail.status!='cancel'&&false}}" catchtap="refund" data-sn="{{orderDetail.orderNo}}" style="color:#999;border-radius: 80rpx;">
+      申请退款 
+    </button>
+    <button wx:if="{{orderstate == '已取消'}}" catchtap="delOrder" data-sn="{{orderDetail.parentOrderNo}}">
+      删除订单
+    </button>
+    <button wx:if="{{orderstate == '待付款'}}" catchtap="selectCredit" data-no="{{orderDetail.orderNo}}" data-amount="{{orderDetail.amount}}" data-sn="{{orderDetail.parentOrderNo}}" class="on">
+      去支付
+    </button>
+  </view>
+</view>
+<service></service>
+<modal modal="{{modal}}"></modal>
+<van-toast id="van-toast" />
+<van-action-sheet
+  class="credit-action-sheet"
+  show="{{ creditShow }}"
+  description="选择支付方式"
+  cancel-text="取消"
+  bind:cancel='creditHideFun'
+>
+  <button 
+  wx:for="{{creditActions}}" 
+  wx:key="index" 
+  disabled="{{item.disabled}}" 
+  bindtap="{{ item.disabled || item.loading ? '' : 'onSelect' }}" 
+  data-index="{{ index }}" 
+  loading="{{item.loading}}" 
+  class="action-sheet">
+    <view class="credit-action">
+      <image src="{{item.img}}" mode="widthFix" class="credit-icon"/>
+      <text>{{item.name}}</text>
+    </view>
+    <view wx:if="{{item.subname}}" class="subname">{{item.subname}}</view>
+  </button>
+</van-action-sheet>

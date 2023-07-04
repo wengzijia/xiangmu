@@ -1,0 +1,188 @@
+<view class="processe catchtou" id="j_page">
+  <!-- 头部 -->
+  <view wx:if="{{false}}" class="header">
+    <view class="flex">
+      <text catchtap="notice" > 下单须知<text class="ac-icon-arrow"></text></text>
+    </view>
+  </view>
+  <!-- 内容 -->
+  <view class="content">
+    <!-- 开纸尺寸 -->
+    <view class="button_container">
+      <view wx:for="{{procedureList}}" wx:key="id">
+        <view wx:if="{{item.type=='printing'}}">
+          <view class="printing-name">{{item.processName}}</view>
+          <view class="fromItem3">
+            <view class="label">
+              <text class="mustSign red">*</text>
+              开纸尺寸
+            </view>
+            <view class="fromItem" style="display:flex; line-height:68rpx;">
+              <view class="sizeInput" style="margin-right:0;">
+                <input placeholder-class="phcolor" placeholder="长" type="digit" value="{{item.sizeLength}}" bindblur='inputVal' data-from="printing" data-index="{{index}}" data-key='sizeLength' />
+                <text class="fork">X</text>
+                <input placeholder-class="phcolor" placeholder="宽" type="digit" value="{{item.sizeWidth}}" bindblur='inputVal' data-from="printing" data-index="{{index}}" data-key='sizeWidth' />
+                <text class="sizeTxt">mm</text>
+              </view>
+            </view>
+          </view>
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <text class="mustSign red">*</text>
+                <text>印刷数量</text>
+              </text>
+            </view>
+            <view class="conten" style="display:flex;align-items: center;width:100%;margin-left:20rpx;">
+              <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入印刷数量" type="digit" value="{{item.number}}" data-from="printing" data-index="{{index}}" bindblur="changePrintingNum" data-key='number' />
+              <text class="sizeTxt">张</text>
+            </view>
+          </view>
+          <view class="fromItem3">
+            <view class="label"><text class="mustSign red">*</text>印刷机型</view>
+            <view class="button_container fromItem">
+              <!-- <block wx:for="{{surfaceTreatment}}" wx:key="index"> -->
+                <block wx:for="{{item.printingMachine}}" wx:key="item2" wx:for-index="i" wx:for-item="item2">
+                  <button class='{{item["printingMachineType"]&&item["printingMachineType"]==item2.value?"checked_button":"normal_button"}}' data-from="printing" data-index="{{index}}" data-key="printingMachineType" data-val="{{item2.value}}" catchtap="radioTap">
+                    {{item2.lable}}
+                  </button>
+                </block>
+              <!-- </block> -->
+            </view>
+          </view>
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <text class="mustSign red">*</text>
+                <text>材质/克重</text>
+              </text>
+            </view>
+            <view class="conten" style="display:flex;align-items: center;width:100%;margin-left:20rpx;">
+              <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入纸张材质" type="text" data-index="{{index}}" value="{{item.thickness}}" bindblur="inputVal" data-key='thickness' />
+              <!-- <text class="sizeTxt">张</text> -->
+            </view>
+          </view>
+          
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <text class="mustSign red">*</text>
+                <text>印刷方式</text>
+              </text>
+            </view>
+            <view class="button_container fromItem">
+              <!-- <block wx:for="{{surfaceTreatment}}" wx:key="index"> -->
+                <block wx:for="{{item.printingModeList}}" wx:key="item2" wx:for-index="i" wx:for-item="item2">
+                  <button class='{{item["printingMode"]&&item["printingMode"]==item2.value?"checked_button":"normal_button"}}' data-key="printingMode" data-from="printing" data-index="{{index}}" data-val="{{item2.value}}" catchtap="radioTap">
+                    {{item2.lable}}
+                  </button>
+                </block>
+              <!-- </block> -->
+            </view>
+          </view>
+          
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <text class="mustSign red">*</text>
+                <text>印刷颜色</text>
+              </text>
+            </view>
+            <view class="button_container fromItem">
+              <block >
+                <button class="checked_button" >四色印刷</button>
+              </block>
+              <!-- <block wx:if="{{addColor}}">
+                <button class='{{color?"checked_button":"normal_button"}}' data-key="color" data-val="白墨" catchtap="checkTap">白墨</button>
+              </block> -->
+            </view>
+          </view>
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <!-- <text class="mustSign red">*</text> -->
+                <text>专色数量</text>
+              </text>
+            </view>
+            <view class="conten" style="display:flex;align-items: center;width:100%;margin-left:20rpx;">
+              <view class="select">
+                <view class="select-value" catch:tap="showSelect">{{item.pantoneNumber}}<van-icon class="select-icon" name="arrow-down" /></view>
+                <view class="option-box {{select?'option-box-h':''}}">
+                  <view wx:for="{{[0,1,2,3,4]}}" wx:for-item="option" wx:for-index="i" wx:key="option" data-key="pantoneNumber" data-from="printing" data-index="{{index}}" data-val="{{option}}" catch:tap="changeSelect" class="select-option">{{option}}</view>
+                </view>
+              </view>
+              <!-- <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入印刷数量" type="digit" value="{{item.printingNum}}" bindblur="changePrintingNum1" data-key='printingNum' />
+              <text class="sizeTxt">张</text> -->
+            </view>
+          </view>
+          <view wx:if="{{item.pantoneColorList.length>0}}" class="fromItem3">
+            <view class="label">
+              <text>
+                <text class="mustSign red">*</text>
+                <text>PANTONE色号</text>
+              </text>
+            </view>
+            <view class="conten" style="display:flex;flex-wrap:wrap;align-items: center;width:100%;margin-left:20rpx;justify-content: space-between;">
+              <block wx:for="{{item.pantoneColorList}}" 
+                wx:for-item="item2" wx:key="item2" 
+                wx:for-index="index2">
+                  <input  
+                  style="width: 46%;min-width: 46%;margin-bottom:12rpx;" 
+                  class="input-border"
+                  placeholder-class="phcolor" 
+                  type="text"
+                  value="{{item2.value}}"
+                  data-key="pantoneColorList"
+                  data-index="{{index}}"
+                  data-index2="{{index2}}"
+                  bindblur="changePantoneColor" />
+              </block>
+            </view>
+          </view>
+          <view class="fromItem3">
+            <view class="label">
+              <text>
+                <!-- <text class="mustSign red">*</text> -->
+                <text>看色</text>
+              </text>
+            </view>
+            <view class="button_container fromItem">
+              <!-- <block >
+                <button class="checked_button" >四色印刷</button>
+              </block> -->
+              <block>
+                <button class='{{item.lookColor?"checked_button":"normal_button"}}' data-index="{{index}}" data-key="lookColor" data-val="看色" catchtap="checkTap">看色</button>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="fromItem3">
+          <view class="label">
+            <text>
+              <text class="mustSign red">*</text>
+              <text>印刷总价</text>
+            </text>
+          </view>
+          <view class="conten" style="display:flex;align-items: center;width:100%;margin-left:20rpx;">
+            <input style="flex:1" class="input-border" placeholder-class="phcolor" placeholder="请输入总价" type="digit" data-index="{{index}}" data-key="amount" value="{{item.amount}}" bindblur="inputVal" />
+            <text class="sizeTxt">元</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{isShowBottomView}}" style="height:500rpx"></view>
+  <!-- 底部加入购物车 -->
+  <view class="footer btuBottom">
+    <!-- <view class="footerBox2" catchtap="checkCart">
+      <view class="footerBoxIcon ac-icon-cart">
+        <view class="footerBuyCount">{{cartCount}}</view>
+      </view>
+      <view>购物车</view>
+    </view>
+    <view class="footerBox3" catchtap="addEditionCart">加入购物车</view> -->
+    <view class="footerBox4" catchtap="placeOrder">立即下单</view>
+  </view>
+  <modal modal="{{modal}}"></modal>
+  <van-toast id="van-toast" />
+</view>

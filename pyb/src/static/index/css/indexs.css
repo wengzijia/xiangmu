@@ -1,0 +1,181 @@
+
+/*********=============优势=============********/
+.advBox{
+    background:url('../img/index/oem_bj.jpg') no-repeat center bottom;  
+    height:402px;
+    margin:0 0 10px;
+    text-align:center;
+    clear: both;
+    padding-top:40px;
+}
+.advTitle{
+    color:#000;
+    font-size:18px;
+    font-weight:normal;
+    padding:58px 0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.advTitle span{
+    font-size:34px;
+    font-weight:700;
+    padding:0 12px;
+}
+.advUl{
+   width:100%;
+   align-items: center;
+   justify-content: center; 
+}
+.advUl li{
+    width:172px;
+    height:172px;
+    background:url('../img/index/oem_icon.png') no-repeat center;
+    flex:1; 
+    font-size:15px;
+}
+.advPtx1,.advPtx2,.advPtx3,.advPtx4,.advPtx5{
+    font-size:40px;
+    background-image:url('../img/icon_new.png');
+    background-repeat:no-repeat;
+    width:78px;
+    height:32px;
+    margin:58px auto 6px;
+}
+.advPtx1{
+    background-position:-380px top;  
+}
+.advPtx2{
+    background-position:-380px -43px;  
+}
+.advPtx3{
+    background-position:-380px -85px;  
+}
+.advPtx4{
+    background-position:-294px top;  
+}
+.advPtx5{
+    background-position:-294px -43px;  
+}
+
+/*********=============生产基地=============********/
+.OEMtitle{
+    padding:40px 0;
+}
+.OEMtitle h6{
+    font-size:20px;
+    padding:8px 0;
+}
+.OEMtitle p{
+    font-size:14px;
+}
+.OEMBnt{
+    background-color: #ff0036;
+    color:#fff;
+    border-radius:30px;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    -ms-border-radius:30px;
+    -o-border-radius:30px;
+    padding:0 18px;
+    line-height:34px;
+    display: inline-block;
+    font-size:16px;
+    margin:8px 0;
+}
+.OEMBnt::after{
+    content: ">>";
+    font-size:12px;
+    font-family:'宋体';
+    display: inline-block;
+    padding-left:10px;
+}
+.OEMBnt:hover{
+    background-color:#df002f;
+    color:#fff;
+}
+.OEMul{
+    overflow: hidden;
+    padding-bottom:40px;
+}
+.OEMul li{
+    border:1px solid #fbe3e5;
+    height:235px;
+    flex:1;
+    width:33.33%;
+    margin-right:15px;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    -ms-border-radius:4px;
+    -o-border-radius:4px;
+    background-color:#fff;
+}
+.OEMul li:last-child{margin-right:0;}
+.OEMulImg{
+    height:190px;
+    max-height:190px;
+    border-radius:4px 4px 0 0;
+    -webkit-border-radius:4px 4px 0 0;
+    -moz-border-radius:4px 4px 0 0;
+    -ms-border-radius:4px 4px 0 0;
+    -o-border-radius:4px 4px 0 0;
+    overflow: hidden;
+}
+.OEMulImg img{
+    width:100%;
+    transition: all .5s ease;
+}
+.OEMulPt{
+    line-height:44px;
+}
+
+/*********=============新闻=============********/
+.newsBox{
+  background-color:#fff;
+  border:1px solid #eee;
+  line-height:42px;
+  height:42px;
+  margin-bottom:40px;
+  overflow: hidden;
+}
+.newsTitle{
+    color:#fe0036;
+    font-size:16px;
+    float: left;
+    width:10%;
+    text-align:center;
+}
+.newsBoxUl{
+    float: left;
+    width:90%;
+}
+.newsBoxUl li{
+    flex:1;
+    width:33.33%;
+    padding-left:16px;
+    position: relative;
+}
+.newsBoxUl li a{color:#333;}
+.newsBoxUl li a:hover .neSpnLast{
+    text-decoration:underline;
+    /* color:#e60021; */
+}
+.newsBoxUl li em{
+  background:url('../img/icon_new.png') no-repeat right -31px;
+  width:24px;
+  height:12px; 
+  position: relative;
+  display:inline-block;
+  top:-4px;right:6px;
+}
+.newSpn::after{
+    width:1px;
+    height:14px;
+    background-color:#e2e2e2;
+    content: "";
+    position: relative;
+    display:inline-block;
+    margin:0 6px 0 10px;
+    top:2px;
+}

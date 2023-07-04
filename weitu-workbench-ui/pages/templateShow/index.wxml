@@ -1,0 +1,64 @@
+<!--pages/templateShow/index.wxml-->
+<canvas type="2d" class="my-canvas2" id="myCanvas2" canvas-id="myCanvas2"></canvas>
+<view>
+  <view class="img_all">
+    <image src="{{templateImg}}" class="wid_img" mode="widthFix"></image>
+    <view class="img_flex">
+      <view>
+        <view class="flex1" wx:if="{{userInfo.avatar}}">
+          <view>
+            <image src="{{imageBaseUrl + userInfo.avatar}}" class="img"></image>
+          </view>
+          <view>
+            <view class="img_name"><text>{{userInfo.fullname}}</text></view>
+            <view class="user_position"><text>({{userInfo.position}})</text></view>
+            <view class="img_adr">{{userInfo.enterprise.enterpriseName}}</view>
+          </view>
+        </view>
+        <view class="detail">推荐一个好物给您，长按识别查看详情吧~</view>
+      </view>
+      <view>
+        <image src="data:image/png;base64,{{referralCode}}" class="img_right"></image>
+      </view>
+    </view>
+  </view>
+  <van-share-sheet show="{{ showShare }}" options="{{ options }}" bind:select="onSelectShare" bind:close="onCloseShare" overlay='{{false}}' cancel-text='1'/>
+
+  <van-overlay show="{{ showLoading }}" >
+<view class="wrapper">
+  <van-loading size="24px" color="#fff" vertical>{{loadingText}}</van-loading>
+</view>
+</van-overlay>
+
+
+<van-overlay show="{{ showSetTips }}">
+  <view class="wrapper">
+    <view class="block" style="width: 440rpx;">
+      <view style="text-align: center;padding: 30rpx 20rpx;">权限不足，无法添加到相册，请开启设置</view>
+     <view style="display: flex;">
+      <button class='set-btn' catchtap="hideSetTips"  style="flex:1" >取   消</button>
+      <button class='set-btn' catchtap="openSetting" style="flex:1">打开设置页</button>
+     </view>
+    </view>
+  </view>
+</van-overlay>
+  <!-- <view wx:if="{{isShow}}">
+    <view class="mrginT"></view>
+    <view class="btn_bg" bindtap="bindNew">
+      <view class="dis_flex">
+        <view>
+          <button class="img_two1" open-type='share'>
+            <image src="/image/template/wx.png" class="img_wid"></image>
+            <view class="text">微信好友</view>
+          </button>
+
+        </view>
+
+        <view class="img_two" bindtap="bindShow">
+          <image src="/image/template/poster.png" class="img_wid"></image>
+          <view class="text">保存海报</view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+</view>

@@ -1,0 +1,115 @@
+<view class='personage'>
+  <view class="herder">
+    <view class="navName" catchtap="myNavigateTo" data-url="settings/index" data-report='{"actionId": 2,"channel":700000}'  style='padding-top:{{statusBarHeight*1.2}}px; text-align:center;font-size:{{fontSizeSetting}}px;padding-bottom:{{statusBarHeight/2}}px;color: #fff;'>个人中心</view>
+    <view class="userinfo" catchtap="myNavigateTo" data-url="settings/index" data-report='{"actionId": 2,"channel":700000}'  style='padding:{{"calc(calc("+boxHeight+"px - 180rpx - 130rpx) / 2)"}} 40rpx;line-height:{{boxLineHeight}}px'>
+      <view wx:if="{{hasUserInfo}}" class="userAvatarUrl">
+        <!-- <open-data type="userAvatarUrl"  ></open-data> -->
+        <image src="{{userInfo.avatarUrl}}" />
+      </view>
+      <view wx:if="{{hasUserInfo}}" class="nickname">
+        {{' '+userInfo.nickName}}
+        <!-- <open-data type="userNickName"  catchtap="bindViewTap" ></open-data> -->
+      </view>
+      <view wx:if="{{!hasUserInfo}}" class="userAvatarUrl">
+        <image src="../../../image/unknown-user.png" mode="aspectFit"></image>
+      </view>
+      <view wx:if="{{!hasUserInfo}}" class="nickname"><text catchtap="myNavigateTo" data-report='{"actionId": 2,"channel":700000}'   data-url="settings/index">未登录</text></view>
+      <view class='ac-icon-set'></view>
+    </view>
+    <view class='orderListStatusBtn'>
+      <view class="flex_between">
+        <view class="left">我的订单</view>
+        <view class="right" catchtap="myNavigateTo" data-type="{{0}}" data-url="allSingleOrder/index">卡盒、坑盒、精装盒<van-icon name="arrow" style="margin-left:10rpx" /></view>
+      </view>
+      <view style="display: flex;justify-content: space-around;">
+        <view wx:for='{{navList}}' class="orderListItem" wx:for-item="nav" wx:key='index' catchtap="myNavigateTo" data-url="{{nav.url.path}}" data-type="{{nav.url.type}}">
+          <image src="{{nav.imageUrl}}" mode="cover" />
+          <view>{{nav.title}}</view>
+        </view>
+      </view>
+      <!-- <view catchtap="myNavigateTo" data-url="allSingleOrder/index" data-type="0">
+            <image src="../../../image/Frame.png" mode="cover" />
+            <view>拼版订单</view>
+          </view>
+          <view catchtap="myNavigateTo" data-url="allSingleOrder/index" data-type="1">
+            <image  src="../../../image/Frame-1.png" mode="cover" />
+            <view>待付款</view>
+          </view>
+          <view catchtap="myNavigateTo" data-url="allSingleOrder/index" data-type="2">
+            <image  src="../../../image/Frame-2.png" mode="cover" />
+            <view>待确认</view>
+          </view>
+          <view catchtap="myNavigateTo" data-url="allSingleOrder/index" data-type="5">
+            <image  src="../../../image/Frame-3.png" mode="cover" />
+            <view>待发货</view>
+          </view> -->
+    </view>
+  </view>
+  <view class='personageList2' style='position: relative;' wx:if='{{!isProxy}}'>
+    <view catchtap="myNavigateTo" data-url="stored/index"  data-report='{"actionId": 1,"channel":701000}'>
+      <text>预存充值</text>
+      <view class="menu_img" wx:if="{{isShowActivities}}">
+        <view class="menu_img_title">
+          有优惠,充值送
+        </view>
+      </view>
+      <view class='greaterThanSign'></view>
+    </view>
+    <view catchtap="myNavigateTo" data-url="credit/index" wx:if="{{credit}}">
+      <text>信用账户</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <!-- <view catchtap="myNavigateTo" data-url="save/index">
+      <text>我的财富</text>
+      <view class='greaterThanSign'></view>
+    </view> -->
+    <!-- <view catchtap="myNavigateTo" data-url="allSingleOrder/index">
+          <text>单款订单</text>
+          <view class='greaterThanSign'></view>
+        </view> -->
+    <view catchtap="myNavigateTo" data-url="allPaperOrder/index" data-type="0" data-report='{"actionId": 7,"channel":700000}'  >
+      <text>买纸订单</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <view catchtap="myNavigateTo" data-url="allOfflineSingleOrder/index" data-type="0" >
+      <text>线下报价订单</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <!-- <view catchtap="myNavigateTo" data-url="allProcessOrder/index" data-type="0">
+      <text>工序加工单</text>
+      <view class='greaterThanSign'></view>
+    </view> -->
+    <!-- wx:if="{{admin}}" -->
+    <view catchtap="myNavigateTo" data-url="allPrintingOrder/index" data-type="0" data-report='{"actionId": 8,"channel":700000}'  >
+      <text>印刷加工单</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <!-- <view catchtap="myNavigateTo" data-url="allOrder/index" data-type="0">
+         <text>整版订单</text>
+         <view class='greaterThanSign'></view>
+       </view> -->
+    <!--       <view catchtap="myNavigateTo" data-url="recommend/index">-->
+
+    <view wx:if="{{recommendType}}" catchtap="myNavigateTo" data-url="recommend/index">
+      <text>我的推荐</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <view  catchtap="myNavigateTo" wx:if="{{recommendType}}" data-url="recommend/mycode/index">
+      <text>我的推荐码</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <view  catchtap="myNavigateTo" data-url="coupon/index" data-report='{"actionId": 1,"channel":702000}'>
+      <text>我的优惠券</text>
+      <view class='greaterThanSign'></view>
+    </view>
+    <view  catchtap="myNavigateTo" data-url="invoice/index">
+      <text>我的发票</text>
+      <view class='greaterThanSign'></view>
+    </view>
+  </view>
+  <service></service>
+ 
+  <modal modal="{{modal}}"></modal>
+</view>
+<van-toast id="van-toast" />
+<!-- <view class="copy">版本号：V4.0.0</view> -->

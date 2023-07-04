@@ -1,0 +1,117 @@
+.container{
+    width:1200px;
+    margin:0 auto
+}
+.clearfix:after{
+    content:" ";
+    display:block;
+    clear:both
+}
+.filter{
+    padding-top:15px;
+    padding-bottom:15px;
+}
+.filter .box{
+    padding:24px;
+    border:1px solid #dcdcdc;
+    background-color:#fff
+}
+.filter .title-h{
+    font-size:14px;
+    border-bottom:1px solid #dcdcdc;
+    padding-bottom:10px;
+    margin-bottom: 10px;
+}
+.filter dl{
+    position:relative;
+    margin-bottom:10px
+}
+.filter dl:after{
+    content:"";
+    display:block;
+    clear:both
+}
+.filter dl dt{
+    position:absolute;
+    top:0;
+    left:0;
+    font-weight:700
+}
+.filter dl dd{
+    padding-left:145px
+}
+.filter dl dd a{
+    margin-right:20px;
+    margin-bottom:10px;
+    display:inline-block
+}
+.filter dl dd a.on{
+    font-weight:700;
+    color:#d0111b;
+}
+
+.grid strong{
+    border-bottom:1px solid #ccc;margin:10px 0;display:block;padding:0 0 5px;font-size:16px;
+    font-weight:normal;
+}
+#wrapper .grid .meta{
+    color:#777;
+    text-align:inherit;
+    font-style:inherit;
+    position: relative;
+}
+#wrapper #container{
+    text-align:center;
+}
+#wrapper .grid{
+    text-align:left;
+}
+#container .layui-laypage{
+    margin:20px auto 0;
+}
+.grid .imgholder img{
+    width:100%;background:#ccc;display:block;background:url(images/loding.gif) no-repeat center;
+    transform: scale(0.85);
+    object-fit: cover;
+}
+.grid strong{
+    color:#e60021;
+}
+.grid{
+    cursor: pointer;
+}
+.imgholder{
+    height: 300px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* overflow: hidden; */
+}
+.pagination li{float:left;}
+
+#wrapper .layui-laypage li.active span{
+    background:#e60021;
+    color:#fff;
+}
+#wrapper .layui-laypage li.disabled{
+    color: #d2d2d2;
+    cursor: not-allowed;
+}
+#wrapper .layui-laypage a, #wrapper .layui-laypage span{
+    margin-bottom:0;
+    color:inherit;
+    height:32px;
+    line-height:32px;
+}
+.gridName{
+    font-size: 13px;
+    margin-bottom: 10px;
+    height: 18px;
+    overflow: hidden;
+}
+.downloadBtn{
+    position: absolute!important;
+    right:0;
+    color:#d0111b!important;
+}

@@ -1,0 +1,41 @@
+<!--pages/editProgram/index.wxml-->
+<view class="editProgramContainer">
+  <view class="oneSortContainer">
+    <!-- 一级分类 -->
+    <view class="oneSortBox">
+      <view class="oneSortText">一级分类:</view>
+      <view class="oneSortTitle">{{yjSortName}}</view>
+    </view>
+    <view class="addSortBox" catchtap="addSort">
+      <image class="addSortImg" src="/image/shopSet/addSort.png"></image>
+      <view class="addSortText">新增分类</view>
+    </view>
+  </view>
+  <!-- 二级分类 -->
+  <view class="twoSortContainer">
+    <view class="twoSortBox" wx:for="{{EJSortData}}" wx:key="index">
+      <view class="twoSortHeadBox">
+        <view class="twoSortTitleBox">
+          <view class="twoSortText">二级分类{{index + 1}}:</view>
+          <input class="twoSortInput" type="text" value="{{item.name}}" data-index="{{index}}" placeholder="请输入分类标题"  bindinput="EJSortInput"/>
+        </view>
+        <view class="delSortBox" data-index="{{index}}" catchtap="deleteSort">
+          <image class="delSortImg" src="/image/shopSet/delSort.png"></image>
+          <view class="delSortText">删除分类</view>
+        </view>
+      </view>
+      <view class="selectedActPlan" wx:if="{{item.packSchemes.length}}" data-id="{{item.id}}"  data-enterpriseCode="{{item.enterpriseCode}}" data-path="{{item.path}}" data-sortIndex="{{index + 1}}" data-sortName="{{item.name}}" data-schemeNum="{{item.schemeNum}}" catchtap="seeAll">已选{{item.schemeNum}}个方案，点击查看全部>></view>
+      <view class="selectedPlan" wx:else>已选0个方案</view>
+      <view class="planImgListBox">
+        <view class="planImgList" wx:for="{{item.packSchemes}}" wx:key="index" wx:if="{{index<5}}">
+          <image class="planImg" wx:if="{{item.goodsImg.secondThumbnail}}" src="{{imageBaseUrl + item.goodsImg.secondThumbnail}}"></image>
+        </view>
+        <image class="addPlanImg" src="/image/shopSet/addPlan.png" wx:if="{{item.name}}" data-sortIndex="{{index + 1}}" data-sortName="{{item.name}}" data-id="{{item.id}}"  data-enterpriseCode="{{item.enterpriseCode}}" data-path="{{item.path}}" catchtap="addPlan"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+  <view class="safetyKmN bottomBox" wx:if="{{isShowSave}}">
+    <view class="flex_c_c save" catchtap="save">保存</view>
+  </view>
+</view>

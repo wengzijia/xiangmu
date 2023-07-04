@@ -1,0 +1,53 @@
+<van-dropdown-menu class="dropdown">
+    <van-dropdown-item title="{{startTimeStr}} 至 {{endTimeStr}}" id="dropdownItem">
+        <view style="padding:25rpx">
+            <view class="title">
+                按时间筛选
+            </view>
+            <view class="flex">
+                <view wx:for="{{siftingOptions}}" wx:key="index" data-key="siftingBtn" data-val="{{item}}" catchtap="clickRadio" class='{{siftingBtn==item?"checked_button":"normal_button"}} box'>
+                    {{item}}
+                </view>
+            </view>
+            <view class="hint">
+                已筛选时间: {{time[0]}} 至 {{time[1]}}
+            </view>
+            <view wx:if="{{siftingBtn == '自定义时间'}}">
+                <view class="flex both" style="align-items: center;margin-top: 20rpx;">
+                    <view class='{{timeStatus=="start"?"checked_button":"normal_button"}} timeBox' data-key="timeStatus" data-val="start" catchtap="clickRadio">
+                        {{time[0]}}
+                    </view>
+                    <view>
+                        至
+                    </view>
+                    <view class='{{timeStatus=="end"?"checked_button":"normal_button"}} timeBox'data-key="timeStatus" data-val="end" catchtap="clickRadio">
+                        {{time[1]}}
+                    </view>
+                </view>
+                <view class="hint" style="color:#E9333F;text-align:center">
+                    最长可查询半年内的交易
+                </view>
+                <view style="margin-top: 20rpx">
+                    <van-datetime-picker
+                        type="date"
+                        value="{{ currentDate }}"
+                        bind:input="onInput"
+                        min-date="{{ minDate }}"
+                        max-date="{{ maxDate }}"
+                        formatter="{{ formatter }}"
+                        show-toolbar="{{false}}"
+                    />
+                </view>
+            </view>
+            <view class="flex both" style="margin-top:25rpx">
+                <view class="reset" catchtap="reset">
+                    重置
+                </view>
+                <view class="confirm" catchtap="onConfirm">
+                    确认
+                </view>
+            </view>
+        </view>
+    </van-dropdown-item>
+    <van-dropdown-item bind:change="changeOption" value="{{value }}" options="{{ option }}" />
+</van-dropdown-menu>

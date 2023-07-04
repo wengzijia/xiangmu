@@ -1,0 +1,263 @@
+<view>
+    <view wx:if="{{activity.prompt}}">
+      <view class="header">
+        <image src="./img/bj.png" class="headerImg"></image>
+        <view class="headerTitle">
+            {{activity.prompt}}
+        </view>
+      </view>
+    </view>
+
+    <view class="flex both padding twoBox">
+        <view class="left flex">
+            <view >
+                我的余额(元)
+            </view>
+            <view style="font-size: 32rpx;font-weight: 550;color: #333333;margin-left: 10rpx;">
+                {{userMoney || '0.00'}}
+            </view>
+        </view>
+        <view class="right" catchtap="jumpBill">
+            账单 <van-icon name="arrow" />
+        </view>
+    </view>
+
+    <view class="card background padding">
+        <view class="title">
+            预存方式
+        </view>
+        <!-- <view class="flex" style="margin-top:28rpx">
+            <button  catchtap="clickRadio" data-key="payType" data-val="2" style="margin-left:0;" class='{{payType==2?"checked_button":"normal_button"}} btn'>
+                <image src='./img/wx.png' class="img" style="" />微信支付</button>
+            <button catchtap="clickRadio" data-key="payType" data-val="1" class='{{payType==1?"checked_button":"normal_button"}} btn'>
+                <image src='./img/zfb.png' class="img" />支付宝转账</button>
+            <button catchtap="clickRadio" data-key="payType" data-val="4" class='{{payType==4?"checked_button":"normal_button"}} btn'>
+                <image src='./img/yhk.png' class="img" />银行卡转账</button>
+        </view> -->
+        <van-radio-group value="{{ payType }}" bind:change="onChange">
+            <van-cell-group>
+                <van-cell clickable data-val="2" data-key="payType" bind:click="clickRadio">
+                    <view slot="title" class="flex">
+                        <image src='./img/wx.png' class="img" style="" />
+                        <text class="img_text">微信支付</text>
+                    </view>
+                    <van-radio slot="right-icon" name="2" checked-color="#E9333F" />
+                </van-cell>
+                <van-cell wx:if="{{account[2][0]}}" clickable data-val="1" data-key="payType" bind:click="clickRadio">
+                    <view slot="title" class="flex">
+                        <image src='./img/zfb.png' class="img" style="" />
+                        <text class="img_text">支付宝转账</text>
+                    </view>
+                    <van-radio slot="right-icon" name="1" checked-color="#E9333F" />
+                </van-cell>
+                <van-cell wx:if="{{account[1][0]}}" clickable data-val="4" data-key="payType" bind:click="clickRadio">
+                    <view slot="title" class="flex">
+                        <image src='./img/yhk.png' class="img" style="" />
+                        <text class="img_text">银行卡转账</text>
+                    </view>
+                    <van-radio slot="right-icon" name="4" checked-color="#E9333F" />
+                </van-cell>
+            </van-cell-group>
+        </van-radio-group>
+
+    </view>
+
+    <view class="flex both threeBox" wx:if="{{payType != 2}}">
+        <view>
+            请将金额转入账户，再填写转账金额。
+        </view>
+        <view style="color: #E9333F;" catchtap="showPopup">
+            查看汇款账户 <van-icon name="arrow" />
+        </view>
+    </view>
+
+    <view class="background padding">
+        <view class="title" style="">
+            <text style="color:#E9333F">* </text>{{payType == 2 ? '充值金额' : '已转账金额'}} <van-icon style="color:#777777" name="question-o" catchtap="showHintPopup" />
+        </view>
+        <view style="height:20rpx;margin-bottom:16rpx;" wx:if="{{unit}}" >
+            <view class="border" style="{{unit.length == 2 ? 'width:50rpx' : ''}}">
+                {{unit}}
+            </view>
+        </view>
+        <view class="flex title" style="font-size: 38rpx;">
+            <text class="money">￥</text>
+            <input type="number" value="{{money}}" data-key="money" bindinput='inputVal' bindblur="inputFun" maxlength="8" placeholder-class="money_num" placeholder="请输入充值金额"></input>
+        </view>
+        <view class="hr"></view>
+        <view class="phrase" wx:if="{{payType == 2}}">
+            <text style="color:{{norm ? '#AAAAAA':'#E9333F'}};margin-left:42rpx">充值金额最低为10元，且为10的整数倍</text>
+        </view>
+        <!-- 微信 -->
+        <view wx:if="{{payType==2 && activity.givingInterval}}" class="flex" style="margin-top:25rpx">
+            <view catchtap="clickRadio" data-key="give_full_amount" data-val="{{item.give_full_amount }}" wx:for="{{activity.givingInterval}}" wx:key="index"
+                class='block {{give_full_amount == item.give_full_amount ?"checked_button2":"normal_button2"}}' style="margin-right:25rpx;" >
+                <view class="block_top"></view>
+                <view class="block_top_text">送{{item.given_amoun}}元</view>
+                <view class="block_text">{{item.give_full_amount }}元</view>
+            </view>
+        </view>
+        <!-- 支付宝 -->
+        <view wx:if="{{payType != 2}}">
+            <view class="title" wx:if="{{payType == 1}}">
+                <view class="title"><text style="color:#E9333F">* </text>转账订单号</view>
+                <input type="text" value="{{orderId}}" data-key="orderId" bindinput="inputFun" maxlength="200" placeholder="请输入已转账订单号" class="input_class"></input>
+                <view class="hr"></view>
+            </view>
+            <view class="title" wx:else>
+                <view class="title"><text style="color:#E9333F">* </text>转账银行卡号</view>
+                <input type="number" value="{{cardNo}}" data-key="cardNo" bindinput="inputFun" bindblur="inputBlur" maxlength="28" placeholder="请输入转账卡号" class="input_class"></input>
+                <view class="hr"></view>
+                <view class="dropDown2" style="{{showDropDown ? '' : 'display: none'}}">
+                    <view catchtap="theCache" wx:for="{{dropDown}}" data-index="{{index}}" data-val="{{item.label}}" wx:key="index" style="margin-bottom:10rpx">
+                        {{item.label}}
+                    </view>
+                </view>
+            </view>
+            <view class="title">
+                <view style="margin-left:24rpx">转账时间</view>
+                <van-dropdown-menu class="dropdown" wx:if="{{startTimeStr}}">
+                    <van-dropdown-item bind:open="openDropdown" wx:if="{{startTimeStr}}" title="{{startTimeStr}}" id="dropdownItem">
+                        <van-datetime-picker
+                            type="datetime"
+                            value="{{ currentDate }}"
+                            max-date="{{ maxDate }}"
+                            formatter="{{ formatter }}"
+                            bind:confirm="confirm"
+                            bind:cancel="cancel"
+                        />
+                    </van-dropdown-item>
+                </van-dropdown-menu>
+				<van-dropdown-menu class="dropdown2" wx:else item-title-class="color_777">
+                    <van-dropdown-item bind:open="openDropdown" title="请选择时间" id="dropdownItem2">
+                        <van-datetime-picker
+                            type="datetime"
+                            value="{{ currentDate }}"
+                            max-date="{{ maxDate }}"
+                            formatter="{{ formatter }}"
+                            bind:confirm="confirm"
+                            bind:cancel="cancel"
+                        />
+                    </van-dropdown-item>
+                </van-dropdown-menu>
+                <view class="hr"></view>
+            </view>
+            <view class="title">
+                <view class="title"><text style="color:#E9333F">* </text>转账凭证<text style="color:#747577;font-size:28rpx">({{photoList.length}}/3)</text></view>
+                <view>
+                    <view class="">
+                <van-grid border="{{ false }}" column-num="3">
+                    <van-grid-item use-slot wx:for="{{photoList}}" wx:key="index">
+                        <view class="photograph-img-box">
+                            <image src="{{item.tempFilePath}}" class="photograph-img" catchtap="checkImgs" data-index="{{index}}" />
+                            <van-icon name="delete-o" custom-class="del-img-icon" bind:click="delPhotographImg" data-index="{{index}}" />
+                        </view>
+                    </van-grid-item>
+                    <van-grid-item use-slot wx:if="{{photoList.length!=photoListMax&&photoList.length<=photoListMax}}">
+                        <van-button custom-class="photograph-btn" bind:click="photograph">
+                            <!-- <image src="../../../image/photograph-ico.png" class="photograph-ico" /> -->
+                            <van-icon style="color: #BDBEC1;font-size: 66rpx;" name="plus" />
+                        </van-button>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+            </view>
+            </view>
+        </view>
+    </view>
+    <view class="start-pin">
+        <text catch:tap="topUp" class="pin-btn" style="background-color: {{!norm?'#AAAAAA':'#E9333F;box-shadow: 0px 6px 7px 0px rgba(233,51,63,0.08);'}};">立即充值</text>
+    </view>
+</view>
+<van-popup
+  show="{{ show }}"
+  round
+  position="bottom"
+  custom-style="height: 40%"
+  bind:close="onClose"
+>
+    <view style="padding:30rpx">
+        <view style="position: absolute;right: 41rpx;">
+            <van-icon name="cross" bind:tap="onClose" />
+        </view>
+        <view wx:if="{{payType == 1}}">
+            <view class="popup_title">
+                支付宝账户
+            </view>
+            <view class="flex both">
+                <view class="popup_label">
+                    支付宝用户名称：
+                </view>
+                <view class="copy" data-sn="{{account[2][0].alipayName}}" catchtap="copyBtn">复制</view>
+            </view>
+            <view class="popup_value">
+                {{account[2][0].alipayName}}
+            </view>
+            <view class="flex both">
+                <view class="popup_label">
+                    支付宝账号：
+                </view>
+                <view class="copy" data-sn="{{account[2][0].alipayAccount}}" catchtap="copyBtn">复制</view>
+            </view>
+            <view class="popup_value">
+                {{account[2][0].alipayAccount}}
+            </view>
+        </view>
+        <view wx:else>
+            <view class="popup_title">
+                汇款账户
+            </view>
+            <view class="flex both">
+                <view class="popup_label">
+                    开户名：
+                </view>
+                <view class="copy" data-sn="{{account[1][0].bankAccount}}" catchtap="copyBtn">复制</view>
+            </view>
+            <view class="popup_value">
+                {{account[1][0].bankAccount}}
+            </view>
+            <view class="flex both">
+                <view class="popup_label">
+                    开户行：
+                </view>
+                <view class="copy" data-sn="{{account[1][0].bank}}" catchtap="copyBtn">复制</view>
+            </view>
+            <view class="popup_value">
+                {{account[1][0].bank}}
+            </view>
+            <view class="flex both">
+                <view class="popup_label">
+                    银行卡号：
+                </view>
+                <view class="copy" data-sn="{{account[1][0].bankCardNumber}}" catchtap="copyBtn">复制</view>
+            </view>
+            <view class="popup_value">
+                {{account[1][0].bankCardNumber}}
+            </view>
+        </view>
+        <view style="text-align:center;font-size: 26rpx;margin-top: 30rpx;" class="popup_label">温馨提示:建议您在<text style="color:#E9333F">转账时备注</text>,可更快确认您的到账。</view>
+    </view>
+</van-popup>
+<van-popup
+  show="{{ showHint }}"
+  round
+  position="bottom"
+  custom-style="height: 30%"
+  bind:close="onClose"
+>
+    <view style="padding:25rpx;">
+        <view style="position: absolute;right: 41rpx;">
+            <van-icon name="cross" bind:tap="onClose" />
+        </view>
+        <view class="popup_title">
+            优惠政策
+        </view> 
+        <text class="popup_label" wx:if="{{rule}}">{{rule}}</text>
+        <view wx:else style="text-align: center;margin-top: 100rpx;color:#777777">
+            活动筹备中敬请期待~
+        </view>
+    </view>
+</van-popup>
+
+<van-toast id="van-toast" />
+

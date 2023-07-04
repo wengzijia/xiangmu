@@ -1,0 +1,5 @@
+.noticeConter{
+  font-size:28rpx;
+  line-height: 36rpx;
+  padding:0 35rpx
+}

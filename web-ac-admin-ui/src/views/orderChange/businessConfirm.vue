@@ -1,0 +1,235 @@
+<template>
+  <div>
+    <el-card style="margin: 10px">
+      <template #header>
+        <div class="card-header">
+          <span>审核确认</span>
+        </div>
+      </template>
+      <div style="max-width: 1200px">
+        <div>
+          <span>变更PO:</span><span class="cor_po mar_30">{{ formParams.poSn }}</span><span>订单状态：{{
+            formParams.orderStatusName || "无" }}</span>
+        </div>
+        <div class="bg" v-if="isCheck == 'reexamine'">
+          <div><span>变更PO号为:</span><span class="cor_po mar_30">{{ formParams.poSn }}</span><span>有关联大版号：<span
+                class="cor_po ">{{ formParams.groupSn }}</span>({{ orderChange_makeUp_status[formParams.makeUpType]?.label
+                }})</span></div>
+          <div style="padding-top:20px">大版文件处理方式：
+            <span v-for="item in orderChange_groupFile_type">
+              <span :key="item.value" v-if="formParams.groupFileHandler == item.value">{{ item.label }}</span>
+            </span>
+          </div>
+        </div>
+        <el-form :model="formParams" class="pad" :rules="changeRules" ref="changeRef">
+          <div v-if="isCheck == 'reexamine'">
+            <el-checkbox v-model="formParams.checked1" label="已征求大版客户同意的凭证" size="large" @change="changeCheck" :disabled="allDisabled()"/>
+            <el-form-item prop="approveUrl" :required="isRequired">
+              <Editor v-model:html="formParams.approveUrl" placeholder="" style="width: 100%;" :edit="isEdit"></Editor>
+            </el-form-item>
+          </div>
+          <div class="mar_60">
+            <div class="title ">
+              <span class="cor">*</span>审核{{ IsPsssText }}原因
+            </div>
+            <el-form-item prop="auditInstructions">
+              <el-input v-model="formParams.auditInstructions" :autosize="{ minRows: 4, maxRows: 8 }" type="textarea"
+                placeholder="请输入" maxlength="240" show-word-limit :disabled="allDisabled()" />
+            </el-form-item>
+            <el-form-item>
+              <div class="btn_mar">
+                <el-button class="addCost" size="large" @click="submit(2, '审核通过')"
+                v-if="!allDisabled()">审核通过</el-button>
+                <el-button size="large" @click="submit(3, '审核不通过')" type="info"
+                v-if="!allDisabled()">审核不通过</el-button>
+                <el-button size="large" @click="changeCancelClick(formParams.changeNo)">取消</el-button>
+              </div>
+            </el-form-item>
+          </div>
+
+        </el-form>
+      </div>
+    </el-card>
+  </div>
+</template>
+  
+<script setup>
+// 接受参数
+import Editor from "@/components/Editor"
+import { getById, approve } from "@/api/orderChange/detail";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { useRouter } from "vue-router";
+const { proxy } = getCurrentInstance();
+const { orderChange_makeUp_status, orderChange_groupFile_type } = proxy.useDict("orderChange_makeUp_status", "orderChange_groupFile_type");
+const route = useRoute();
+const router = useRouter();
+let { id } = route.query;
+const isCheck = ref('examine')
+const changeRef = ref();
+const isEdit = ref(false)
+const isOperate = ref(false)
+const IsPsssText = ref();
+const isRequired = ref(false)
+const data = reactive({
+  formParams: {
+    passOpinion: "",
+    approveUrl: '',
+    checked1: false
+  },
+  changeRules: {
+    auditInstructions: [{ required: true, message: "请输入意见", trigger: "blur" }],
+    approveUrl: [{ required: true, message: "请输入", trigger: "blur" }],
+  },
+});
+const { formParams, changeRules } = toRefs(data);
+const changeCancelClick = (order) => {
+  router.push({
+    path: "orderChangeDetail",
+    query: {
+      changeNo: order,
+    },
+  });
+};
+const changeCheck = (val) => {
+  if (val) {
+    isEdit.value = true
+     isRequired.value = true
+  } else {
+    formParams.value.approveUrl = " "
+    isEdit.value = false
+     isRequired.value = false
+  }
+}
+const getList = () => {
+  let obj = {
+    id: id,
+  };
+  getById(obj)
+    .then((res) => {
+      if (res.code == 200) {
+        formParams.value = res.data
+        formParams.value.orderStatusName = formParams.value.orderStatusName.replace('null','')
+        if (formParams.value.approveUrl) {
+          console.log(324);
+          isEdit.value = false
+          formParams.value.checked1 = true
+        } else {
+          console.log(222);
+          isEdit.value = false
+          formParams.value.checked1 = false
+        }
+        formParams.value.groupFileHandler = res.data.groupFileHandler?.toString()
+        if (formParams.value.status == 1) {
+          isOperate.value = true
+        } else {
+          isOperate.value = false
+          if (formParams.value.status == 2) {
+            IsPsssText.value = '通过'
+          } else if (formParams.value.status == 3) {
+            IsPsssText.value = '不通过'
+          }
+        }
+        let ArrNode = res.data.node.split(",")
+        if (ArrNode.indexOf("5") !== -1) {
+          isCheck.value = 'reexamine'
+        } else {
+          isCheck.value = 'examine'
+        }
+        loading.value = false
+      }
+    })
+    .catch(() => { })
+    .finally(() => { });
+};
+getList();
+const allDisabled = () => {
+  if (isOperate.value) {
+    return false
+  } else {
+    return true
+  }
+}
+const submit = (type, judgeType) => {
+  proxy.$refs.changeRef.validate((valid) => {
+    if (valid) {
+      ElMessageBox.confirm("确认" + judgeType + "?")
+        .then(() => {
+          console.log(34321);
+          let obj = {
+            "groupSn": formParams.value.groupSn,
+            "id": formParams.value.id,
+            "auditInstructions": formParams.value.auditInstructions,
+            "status": type,
+            "approveUrl": formParams.value.approveUrl
+          }
+          console.log(obj);
+          approve(obj)
+            .then((res) => {
+              if (res.code == 200) {
+                ElMessage({
+                  type: "success",
+                  message: res.data,
+                });
+                console.log("___153", res);
+                getList()
+              }
+            })
+            .catch(() => { })
+            .finally(() => { });
+          console.log(obj);
+
+        }).catch(() => { });
+    }
+  });
+};
+</script>
+  
+<style lang="scss" scoped>
+.cor_po {
+  color: #02a7f0;
+  display: inline-block;
+}
+
+.mar_30 {
+  margin-right: 30px;
+}
+
+.title {
+  padding: 10px 0px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.mar_60 {
+  margin-top: 30px;
+}
+
+.bg {
+  background-color: rgba(250, 205, 145, 0.168627450980392);
+  padding: 20px;
+}
+
+.pad {
+  padding: 10px 20px;
+}
+
+.dis_inl {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.addCost {
+  background-color: $bgColor;
+  color: $color;
+  border: $borColor;
+}
+
+.btn_mar {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.cor {
+  color: var(--el-color-danger);
+}</style>
+  

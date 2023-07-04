@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "demo": "../demo/index",
+    "time": "../time/index"
+  }
+}

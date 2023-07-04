@@ -1,0 +1,6 @@
+<view >
+    <view wx:for="{{domHtml}}" wx:key="index" style="padding:25rpx;">
+        <rich-text nodes="{{item.notes}}"></rich-text>
+        <view style="color: #999;">{{item.time}}</view>
+    </view>
+</view>

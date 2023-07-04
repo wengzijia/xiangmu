@@ -1,0 +1,159 @@
+/* pages/previewPlan/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 两行显示省略号 */
+.text-ellipsisl2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*弹性伸缩盒子模型显示*/
+  display: -webkit-box;
+  /*限制在一个块元素显示的文本的行数*/
+  -webkit-line-clamp: 2;
+  /*设置或检索伸缩盒对象的子元素的排列方式*/
+  -webkit-box-orient: vertical;
+}
+
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 预览 */
+.previewContainer {
+  padding: 36rpx;
+  background-color: #F5F7FE;
+  height: 100%;
+}
+
+/* 轮播图预览 */
+.carouselPreviewBox {
+  width: 678rpx;
+  height: 300rpx;
+  border-radius: 16rpx;
+  background-color: #fff;
+}
+
+.carouselPreview {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+/* 商品 */
+.goodsAllBox {
+  margin-bottom: 260rpx;
+}
+
+.goodsBox {
+  width: 678rpx;
+  /* height: 1054rpx; */
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  margin-top: 36rpx;
+  padding: 28rpx;
+  box-sizing: border-box;
+}
+
+.goodsTopBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goodsSortTitle {
+  font-size: 36rpx;
+  font-weight: 500;
+}
+
+.goodsMoreText {
+  font-size: 30rpx;
+  color: #777777;
+}
+
+.goodsMoreText .rightArrowImg {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.goodsListBox {
+  margin-top: 16rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.goodsList {
+  width: 300rpx;
+  height: 448rpx;
+}
+
+.goodsList:nth-child(even) {
+  margin-left: 22rpx;
+}
+
+.goodsList:nth-child(n+3) {
+  margin-top: 36rpx;
+}
+
+.goodsImg {
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 8rpx;
+}
+
+.goodTitle {
+  width: 300rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-top: 16rpx;
+}
+
+.goodsList .priceBox {
+  display: flex;
+}
+
+.goodsList .priceBox .price {
+  color: #FF4D4F;
+}
+
+.goodsList .priceBox .price .rmb {
+  font-size: 24rpx;
+}
+
+.goodsList .priceBox .price .money {
+  margin: 4rpx 12rpx 0 8rpx;
+}
+
+.goodsList .priceBox .unit {
+  font-size: 30rpx;
+  color: #777777;
+}
+
+/* 预览弹窗底部 */
+.previewBottomBox {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 750rpx;
+  height: 112rpx;
+  background-color: #FFFFFF;
+}
+
+.previewBottomBox .closePreviewBtn {
+  width: 678rpx;
+  height: 84rpx;
+  color: #FFFFFF;
+  background-color: #EA5354;
+  border-radius: 66rpx;
+  margin: 14rpx auto;
+}

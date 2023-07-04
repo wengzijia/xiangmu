@@ -1,0 +1,15 @@
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "订单详情",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "modal": "../../../../components/msgModal/index",
+        "table": "../../../../components/table/table",
+        "mages": "../../../../components/mages/index.wxml",
+        "service": "../../../../components/service/service"
+       
+    }
+}

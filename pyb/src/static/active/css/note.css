@@ -1,0 +1,34 @@
+*{padding:0;margin:0;}
+ul,li{list-style-type:none;}
+.acyInforBox{
+    width:500px;
+    margin:auto;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top:-20px;
+    right: 0;
+    bottom: 0;
+    height:200px;
+    line-height:30px;
+}
+.acyInfWicon{
+    background:#09bb07;
+    color:#fff;
+    width:70px;
+    height:70px;
+    border-radius:70px;
+    display: inline-block;
+}
+.acyInforBox h1{font-size:20px;font-weight:normal;}
+.acyInforBox p{color:#333;}
+.acyInfBnt{
+    padding:6px 16px;
+    background-color: #ff0000;
+    color:#fff;
+    font-size:14px;
+    border-radius:100px;
+    position: relative;top:6px;
+}
+
+.red{color:#fd000d;}

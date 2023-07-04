@@ -1,0 +1,13 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "生成报价单",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "table": "../../../components/table/table",
+    "modal": "../../../components/msgModal/index",
+    "search": "../../../components/search/index",
+    "step": "../../../components/step/index"
+  }
+}

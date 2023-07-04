@@ -1,0 +1,226 @@
+/* pages/gallery/index.wxss */
+/* 公共类 */
+.flex_c_c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 两行显示省略号 */
+.text-ellipsisl2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*弹性伸缩盒子模型显示*/
+    display: -webkit-box;
+    /*限制在一个块元素显示的文本的行数*/
+    -webkit-line-clamp: 2;
+    /*设置或检索伸缩盒对象的子元素的排列方式*/
+    -webkit-box-orient: vertical;
+}
+
+/* iPhoneX兼容 底部安全距离外 */
+.safetyKmW {
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* iPhoneX兼容 底部安全距离内 */
+.safetyKmN {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+page {
+    background: linear-gradient(180deg, #DBE7FF 0%, #F5F7FE 100%);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item-box {
+    padding: 36rpx 36rpx 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #e9f0ff;
+}
+
+.swiper-box {
+  border-radius: 8px;overflow: hidden;
+}
+
+.swiper-box swiper {
+    border-radius: 16rpx;
+    overflow: hidden;
+}
+.swiper-box .swiperView {
+  border-radius: 16rpx;
+  overflow: hidden;
+  transform: translateY(0);
+}
+.swiper-box image {
+    width: 100%;
+}
+.swiper-box .swiperView,.swiper-box image{
+  height: 300rpx;
+}
+
+/* 圆点的样式  因为大小不一样。所以按钮设置大小之后，背景色记得设置完全透明*/
+swiper .wx-swiper-dot {
+    width: 10rpx;
+    height: 10rpx;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+}
+
+/* 未选中 */
+swiper .wx-swiper-dot::before {
+    width: 10rpx;
+    height: 10rpx;
+    content: '';
+    border-radius: 50%;
+    flex-grow: 1;
+    background: rgba(26, 23, 23, 0.267);
+}
+
+/* 选中 */
+swiper .wx-swiper-dot-active::before {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+}
+
+image {
+    image-rendering: -moz-crisp-edges;
+    /* Firefox */
+    image-rendering: -o-crisp-edges;
+    /* Opera */
+    image-rendering: -webkit-optimize-contrast;
+    /* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    /* IE (non-standard property) */
+}
+
+.item-conter {
+    margin-top: 36rpx;
+}
+
+.item-title {
+    display: flex;
+    align-items: center;
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 20rpx;
+    margin-top: 36rpx;
+    position: relative;
+    margin-top: 0;
+    padding-left: 18rpx;
+}
+
+.item-title-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.item-conter {
+    background-color: #fff;
+    padding: 28rpx 10rpx;
+    border-radius: 8rpx;
+}
+
+.more-btn {
+    position: absolute;
+    right: 18rpx;
+    font-size: 15px;
+    color: #777777;
+}
+
+.van-grid-item__content--surround:after {
+    border-color: #fff !important;
+    /* display: flex; */
+}
+
+.van-grid-item__content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.goods-image {
+    width: 100%;
+    height: 228rpx;
+    border-radius: 8rpx;
+    margin-bottom: 10rpx;
+}
+
+.goods-name {
+    font-size: 14px;
+    height: 38px;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.goods-price-box {
+    width: 100%;
+    margin-top: 10rpx;
+    font-size: 30rpx;
+}
+
+.price-box {
+    color: #FF4D4F;
+    font-size: 12px;
+    margin-right: 10rpx;
+}
+
+.price-num {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 立刻咨询 */
+.consultBox {
+    position: fixed;
+    top: 810rpx;
+    right: 40rpx;
+    width: 104rpx;
+    height: 104rpx;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.consultPic {
+    width: 104rpx;
+    height: 104rpx;
+    border-radius: 92rpx;
+}
+
+.consultImg {
+    width: 110rpx;
+    height: 40rpx;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/* 空状态 */
+.nullBox {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nullImg {
+    /* width: 400rpx;
+    height: 245rpx; */
+}
+
+.nullText {
+    font-size: 28rpx;
+    color: #777777;
+    font-weight: 500;
+}

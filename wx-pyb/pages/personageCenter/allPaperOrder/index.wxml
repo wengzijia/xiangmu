@@ -1,0 +1,176 @@
+<view class="body">
+  <view class="personage">
+    <view class="head">
+      <view wx:if="{{false}}" class="search">
+        <icon type="search" size="20" class="srarch-icon" />
+        <input placeholder="请输入订单号" placeholder-class="placeholder-text" bindconfirm="search" bindinput="getkeywords" value="{{keywords}}" />
+        <view class="clear" catchtap="clearText">
+          <icon wx:if="{{keywords}}" class="progress-cancel" type="cancel"></icon>
+        </view>
+      </view>
+      <view class="tabs">
+        <text catchtap="tabsCrount" class="{{currentTab==0 ? 'grid' : ''}}" data-current="0">全部</text>
+        <text catchtap="tabsCrount" class="{{currentTab==1 ? 'grid' : ''}}" data-current="1">待付款</text>
+        <text catchtap="tabsCrount" class="{{currentTab==2 ? 'grid' : ''}}" data-current="2">待配送</text>
+        <!-- <text catchtap="tabsCrount" class="{{currentTab==5 ? 'grid' : ''}}" data-current="5">待结算</text> -->
+        <text catchtap="tabsCrount" class="{{currentTab==3 ? 'grid' : ''}}" data-current="3">已完成</text>
+        <text catchtap="tabsCrount" class="{{currentTab==4 ? 'grid' : ''}}" data-current="4">已取消</text>
+      </view>
+    </view>
+  </view>
+  <scroll-view wx:if="{{orderData.length>0}}" scroll-y="y" style="height:{{list.length>1?height-70:height-20}}px" bindscrolltolower="loading">
+    <checkbox-group bindchange="checkboxChange">
+      <view class="order" wx:for="{{orderData}}" wx:key="id" wx:for-index="index">
+        <view class="order-list">
+          <view class="order-list-item">
+            <view class="list-top">
+              <view>
+                <view class="order-sn">
+                  <view wx:if="{{currentTab==1}}" class="checked-box">
+                    <checkbox value="{{index}}" checked="{{item.checked}}" data-i="{{index}}" data-check="{{}}" catchtap="clickChecked" />
+                  </view>
+                  <view class="list-tittel">
+                    <text>订单编号：</text>
+                    <text>{{item.orderNo}}</text>
+                    <!-- <text>卡纸盒</text> -->
+                    <!-- <text wx:if="{{item.boxtype}}">{{item.miniEditionGoodsInfo[0].goodsAttr[0][1]}}</text> -->
+                    <!-- <text>{{item.paper.paperType+item.paper.kg+'g'}}</text> -->
+                  </view>
+                </view>
+              </view>
+              <view class="order-state">
+                <text wx:if="{{item.status == 'nopaid'}}" style="color:#ff0036">待付款</text>
+                <text wx:if="{{item.status == 'refunding'||item.status == 'stoped'}}" style="color:#ff0036">退款中</text>
+                <text wx:if="{{item.status == 'refunded'}}" style="color:#999999">退款完成</text>
+                <text wx:if="{{item.status == 'paid'||item.status == 'confirmed'}}" style="color:#ff0036">待配送</text>
+                <text wx:if="{{item.status == 'shipped'||item.status == 'SHIPPED'}}">
+                  <text style="color:#999">已完成</text>
+                </text>
+                <text wx:if="{{item.status=='cancel'}}" catchtap="delOrder" data-sn="{{item.parentOrderNo}}" style="color:#c6c6c6;">
+                  <text>已取消</text>
+                  <text class="ac-icon-del" style="font-sixe:28rpx;color:#ddd;padding-left:20rpx;position: relative;top: -4rpx;"></text>
+                </text>
+              </view>
+            </view>
+            <view catchtap="getOrderDetails" data-sn="{{item.orderNo}}">
+              <view wx:for="{{item.miniEditionGoodsInfo}}" wx:key="id" wx:for-item="i">
+                <view class="list-content">
+                  <view class="goods-info" style="word-break:break-all;">
+                    <view class="information">
+                      <text wx:for="{{i.goodsAttr}}" wx:for-item="items" wx:for-index="i" wx:key="id">
+                        <text style="color:#666;" wx:if="{{items.length==1}}">{{items[0]}};</text>
+                        <text wx:else>
+                          <text>{{items[0]}}:</text>
+                          <text style="color:#666;">{{items[1]}};</text>
+                        </text>
+                      </text>
+                      <text>
+                        <text>印刷厂商:</text>
+                        <text style="color:#666;">{{item.factoryName}};</text>
+                      </text>
+                      <text wx:if="{{item.paper.cuttingfee>0}}">
+                        <text>纸行分切费:</text>
+                        <text style="color:#666;">{{item.paper.cuttingfee}}元;</text>
+                      </text>
+                    </view>
+                  </view>
+                </view>
+                <view class="list-bottom">
+                  <view class="order-count">
+                    <view class="money">
+                      ¥
+                      <text class="fontsBold">{{i.amount}}</text>
+                    </view>
+                  </view>
+                  <image wx:if="{{item.status=='paid'}}" src="../../../image/reviewed.png" alt srcset class="reviewed" />
+                  <text style="color:#999;">X {{i.number}}</text>
+                </view>
+                <!-- <view
+                  class="paper-money"
+                  style="margin-right:20rpx"
+                >纸张费:¥{{item.suborderDiscountDetail.paperPrice*1}}</view> -->
+                <!-- <view class="list-bottom"> -->
+                <!-- <view class="order-count">
+                    <view
+                      class="paper-money"
+                    >印刷费:¥{{item.suborderDiscountDetail.colorMoney*1+item.suborderDiscountDetail.spotMoney*1}}</view>
+                  </view> -->
+                <!-- <view wx:if="{{item.status=='paid'||item.status=='confirmed'||true}}" class="count-down">
+                    <text wx:if="{{item.confirmedTime>0&&item.status=='confirmed'||true}}">{{item.downTime}}</text>
+                    <view
+                      wx:if="{{item.status=='paid'||true}}"
+                      style="display:inline-block; position: relative;width:380rpx;text-align: right;"
+                    > -->
+                <!-- </view>
+                  </view> -->
+                <!-- </view> -->
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="list-btn" wx:if="{{item.status == 'nopaid'}}">
+          <view>
+            <button catchtap="cancel" data-sn="{{item.parentOrderNo}}">取消订单</button>
+            <button class="pay-btn" catchtap="WXpay" data-no="{{item.orderNo}}" data-sn="{{item.parentOrderNo}}" data-paytype="{{item.paperSaleId}}">
+              去付款
+            </button>
+          </view>
+        </view>
+        <view wx:if="{{item.miniDiffOrderList&&item.miniDiffOrderList.length>0}}" class="price-difference" catchtap="getOrderDetails" data-sn="{{item.orderNo}}">
+          <view wx:for="{{item.miniDiffOrderList}}" wx:for-item="item2" style="margin:20rpx 32rpx 0" wx:key="id">
+            <view class="price-difference-title">
+              <view>
+                <text style="color:#999">差价单号：</text>
+                {{item2.orderNo}}
+              </view>
+              <text style="color:#ff0036">{{item2.status=='nopaid'?'未支付':'已支付'}}</text>
+            </view>
+            <view class="price-difference-title difference-pay">
+              <view>
+                <text style="color:#999">差价金额：</text>
+                ￥{{item2.diffMoney}}
+              </view>
+              <view style="display: flex;align-items: center;">
+                <button wx:if="{{item2.status=='nopaid' && item.status != 'cancel' }}" class="draw" catchtap="DiffOrderPay" disabled="{{item2.status!='nopaid'}}" data-status="{{item.status}}" data-sn="{{item2.orderNo}}"  data-paytype="{{item.paperSaleId}}">
+                  去支付
+                </button>
+              </view>
+            </view>
+            <view>
+              <view>
+                <text style="color:#999">差价描述：</text>
+                {{item2.diffDesc}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </checkbox-group>
+    <view wx:if="{{more}}" class="more">
+      <text>已经到底了~</text>
+    </view>
+  </scroll-view>
+  <view wx:if="{{list.length>1}}" class="bottom_total " >
+    <view class="bottom_line"></view>
+    <view class="b">
+      <view class="bottom-text ">
+        <checkbox-group bindchange="allCheckboxChange">
+          <checkbox checked="{{Allchecked}}" />
+          <text>全选</text>
+        </checkbox-group>
+        <view>
+          <text>需付款:</text>
+          <text style="color:red;font-size:36rpx;">￥{{totalPrice}}</text>
+        </view>
+      </view>
+      <button class="button-red total-button" style="z-index:99" catchtap="totalPay">合并付款</button>
+    </view>
+  </view>
+</view>
+<view wx:if="{{orderData.length<1}}" class="order-null">
+  <image src="../../../image/personage6.png" />
+  <view style="text-align:center;color:#999;font-size:28rpx;padding:20rpx 0;">
+    <text>您还没有下单呢~</text>
+  </view>
+</view>
+<modal modal="{{modal}}"></modal>

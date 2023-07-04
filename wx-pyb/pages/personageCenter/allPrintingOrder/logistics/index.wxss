@@ -1,0 +1,48 @@
+page {
+  background-color: #fff;
+}
+
+.body view {
+  background-color: #fff;
+}
+.line{
+  height: 72rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item{
+  min-width: 260rpx;
+}
+.logi_all{
+  padding: 22rpx 32rpx 26rpx;
+  border-bottom: 1px solid rgba(229,229,229,0.5);
+}
+.logi_title{
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}
+.logi_content{
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  display: flex;
+  font-weight: 300;
+}
+.logi_wid{
+  width: 180rpx;
+  text-align: right;
+  margin-right: 20rpx;
+}
+.logi_price{
+  color: #666666;
+}
+.bg{
+  background: #F4F4F4 !important;
+  color:#666666 !important;
+  font-size: 28rpx !important;
+}

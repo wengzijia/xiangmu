@@ -1,0 +1,118 @@
+<view class="body ">
+	<time bindonSeach="onSeach" type="{{active}}"></time>
+    <scroll-view wx:if="{{orderData.length>0}}" scroll-y="y" class="noAdmin" bindscrolltolower="loading">
+        <view wx:for="{{orderData}}" wx:for-item="el" wx:for-index="ii" wx:key="ii">
+            <view class="title">
+                {{el.title}}
+            </view>
+            <view class="order" wx:for="{{el[el.title]}}" wx:key="id" wx:for-index="index2">
+                <!-- demo -->
+                <demo item="{{item}}" _index="{{index2}}"></demo>
+                <view class="displayFlex borderTop" style="padding-bottom: 20rpx;">
+                    <view wx:if="{{active == 2}}">
+                        <view class="btn"
+                            catchtap="checkInvoice"
+                            data-invoiceNote="{{item.invoiceNote}}"
+                            data-invoiceExprNum="{{item.invoiceExprNum}}"
+                            data-invoiceExprType="{{item.invoiceExprType}}"
+                            data-einvoice="{{item.einvoice}}"
+                            >查看发票</view>
+                    </view>
+                    <view style="padding-right:34rpx;flex:1;text-align: right;">
+                        <view wx:if="{{item.shippingFee}}" class="total-item">
+                            <text class="total">
+                                <text>物流费用:￥<text class="font_36">{{item.shippingFee}}</text></text>
+                            </text>
+                        </view>
+                        <view wx:if="{{item.invoiceExpressFee}}" class="total-item">
+                            <text class="total">
+                                <text>发票快递费:￥<text class="font_36">{{item.invoiceExpressFee}}</text></text>
+                            </text>
+                        </view>
+                        <view wx:if="{{item.taxmoney}}" class="total-item">
+                            <text class="total">
+                                <text>税金:￥<text class="font_36">{{item.taxmoney}}</text></text>
+                            </text>
+                        </view>
+                    </view>
+                </view>
+                
+                <view wx:if="{{item.children.length>0 && (item.miniDiffOrder&&item.miniDiffOrder.length)}}" class="total-item borderTop"  style="padding-top:10rpx;margin-bottom: 20rpx;">
+                    <text class="total">
+                        <text style="margin-right:20rpx;">共{{item.children.length}}件</text>
+                        <text>合计:￥<text class="font_36" style="margin-right:34rpx;">{{item.amount}}</text></text>
+                    </text>
+                </view>
+                <view wx:if="{{item.invoiceAmount && !item.miniDiffOrder.length}}" class="total-item borderTop" style="padding-top:10rpx;margin-bottom: 20rpx;">
+                    <text class="total color_ff0036">
+                        <text style="margin-right:20rpx;">共{{item.children.length}}件</text>
+                        <text class="">开票金额:￥<text class="font_36" style="margin-right:34rpx;">{{item.invoiceAmount}}</text></text>
+                    </text>
+                </view>
+                
+                <view wx:if="{{item.miniDiffOrder&&item.miniDiffOrder.length>0}}" catchtap="getOrderDetails" data-sn="{{item.orderNo}}">
+                    <view wx:for="{{item.miniDiffOrder}}" wx:for-item="items" class="price-difference" wx:key="id">
+                        <view class="price-difference-title">
+                            <view>
+                                <text style="color:#999">差价单号：</text>
+                                {{items.orderNo}}
+                            </view>
+                        </view>
+                        <view>
+                            <view>
+                                <text style="color:#999">差价金额：</text>
+                                ￥{{items.diffMoney}}
+                            </view>
+                        </view>
+                        <view>
+                            <view>
+                                <text style="color:#999">差价描述：</text>
+                                {{items.diffDesc}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="total-item" style="padding-bottom:20rpx" wx:if="{{item.children.length>0 && (item.miniDiffOrder&&item.miniDiffOrder.length && item.invoiceAmount)}}">
+                    <text class="total color_ff0036" style="padding-right:28rpx;font-size: 30rpx;">
+                        <text>开票金额:￥<text>{{item.invoiceAmount}}</text></text>
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{more}}" class="more">
+            <text>已经到底了~</text>
+        </view>
+    </scroll-view>
+</view>
+<view wx:if="{{orderData.length<1}}" class="order-null">
+    <!-- <image src="../../../../image/personage6.png" /> -->
+    <view style="text-align:center;color:#999;font-size:28rpx;padding:20rpx 0;">
+        <text>暂无开票~</text>
+    </view>
+</view>
+<van-popup
+  show="{{ invoicePopup }}"
+  round
+  position="bottom"
+  custom-style="height: 40%"
+  bind:close="onClose"
+>
+    <view style="padding:25rpx;">
+        <view style="position: absolute;right: 41rpx;">
+            <van-icon name="cross" bind:tap="onClose" />
+        </view>
+        <view class="popup_title" style="margin-bottom: 18rpx;font-size: 38rpx;font-weight: 600;">
+            纸张发票信息
+        </view>
+        <view class="" style="margin-bottom: 18rpx;">
+            <view style="color:#777777">邮寄状态 <text style="color:#333;margin-left: 10rpx;">{{ invoiceInfo.invoiceExprNum ? '已邮寄' : '待邮寄'}}</text></view>
+        </view>
+        <view wx:if="{{invoiceInfo.invoiceExprNum}}" class="displayFlex borderTop" style="margin-bottom: 18rpx;">
+            <view style="color:#777777">快递公司 <text style="color:#333;margin-left: 10rpx;">{{ invoiceInfo.invoiceExprType == 1 ? '顺丰' : '京东'}}</text></view>
+        </view>
+        <view wx:if="{{invoiceInfo.invoiceExprNum}}" class="displayFlex borderTop" style="margin-bottom: 18rpx;">
+            <view style="color:#777777">快递单号 <text style="color:#333;margin-left: 10rpx;">{{invoiceInfo.invoiceExprNum}}</text></view>
+            <view class="box" catchtap="copyBtn" data-sn="{{invoiceInfo.invoiceExprNum}}">复制</view>
+        </view>
+    </view>
+</van-popup>

@@ -1,0 +1,13 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+ "navigationBarTextStyle": "black",
+ "navigationBarTitleText": "我的发票",
+ "backgroundColor": "#ffffff",
+ "backgroundTextStyle": "light",
+ "usingComponents": {
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "orderList": "./orderList/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

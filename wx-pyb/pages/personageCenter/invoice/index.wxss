@@ -1,0 +1,119 @@
+page {
+  background-color: #f4f4f4;
+}
+.content {
+	padding: 0 28rpx 28rpx 28rpx;
+}
+.displayFlex {
+  display: flex;
+}
+.flex_1 {
+	flex: 1;
+}
+.flexCenter {
+	justify-content: center;
+	align-items: center;
+}
+.borderRadius {
+  border-radius: 8rpx;
+}
+.marginBottom_20rpx {
+  margin-bottom: 20rpx;
+}
+.padding_28rpx {
+	padding: 28rpx;
+}
+.back_fff {
+	background-color: #fff;
+}
+.color_777 {
+	color: #777;
+}
+.swipeIcon {
+  margin-right: 20rpx;
+  color: #FFB702;
+  width: 32rpx;
+}
+.swipeEdit {
+	margin: 0 20rpx;
+	/* width: 65px;
+	text-align: center; */
+}
+.marginTop_20 {
+	margin-top: 16rpx;
+}
+.explanation {
+	text-align: right;
+	margin-bottom: 14rpx;
+}
+.explanation text {
+	margin-right: 10rpx;
+}
+.whitespace {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  color: #777;
+}
+.popup_title {
+	text-align: center;
+	border-bottom: 1px solid #f4f4f4;
+	padding-bottom: 30rpx;
+}
+.popup_conten {
+	color: #777777;
+  margin-bottom: 10rpx;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #ffffff;
+  padding-top: 20rpx;
+  width: 100%;
+}
+.footerBtn {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-bottom: 40rpx;
+  background: #ff0036;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 90%;
+  text-align: center;
+  border-radius: 40rpx;
+  color: #ffffff;
+}
+.left_transform {
+  left: 50%;
+  transform: translate(-50%);
+  /* transform: translate(-50%,-50%) */
+}
+.van-swipe-cell__left,
+.van-swipe-cell__right {
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  width: 65px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #f44;
+}
+.admin{
+  height: calc(100vh - 320rpx - constant(safe-area-inset-bottom));
+  height:calc(100vh - 320rpx - env(safe-area-inset-bottom)) ;
+}
+.noAdmin{
+  height: calc(100vh - 260rpx - constant(safe-area-inset-bottom));
+  height: calc(100vh - 260rpx  - env(safe-area-inset-bottom));
+}
+.popup_label {
+  font-size: 30rpx;
+  color: #777777;
+  margin-top: 16rpx;
+}
+.active {
+  color: #E9333F !important;
+}

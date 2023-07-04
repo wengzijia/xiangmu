@@ -1,0 +1,101 @@
+page {
+    background: #F4F4F4;
+}
+.flex {
+    display: flex;
+}
+.both{
+    justify-content: space-between;
+    margin-top: 10rpx;
+}
+.card {
+    border-radius: 8rpx;
+    background-color: #fff;
+    padding: 25rpx;
+    margin: 25rpx;
+}
+.dropdown .van-dropdown-menu  {
+    background-color: #F4F4F4 !important;
+    box-shadow: var(--dropdown-menu-box-shadow,0 0px 1px hsla(210,1%,40%,.12)) !important;
+}
+.van-dropdown-menu__item:first-child {
+    flex: 2;
+}
+.title {
+    font-size: 32rpx;
+    font-weight: 550;
+}
+.box {
+    margin-right: 15rpx;
+    font-size: 12px;
+    height: 17px;
+    padding: 12rpx 18rpx;
+    margin-top: 20rpx;
+    border-radius: 12rpx;
+}
+.timeBox {
+    /* margin-right: 15rpx; */
+    font-size: 12px;
+    height: 70rpx;
+    text-align: center;
+    line-height: 70rpx;
+    width: 43%;
+    border-radius: 12rpx;
+}
+.hint {
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    font-weight: 400;
+    color: #AAAAAA;
+}
+.reset {
+    width: 45%;
+    height: 70rpx;
+    border-radius: 40rpx;
+    border: 1px solid #777777;
+    line-height: 70rpx;
+    text-align: center;
+}
+.confirm {
+    width: 45%;
+    height: 70rpx;
+    border-radius: 40rpx;
+    border: 1px solid #E9333F;
+    line-height: 70rpx;
+    text-align: center;
+    background-color: #E9333F;
+    color: #fff;
+}
+.active {
+    color: #E9333F !important;
+}
+.AAA_28 {
+    color: #AAAAAA;
+    font-size: 26rpx;
+}
+.green_34 {
+    color: #08C667;
+    font-size: 34rpx;
+}
+.red_34 {
+    color: #E9333F;
+    font-size: 34rpx;
+}
+/* .van-dropdown-menu__item {
+    height: 80rpx;
+} */
+.dropdown .van-dropdown-menu {
+    height: 80rpx;
+}
+
+/* 按钮未选中 */
+.normal_button {
+    background: #F6F6F6;
+    border: #E0E0E0 1rpx solid !important;
+  }
+  /* 按钮选中 */
+  .checked_button {
+    /* background: #ff0036; */
+    color: #ff0036!important;
+    border:  #ff0036 1rpx solid !important;
+  }

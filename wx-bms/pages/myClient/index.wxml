@@ -1,0 +1,37 @@
+<!--pages/myClient/index.wxml-->
+<!-- 解决滚动穿透 -->
+<page-meta page-style="{{show ? 'overflow:hidden;' : ''}}" />
+<view class="myClientContainer">
+  <!-- 客户列表 -->
+  <view class="clientList" wx:for="{{customerList}}" wx:key="id" data-customerId="{{item.id}}" data-customerName="{{item.customer_name}}" bindtap="skipCustomerDetails">
+    <view class="imgWrap">
+        <image class="headPortraits" src="{{item.customer_info.wx_portrait ?  item.customer_info.wx_portrait : '../../image/palceOrder/avatar2.png'}}"></image>
+        <text class="customerName ellipsis-line-1">{{item.customer_name}} </text>
+      </view>
+      <view class="weChatName">
+      <view class="name ellipsis-line-1">{{item.customer_info.wx_nickname}}</view> 
+      <van-icon name="arrow" />
+      </view>
+  </view>
+  <!-- 添加客户 -->
+  <navigator url="../newClient/index">
+    <!-- bindtap="showPopup" -->
+  <view class="imgContainer">
+    <image src="../../image/myClient/add.png"></image>
+  </view>
+</navigator>
+  <!-- 添加客户弹窗 -->
+  <!-- <van-popup show="{{ show }}" bind:close="onClose">
+    <view class="popupContainer">
+      <view class="inputBox"> -->
+        <!-- placeholder-style="text-align:center;" -->
+        <!-- <input class="input" value="{{customerName}}" data-value="{{customerName}}"  bindinput="getValue" type="text" placeholder="为你的客户起个名称"  /> -->
+        <!-- <textarea  	auto-focus="true"  name="" id="" cols="30" rows="10"  placeholder="为你的客户起个名称" value="{{customerName}}"  bindinput="getValue"  class="textarea"></textarea>
+      </view>
+      <view class="buttonContainer">
+        <button class="cancel" bindtap="onClose">取消</button>
+        <button class="save" bindtap="save">保存</button>
+      </view>
+    </view>
+  </van-popup> -->
+</view>

@@ -1,0 +1,20 @@
+<view class="modify">
+  <view class="user-box">
+    <text>设置新密码</text>
+    <view class="tips">
+      <text>设置密码，提高账户安全性</text>
+    </view>
+  </view>
+<view class="pwd-box">
+  <view>
+    <input password="{{tp1.type}}" placeholder="请输入6~16个字符（字母加数字组合）" bindinput="pwd1" maxlength="{{15}}"/>
+    <text catchtap="changeType" class="{{tp1.icon}}" data-index="1"></text>
+  </view>
+  <view>
+    <input  password="{{tp2.type}}" placeholder="请再次输入密码" bindinput="pwd2" maxlength="{{15}}"/>
+    <text catchtap="changeType" class="{{tp2.icon}}" data-index="2"></text>
+  </view>
+</view>
+<button class="btn" catchtap="change">确认</button>
+</view>
+<modal modal="{{modal}}"></modal>

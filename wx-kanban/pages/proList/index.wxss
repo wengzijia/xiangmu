@@ -1,0 +1,482 @@
+/* pages/proList/index.wxss */
+page{
+  width: 100%;
+  background-color:  #F4F5FC;
+}
+/* 公共类 */
+.flex_c_c{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 搜索 */
+.searchBox{
+  display: flex;
+  padding: 8rpx 0 12rpx 16rpx;
+  background-color: #FFFFFF;
+}
+
+.searchBar{
+  width: 490rpx;
+  height: 68rpx;
+  background-color: #F6F7FB;
+  border-radius: 48rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 16rpx  24rpx 16rpx 16rpx;
+  position: relative;
+}
+
+.searchBar .searchIcon{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 24rpx;
+}
+
+.searchBar .searchInput{
+  font-size: 28rpx;
+  width: 85%;
+}
+
+.searchBar .clearBox{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 24rpx;
+}
+
+.searchBar .clearBox  .clear{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  /* margin-right: 24rpx; */
+}
+
+.searchBox .search{
+  margin: 14rpx 0 10rpx 16rpx;
+  font-size: 30rpx;
+  color: #595959;
+}
+
+/* 主体 */
+.mainBody{
+  padding: 38rpx 16rpx  0 16rpx;
+  background-color: #F4F5FC;
+}
+
+.tabBox{
+  padding-bottom: 20rpx;
+}
+
+/* 修改vant标签激活色 */
+.tabBox .van-tab--active{
+  font-weight: 700;
+}
+
+/* 修改vant激活下划线 */
+.tabBox .van-tabs__line {
+  width: 58rpx !important;
+  height: 8rpx !important;
+  bottom: 18rpx !important;
+}
+
+/* 修改vant标签背景色 */
+.tabBox .van-tabs__scroll {
+  background-color: transparent;
+}
+/* 修改vant标签字体大小 */
+.tabBox .van-tab{
+  font-size: var(--tab-font-size,17px);
+}
+/* tab切换列表 */
+.waitAPSBox ,.anoBox ,.doneBox{
+  /* 苹果使用内边距生效 外边距不生效 */
+  padding-bottom: 52rpx;
+}
+
+.proListBox:first-child,.anoListBox:first-child,.doneListBox:first-child{
+  margin-top: 0rpx;
+}
+
+/* 待排产 */
+.proListBox{
+  width: 718rpx;
+  height: 456rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  margin-top: 20rpx;
+  padding: 20rpx  20rpx 20rpx 16rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+
+.proTextBox{
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+  margin-bottom: 18rpx;
+}
+
+.proTextBox .proRightText{
+  color: #F9AC14;
+}
+
+.proInfoBox{
+  display: flex;
+  padding: 20rpx 0;
+  border-top:2rpx solid #F2F3F7;
+  border-bottom:2rpx solid #F2F3F7;
+}
+
+.proImgBox{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.proImgBox .proImg{
+  width: 100%;
+  height: 100%;
+}
+
+.proBInfo{
+  margin-left: 20rpx;
+}
+
+.proInfoBox .proInfo{
+  font-size: 28rpx;
+  color: #333333;
+  margin-left: 20rpx;
+}
+
+.proInfo .poNumBox{
+  display: flex;
+}
+
+.proInfo .proItem{
+  margin-top: 10rpx;
+}
+
+.proInfo .proLText{
+  color: #8C8C8C;
+  margin-right: 10rpx;
+}
+
+.poNumBox .proJiBox .proJi{
+  width: 48rpx;
+  height: 28rpx;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  background-color: #ff4d4f;
+  border-radius: 6rpx;
+  margin-left: 16rpx;
+  /* flex-shrink: 0; */
+}
+
+
+/* .proListBox .proInfoBtn{
+  
+} */
+
+.proInfoBtn .startPro{
+  width: 168rpx;
+  height: 56rpx;
+  border-radius: 34rpx;
+  background-color: #3D7EFF;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  /* margin-top: 42rpx;
+  margin-left: 510rpx; */
+  position: absolute;
+  bottom: 20rpx;
+  right: 20rpx;
+}
+
+/* 异常 */
+.anoListBox{
+  width: 718rpx;
+  /* height: 630rpx; */
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  margin-top: 30rpx;
+  padding:20rpx 20rpx 20rpx 16rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.anoTextBox{
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #333333;
+  margin-bottom: 18rpx;
+}
+
+.anoTextBox .anoRightText{
+  color: #FF4D4F;
+}
+
+.anoInfoBox{
+  display: flex;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #F2F3F7;
+}
+
+.anoImgBox{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.anoImgBox .anoImg{
+  width: 100%;
+  height: 100%;
+}
+
+.anoBInfo{
+  margin-left: 20rpx;
+}
+
+.anoInfoBox .anoInfo{
+  font-size: 28rpx;
+  color: #333333;
+  margin-left: 20rpx;
+}
+
+.anoInfo .anoPoNumBox{
+  display: flex;
+}
+
+/* 排除第一个元素 */
+.anoInfo .anoItem:not(:first-child){
+  margin-top: 10rpx;
+}
+
+.anoInfo .anoLText{
+  color: #8C8C8C;
+  margin-right: 10rpx;
+}
+
+/* 异常备注 */
+.anoBox .anoRemarkBox{
+  width: 686rpx;
+  /* height: 66rpx; */
+  background: #F6F7FB;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  font-size: 24rpx;
+  color: #8C8C8C;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  /* 数字不换行 */
+  word-break: break-all;
+}
+
+.anoRemarkBox .text{
+  flex-shrink: 0;
+}
+.anoRemarkBox .content{
+  margin-left: 16rpx;
+}
+
+/* 异常图片 */
+.anoPicBox{
+  width: 686rpx;
+  height: 132rpx;
+  background: #F6F7FB;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  color: #8C8C8C;
+  margin-top: 16rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+} 
+
+/* .anoPicBox .anoPicText{
+   width: 104rpx;
+} */
+
+.anoPicBox .anoPicListBox{
+  width: 80%;
+  margin-left: 16rpx;
+}
+
+
+.anoPicListBox .anoPic{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+}
+
+/* 异常按钮 */
+.anoBtnBox{
+  margin-top: 20rpx;
+  border-top: 2rpx solid #F2F3F7;
+}
+
+.anoBtnBox .disRecPro,.anoBtnBox .recPro{
+  width: 168rpx;
+  height: 56rpx;
+  border-radius: 34rpx;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  margin-left: 518rpx;
+}
+
+.anoBtnBox .disRecPro{
+  color: #AAAAAA;
+  background-color: #D9D9D9;
+}
+
+.anoBtnBox .recPro{
+  color: #FFFFFF;
+  background-color: #3D7EFF;
+}
+
+/* 已完成 */
+.doneListBox{
+  width: 718rpx;
+  height: 360rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  margin-top: 30rpx;
+  padding: 20rpx 20rpx 20rpx 16rpx;
+  box-sizing: border-box;
+}
+
+.doneTextBox{
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #333333;
+  margin-bottom: 18rpx;
+}
+
+.doneTextBox .doneRightText{
+  color: #3D7EFF;
+}
+
+.doneInfoBox{
+  display: flex;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #F2F3F7;
+}
+
+.doneImgBox{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.doneImgBox .doneImg{
+  width: 100%;
+  height: 100%;
+}
+
+.doneInfo{
+  margin-left: 20rpx;
+}
+
+.doneInfoBox .doneInfo{
+  font-size: 28rpx;
+  color: #333333;
+  margin-left: 20rpx;
+}
+
+.doneInfo .donePoNumBox{
+  display: flex;
+}
+
+.doneInfo .doneItem{
+  margin-top: 10rpx;
+}
+
+.doneInfo .doneLText{
+  color: #8C8C8C;
+  margin-right: 10rpx;
+}
+
+/* 没有订单提示和没有搜索结果 */
+.empty,.noSearch{
+  margin-top: 332rpx;
+  text-align: center;
+}
+
+.empty .emptyImg,.noSearch .noSearchImg{
+  width: 336rpx;
+  height: 288rpx;
+}
+
+.empty .emptyText,.noSearch .noSearchText{
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  color: #747577;
+}
+
+/* 提示弹窗 */
+.hintPopup {
+  /* 去除背景色 */
+  background-color: transparent !important;
+}
+
+.hintBox{
+  width: 600rpx;
+  height: 410rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  text-align: center;
+  padding-top: 50rpx;
+  box-sizing: border-box;
+}
+
+.hintBox .hintTitle{
+  font-size: 40rpx;
+  color: #3D7EFF;
+  font-weight: 700;
+}
+
+.hintBox .hintText{
+  font-size: 30rpx;
+  color: #333333;
+  margin-top: 60rpx;
+}
+
+.hintBox .hintAffirm{
+  width: 220rpx;
+  height: 64rpx;
+  background: #3D7EFF;
+  border-radius: 32rpx;
+  color: #FFFFFF;
+  margin:0 auto;
+  margin-top: 60rpx;
+}
+
+/* 搜索状态提示 */
+.searchStatusBox{
+  text-align: center;
+  margin-top: 330rpx;
+}
+.searchStatusBox .searchStatusImg{
+  width: 338.41rpx;
+  height: 248.2rpx;
+}
+
+.searchStatusBox .SSHintTextBOX{
+  font-size: 30rpx;
+  color: #262626;
+  margin-top: 70rpx;
+}
+
+
+

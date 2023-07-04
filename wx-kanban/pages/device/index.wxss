@@ -1,0 +1,85 @@
+/* pages/device/index.wxss */
+page {
+  width: 100%;
+  background-color: #F4F5FC;
+}
+
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deviceContainer {
+  padding: 0 16rpx;
+  /* iPhoneX兼容 底部安全距离 */
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* .listBox { */
+  /* iPhoneX兼容 底部安全距离 */
+  /* margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom); */
+/* } */
+
+.itemBox {
+  width: 718rpx;
+  height: 140rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  display: flex;
+  margin-top: 20rpx;
+  color: #262626;
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.itemBox .headPortraits {
+  width: 92rpx;
+  height: 92rpx;
+  flex-shrink: 0;
+}
+
+.itemBox .deviceName {
+  font-size: 33rpx;
+  margin-left: 40rpx;
+}
+
+/* 设备空提示 */
+.deviceEmptyHint {
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute; */
+  width: 510rpx;
+  text-align: center;
+  margin: 350rpx auto 0;
+}
+
+.deviceEmptyHint .img {
+  width: 336.51rpx;
+  height: 288.02rpx;
+}
+
+.deviceEmptyHint .text {
+  color: #747577;
+  font-size: 30rpx;
+  margin-top: 40rpx;
+}
+
+/* 退出登录 */
+.exitBox {
+  width: 200rpx;
+  margin: 40rpx auto;
+  text-align: center;
+  color: #989898;
+}
+
+.exitBox .exitImg {
+  width: 60rpx;
+  height: 60rpx;
+}

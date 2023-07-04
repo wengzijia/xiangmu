@@ -1,0 +1,27 @@
+<view class="document">
+    <view wx:if="{{false}}" class="title">印刷资质要求与模板</view>
+    <view>客户下单时根据印刷内容不同，需提供以下相应证件扫描件或拍照上传：</view>
+    <view><text class="b">1.营业执照。</text></view>
+    <view><text class="b">2.商标注册证：</text>包装上印有商标，如带有R字样请提供该商标的有效商标注册证；如带有TM字样请提供商标注册受理证书。</view>
+    <view class="b red">3.商标印制委托书：如您是商标持有人，需要您授权傲彩公司印制，如您是商标持有人的委托人，则需要您的转委托书、与商品持有人对您的直接委托书，保持授权链条完整。委托书模板请见下文。</view>
+    <view><text class="b">4.条码登记证：</text>包装上印有条码，请提供条码登记证。</view>
+    <view><text class="b">5.广告经营许可证：</text>如您是广告公司，请提供广告经营许可证。</view>
+    <view><text class="h2">附：</text></view>
+    <view><text class="b">1、直接委托：</text></view>
+    <view class="centent"><text class="b">印刷品商标印制委托授权书</text></view>
+    <view>委托方：XXX有限公司 </view>
+    <view>受委托方：深圳市七彩祥云信息技术有限公司</view>
+    <view><text class="null"></text>委托方是“XXX”商标持有人， 现委托“深圳市七彩祥云信息技术有限公司”在产品包装上印刷“XXX”商标，印制的商标均由委托方提供，委托方所提供的商标均合法使用，所提供的证明文件真实有效。受委托人按照委托方提供的内容及要求进行印刷，若因此产生的任何侵权责任或经济纠纷均由委托方负责。受委托方若无按照要求印刷则由受委托方负责。</view>
+    <view><text class="null"></text>委托日期：XX年XX月XX日至XX年XX月XX日止。</view>
+    <view><text class="null"></text>特此委托。</view>
+    <view class="mb"><text class="null"></text>委托方: XXX有限公司 （盖章）</view>
+    <view><text class="b">2、转委托：</text></view>
+    <view class="centent"><text class="b">印刷品商标印制转委托授权书</text></view>
+    <view>委托方：XXX有限公司 </view>
+    <view>受委托方：深圳市七彩祥云信息技术有限公司</view>
+    <view><text class="null"></text>委托方受“XXX”商标持有人XXX公司委托在产品包装上印刷“XXX”商标， 现转委托“深圳市七彩祥云信息技术有限公司”在产品包装上印刷“XXX”商标，印制的商标均由委托方提供，委托方所提供的商标均合法使用，所提供的证明文件真实有效。受委托人按照委托方提供的内容及要求进行印刷，若因此产生的任何侵权责任或经济纠纷均由委托方负责。受委托方若无按照要求印刷则由受委托方负责。</view>
+    <view><text class="null"></text>委托日期：XX年XX月XX日至XX年XX月XX日止。</view>
+    <view><text class="null"></text>特此委托。</view>
+    <view><text class="null"></text>附:"XXX"商标持有人XXX公司对委托方的授权书</view>
+    <view><text class="null"></text>委托方: XXX有限公司 （盖章）</view>
+</view>

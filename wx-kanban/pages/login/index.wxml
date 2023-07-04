@@ -1,0 +1,25 @@
+<!--pages/login/index.wxml-->
+<view class="loginContainer">
+   <view class="imgBox">
+      <image class="logoBackground" src="../../image/login/login.png"></image>
+   </view>
+   <view class="loginBox">
+      <view class="mobileBox">
+        <image class="mobile" src="../../image/login/mobile.png"></image>
+        <input class="mobileInput" maxlength="11"  placeholder="请输入手机号" type="number" data-type="{{0}}" value="{{phoneNumber}}" catchinput="getInputVal"/>
+      </view>
+      <view class="codeBox">
+        <image class="code" src="../../image/login/securityCode.png"></image>
+        <input class="codeInput" placeholder="请输入验证码" type="number" data-type="{{1}}" value="{{code}}" catchinput="getInputVal"/>
+        <view class="getCode" wx:if="{{showCode}}" catchtap="sendCode">获取验证码</view>
+        <view class="flex_c_c waitTime" wx:else>{{countDown}}</view>
+      </view>
+      <van-button type="info" round size="large" wx:if="{{phoneNumber && code && isFabricators}}" catchtap="login">登录</van-button>
+      <view class="flex_c_c disableLogin" wx:else catchtap="text">登录</view>
+      <view class="look" catchtap="look"><text>先去看看 ></text></view>
+      <view class="TCPBox">
+        <text>登录即代表同意</text> 
+        <text style="color: red;">《除废服务协议》</text>
+      </view>
+   </view>
+</view>

@@ -1,0 +1,4 @@
+<view>
+<image src='../../image/share/share4.gif'  mode="widthFix" style='width:100%'></image>
+   <button open-type="share" share-mode="{{['qq', 'qzone','wechatFriends','wechatMoment']}}" class="shareBtn">  </button>
+</view>

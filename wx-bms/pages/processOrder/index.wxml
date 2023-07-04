@@ -1,0 +1,192 @@
+<!--pages/processOrder/index.wxml-->
+<view class="processingSingleContainer">
+<!-- 本厂、外厂加工单tab切换 -->
+<view class="processingForm" wx:if="{{is_supplier == 1}}">
+    <view class="workOrder {{ workOrderIndex == 0 ? 'leftBgc' : '' }}"   catchtap="changeType" data-index="0">本厂加工单</view>
+    <view class="workOrder {{ workOrderIndex == 1 ? 'rightBgc' : '' }}"  catchtap="changeType" data-index="1">外厂加工单</view>
+</view>
+<!-- 搜索框 -->
+<!-- <view class="searchBox">
+  <input class="inputBox" placeholder="搜索"/>
+</view> -->
+<van-search value="{{ value }}" shape="round"
+  background=" #F1F3F5" placeholder="请输入订单号"  bind:search="search" bind:cancel="cancelSearch" show-action clear-trigger=""/>
+<!-- 订单状态 -->
+<view class="orderStatus">
+  <!-- <block wx:for="{{orderStatus}}" wx:key="item">
+    <view class="orderText {{orderIndex == index ? 'orderTextActivate' : ''}}" catchtap="changeOrderStatus" data-index="{{index}}">{{item}}</view>
+  </block> -->
+  <block wx:for="{{orderStatus}}" wx:key="type">
+    <view wx:if="{{is_supplier == 1 && workOrderIndex == 0}}" class="orderText {{orderIndex == item.type ? 'orderTextActivate' : ''}}" catchtap="changeOrderStatus"  data-index="{{item.type}}">{{item.name}}</view>
+    <view wx:if="{{is_supplier == 1 && workOrderIndex == 1 && item.type != 4}}" class="orderText {{orderIndex == item.type ? 'orderTextActivate' : ''}}" catchtap="changeOrderStatus"  data-index="{{item.type}}">{{item.name}}</view>
+    <view wx:if="{{is_supplier == 0 && item.type != 4}}" class="orderText {{orderIndex == item.type ? 'orderTextActivate' : ''}}" catchtap="changeOrderStatus"  data-index="{{item.type}}">{{item.name}}</view>
+  </block>
+</view>
+<view class="processOrderContainer">
+<!-- 工序状态 -->
+<scroll-view scroll-x="{{true}}" style="padding: {{bottom}}rpx;padding-right:24rpx;box-sizing: border-box;" wx:if="{{showProcess}}">
+<view class="processStatus">
+  <block wx:for="{{process}}" wx:key="alias" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && process.length > 2 }}">
+    <view  class="processText {{processIndex == item.alias ? 'processTextActivate' : ''}}" catchtap="changeProcessStatus" data-machining_id="{{item.machining_id}}" data-is_material="{{item.is_material}}"  data-alias="{{item.alias}}">{{item.machining_name}}</view>
+  </block>
+</view>
+</scroll-view>
+<!-- 加工单为空显示 -->
+<view class="emptyContainer" wx:if="{{!orderData.length}}">
+<view class="empty">
+  <image src="../../image/bill/none.png"></image>
+</view>
+<view class="emptyHint">小主，您还没有加工单呢~</view>
+</view>
+<!-- refresher-enabled 开启自定义下拉刷新  bindscrolltolower 滚动到底部或右边触发  bindrefresherrefresh   自定义下拉刷新被触发 
+    refresher-triggered   true 表示下拉刷新已经被触发   false 也就是复位   不然会卡在那里
+    刚开始为true    下拉刷新改为false就关闭
+ -->
+<!--  订单列表  -->
+<scroll-view refresher-enabled="true" bindscrolltolower="scrollLoadMore"  bindrefresherrefresh="pullToRefresh" refresher-triggered="{{isPullRefresh}}"   scroll-y="{{true}}" lower-threshold="160"  style="height:{{height}}" wx:if="{{orderData.length}}">
+<view  class="orderWrap" wx:for="{{orderData}}" wx:key="order_id">
+<!-- 订单编号、状态 -->
+  <view class="orderNumberBox">
+    <view class="orderNumber">订单编号：{{item.group_sn}}</view>
+    <view class="orderStatusBox">
+      <text class="text" wx:if="{{ item.status == 1 }}">待加工</text>
+      <text class="text" wx:if="{{ item.status == 2 }}">待付款</text>
+      <text class="text" wx:if="{{ item.status == 3 }}">已完成</text>
+      <text class="text" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && item.status == 4 && item.processing_status == 1 && item.processing_place == 2}}">生产中</text>
+      <text class="text" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && item.status == 4 && item.processing_status == 2 && item.processing_place == 2}}" style="color: #48BF75;">生产完成</text>
+      <van-icon class="icon"  name="delete-o"  wx:if="{{ is_supplier == 1 && workOrderIndex == 0 &&  item.status != 3 && item.status != 4 }}" data-orderId="{{item.order_id}}" bindtap="deletePopup"/>
+    </view>
+  </view>
+  <!-- 订单信息 -->
+  <view class="orderInfo">
+    <view class="imgBox">
+     <image class="detailImg" mode="aspectFit"  src="{{item.order_file_url[0] == undefined ? '../../image/palceOrder/avatar2.png' : item.order_file_url[0]}}" data-previewImage="{{item.order_file_url}}" catchtap="previewImage"></image>
+    </view>
+    <view class="orderTextBox">
+     <view class="titleBox">
+     <view class="title ellipsis-line-1">{{item.goods_name}}</view>
+     <view class="date">{{item.add_time}}</view>
+     </view>
+      <view class="craftBox">
+      <text class="item craft">工艺:</text>
+      <text class="items craftText">{{item.attribute_name}}</text>
+      </view>
+      <block wx:for="{{item.process_attr}}" wx:key="label" >
+        <view class="oilSizeBox" wx:if="{{item.value&&item.value!='mm'&&item.value!='*mm'}}">
+        <text class="item oilSize">{{item.label}}:</text>
+        <text class="items oilSizeText">{{item.value}}</text>
+        </view>
+      </block>
+      <!-- <view class="oilTypeBox">
+      <text class="item oilType">过油类型:</text>
+      <text class="items oilTypeText">哑膜;</text>
+      </view> -->
+      <view class="remarkBox">
+      <text class="item remark">备注:</text>
+      <text class="items remarkText">{{item.order_note}}</text>
+      </view>
+        <!-- 订单数量、价格 -->
+  <view class="orderQuantityBox">
+    <view class="orderQuantity">x{{item.number}}</view>
+    <view class="orderPrice" wx:if="{{item.price}}">¥ <text class="price">{{item.price}}</text></view>
+  </view>
+    </view>
+  </view>
+  <!-- 用户头像、名称，订单按钮 -->
+  <view class="userInfo">
+    <view class="userBox">
+    <view class="headPortraitBox">
+    <image class="headPortrait" src="{{item.customer_info.wx_portrait}}"></image>
+    </view>
+    <view class="name ellipsis-line-1">{{item.customer_info.customer_name}}</view>
+  </view>
+  <view class="buttonBox {{ item.status == 3 ? 'timePayment' : ''}}">
+    <button class="toTally" wx:if="{{ (is_supplier == 1 && workOrderIndex == 0 && item.status == 1  ) || ( is_supplier == 1 && workOrderIndex == 0 && item.status == 4  && item.processing_place == 2 && item.processing_status == 2 )}}" data-orderid="{{item.order_id}}" data-id="{{item.attribute_id}}"  data-customerid="{{item.customer_id}}" data-attrType="{{item.attribute_type}}"  catchtap="toChargeUp">去记账</button>
+    <button class="changeTally" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && item.status == 2}}" data-orderid="{{item.order_id}}" data-id="{{item.attribute_id}}" data-customerid="{{item.customer_id}}" data-attrType="{{item.attribute_type}}" data-isEnabled="1" catchtap="editOrder">更改记账</button>
+   <view class="payTime" wx:if="{{item.status == 3}}">付款时间：{{item.payer_info.payer_time}}</view>  
+    <button class="toPayment" wx:if="{{ is_supplier == 1 && workOrderIndex == 1 && item.status == 2 ||   is_supplier == 0 && item.status == 2 }}"  data-price="{{item.price}}"  data-supplierId="{{item.supplier_id}}"  data-yearsmonth="{{item.years_month}}"  data-orderid="{{item.order_id}}"  catchtap="affirmPopup" >去支付</button>
+    <button class="toTally" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && item.status == 1 && item.processing_status == 0 && item.processing_place == 2}}" data-orderid="{{item.order_id}}" catchtap="turnProductionShow">转生产</button>
+    <button class="toTally" wx:if="{{ is_supplier == 1 && workOrderIndex == 0 && item.status == 4 && item.processing_status == 1 && item.processing_place == 2}}" data-orderid="{{item.order_id}}" data-processingPlace="{{item.processing_place}}" data-processingStatus="{{item.processing_status}}" catchtap="withdrawProductionShow">撤回生产</button>
+  </view>
+</view>
+</view>
+<view  hidden="{{end}}" class="end" >{{endText}}</view>
+</scroll-view>
+</view>
+<!-- 删除弹窗 -->
+<van-popup show="{{ deleteShow }}" bind:close="deletePopup" class="delete">
+    <view class="deletePopup">
+      <view class="hint">提示</view>
+      <view class="promptMessage">
+      <view>是否删除该加工单</view>
+      </view>
+      <view class="buttonBox"> 
+        <button class="item cancel" bindtap="deleteClose">取消</button>
+        <button class="item affirm" bindtap="deleteOrder">确认</button>
+      </view>
+    </view>
+</van-popup>
+<!-- 确认支付弹窗 -->
+<van-popup
+  show="{{ affirmShow }}"
+  position="bottom"
+  safe-area-inset-bottom="{{false}}"
+  bind:close="affirmClose"
+  safe-area-inset-bottom="{{false}}"
+>
+<view class="confirmPaymentBox">
+  <view class="confirmPaymentWarp">
+  <view class="confirmPayment">确认支付</view>
+  <van-icon class="close" name="close" catchtap="affirmClose" />
+ </view>
+ <view class="moneyBox">
+ <view class="text">需付金额</view>
+ <view class="price">¥{{price}}</view>
+ </view>
+ <view class="orderNumberWrap">
+ <view class="text">订单笔数</view>
+ <view class="number">1</view>
+ </view>
+ <view class="payNowBox">
+ <image class="payNowBgc" src="../../image/processOrder/paynow.png"></image>
+ <view class="payNow" catchtap="toPayment">立即支付</view>
+ </view>
+</view>
+</van-popup>
+<!-- 支付成功弹窗 -->
+<van-popup show="{{ payShow }}">
+  <view class="paySuccessBox">
+      <view class="paySuccess">订单支付成功!</view>
+      <button class="affirm" catchtap="payClose">确认</button>
+  </view>
+</van-popup>
+<!-- 转生产弹窗 -->
+<van-popup show="{{ isTurnProductionShow }}"  class="turnProductionPopup">
+    <view class="turnProduction">
+      <view class="hint">提示</view>
+      <view class="promptMessage">
+      <view>是否确认该订单进入生产</view>
+      </view>
+      <view class="buttonBox"> 
+        <button class="item cancel" catchtap="turnProductionClose">取消</button>
+        <button class="item affirm" catchtap="turnProduction">确认</button>
+      </view>
+    </view>
+</van-popup>
+<!-- 撤回生产弹窗 -->
+<van-popup show="{{ isWithdrawProductionShow }}"  class="withdrawProductionPopup">
+    <view class="turnProduction">
+      <view class="hint">提示</view>
+      <view class="promptMessage">
+      <view>是否确认撤回生产</view>
+      </view>
+      <view class="buttonBox"> 
+        <button class="item cancel" catchtap="withdrawProductionClose">取消</button>
+        <button class="item affirm" catchtap="withdrawProduction">确认</button>
+      </view>
+    </view>
+</van-popup>
+</view>
+
+
+<van-toast id="van-toast" />

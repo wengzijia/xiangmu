@@ -1,0 +1,11 @@
+/* pages/orderInformation/index.wxss */
+.noticeContainer .orderInformationText {
+  margin: 38rpx 60rpx 0 60rpx;
+  color: #333333;
+  font-size: 30rpx;
+  line-height: 46.2rpx;
+}
+
+.noticeContainer .orderInformationText .marginTop{
+   margin-top: 20rpx;
+}

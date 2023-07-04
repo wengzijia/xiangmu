@@ -1,0 +1,173 @@
+<!--pages/gallerySet/index.wxml-->
+<view class="top">
+  <view class="gallery_all">
+    <view class="dis_flex mar_b56">
+      <view class="flex_left">企业名称</view>
+      <view class="flex_right">{{userInfo.enterprise.enterpriseName}}</view>
+    </view>
+    <view class="dis_flex ">
+      <view class="flex_left">营业执照</view>
+      <view>
+        <image src="{{imageBaseUrl+userInfo.enterprise.businessLicense}}" mode="heightFix" class="wid_img"></image>
+      </view>
+    </view>
+  </view>
+  <view class="gallery_all mar_t28">
+    <view>
+      <text class="title">轮播图设置<text class="sign">*</text></text>
+      <text class="note">（图片分辨率340*150,10M以内）</text>
+    </view>
+    <view class="img_flex mar_t56">
+      <view class="img_flex" wx:for="{{carouselList}}" wx:key="index" wx:if="{{item.statusDel!=1}}">
+        <view class="photograph-img-box img_mar" catchtap="bindCarousel" data-index="{{index}}" data-id="{{item.id}}">
+          <image src="{{item.coverPath}}" class="photograph-img " data-index="{{index}}" data-src="{{[item.coverPath]}}" data-list="{{[item.coverPath]}}" />
+          <view></view>
+          <view class="posi_fix" catchtap="delCarouseImg" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{Ishow}}">
+            <image src="/image/gallery/close.png" class="clo_img"></image>
+          </view>
+        </view>
+      </view>
+      <view class="img_flex flex1 " wx:if="{{carouselClose||Ishow&&carouselList.length!=4&&carouselList.length<=4}}">
+        <view class="add_bg img_mar" catchtap="bindCarousel">
+          <van-icon name="plus" style="color:#aaaaaa;font-size: 40rpx;" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="gallery_all mar_t28">
+    <view>
+      <text class="title">合作案例设置<text class="sign">*</text></text>
+      <text class="note">（图片分辨率151*114,10M以内）</text>
+    </view>
+    <view class="img_flex mar_t56">
+      <view class="img_flex" wx:for="{{cooperationList}}" wx:key="index" wx:if="{{item.statusDel!=1}}">
+        <view class="photograph-img-box">
+          <view class=" img_mar" style="height: 320rpx;">
+            <!-- catchtap="checkCooperationImgs"  -->
+            <image src="{{item.coverPath}}" class="photograph-img " style="height: 320rpx;max-height: 320rpx;" data-index="{{index}}" catchtap="bindCooperation" data-id="{{item.id}}" />
+            <view class="posi_fix" catchtap="delCooperationImg" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{Ishow}}">
+              <image src="/image/gallery/close.png" class="clo_img"></image>
+            </view>
+            <!-- <van-icon name="delete-o" custom-class="del-img-icon" bind:click="delbindCarouselImg" data-index="{{index}}" /> -->
+          </view>
+          <textarea placeholder="请输入标题" class="mar_t8" auto-height maxlength="15" value="{{item.title}}" bindinput="bindTitle" data-key="cooperationList" data-index="{{index}}" disabled="{{!Ishow}}"></textarea>
+        </view>
+      </view>
+      <view class="img_flex flex1 " wx:if="{{cooperationClose||Ishow&&cooperationList.length!=8&&cooperationList.length<=8}}" catchtap="bindCooperation">
+        <view>
+          <view class="add_bg img_mar" style="height: 320rpx;line-height: 320rpx;">
+            <van-icon name="plus" style="color:#aaaaaa;font-size: 40rpx;" />
+          </view>
+          <!-- <view  class="mar_t8" >请输入内容</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="gallery_all mar_t28">
+    <view>
+      <text class="title">工厂展示设置<text class="sign">*</text></text>
+      <text class="note">（图片分辨率340*150,10M以内）</text>
+    </view>
+    <view class="img_flex mar_t56">
+      <view class="img_flex" wx:for="{{factoryList}}" wx:key="index" wx:if="{{item.statusDel!=1}}">
+        <view class="photograph-img-box img_mar" data-index="{{index}}" data-id="{{item.id}}" catchtap="bindFactory">
+          <image src="{{item.coverPath}}" class="photograph-img " data-index="{{index}}" />
+          <view></view>
+          <view class="posi_fix" catchtap="delFactoryImg" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{Ishow}}">
+            <image src="/image/gallery/close.png" class="clo_img"></image>
+          </view>
+          <!-- <van-icon name="delete-o" custom-class="del-img-icon" bind:click="delbindCarouselImg" data-index="{{index}}" /> -->
+        </view>
+      </view>
+      <view class="img_flex flex1 " wx:if="{{factoryClose||Ishow&&factoryList.length!=4&&factoryList.length<=4}}">
+        <view class="add_bg img_mar" catchtap="bindFactory">
+          <van-icon name="plus" style="color:#aaaaaa;font-size: 40rpx;" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="gallery_all mar_t28">
+    <view>
+      <text class="title">联系信息设置<text class="sign">*</text></text>
+    </view>
+    <view class="text_flex mar_t56">
+      <view class="text_left">
+        联系电话
+      </view>
+      <view class="text_right">
+        <input type="text" placeholder="请输入电话号码" bindinput="inputChange" disabled="{{!Ishow}}" data-key="phone" value="{{phone}}" />
+      </view>
+    </view>
+    <!-- <view class="text_flex mar_t56">
+      <view class="text_left">
+        所在地区
+      </view>
+      <view class="text_right" catchtap="showPopup">
+        <view class="section">
+            {{province}}，{{city}}，{{county}}
+          </view>
+      </view>
+    </view> -->
+    <view class="firmAddressBox">
+      <view class="text">企业地址</view>
+      <view class="firmAddress" bindtap="getLocation">
+        <input type="text" placeholder="点击选择" class="selectAddress" placeholder-class="p_class" value=""  disabled  wx:if="{{!addressName && !address}}"/>
+        <view class="addressContent" wx:else>
+          <view class="text-ellipsisl1 addressName">{{addressName}}</view>
+          <view class="text-ellipsisl1 addressDetail" style="{{!addressName ? 'color: #333333;' : 'color:#858585' }}">{{address}}</view>
+        </view>
+        <van-icon name="arrow" class="rightArrow" />
+      </view>
+    </view>
+    <view class="text_flex mar_t56">
+      <view class="text_left">
+        详细地址
+      </view>
+      <view class="text_right">
+        <textarea type="text" placeholder="请输入详细地址" auto-height class="text_wid" bindinput="inputChange" data-key="detailedAddress" value="{{detailedAddress}}" disabled="{{!Ishow}}">
+      </textarea>
+      </view>
+    </view>
+  </view>
+  <view class="gallery_all mar_t28">
+    <view>
+      <text class="title">企业简介设置<text class="sign">*</text></text>
+    </view>
+    <!-- <view class="text_flex mar_t56">
+      <view class="text_left">
+        公司名称
+      </view>
+      <view class="text_right">
+        <input type="text" placeholder="请输入公司名称" bindinput="inputChange"  data-key="title" value="{{title}}" disabled="{{!Ishow}}"/>
+      </view>
+    </view> -->
+    <view class="text_flex mar_t56">
+      <view class="text_left">
+        详细描述
+      </view>
+      <view class="text_right">
+        <textarea type="text" placeholder="请输入详细描述" maxlength="30000" value="" auto-height class="text_wid" bindinput="inputChange" data-key="introduction" value="{{introduction}}" disabled="{{!Ishow}}">
+      </textarea>
+      </view>
+    </view>
+  </view>
+  <view class="mrginT"></view>
+  <view class="btn_bg" wx:if="{{Ishow}}">
+    <view class="btn" catchtap="submitNote">保存</view>
+  </view>
+  <view class="btn_bg" wx:else>
+    <view class="btn_flex">
+      <view class="edit_all" catchtap="editNote">
+        <view>
+          <image src="/image/nameCardSeting/edit.png" class="edit_img"></image>
+        </view>
+        <view class="edit_text">重新编辑</view>
+      </view>
+      <view class="btn1" catchtap="preview">预览</view>
+    </view>
+
+  </view>
+  <van-popup show="{{ show }}" position="bottom" bind:close='showPopup' round>
+    <van-area wx:if="{{ show }}" area-list="{{ areaList }}" value="{{areaListId}}" bind:cancel="showPopup" bind:confirm="confirmArea" />
+  </van-popup>
+</view>

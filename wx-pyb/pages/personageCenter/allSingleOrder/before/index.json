@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#f8f8f8",
+ "navigationBarTextStyle": "black",
+ "navigationBarTitleText": "查看印前备注",
+ "backgroundColor": "#f8f8f8",
+ "backgroundTextStyle": "light",
+ "usingComponents": {
+    "van-steps": "@vant/weapp/steps/index"
+  }
+}

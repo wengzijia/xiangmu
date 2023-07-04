@@ -1,0 +1,40 @@
+.manufacturer_main1222{position:relative;background:#2f3336 url('images/bg_1222_001.png') no-repeat scroll top center;width:100%;height:333px;}
+.service1222{width:800px;margin:0 auto;height:333px;color:#fff;}
+.serviceStore_1212{background:#f2f4f7;padding-bottom:70px;}
+.serviceStore_1212 .main1200{width:1200px;margin:0 auto;}
+.serviceStore_1212 .main1200 .top_staycity{padding:12px 20px;background:#ebebeb;/*添加于2017-1225*/position:relative;}
+.serviceStore_1212 .main1200 .top_staycity .txt1212{width:200px;height:44px;line-height:44px;background:#fff;border-radius:5px;text-indent:15px;}
+.serviceStore_1212 .main1200 .IntelligentSorting .IntelligentSorting_left{width:830px;}
+.serviceStore_1212 .main1200 .IntelligentSorting .IntelligentSorting_left .sort_items_ul{padding-bottom:50px;}
+.serviceStore_1212 .main1200 .IntelligentSorting .IntelligentSorting_left .sort_items_ul li{padding:15px;border-top:1px solid #ddd;height:145px;}
+.serviceStore_1212 .main1200 .IntelligentSorting .IntelligentSorting_left .sort_items_ul li:hover{background:#f1f7fd;}
+.marginLeft20{margin-left:30px;font-size:12px;line-height:29px;}
+.experienceName a{color:#08d;font-size:18px;}
+.lookAtmore{position:relative;width:185px;height:145px;overflow:hidden;}
+.lookAtmore .lookAtmore-none{position:absolute;top:145px;cursor:pointer;background:#000;color:#fff;text-align:center;line-height:30px;width:100%;height:30px;transition:top 0.5s;-moz-transition:top 0.5s;/* Firefox 4 */-webkit-transition:top 0.5s;/* Safari 和 Chrome */-o-transition:top 0.5s;}
+.lookAtmore:hover .lookAtmore-none{top:115px;}
+.serviceStore_1212 .main1200 .IntelligentSorting .IntelligentSorting_right{width:350px;height:520px;background:#fff;}
+.iwanthz{text-align:center;}
+.iwanthz .iwanthz_a{display:inline-block;width:220px;height:50px;background:#fff;line-height:50px;background:#08d;color:#fff;border-radius:25px;font-size:15px;}
+.paging_1222{float:right;margin-top:20px;}
+.paging_1222 a{float:left;display:inline-block;width:25px;height:25px;border:1px solid #ddd;text-align:center;line-height:25px;border-right:none;background:#fff;}
+.paging_1222 a:hover{background:#08d;color:#fff;}
+.paging_1222 .none:hover{background:#fff;color:#666;}
+a.selected{background:#08d;color:#fff;}
+
+/*修改于2017-1225-1337*/
+.input-text{width:100px;border:none;}
+.top_staycity .stayinthecity-1225{position:absolute;top:56px;left:20px;border:2px solid #e5e5e5;padding:15px 15px 5px;border-radius:4px;background:#fff;z-index:999;}
+.top_staycity .stayinthecity-1225 .stayinthecity-tab span{display:inline-block;padding:0 72px 5px;line-height:26px;border-bottom:1px solid #e5e5e5;cursor:pointer;letter-spacing:3px;}
+.top_staycity .stayinthecity-1225 .stayinthecity-tab span.selected{border-bottom:1px solid #08d;color:#08d;}
+.top_staycity .stayinthecity-1225 .tabBox1225 a{display:inline-block;color:#555;padding:2px 5px;margin:3px 5px;transition:background 0.25s;-moz-transition:background 0.25s;/* Firefox 4 */-webkit-transition:background 0.25s;/* Safari 和 Chrome */-o-transition:background 0.25s;}
+.top_staycity .stayinthecity-1225 .tabBox1225 a:hover{background:#08d;color:#fff;}
+.top_staycity .stayinthecity-1225 .tabBox1225 .classcity-row em{background:#efefef;width:20px;height:20px;display:inline-block;text-align:center;color:#08d;margin:0 10px;}
+.top_staycity .stayinthecity-1225 .tabBox1225 .classcity-row{padding:15px 0 10px;border-bottom:1px solid #efefef;}
+.div-12251622{margin:-25px 0 0 40px;}
+
+.lookAtmore-none-1 img{border-radius:4px;}
+
+/*
+.layui-layer-title, a.layui-layer-min, .layui-layer-max{display:none !important;}
+*/

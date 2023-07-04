@@ -1,0 +1,131 @@
+<view>
+  <van-notice-bar
+    left-icon="volume-o"
+    text="2023年1月1日00：00：00起，暂停信用购支付功能，待功能升级后继续使用"
+  />
+  <view class="mar_r32">
+    <view>
+      <view class="posi_re">
+        <image src="../../../image/creditBan.png" class="wid_100" mode="widthFix"></image>
+        <view class="pose_abt">
+          <view style="display:flex;justify-content: space-between;">
+            <view>
+              <view class="cor_p font_28">{{ status ? '剩余可用(元)' : ''}}</view>
+              <view class="credit_pay">{{ status ? surplus : ''}}</view>
+              <view><text class="cor_w pad_r10 font_28">已用额度:</text><text class="cor_p "> {{used}}</text></view>
+            </view> 
+            <view>
+              <view class="cor_p font_28">
+                <text wx:if="{{storage > 0}}">备用金(元)</text>
+              </view>
+              <view class="credit_pay">
+                <text wx:if="{{storage > 0}}">{{storage}}</text>
+              </view>
+              <view wx:if="{{status}}"><text class="cor_w pad_r10 font_28">总额度:</text><text class="cor_p">{{total}}</text></view>
+            </view>
+          </view>
+          <!-- <view class="flex_credit font_28">
+          </view> -->
+        </view>
+      </view>
+      <view class="tab_search">
+        <view class="tabNav">
+          <!-- catchtap="{{!buttonClicked?'detailTap':''}}"  -->
+          <view wx:for="{{list}}" wx:key="index" catchtap="detailTap" data-idx="{{item.id}}" class="{{creditId==item.id ? 'cur' : ''}}">
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+      <view class="" wx:if="{{creditId==0}}">
+        <view class="list_bg" wx:if="{{billList.length>0}}" >  
+          <scroll-view  scroll-y="y" class="bill-list">
+            <view wx:for="{{billList}}" wx:key="id" class="{{item.disabled?'date_flex2':'date_flex'}}">
+              <view class="date_pri">
+                <view wx:if="{{item.payStatus==0}}">本月消费</view>
+                <view wx:else>{{item.month}}月应还(元)</view>
+                <view wx:if="{{item.overdue}}" class="overdue">逾期</view>
+              </view>
+              <view class="amount">
+                <view>{{item.surplus}}</view>
+                <view wx:if="{{item.overdue}}" class="overdue">{{item.overdue}}</view>
+              </view>
+              <view class="repayment-list" wx:for="{{item.subStatements}}" wx:key="i" wx:for-index="i" wx:for-item="items">
+                <view class="repayment-amount">{{items.amount}}</view>
+                <view class="repayment-item">
+                  <view >{{items.monthlySubStatementNo}}</view>
+                  <view >{{items.payTime}}</view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="none_all" wx:else>
+          <image src="../../../image/none.png" mode="widthFix"></image>
+          <view>暂无还款~</view>
+        </view>
+          <!-- //底部支付按钮 -->
+        <view class="btn_bg" wx:if="{{repayment}}">
+          <button class="share_btn" bindtap="bindPay" data-id="" data-status="gopay">
+            {{btnText}}还款
+          </button>
+        </view>
+      </view>
+      <view wx:if="{{creditId==1}}">
+        <view wx:if="{{orderList.length==0}}" class="picker" style="z-index: 1;margin-top:2px;">
+          <view catch:tap="showPopup">{{showDate}} <van-icon name="arrow-down" /></view>
+          <view >消费:￥0</view>
+        </view>
+      <block  wx:if="{{orderList.length>0}}" >
+        <scroll-view  scroll-y="y" bindscrolltolower="scrolltolower" class="order-list">
+          <view  wx:for="{{orderList}}" wx:key="index" wx:for-item="list">
+            <view class="picker" style="z-index: {{index}};">
+              <view catch:tap="showPopup">{{list.month}} <van-icon name="arrow-down" /></view>
+              <view >消费:￥{{list.total}}</view>
+            </view>
+            <view class="list_bg2" wx:for="{{list.list}}" wx:key="id" catch:tap="toOrderDetail" data-type="{{item.orderType}}" data-sn="{{item.subOrderNos||0}}" >
+                  <view class="order_sn">
+                    <view>{{item.subOrderNos||item.orderNo}}</view>
+                    <view class="order_right">{{item.changeTime}}</view>
+                  </view>
+                  <view class="order_sn">
+                    <view style="font-size: 33rpx;">{{item.changeType == 3 ? "退款金额" : item.changeType == 2 ? "消费金额" : ''}}</view>
+                    <view class="order_right" style='color: {{item.changeType == 2 ? "#E9333F" : "#08C667"}};font-size: 30rpx;'>{{item.changeType == 2 ? "-" : "+"}} {{item.amount}}</view>
+                  </view>
+                  <view class="order_sn">
+                    <view style="color: #999999;font-size: 25rpx;">当前剩余额度</view>
+                    <view class="order_right">{{item.currentSurplusAmount}}</view>
+                  </view>
+                  <view class="date_all"><text wx:if="{{item.orderType=='5'}}">加工单</text></view>
+                <!-- <view class="price">
+                  <text >{{item.amount}}</text>
+                  <text wx:if="{{item.cancelCreditPurchaseLogs&&item.cancelCreditPurchaseLogs.length>0}}" style="display:block;font-size:26rpx;font-weight:normal;color:#ff0036;">有退款</text>
+                </view> -->
+            </view>
+          </view>
+        </scroll-view>
+      </block>
+        <block wx:else>
+        <view class="none_all">
+          <image src="../../../image/none.png" mode="widthFix"></image>
+          <view>暂无账单~</view>
+        </view>
+      </block>
+      </view>
+    </view>
+  </view>
+
+</view>
+<van-popup 
+  show="{{ showPopup }}" 
+  round
+  position="bottom"
+  bind:close="onClose">
+  <van-datetime-picker
+    type="year-month"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    max-date="{{maxDate}}"
+    bind:confirm="onInput"
+    bind:cancel="onClose"
+  />
+</van-popup>

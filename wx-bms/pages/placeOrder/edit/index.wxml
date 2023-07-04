@@ -1,0 +1,257 @@
+<!-- pages/placeOrder/edit/index.wxml -->
+<view>
+    <!-- 所属客户 -->
+    <van-cell-group inset custom-class="item-box">
+        <van-cell border="{{ false }}">
+            <view slot="title" style="font-size:32rpx;font-weight:500">所属客户</view>
+        </van-cell>
+        <van-cell title-class='customer-title' value-class='customer-value' title="选择客户" required use-label-slot>
+            <view class="customer-info-box" catchtap="showSelectCustomer">
+                <view class="customer-info" style="">
+                    <image class="customer-avatar" src="{{customerInfo.wx_portrait}}" mode="aspectFit" lazy-load="false" binderror="" bindload=""></image>
+                    {{customerInfo.customer_name||'选择客户'}}
+                </view>
+                <van-icon name="arrow-down" wx:if="{{!(orderBill&&orderBill.status&&orderBill.status!=1)}}" />
+            </view>
+        </van-cell>
+        <van-field maxlength="30" wx:if="{{customerInfo.customer_type=='2'}}" value="{{ formdata.po_sn||formdata.group_sn }}" bind:input="proOrderSnFun" type="number" placeholder="请输入生产单号" label="生产单号" border="{{ false }}" />
+        <van-field maxlength="30" wx:elif="{{customerInfo.customer_type=='1'}}" value="{{ formdata.goods_name }}" data-key="formdata.goods_name" placeholder="为订单起个名,易于辨认" label="名称" border="{{ false }}" bind:change="inputChange" />
+    </van-cell-group>
+    <!-- 选择生产单号组件 -->
+    <van-cell-group inset custom-class="item-box" wx:if="{{showSelectProOrderValue&&customerInfo.customer_type=='2'}}">
+        <van-picker columns="{{ proOrderSnList }}" bind:cancel="hideSelectOrder" bind:confirm="selectProOrderSn" show-toolbar="{{true}}" title="选择生产单号" />
+    </van-cell-group>
+    <!-- 工单参数 -->
+    <van-cell-group inset custom-class="item-box" wx:if="{{attrList.length>0}}">
+        <van-cell border="{{ false }}">
+            <view slot="title" style="font-size:32rpx;font-weight:500">工单参数</view>
+        </van-cell>
+        <block wx:for="{{attrList}}" wx:key="index">
+            <block wx:if="{{item.isShow}}">
+                <!-- 单选 -->
+                <block wx:if="{{item.type=='radio'}}">
+                    <van-cell title="{{item.label}}" use-label-slot required="{{item.required}}" custom-class="form-item" border="{{ false }}">
+                        <block wx:for="{{item.attr}}" wx:for-item="item2" wx:for-index="index2" wx:key="label">
+                            <button class='{{item.value==item2.value?"checked_button":"normal_button"}}' disabled="{{formdata.processing_place==2&&formdata.status>1}}" data-index="{{index}}" data-value="{{item2.value}}" catchtap="radioTap">
+                                {{item2.label}}
+                            </button>
+                        </block>
+                    </van-cell>
+                </block>
+                <!-- 多选 -->
+                <block wx:if="{{item.type=='checkbox'}}">
+                    <van-cell title="{{item.label}}" use-label-slot required="{{item.required}}" custom-class="form-item" border="{{ false }}">
+                        <block wx:for="{{item.attr}}" wx:for-item="item2" wx:for-index="index2" wx:key="label">
+                            <button class='{{item2.isSelect?"checked_button":"normal_button"}}' data-index="{{index}}" data-index2="{{index2}}" catchtap="checkeTap">
+                                {{item2.label}}
+                            </button>
+                        </block>
+                    </van-cell>
+                </block>
+                <!-- 普通输入框 -->
+                <block wx:if="{{item.type=='input'}}">
+                    <!-- <view class="input-border-box">
+                     <block wx:for="{{item.attr}}" wx:key="index2" wx:for-index="index2" wx:for-item="item2">
+                    <van-field  maxlength="30" type="{{item.key=='number'?'number':'digit'}}" input-class='input-border' value="{{ item2.value }}"  required="{{item.required}}" placeholder="请输入{{item.label}}" data-index="{{index}}" border="{{ false }}" bind:input="inputChange2">
+                        <view slot="label" style="flex:none">
+                            {{item.label}}
+                        </view>
+                        <view slot='right-icon' wx:if="{{item2.unit}}" class="input-right-icon-border">{{item2.unit}}</view>
+                    </van-field>
+                    </block>
+                </view> -->
+                    <van-cell title="{{item.label}}" use-label-slot required="{{item.required}}" custom-class="form-item" border="{{ false }}">
+                        <view class="size-input-border-box">
+                            <block wx:for="{{item.attr}}" wx:key="index2" wx:for-index="index2" wx:for-item="item2">
+                                <input placeholder="{{item2.label}}" data-index="{{index}}"  disabled="{{formdata.processing_place==2&&formdata.status>1}}"  type="{{item.key=='number'?'number':'digit'}}" value="{{item2.value}}" class="{{item2.unit?'':'hide-right-border'}}" bindinput="inputChange2" />
+                                <text class="input-right-unit" wx:if="{{item2.unit}}">{{item2.unit}}</text>
+                            </block>
+                        </view>
+                    </van-cell>
+                </block>
+                <!-- 尺寸输入框 -->
+                <block wx:if="{{item.type=='sizeInput'}}">
+                    <van-cell title="{{item.label}}" use-label-slot required="{{item.required}}" custom-class="form-item" border="{{ false }}">
+                        <view class="size-input-border-box">
+                            <block wx:for="{{item.attr}}" wx:key="index2" wx:for-index="index2" wx:for-item="item2">
+                                <input placeholder="{{item2.label}}" data-index="{{index}}" disabled="{{formdata.processing_place==2&&formdata.status>1}}" type="digit" data-index2="{{index2}}" value="{{item2.value}}" class="{{item2.unit?'':'hide-right-border'}}" bindinput="inputChange2" />
+                                <text class="input-right-unit" wx:if="{{item2.unit}}">{{item2.unit}}</text>
+                            </block>
+                        </view>
+                    </van-cell>
+                </block>
+                <!-- 选择 -->
+                <block wx:if="{{item.type=='picker'}}">
+                    <van-cell title="{{item.label}}" use-label-slot required="{{item.required}}" custom-class="form-item" border="{{ false }}">
+                        <view class="picker-value-box" style="" catchtap="isShowPicker" data-index="{{index}}">
+                            <view class="picker-value" style="flex:1">
+                                <view style="text-align:center;width:100%">
+                                    {{item.value||('选择'+item.label)}}
+                                </view>
+                            </view>
+                            <van-icon name="arrow-down" custom-class="picker-icon" />
+                        </view>
+
+                    </van-cell>
+                    <van-action-sheet bind:select="selectPicker" bind:close="isShowPicker" bind:click-overlay="isShowPicker" title="请选择{{item.label}}" show="{{ item.isShowPicker }}" actions="{{ item.attr }}" />
+                </block>
+            </block>
+        </block>
+    </van-cell-group>
+    <!-- 其他 -->
+    <van-cell-group inset custom-class="item-box">
+        <van-cell border="{{ false }}">
+            <view slot="title" style="font-size:32rpx;font-weight:500">其他</view>
+        </van-cell>
+        <van-field maxlength="150" value="{{ formdata.order_note }}" data-key="formdata.order_note" placeholder="请输入订单备注" maxlength="{{150}}" label="订单备注" bind:change="inputChange" />
+  
+        <van-cell border="{{ false }}">
+            <view slot="title">{{daomoFileNameObj[processId]?'上传大版图片':'拍照上传'}}</view>
+        </van-cell>
+        <van-cell border="{{ false }}" use-label-slot custom-class="photograph-title">
+            <view>
+                <van-grid border="{{ false }}" column-num="3">
+                    <van-grid-item use-slot wx:for="{{photoList}}" wx:key="index">
+                        <view class="photograph-img-box">
+                            <image src="{{item.tempFilePath}}" class="photograph-img" catchtap="checkImgs" data-index="{{index}}" />
+                            <van-icon name="delete-o" custom-class="del-img-icon" bind:click="delPhotographImg" data-index="{{index}}" />
+                        </view>
+                    </van-grid-item>
+                    <van-grid-item use-slot wx:if="{{photoList.length!=5&&photoList.length<=5}}">
+                        <van-button custom-class="photograph-btn" bind:click="photograph">
+                            <image src="../../../image/palceOrder/photograph-ico.png" class="photograph-ico" />
+                        </van-button>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+        </van-cell>
+
+        <block  wx:if="{{daomoFileNameObj[processId]&&customerInfo.id != 0}}">
+        <van-cell border="{{ false }}" >
+            <view slot="title">上传{{daomoFileNameObj[processId]}}图片</view>
+        </van-cell>
+        <van-cell border="{{ false }}" use-label-slot custom-class="photograph-title">
+            <view>
+                <van-grid border="{{ false }}" column-num="3">
+                    <van-grid-item use-slot wx:for="{{photoKnifeList}}" wx:key="index">
+                        <view class="photograph-img-box">
+                            <image src="{{item.tempFilePath}}" class="photograph-img" catchtap="checkKnifeImgs" data-index="{{index}}" />
+                            <van-icon name="delete-o" custom-class="del-img-icon" bind:click="delPhotographKnifeImg" data-index="{{index}}" />
+                        </view>
+                    </van-grid-item>
+                    <van-grid-item use-slot wx:if="{{photoKnifeList.length!=5}}">
+                        <van-button custom-class="photograph-btn" bind:click="photographKnife">
+                            <image src="../../../image/palceOrder/photograph-ico.png" class="photograph-ico" />
+                        </van-button>
+                    </van-grid-item>
+                </van-grid>
+            </view>
+        </van-cell>
+        </block>
+    </van-cell-group>
+    <!-- 价格 -->
+    <van-cell-group inset custom-class="item-box padding-bottom-style">
+        <van-cell border="{{ false }}">
+            <view slot="title" style="font-size:32rpx;font-weight:500">价格</view>
+        </van-cell>
+        <!-- 订单单价 -->
+        <view class="input-border-box" style="position: relative;">
+            <van-field maxlength="9" type="digit" input-class='input-border' value="{{ formdata.unit_price }}" data-key="formdata.unit_price" placeholder="请输入单价" label="订单单价" border="{{ false }}" bind:change="inputChange">
+                <view slot='right-icon' class="input-right-icon-border">元</view>
+                <!-- <view class='total-price-box' slot="button">
+                    <view class='total-price'><text wx:if="{{tipPrice!=0}}">{{tipPrice}}</text></view>
+                    <van-button size="small" catchtap = "changeTotalPrice"  type="primary" custom-class='total-price'>
+                计算总价
+                </van-button>
+                </view> -->
+            </van-field>
+            <view class='total-price-box2'>
+                <view class='total-price'><text wx:if="{{tipPrice!=0}}">{{tipPrice}}</text></view>
+                <!-- <view class='total-price'><text>66666666666</text></view> -->
+            </view>
+        </view>
+        <!-- 订单总价 -->
+        <view class="input-border-box">
+            <van-field maxlength="9" type="digit" input-class='input-border' value="{{ formdata.price }}" data-key="formdata.price" placeholder="请输入总价" label="订单总价" border="{{ false }}" bind:change="inputChange">
+                <view slot='right-icon' class="input-right-icon-border">元</view>
+            </van-field>
+
+        </view>
+
+    </van-cell-group>
+    <!-- 加工地 -->
+    <van-cell-group inset custom-class="item-box padding-bottom-style" wx:if="{{is_bw_push&&customerInfo.id != 0}}">
+        <van-cell border="{{ false }}">
+            <view slot="title" style="font-size:32rpx;font-weight:500">加工地</view>
+        </van-cell>
+        <van-cell title="所属加工地" required custom-class="form-item" border="{{ false }}">
+            <view class="picker-value-box" catchtap="showAllPlaces">
+                <view class="picker-value" style="flex:1">
+                    <view style="text-align:center;width:100%;color: {{isEnabled != 1 ? '#333333' : '#cccccc' }};">
+                       {{placeName}}
+                    </view>
+                </view>
+                <van-icon name="arrow-down" custom-class="picker-icon" />
+            </view>
+        </van-cell>
+    </van-cell-group>
+    <!-- 底部图片显示 -->
+    <van-cell-group inset custom-class="item-box" wx:if="{{customerInfo.customer_type=='2'&&formdata.group_sn&&proOrderInfoList[formdata.po_sn||formdata.group_sn]}}">
+        <image src="{{imageBaseUrl + proOrderInfoList[formdata.po_sn||formdata.group_sn]}}" style="width:100%;" data-url="{{proOrderInfoList[formdata.group_sn]}}" catchtap="ckeckImgPo" />
+    </van-cell-group>
+    <view class="submit-bar">
+        <view class="submit-btn-box submit-btn-box2" wx:if="{{customerInfo.id == 0 && isEnabled != 1}}">
+            <van-button color="linear-gradient(to left, #FF0036 , #FF6842)" bind:click="submitForm" data-type="3">已完成加工</van-button>
+        </view>
+        <view class="submit-btn-box" wx:if="{{customerInfo.id != 0 &&  isEnabled != 1}}">
+            <van-button color="linear-gradient(to left,#FF9900, #FFB342 )" bind:click="submitForm" data-type="2">保存至待加工</van-button>
+            <van-button color="linear-gradient(to left, #FF0036 , #FF6842)" bind:click="submitForm" data-type="4" wx:if="{{is_bw_push && customerInfo.id != 0 && placesIndex == 2}}">开始生产</van-button>
+            <van-button color="linear-gradient(to left, #FF0036 , #FF6842)" bind:click="submitForm" data-type="3" wx:else>已完成加工</van-button>
+        </view>
+        <view class="submit-btn-box submit-btn-box2" wx:if="{{ isEnabled == 1 }}">
+            <van-button color="linear-gradient(to left, #FF0036 , #FF6842)" bind:click="submitForm" data-type="3">已完成加工</van-button>
+        </view>
+    </view>
+</view>
+<!-- 选择客户组件 -->
+<van-action-sheet class="select-customer-action-sheet" title="选择客户" bind:close="hideSelectCustomer" bind:click-overlay="hideSelectCustomer" show="{{ showSelectCustomerValue }}">
+    <view class="select-customer-action-sheet">
+        <van-cell-group inset border="{{false}}" custom-class="select-customer" wx:for="{{customerList}}" wx:key="index">
+            <van-cell border="{{false}}" bind:click="selectCustomer" data-index="{{index}}">
+                <view class="customer-info-box">
+                    <view class="customer-info" style="">
+                        <image class="customer-avatar" src="{{item.wx_portrait}}" mode="aspectFit" lazy-load="false" binderror="" bindload=""></image>
+                        {{item.customer_name}}
+                    </view>
+                    <view>{{item.wx_nickname}}</view>
+                </view>
+            </van-cell>
+        </van-cell-group>
+        <view class="select-customer2-box">
+            <van-cell-group inset border="{{false}}" custom-class="select-customer select-customer2" >
+              <van-cell border="{{false}}" bind:click="addCustomer"  >
+                <view class="customer-info-box">
+                    <view style="text-align: center;width:100%;color: #fff;" >
+                        <van-icon name="plus" style="margin-right: 20rpx;"/>新建客户
+                    </view>
+                </view>
+            </van-cell>
+        </van-cell-group>
+        </view>
+    </view>
+</van-action-sheet>
+
+<!-- 选择所属加工地组件 -->
+<van-action-sheet class="select-customer-action-sheet" title="所属加工地" bind:close="hideAllPlaces" bind:click-overlay="hideAllPlaces" show="{{ isShowAllPlaces }}">
+    <view class="select-customer-action-sheet">
+        <van-cell-group inset border="{{false}}" custom-class="select-customer" wx:for="{{allPlaces}}" wx:key="index">
+            <van-cell border="{{false}}" bind:click="selectPlaceName" data-index="{{item.index}}" data-name="{{item.name}}">
+                <view class="customer-info-box" style="color: #333333;">
+                    <view>{{item.name}}</view>
+                </view>
+            </van-cell>
+        </van-cell-group>
+    </view>
+</van-action-sheet>
+
+<van-toast id="van-toast" />

@@ -1,0 +1,9 @@
+<!--components/modal/component.wxml-->
+<view class='modal-wrapp' wx:if='{{modal.show&&modalDefault.show}}' style='padding-top:{{modalPadding}}px'>
+    <view class="modal-main">
+      <image src="https://www.aocai.cn/static/wxpyb/2023cjfj.png" class="activity-img" mode="widthFix"></image>
+      <view class='modal-button'>
+        <view class='modal-cancel' ><text class="my-icon ac-icon-close" bindtap="modalCancel"></text></view>
+      </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+/* 信用支付 */
+.credit-action-sheet button {
+	display: block;
+}
+.action-sheet {
+	padding: 8px 16px;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+  
+.credit-action {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32rpx;
+}
+  
+.credit-icon {
+	width: 28px;
+	height: 28 px;
+	margin-right: 8px;
+}
+
+.subname {
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}

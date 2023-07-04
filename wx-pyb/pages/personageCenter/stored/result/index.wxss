@@ -1,0 +1,50 @@
+page .van-step--vertical .van-step__line{
+  width: 2px !important;
+  /* background-color: #fff !important;  */
+  background: linear-gradient(
+        to top,
+        transparent 0%,
+        transparent 50%,
+        #fff 50%,
+        #fff 100%
+    );
+    background-size: 2px 10px;
+    background-repeat: repeat-y;
+    /* margin-right: 50rpx; */
+}
+.van-icon.van-icon-clock{
+  font-size: 70rpx !important;
+}
+.van-step.van-step--vertical{
+  height: 200rpx;
+  margin-left: 50rpx;
+  /* line-height: 100rpx; */
+}
+.van-step__title {
+  margin-left: 30rpx;
+  font-size: 35rpx;
+  color: #777777;
+}
+
+.van-step--process .van-step__title {
+  color: #333 !important;
+}
+.desc-text {
+  font-size: 26rpx;
+  color: #777777;
+}
+.van-step--vertical:after {
+  border-bottom-width: 0 !important;
+}
+.msg {
+  position: relative;
+  top: -50rpx;
+  margin-left : 30rpx;
+}
+.btn {
+  padding: 22rpx 100rpx;
+  text-align: center;
+  border: 1px solid #E9333F;
+  color: #E9333F;
+  border-radius: 15rpx;
+}

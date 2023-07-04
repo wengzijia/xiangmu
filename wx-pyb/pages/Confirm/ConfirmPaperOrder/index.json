@@ -1,0 +1,13 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "确认订单",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  
+  "usingComponents": {
+    "table": "../../../components/table/table",
+    "modal": "../../../components/msgModal/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
+  }
+}

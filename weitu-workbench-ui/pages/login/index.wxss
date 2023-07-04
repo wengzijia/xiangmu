@@ -1,0 +1,166 @@
+/* pages/login/index.wxss */
+/* 公共类 */
+.flex_c_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomSafetyKm {
+  /* iPhoneX兼容 底部安全距离 */
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.loginContainer {
+  margin: 0 36rpx;
+}
+
+.loginBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 128rpx;
+  width: 100%;
+}
+
+.loginBox .logoImg {
+  width: 64.05rpx;
+  height: 64.05rpx;
+  margin-right: 12rpx;
+}
+
+.loginBox .logoTitle {
+  font-size: 64rpx;
+  font-weight: 500;
+}
+
+.logoContent {
+  text-align: center;
+  font-size: 30rpx;
+  margin-top: 22rpx;
+}
+
+.phoneBox {
+  width: 678rpx;
+  height: 90rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  border: 2rpx solid #E6E6E6;
+  padding: 24rpx 28rpx 0;
+  margin-top: 108rpx;
+  box-sizing: border-box;
+}
+
+.codeBox {
+  display: flex;
+  margin-top: 28rpx;
+}
+
+.codeBox .codeInputBox {
+  width: 446rpx;
+  height: 90rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  border: 2rpx solid #E6E6E6;
+  padding: 24rpx 28rpx 0;
+  box-sizing: border-box;
+}
+
+.codeBox .getCode {
+  width: 208rpx;
+  height: 90rpx;
+  background: #3D7EFF;
+  border-radius: 8rpx;
+  margin-left: 24rpx;
+  border: 2rpx solid #3D7EFF;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+
+.codeBox .sent {
+  width: 208rpx;
+  height: 90rpx;
+  background: rgba(61, 126, 255, 0.5);
+  border-radius: 8rpx;
+  margin-left: 24rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+
+.login {
+  text-align: center;
+  margin-top: 80rpx;
+  width: 678rpx;
+  height: 88rpx;
+  background-color: #3D7EFF;
+  box-shadow: 0rpx 10rpx 14rpx 0rpx rgba(61, 150, 255, 0.2);
+  border-radius: 8rpx;
+  color: #FFFFFF;
+}
+
+.notLogin {
+  text-align: center;
+  margin-top: 80rpx;
+  width: 678rpx;
+  height: 88rpx;
+  background-color: rgba(61, 126, 255, 0.5);
+  border-radius: 8rpx;
+  color: #FFFFFF;
+}
+
+.regardsWeiTu {
+  text-align: center;
+  color: #3D7EFF;
+  font-size: 30rpx;
+  margin-top: 52rpx;
+}
+
+.hotline {
+  position: fixed;
+  left: 178rpx;
+  bottom: 24rpx;
+}
+
+
+/* 关于微图弹窗 */
+.weiTuPopupBox {
+  width: 646rpx;
+  border-radius: 16rpx;
+}
+
+.weiTuLogoBox{
+  position: relative;
+}
+
+.weiTuLogoBox .wTlogoBjt{
+  position: absolute;
+  width: 646rpx;
+  height: 154rpx;
+}
+
+
+.weiTuLogoBox .weiTuLogoImg {
+  width: 92rpx;
+  height: 92rpx;
+  position: absolute;
+  top: 32rpx;
+  left: 28rpx;
+}
+
+.weiTuLogoBox .weiTuTextBox {
+  position: absolute;
+  top: 32rpx;
+  left: 136rpx;
+  font-size: 30rpx;
+}
+
+.weiTuTextBox .wT{
+  font-size: 48rpx;
+  color: #3D7EFF;
+}
+
+.wTContentBox{
+  padding: 182rpx 28rpx 28rpx 16rpx;
+}
+

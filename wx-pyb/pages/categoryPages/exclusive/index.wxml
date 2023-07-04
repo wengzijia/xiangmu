@@ -1,0 +1,46 @@
+<view class="exclusive">
+    <view class="tabs1">
+        <view catchtap="tabsCrount" class="{{currentTab==0 ? 'grid' : ''}}" data-current="0">
+            <text>自动拼版</text>
+        </view>
+        <view catchtap="tabsCrount" class="{{currentTab==1 ? 'grid1' : ''}}" data-current="1" style="{{index==2 ? 'display:none' : ''}}">
+            <text>自定义拼版</text>
+        </view>
+    </view>
+    <view wx:if="{{currentTab==0}}" class="sidebar-box">
+        <view class="sidebar" >
+            <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{boxList}}" range-key="name">
+                <view class="sidebar-item">
+                选择盒型:{{boxList[index].data.name}}<van-icon name="arrow-down" />
+                </view>
+            </picker> -->
+            <text class="sidebar-item">选择盒型</text>
+            <text wx:if="{{item.data.goodsId!='944' && item.data.goodsId!='943'&& item.data.goodsId!='1617'}}" wx:for="{{sidebarList}}" wx:key="id" class="{{'sidebar-item '+ (activeKey==index?'isactive':'')}}" catchtap="sidebarCrount" data-goodsid="{{item.data.goodsId}}" data-current="{{index}}" data-val="{{item.data.name}}">{{item.data.name}}</text>
+        </view>
+        <!-- style="{{'height:'+height+'px;'}}" -->
+        <!-- style="height: calc(100vh - 100rpx);" -->
+        <scroll-view class="sidebar-imgbox" scroll-y style="height: calc(100vh - 100rpx);">
+            <view wx:for="{{daomoList}}" wx:key="id" wx:for-item="item2" class="daomo-item" catch:tap="toValuation" data-obj="{{item2}}" data-url="{{item2.knifeUrl}}" data-img="{{imgBaseUrl+(item2.specialImg||item2.photoPath2)}}">
+                <image src="{{imgBaseUrl+(item2.specialImg||item2.photoPath2)}}" mode="aspectFit" lazy-load class="daomo-img"/>
+                <view class="item_btn">点击拼版</view>
+            </view>
+        </scroll-view>
+    </view> 
+    <view wx:else>
+        <van-notice-bar left-icon="volume-o" color="#E9333F" background="#FFE5E7" text="上传文件中必须是刀线内容，含有其他内容不支持"/>
+        <view class="btn-box">
+         
+            <text class="up-btn {{times > 4?'bor2':'bor1'}}"  catch:tap="uploadeFile">上传刀模(PDF格式)</text>
+            <view style="margin-top:60rpx;text-align:center;margin-bottom:100rpx;height: 42rpx;"><text wx:if="{{path}}" catch:tap="lookPdf">查看上传刀模>></text></view>
+        </view>
+        <view class="example">
+            <view style="text-align:center;">
+                <text class="tips">查看刀模示例</text>
+            </view>
+            <image src="{{imgBaseUrl+'/uploads/picture/20200602/K_GS_SC_BOX002-2.png'}}" mode="aspectFit" class="example-img"/>
+      </view>
+        <view style="margin:60rpx 0;text-align:center;">
+            <text wx:if="{{path}}" class="next-btn" catch:tap="toValuation" >下一步</text>
+        </view>
+    </view>
+</view>

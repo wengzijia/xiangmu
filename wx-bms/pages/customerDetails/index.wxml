@@ -1,0 +1,80 @@
+<!--pages/customerDetails/index.wxml-->
+<view class="customerDetailsContainer">
+ <!-- 备注名 -->
+  <view class="noteContainer">
+    <view class="remarkName">备注名:</view>
+    <input class="name" value="{{customerName}}"   data-customerName="{{customerName}}" bindinput="getRemarkName" type="text" placeholder="最多输入十字符"/>
+  </view>
+  <!-- 绑定微信 -->
+  <view class="bindWechatContainer">
+  <!-- 绑定微信提示 -->
+    <view class="bindWechatBox">
+    <text class="bindWechat">绑定微信</text>
+    <text class="bindWechatText">绑定微信后，订单和账单会同步到对方账户</text>
+    </view>
+    <!-- 客户列表 -->
+    <view class="customerContainer">
+        <!-- 没有客户 -->
+      <view class="nullClient" wx:if="{{customerInfo.length == 0}}">暂无可以绑定的微信~ 分享账单付款后绑定微信账号</view>
+      <view class="client" wx:for="{{customerInfo}}" wx:key="user_id">
+      <view class="clientInfo">
+       <view class="profilePhoto"><image src="{{item.wx_portrait ? item.wx_portrait : '../../image/palceOrder/avatar2.png' }}"></image></view>
+       <view class="name">{{item.wx_nickname ? item.wx_nickname : item.user_tel}}</view>
+      </view>
+      <view class="checkBox">
+        <van-radio-group value="{{customerUid}}" bind:change="onChange">
+         <van-radio name="{{item.user_id}}" checked-color="#e9333f" icon-size="48rpx" ></van-radio>
+        </van-radio-group>
+          <!-- <image class="item round" src="../../image/customerDetails/round.png"></image>
+          <image class="item check" src="../../image/customerDetails/check.png"></image> -->
+      </view>
+      </view>
+      <!-- 没有获取到用户名和头像展示手机号 -->
+      <!-- <view class="phoneNumberBox">
+      <view class="phoneNumberInfo">
+       <view class="profilePhoto"><image src="../../image/customerDetails/"></image></view>
+        <view class="phoneNumber">18702000000</view>
+      </view>
+      <view class="checkBox">
+          <image class="item round" src="../../image/customerDetails/round.png"></image>
+          <image class="item check" src="../../image/customerDetails/check.png"></image>
+      </view>
+      </view> -->
+    </view>
+  </view>
+  <!-- 保存按钮 -->
+  <view class="saveButton" bindtap="save">
+    <image src="../../image/customerDetails/save.png"></image>
+    <text class="save">保存</text>
+  </view>
+  <!-- 保存弹窗 -->
+  <van-popup show="{{ show }}" bind:close="showPopup">
+    <view class="savePopup">
+      <view class="hint">提示</view>
+      <view class="promptMessage">
+      <view>当前信息已更改，确认</view>
+      <view>要保存吗？</view>
+      </view>
+      <view class="buttonBox"> 
+        <button class="item cancel" bindtap="onClose">取消</button>
+        <button class="item affirm" bindtap="affirm">确认</button>
+      </view>
+    </view>
+  </van-popup>
+
+  <!-- 返回弹窗 -->
+  <!-- <van-popup show="{{ show }}" bind:close="showPopup">
+    <view class="backPopup">
+      <view class="hint">提示!</view>
+      <view class="promptMessage">
+      <view>已更改信息但未保存，</view>
+      <view>需要保存后退出吗?</view>
+      </view>
+      <view class="buttonBox"> 
+        <button class="item noSave" bindtap="onClose">不保存</button>
+        <button class="item saveExit">保存退出</button>
+      </view>
+    </view>
+  </van-popup> -->
+</view>
+<van-toast id="van-toast" /> 

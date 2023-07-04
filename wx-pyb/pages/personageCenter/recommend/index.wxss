@@ -1,0 +1,225 @@
+page{
+  background-color: rgb(240, 240, 240);
+}
+.body view{
+  background-color: rgb(255, 255, 255);
+}
+.list{
+  padding: 0 32rpx;
+  /* height: 100rpx; */
+  line-height: 94rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  /* display: flex;
+  justify-content: space-between; */
+  position: relative;
+  font-size: 28rpx;
+}
+.list-item,.info,.flex{
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.body .info{
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  border-top: 1rpx solid #f5f5f5;
+}
+.centent-item{
+  width: 23%;
+}
+.left-item{
+  width: 28%;
+}
+.right-item{
+  width: 20%;
+}
+.greaterThanSign{
+  width: 12rpx;
+  height: 12rpx;
+  border-right: 2rpx solid rgb(100, 100, 100);
+  border-top: 2rpx solid rgb(100, 100, 100);
+  transform: rotate(45deg);
+  position: absolute;
+  top:38rpx;
+  right:24rpx;
+}
+.greaterThanSign2{
+  width: 16rpx;
+  height: 16rpx;
+  border-right: 2rpx solid rgb(100, 100, 100);
+  border-top: 2rpx solid rgb(100, 100, 100);
+  transform: rotate(135deg);
+  position: absolute;
+  top:16rpx;
+  right:26rpx;
+}
+.tabs{
+  width: 92%;
+  height: 72rpx;
+  margin: 20rpx auto;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.item{
+  display: inline-block;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  line-height: 72rpx;
+  border-radius: 12rpx;
+}
+.active{
+  background-color: rgba(255, 255, 255,.7);
+  color: #ff0036;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.footer{
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100rpx;
+  margin: 0 auto;
+  line-height: 100rpx;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32rpx;
+}
+/* .picker{
+  margin-top: 24rpx;
+  vertical-align: middle;
+  width: 200rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  border: 1px solid rgb(143, 143, 143);
+  position: relative;
+} */
+.red{
+  color: #ff0036;
+}
+.order-null{
+  width: 750rpx;
+  padding-top: 100rpx;
+  height: 440rpx;
+  background-color: rgb(240, 240, 240);
+  text-align: center;
+}
+.order-null image{
+  width: 320rpx;
+  height: 234rpx;
+}
+.tool,.explain{
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: -2rpx;
+}
+.tool{
+  left: 40rpx;
+}
+.explain{
+  right: 40rpx;
+}
+.picker{
+  z-index: 2;
+  width: 240rpx;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.date{
+  height: 52rpx;
+  line-height: 52rpx;
+  font-size: 36rpx;
+  margin: 30rpx auto;
+  position: relative;
+  color: #fff;
+}
+.date view{
+  color: #fff;
+}
+
+.greaterThanSign2{
+  width: 16rpx;
+  height: 16rpx;
+  border-right: 2rpx solid rgb(255, 255, 255);
+  border-top: 2rpx solid rgb(255, 255, 255);
+  transform: rotate(135deg);
+  display: inline-block;
+  position: relative;
+  top: -8rpx;
+  left: 8rpx;
+}
+.total-body{
+  width: 85%;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  height: 164rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  color: rgba(255, 255, 255,1);
+  margin: 0 auto 20rpx;
+}
+.h3{
+  font-size: 28rpx;
+  color: rgba(255, 255, 255,0.7);
+  line-height: 68rpx;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.total-body text{
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.input{
+  display: inline-block;
+  width: 300rpx;
+  height: 68rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  /* border: 1px solid #999; */
+  /* border-bottom: 1px solid #999; */
+  /* border-radius: 30rpx; */
+  margin-top: 20rpx;
+}
+.withdrawal-box{
+  font-size: 32rpx;
+  line-height: 100rpx;
+  display: flex;
+}
+.body .withdrawal-btn{
+  box-sizing: border-box;
+  width: 200rpx;
+  height: 68rpx;
+  text-align: center;
+  background-color: #ff0036;
+  color: #fff;
+  position: absolute;
+  right: 12rpx;
+  top: 20rpx;
+  padding: 0;
+  border: 1rpx solid #ff0036;
+  border-radius: 34rpx;
+  line-height: 60rpx;
+}
+.bg-img{
+  width: 100%;
+  height: 340rpx;
+  position: absolute;
+  object-fit: contain;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}

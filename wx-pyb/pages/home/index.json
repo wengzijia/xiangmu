@@ -1,0 +1,14 @@
+{
+   "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "拼一版",
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "light",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "modal": "./modal/index",
+    "search": "../../components/search/index",
+    "service": "../../components/service/service",
+    "cell": "plugin://contactPlugin/cell"
+  }
+}

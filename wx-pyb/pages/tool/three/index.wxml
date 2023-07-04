@@ -1,0 +1,2 @@
+<!--pages/tool/cutter/download/index.wxml-->
+<web-view bindmessage="bindGetMsg" wx:if="{{webUrl}}" src="{{webUrl}}" />

@@ -1,0 +1,40 @@
+@charset "utf-8";
+/*弹窗css*/
+.close{ 
+	background: url(../images/wbb1026delete.png) no-repeat; 
+	width:15px; 
+	height:14px; 
+	cursor:pointer; 
+	position:absolute; 
+	right:5px; 
+	top:5px; 
+	text-indent:-999em;
+	}
+.mask{ 
+	background-color:#ccc;
+	background:#7f7f7f;
+	filter: alpha(opacity=50); /*设置不透明级别*/
+	position:absolute; 
+	left:0;
+	top:0;
+	z-index:1000;
+	}
+.login{ 
+	position:fixed;
+	z-index:1001;
+	}
+.wbb1026bigBg{
+	border-radius:22px; 
+	width:530px;
+	height:700px;
+	background:#fff;
+}
+.loginCon{
+	position:relative; 
+	width:290px;
+	height:356px;
+	background:url(../images/gongyi.png) #2A2C2E center center no-repeat;
+	border-radius:10px;
+	}
+/* CSS Document */
+

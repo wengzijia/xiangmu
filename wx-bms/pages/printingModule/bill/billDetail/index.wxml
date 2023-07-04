@@ -1,0 +1,192 @@
+<!-- 傲彩账单不能分享，不展示分享按钮 -->
+<!-- 其他账单搜索订单编号 和名称，傲彩PO号，大版编号 -->
+<!-- 2020-04-20修改账单详情页面输入的搜索条件显示位置有误 height:calc(100vh - 1rpx) -->
+<scroll-view scroll-y="true" style="height:calc(100vh - 1rpx)" class="list" bindscrolltolower="bindDownLoad"  >
+  <view class="mar_r32">
+    <view style="padding-bottom:{{monthDetail.toHeader.unpaid_price!=0 && customer.customer_type=='1' ? 140:0}}rpx">
+    <view class="posi_re"> 
+      <!-- mode="widthFix" -->
+      <image src="../../../../image/bill/billbanner.png" class="wid_100"  mode="widthFix" ></image>
+      <button class="share_ab" open-type='share' wx:if="{{customer.customer_type=='1'}}"> </button>
+      <view class="pose_abt">
+        <view class="topf">
+          <block wx:if="{{customer.customer_info.wx_portrait}}">
+            <image src="{{customer.customer_info.wx_portrait}}" mode="widthFix" class="headImg"> </image>
+          </block>
+          <block wx:else>
+            <image src="../../../../image/palceOrder/avatar.png" mode="widthFix" class="headImg" wx:if="{{customer.customer_type=='2'}}"> </image>
+            <image src="../../../../image/palceOrder/avatar2.png" mode="widthFix" class="headImg" wx:else> </image>
+          </block>
+          <text class="fontV" wx:if="{{customer.customer_name}}">{{customer.customer_name}}</text>
+          <text class="fontd">{{customer.years_month}}</text>
+        </view>
+        <view class="botflex">
+          <view class="cont_all">
+            <view>总金额(元)</view>
+            <view>{{monthDetail.toHeader.total_price}}</view>
+          </view>
+          <view class="cont_all">
+            <view>已收款(元)</view>
+            <view>{{monthDetail.toHeader.paid_price}}</view>
+          </view>
+          <view class="cont_all">
+            <view>待支付(元)</view>
+            <view>{{monthDetail.toHeader.unpaid_price}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="tab_search">
+      <!-- 工序切换 -->
+      <view class="search_all">
+        <view class="search">
+          <view class="sear_img">
+            <image src="../../../../image/bill/search.png" mode="widthFix"></image>
+          </view>
+          <view class="flex">
+            <input placeholder="{{inputVal}}" type="text" always-embed='{{aa}}' placeholder-class="placeholder-text" 	confirm-type='search' bindconfirm="search" bindinput="getkeywords" value="{{billDetail.group_sn}}" />
+          </view>
+          <!-- <view class="clear" catchtap="clearText">
+            <van-icon name="close" wx:if="{{billDetail.group_sn}}" size="36rpx" color="#999" class="mid" />
+          </view> -->
+        </view>
+      </view>
+      <scroll-view scroll-x="{{true}}" style="margin: 0 20rpx;width: auto;">
+        <view class="tabNav">
+          <view wx:for="{{monthDetail.attribute}}" wx:key="index" data-idx="{{item.attribute_id}}" data-type="{{item.attribute_type}}" bindtap="detailTap" class="{{detailTap==item.attribute_id ? 'cur' : ''}}">
+            {{item.title}}
+          </view>
+        </view>
+      </scroll-view>
+      <!-- //搜索框 -->
+
+    </view>
+    <!-- 订单列表 -->
+    <block wx:if="{{monthDetail.data.length>0}}">
+      <view class="order_all" wx:for="{{monthDetail.data}}" wx:key="id">
+        <view class="order_flex">
+          <view class="date_all">
+            <!-- //其他客户 -->
+            <text>订单编号：</text>
+            <text>{{item.po_sn?item.po_sn:item.group_sn}}</text>
+          </view>
+          <view class="date">{{item.bill_time}}</view>
+        </view>
+        <view class="list_flex">
+          <view class="list_left">
+            <view class="listname" wx:if="{{item.goods_name}}">
+              <text class="lcolor">名称:</text>
+              <text class="rcolor">{{item.goods_name}}</text>
+            </view>
+            <view class="listname">
+              <text class="lcolor">工艺:</text>
+              <text class="rcolor">{{item.attribute_name}}</text>
+            </view>
+            <view class="listname" wx:if="{{item.number}}">
+              <text class="lcolor">数量:</text>
+              <text class="rcolor">{{item.number}}张</text>
+            </view>
+            <view class="listname" wx:if="{{item.back_number}}">
+              <text class="lcolor">背面数量:</text>
+              <text class="rcolor">{{item.back_number}}张</text>
+            </view>
+            <view class="listname" wx:if="{{item.area&&item.area!='*'}}">
+              <text class="lcolor">尺寸:</text>
+              <text>{{item.area}}mm</text>
+            </view>
+            <block wx:if="{{item.process_attr}}">
+              <block  wx:for="{{item.process_attr}}" wx:for-item="item2" wx:key="index2"  wx:key="label">
+              <view class="listname" wx:if="{{item2.value&&item2.value!=''&&item2.value!='*'}}">
+                <text class="lcolor">{{item2.label}}:</text>
+                <text>{{item2.value}}</text>
+              </view>
+              </block>
+            </block>
+            <block wx:else>
+              <view class="listname" wx:if="{{item.operator_name}}">
+                <text class="lcolor">操作员:</text>
+                <text>{{item.operator_name}}</text>
+              </view>
+              <view class="listname" wx:if="{{item.process_device_type}}">
+                <text class="lcolor">机台类型:</text>
+                <text>{{item.process_device_type}}</text>
+              </view>
+              <view class="listname" wx:if="{{item.process_color}}">
+                <text class="lcolor">工艺颜色:</text>
+                <text>{{item.process_color}}</text>
+              </view>
+              <view class="listname" wx:if="{{item.process_color_num}}">
+                <text class="lcolor">工艺颜色数量:</text>
+                <text>{{item.process_color_num}}</text>
+              </view>
+            </block>
+            <view class="bot_color " wx:if="{{item.status && customer.customer_type=='1'}}">
+              <text class="lcolor">状态:</text>
+              <text class="pcolor">{{item.status}}</text>
+              <!-- //已付款的状态下才会展示 -->
+            
+              <text class="time" wx:if="{{item.status=='已付款'}}">{{item.payer_info.payer_time}}</text>
+            </view>
+            <!-- //已付款的状态下才会展示 -->
+            <view class="bot_color " wx:if="{{item.status=='已付款'}}">
+              <text class="lcolor">付款编号:</text>
+              <text>{{item.payer_info.pay_no}}</text>
+            </view>
+            <!-- //加工商用户下才会显示 -->
+            <!-- <view class="bot_color" wx:if="{{item.is_settlement}}">
+              <text class="lcolor">{{customer.customer_type=='2'?"结款:":"结算状态:"}}</text>
+              <text class="pcolor">{{item.is_settlement}}</text>
+            
+              <text class="time" wx:if="{{item.is_settlement=='已结算'}}">{{item.settlement_time}}</text>
+            </view> -->
+          </view>
+          <view class="list_right">
+            <!-- 图片预览 -->
+            <image src="{{item.order_file_url[0]}}" data-src="{{item.order_file_url[0]}}" data-list="{{item.order_file_url}}" catchtap="checkImg" mode="aspectFit" wx:if="{{customer.customer_type=='1'}}"></image>
+            <image src="{{item.thumb.cover_path}}" data-src="{{[item.thumb.thumb_path]}}" data-list="{{[item.thumb.thumb_path]}}" catchtap="checkImg" mode="aspectFit" wx:else></image>
+          </view>
+        </view>
+       
+        <view class="remarks bot_b">
+          <text class="lcolor">备注:</text>
+          <text>{{item.order_note}}</text>
+        </view>
+        <view class="bot_color2">
+          <view> <text class="lcolor">总额:</text>
+            <text class="countcolor">￥{{item.price}}</text>
+          </view>
+          <!-- //待付款的状态下才会展示 -->
+          <!-- <view class="edit_btn" wx:if="{{item.status=='未付款'}}" bindtap="editBill" data-item="{{item}}" data-isEnabled="1">修改账单</view> -->
+        </view>
+        <!-- //已付款的状态下才会展示 -->
+        <view class="pay" wx:if="{{item.status=='已付款'}}">
+          <block wx:if="{{item.payer_info.wx_portrait && item.payer_info.wx_nickname}}">
+          <view>  <text class="lcolor">付款人:</text></view>
+          
+            <image src="{{item.payer_info.wx_portrait}}" mode="widthFix"></image>
+            <view class="rcolor">{{item.payer_info.wx_nickname}}</view>
+          </block>
+          <!-- 没有头像和昵称展示手机 -->
+          <view class="rcolor" wx:else>{{item.payer_info.user_tel}}</view>
+        </view>
+      </view>
+      <view class="loading-text">
+        {{loadingType == 0 ? contentText.contentrefresh :contentText.contentnomore}}
+      </view>
+    </block>
+    <!-- 没有账单~ -->
+    <block wx:else>
+      <view class="none_all">
+        <image src="../../../../image/bill/none.png" mode="widthFix"></image>
+        <view>小主，该工序还没有账单呢~</view>
+      </view>
+    </block>
+    </view>
+  </view>
+</scroll-view>
+<!-- //底部分享按钮 -->
+<view class="btn_bg" wx:if="{{customer.customer_type=='1' && monthDetail.toHeader.unpaid_price!=0}}">
+  <button class="share_btn" open-type='share'>
+    分享客户付款
+  </button>
+</view>

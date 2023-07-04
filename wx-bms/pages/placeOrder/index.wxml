@@ -1,0 +1,20 @@
+<!-- pages/placeOrder/index.wxml -->
+<view>
+  <!-- 图片 -->
+  <view class='swiperView'>
+    <image src="../../image/palceOrder/group.png" mode="widthFix"></image>
+  </view>
+  <!-- 文字 -->
+  <view class="title">选择您需要加工的工序</view>
+  <!-- 宫格 -->
+  <view class="grid-box">
+    <van-grid column-num="{{4}}" border="{{ false }}">
+      <van-grid-item wx:for="{{processList}}" wx:key="machining_id" bind:click="toEditPage" data-id='{{item.machining_id}}' data-type="{{item.is_material}}"  use-slot content-class='grid-item__conten'>
+        <view class="grid-item">
+          <view class="item-text">{{item.machining_name}}</view>
+          <image src="../../image/palceOrder/item-bg.png" mode="widthFix"></image>
+        </view>
+      </van-grid-item>
+    </van-grid>
+  </view>
+</view>

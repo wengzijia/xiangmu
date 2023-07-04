@@ -1,0 +1,23 @@
+<view>
+  <view class="card_all" wx:if="{{AllEmployeeList.fullname}}">
+
+    <view class="card_bg" style="background-image: url({{staticFileBaseUrl}}/static/wxwt/workbench/card.png);">
+            <view class="card_flex">
+              <view >
+                <image src="{{AllEmployeeList.avatar}}"  class="card_img" catchtap="bindPreview" data-img="{{AllEmployeeList.avatar}}"></image>
+              </view>
+              <view class="name_all" >
+                <view class="card_bg233"></view>
+                <view class="name1"> {{AllEmployeeList.fullname}}</view>
+                <view class="name2" >{{AllEmployeeList.position}}</view>
+                <view class="name3"><image src="/image/nameCardSeting/tel.png" class="tel_img"/>{{AllEmployeeList.mobile}}</view>
+                <view class="name4" ><image src="/image/nameCardSeting/wxchat.png" class="tel_img"/>{{AllEmployeeList.wechatCode||'-'}}</view>
+              </view>
+            </view>
+          </view>
+  </view>
+  <view class="mrginT"></view>
+  <view class="btn_bg" >
+    <view class="btn" catchtap="toPage" data-url="/pages/nameCardSet/preview/index?userId={{userId}}" >预览</view>
+  </view>
+</view>

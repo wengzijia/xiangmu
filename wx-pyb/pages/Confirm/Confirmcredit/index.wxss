@@ -1,0 +1,79 @@
+/* pages/Confirm/Confirmcredit/index.wxss */
+page {
+  background-color: #F1F3F5;
+}
+.mar_rl {
+  margin: 18px 32rpx 0;
+}
+
+.confirm_bg {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 24rpx 32rpx 20rpx;
+}
+.pay_text {
+  font-size: 28rpx;
+  color: #333333;
+}
+.money {
+  margin: 30rpx 0 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #E5E5E5;
+  color: #333;
+}
+.money text:nth-child(1) {
+  font-size: 40rpx;
+}
+.money text:nth-child(1) {
+  font-size: 40rpx;
+  display: inline-block;
+  padding-right: 20rpx;
+}
+.money text:nth-child(2) {
+  font-size: 56rpx;
+  font-weight: bold;
+}
+.count{
+  color: #999999;
+  font-size: 28rpx;
+}
+.count text{
+  color: #333;
+}
+.pay{
+  background-color: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 20rpx;
+  color: #333;
+  margin-top: 20rpx;
+  padding: 0rpx 32rpx;
+}
+.btn_bg {
+  background-color: #fff;
+  padding: 24rpx 74rpx;
+  position: fixed;
+  bottom: 0;
+  right: 0rpx;
+  left: 0rpx;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+}
+.btn_text {
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+
+  border-radius: 40rpx;
+
+  width: 100%;
+  text-align: center;
+}
+.btn_able{
+  background: #E9333F;
+  color: #fff;
+}
+.btn_disable{
+  background-color: #CCCCCC;
+  color: #999;
+}

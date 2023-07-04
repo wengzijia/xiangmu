@@ -1,0 +1,182 @@
+@import "fonts.css";
+@import "help.css";
+*{margin:0;padding:0;}
+ul,ol,li{list-style-type:none;}
+button{outline:0;}
+body{
+   font-family:"微软雅黑",HELVETICA;
+}
+/*宽*/
+.comBox{
+    /*width:1226px;*/
+    width:1240px;
+    margin:0 auto;
+}
+/*top*/
+.mainBx{
+    padding-top:119px;
+}
+/*颜色*/
+.red{
+    color:#e60021;
+}
+/*********=============footer=============********/
+.footTop{
+    background:#fff;
+    border-top:1px solid #f3f3f3;
+}
+.footEnsure{
+    border-bottom:1px solid #f1f1f1;
+    padding:16px 0;
+    display:flex;
+}
+.footEnsure li{
+    flex:1;
+    text-indent:70px
+}
+.footTxtBx{
+    display:flex;
+    padding:30px 0 26px;
+}
+.footTxtUl{
+    display:flex;
+    width:84%;
+}
+.footTxtUl li{
+    flex:1;
+    padding-left:70px;
+}
+.footTxtUl h2{
+    font-size:16px;
+    font-weight:normal;
+}
+.footTxtUl div{
+    font-size:12px;
+    padding-top:14px;
+}
+.footTxtUl div a{
+    display:block;
+    text-decoration:none;
+    color:#999;
+    line-height:24px;
+}
+.footTxtUl div a:hover,.footTxtQt a:hover,.footBottom a:hover{
+    text-decoration:underline;
+    color:#e60021;
+}
+.footTel{
+    border-left:1px solid #f1f1f1;
+    text-align:center;
+    font-size:12px;
+    width:16%;
+    color:#999;
+}
+.footTel h1{
+    font-size:20px;
+    font-weight:normal;
+    padding-bottom:4px;
+    color:#e60021;
+}
+.footTContact{
+    border:1px solid #e60021;
+    width:120px;
+    display: inline-block;
+    color:#e60021;
+    margin:16px 0;
+    line-height:30px;
+    text-align:center;
+    cursor: pointer;
+}
+.footTContact a{color:#e60021;display:block;}
+.footTContact a:hover{color:#ff1335;}
+.footTContact span{
+    margin:0 6px;
+    position: relative;
+    top:1px;
+}
+.footTxtQt{
+    border-top:1px solid #f1f1f1;
+    padding:14px 0;
+    display:flex;
+    align-items:center;
+}
+.footTxtQtSpn{
+    padding-left:50px;
+    width:120px;
+    font-size:16px;
+}
+.footTxtQt a{
+    font-size:12px;
+    text-decoration:none;
+    color:#999;
+    margin-right:27px;
+    line-height:28px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+}
+.footTxtQtDv{padding-right:30px;}
+.footBottom{
+    background:#000;
+    border-top:4px solid #e60021;
+    color:#ccc;
+    font-size:14px;
+    padding:20px 0 16px;
+    text-align:center;
+    line-height:28px;
+}
+.footBottom a{
+    text-decoration:none;
+    color:#ccc;
+    position: relative;
+}
+.footBottomPt a{
+    padding:0 14px;
+}
+.footBottomPt a::after{
+    content:"";
+    width:1px;
+    height:12px;
+    background:#3c3c3c;
+    display: inline-block;
+    position: absolute;
+    right:0;
+    top:4px;
+}
+.footBottomPt a:last-child::after{display:none;}
+.footBicp{color:#777;font-size:12px;}
+.footBicp span{
+    padding:0 8px;
+    display: inline-block;
+}
+.footBimgBx{
+    padding-top:26px;
+    text-align:center;
+}
+.footBimgBx a{
+    display: inline-block;
+    width:125px;
+    height:38px;
+    margin-right:8px;
+}
+.footBimg1{
+    background:url('../../img/icon_new.png') no-repeat left top;
+}
+.footBimg2{
+    background:url('../../img/icon_new.png') no-repeat left -39px;
+}
+.footBimg3{
+    background:url('../../img/icon_new.png') no-repeat left -78px;
+}
+.footTelWx img{
+    width:100px;
+}
+
+.btn-default:focus{
+	border:1px solid #ccc;
+	outline:0!important;
+}
+.el-tabs__item:hover{
+	color:#e60021!important;
+}

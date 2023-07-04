@@ -1,0 +1,43 @@
+<!--pages/personageCenter/coupon/index.wxml-->
+<scroll-view scroll-y="true" style="height:calc(100vh)" class="list" bindscrolltolower="bindDownLoad"  >
+<view class="btuBottom">
+  <view class="top" catchtap="goHistory"> 查看历史优惠券>></view>
+  <view class="coupon_all">
+    <block wx:if="{{couponList.length>0}}">
+      <view class="coupon_bg" wx:for="{{couponList}}" wx:key="index" catchtap='panel' data-index='{{index}}'>
+        <view class="coupon_flex">
+          <view class="coupon_left">
+            <view class="coupon_price">
+              <text>优惠券</text>
+              <view class="coupon_sign">
+                <text style="color: #FF6000;font-size: 20rpx;font-weight: 600;">{{item.discountType != 4 ? '1次' : '满减'}}</text>
+                <view class="coupon_sign_cir"></view>
+              </view>
+            </view>
+            <view class="min">最高优惠{{item.discountMoney}}元</view>
+          </view>
+          <view class="line">
+            <view class="circular"></view>
+          </view>
+          <view class="coupon_right">
+            <view class="Deduction">{{item.couponTypeName}}</view>
+            <view class="min">有效期：{{item.startEffectivityTime}} - {{item.endEffectivityTime}}</view>
+          </view>
+        </view>
+        <view class="collapse {{ item.isShow?'open':'close'}}">
+          <view style="padding-top: 20rpx;">{{item.couponRule}}</view>
+        </view>
+      </view>
+      <!-- <view class="loading-text">
+        {{loadingType == 0 ? contentText.contentrefresh :contentText.contentnomore}}
+      </view> -->
+    </block>
+    <block wx:else>
+      <view class="none_all">
+        <image src="../../../image/none.png" mode="widthFix"></image>
+        <view>暂无优惠券</view>
+      </view>
+    </block>
+  </view>
+</view>
+</scroll-view>

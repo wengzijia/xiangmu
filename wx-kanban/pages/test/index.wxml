@@ -1,0 +1,3 @@
+<view class="uploader">
+    <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" bind:delete="deleteImg" multiple="{{true}}" />
+</view>

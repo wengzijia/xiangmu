@@ -1,0 +1,33 @@
+<view style='text-align:center;padding:20px 0 40rpx;' >
+<!-- <swiper wx:if='{{imgList.length>1}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{true}}' indicator-active-color='#ff0036'>
+   <swiper-item wx:for='{{imgList}}' wx:key="index" >
+    <image src="{{item}}" mode='widthFix' catchtap="skipPage" data-val="{{item}}"></image>
+     <image   class="" src="{{item}}" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+   </swiper-item>
+  </swiper> -->
+  <!-- <view class="order_color"><text style="color:#333">订单编号:</text>{{orderSn}}</view> -->
+<view  style="padding-bottom:80rpx">
+  <view wx:for="{{imgList}}" wx:key="id" wx:for-index="index" class="mar_b">
+    <image  class="img" src="{{item}}" mode="aspectFit" data-url="{{item}}" catchtap='checkAll' />
+  </view>
+</view>
+  <!-- <button style='background-color: #ff0036; color: #fff;margin-top:20rpx;margin-bottom:150rpx;'  catchtap='checkAll'>
+    查看全部图片
+  </button> -->
+  <view class='bottom-btn-box'>
+  <button class='bottom-btn' disabled="{{notConfirm}}" wx:if="{{queryType == 'confirm'}}"  catchtap='showDialogFun'>
+    {{btnText}}
+  </button>
+  </view>
+   <van-dialog show="{{showDialog}}" title="确认提醒" use-slot show-cancel-button bind:confirm="sendFile" confirm-button-text="确认"  >
+      <view style="padding: 20rpx 40rpx; font-size: 28rpx">
+        确认兰纸后将会出版，如需改动可能会产生版费，请知悉
+      </view>
+      <!-- <view
+        style="padding: 20rpx 40rpx;  font-size: 28rpx;  color: #f21f28; text-align: center; "
+      >
+        订单确认后无法撤回，请仔细确认
+      </view> -->
+    </van-dialog>
+ 
+</view>

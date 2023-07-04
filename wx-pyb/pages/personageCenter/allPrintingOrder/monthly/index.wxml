@@ -1,0 +1,41 @@
+<view class="safe_bot">
+<view class="box">
+  <view class="flex header">
+    <image src="../../../../image/Frame-4.png" class="wid_img"></image>
+    <text style="margin-left: 10rpx;">印刷月结账单</text>
+  </view>
+
+  <view class="flex flexBetween" style="margin-top: 40rpx;">
+    <view class="text_center">
+      <view class="text_title">
+        汇总（元）
+      </view>
+      <view class="text_rmb" style="margin-top: 20rpx;">
+        {{summary || 0}}
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="text_center">
+      <view class="text_title">
+        待结（元）
+      </view>
+      <view class="text_rmb" style="margin-top: 20rpx;">
+        {{stay || 0}}
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="list">
+  <view class="list-item flex flexBetween" wx:for="{{orderList}}"  wx:key='id' catchtap="itemClick" data-monthly="{{item.yearMonth}}" >
+    <view>
+      <text>{{item.yearMonth}}</text><text style="margin-left: 30rpx;color: #999999;">已完结：{{item.amountNopaidClosed }}元</text>
+    </view>
+    <view>
+      <text style="margin-right: 10rpx">待结：{{item.amountNopaid}}元</text><van-icon name="arrow" />
+    </view>
+  </view>
+</view>
+
+</view>

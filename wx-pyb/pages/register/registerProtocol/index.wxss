@@ -1,0 +1,11 @@
+.herder{
+  font-size: 40rpx;
+  text-align: center;
+  font-weight: 600;
+  color: #777777;
+}
+view{
+  font-size: 32rpx;
+  color: #777777;
+  padding:20rpx 5rpx; 
+}

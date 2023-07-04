@@ -1,0 +1,309 @@
+<view class="paperboard catchtou" id="j_page">
+  <view class="stepbox">
+    <step active="2"></step>
+  </view>
+  <view class="content">
+
+    <!-- 报价单标题 -->
+    <view class="boxborder">
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>报价单标题</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入报价单标题" type="text" value="{{offerData.orderTitle}}" bindblur='inputVal' data-key='offerData.orderTitle' />
+              <van-icon bind:click="searchOrder" custom-class='order-title-search' name="search" />
+           </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="boxborder">
+      <!-- 采购单位 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>采购单位</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入采购单位" type="text" value="{{offerData.contactCompany}}" bindblur='inputVal' data-key='offerData.contactCompany' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 联系人 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>联系人</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入联系人" type="text" value="{{offerData.contactName}}" bindblur='inputVal' data-key='offerData.contactName' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 联系电话 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>联系电话</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入联系电话" type="text" value="{{offerData.contactMobile}}" bindblur='inputVal' data-key='offerData.contactMobile' />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="boxborder">
+      <!-- 销售单位 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>销售单位</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入销售单位" type="text" value="{{offerData.saleCompany}}" bindblur='inputVal' data-key='offerData.saleCompany' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 联系人 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>联系人</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入联系人" type="text" value="{{offerData.saleName}}" bindblur='inputVal' data-key='offerData.saleName' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 联系电话 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>联系电话</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入联系电话" type="text" value="{{offerData.saleMobile}}" bindblur='inputVal' data-key='offerData.saleMobile' />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="boxborder">
+      <!-- 产品名称 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>产品名称</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入产品名称" type="text" value="{{offerData.productName}}" bindblur='inputVal' data-key='offerData.productName' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 盒子尺寸 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <!-- <text class="mustSign red">*</text> -->
+            <text>盒子尺寸</text>
+          </view>
+          <view class="button_container fromItem">
+            <block>
+              {{qdata.area}}mm
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 材质工艺 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>材质工艺</text>
+          </view>
+          <view class="button_container fromItem">
+            <block>
+              {{qdata.paperType}}
+              {{qdata.craft}}
+            </block>
+            <!-- <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入材质工艺" type="text" value="{{offerData.craft}}" bindblur='inputVal' data-key='offerData.craft' />
+            </view> -->
+          </view>
+        </view>
+      </view>
+
+      <!-- 数量 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <!-- <text class="mustSign red">*</text> -->
+            <text>数量</text>
+          </view>
+          <view class="button_container fromItem">
+            <block>
+              {{qdata.number}}个
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 销售价格 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <!-- <text class="mustSign red">*</text> -->
+            <text>销售价格</text>
+          </view>
+          <view class="button_container fromItem">
+            <block>
+              {{qdata.amount}}元
+            </block>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <view class="boxborder">
+    <!-- 备注 -->
+      <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>备注</text>
+          </view>
+          <view class="button_container fromItem" style="text-align: right;color: red;">
+            <view>
+              <text catch:tap="addrema">+添加备注</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 报价单有效期 -->
+      <view wx:for="{{remarkslist}}" wx:key="index">
+        <view style="display:flex;" wx:if="{{item.isinp}}">
+          <view class="label">
+            <input style="text-align: left;" class="input-border" placeholder-class="phcolor" placeholder="" type="text" value="{{item.inpval}}" bindinput='remarkfn' data-key="inpval" data-i="{{index}}" />
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="" type="text" value="{{item.value}}" bindinput='remarkfn' data-key="value" data-i="{{index}}" />
+            </view>
+          </view>
+        </view>
+        <view style="display:flex;" wx:else>
+          <view class="label">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入{{item.name}}" type="text" value="{{item.value}}" bindinput='remarkfn' data-key="value" data-i="{{index}}" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 送货地址  -->
+      <!-- <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>送货地址</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入送货地址" type="text" value="{{offerData2.address}}" bindblur='inputVal' data-key='offerData.address' />
+            </view>
+          </view>
+        </view>
+      </view> -->
+
+      <!-- 送货方式 -->
+      <!-- <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>送货方式</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入送货方式" type="text" value="{{offerData2.deliverymethod}}" bindblur='inputVal' data-key='offerData.deliverymethod' />
+            </view>
+          </view>
+        </view>
+      </view> -->
+      
+      <!-- 付款方式 -->
+      <!-- <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>付款方式</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入付款方式" type="text" value="{{offerData2.paymentmethod}}" bindblur='inputVal' data-key='offerData.paymentmethod' />
+            </view>
+          </view>
+        </view>
+      </view> -->
+
+      <!-- 交货时间 -->
+      <!-- <view>
+        <view style="display:flex;">
+          <view class="label">
+            <text>交货时间</text>
+          </view>
+          <view class="button_container fromItem">
+            <view class="priceinp">
+              <input class="input-border" placeholder-class="phcolor" placeholder="请输入交货时间" type="text" value="{{offerData2.deliverytime}}" bindblur='inputVal' data-key='offerData.deliverytime' />
+            </view>
+          </view>
+        </view>
+      </view> -->
+
+    </view>
+
+
+
+
+  </view>
+
+  <view class="start-pin">
+    <text catch:tap="preserve" data-is="0" class="pin-btn">保存</text>
+    <text catch:tap="preserve" data-is="1" class="pin-btn2">下载</text>
+  </view>
+</view>
+<van-toast id="van-toast" />
+
+
+<van-popup round position="bottom" show="{{ showSelectiOrder }}" >
+<van-picker
+  show-toolbar
+  title="选择报价信息"
+  columns="{{ orderTitleList }}"
+  bind:cancel="hideSelectiOrder"
+  bind:confirm="confirmOrderTitle"
+/>
+</van-popup>

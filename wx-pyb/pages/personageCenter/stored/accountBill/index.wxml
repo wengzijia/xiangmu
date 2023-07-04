@@ -1,0 +1,161 @@
+<view>
+    <view style="height:80rpx">
+        <van-tabs offset-top="{{0}}" active="{{ active }}" tab-active-class="active" bind:change="onChange">
+            <van-tab title="消费记录"></van-tab>
+            <van-tab title="充值明细"></van-tab>
+        </van-tabs>
+    </view>
+    
+    <view class="">
+        <van-dropdown-menu class="dropdown">
+            <van-dropdown-item title="{{startTimeStr}} 至 {{endTimeStr}}" id="dropdownItem">
+                <view style="padding:25rpx">
+                    <view class="title">
+                        按时间筛选
+                    </view>
+                    <view class="flex">
+                        <view wx:for="{{siftingOptions}}" wx:key="index" data-key="siftingBtn" data-val="{{item}}" catchtap="clickRadio" class='{{siftingBtn==item?"checked_button":"normal_button"}} box'>
+                            {{item}}
+                        </view>
+                    </view>
+                    <view class="hint">
+                        已筛选时间: {{time[0]}} 至 {{time[1]}}
+                    </view>
+                    <view wx:if="{{siftingBtn == '自定义时间'}}">
+                        <view class="flex both" style="align-items: center;margin-top: 20rpx;">
+                            <view class='{{timeStatus=="start"?"checked_button":"normal_button"}} timeBox' data-key="timeStatus" data-val="start" catchtap="clickRadio">
+                                {{time[0]}}
+                            </view>
+                            <view>
+                                至
+                            </view>
+                            <view class='{{timeStatus=="end"?"checked_button":"normal_button"}} timeBox'data-key="timeStatus" data-val="end" catchtap="clickRadio">
+                                {{time[1]}}
+                            </view>
+                        </view>
+                        <view class="hint" style="color:#E9333F;text-align:center">
+                            最长可查询半年内的交易
+                        </view>
+                        <view style="margin-top: 20rpx">
+                            <van-datetime-picker
+                                type="date"
+                                value="{{ currentDate }}"
+                                bind:input="onInput"
+                                min-date="{{ minDate }}"
+                                max-date="{{ maxDate }}"
+                                formatter="{{ formatter }}"
+                                show-toolbar="{{false}}"
+                            />
+                        </view>
+                    </view>
+                    <view class="flex both" style="margin-top:25rpx">
+                        <view class="reset" catchtap="reset">
+                            重置
+                        </view>
+                        <view class="confirm" catchtap="onConfirm">
+                            确认
+                        </view>
+                    </view>
+                </view>
+            </van-dropdown-item>
+            <van-dropdown-item bind:change="changeOption" value="{{value }}" options="{{ option }}" />
+
+        </van-dropdown-menu>
+        <view wx:if="{{active == 0}}" style="margin: 0 50rpx;font-size: 26rpx;">
+            共计消费: {{total}}
+        </view>
+    </view>
+    <view wx:if="{{active}}">
+        <view class="card" wx:for="{{orderList}}" wx:key="index">
+            <view class="flex both">
+                <view class="left">
+                    充值时间
+                </view>
+                <view class="right" style="font-size:28rpx">
+                    {{item.changeTime}}
+                </view>
+            </view>
+            <view class="flex both">
+                <view class="left AAA_28">
+                    充值金额
+                </view>
+                <view class="right">
+                    +{{item.payPoints}}
+                </view>
+            </view>
+            <view class="flex both" wx:if="{{item.status==1 && item.donateMoney != '0.00'}}">
+                <view class="left AAA_28" style="color:#08C667">
+                    赠送金额
+                </view>
+                <view class="right" style="color:#08C667">
+                    +{{item.donateMoney}}
+                </view>
+            </view>
+            <view class="flex both" wx:if="{{item.status==1}}">
+                <view class="left AAA_28">
+                    当前余额
+                </view>
+                <view class="right AAA_28">
+                    {{item.userMoney}}
+                </view>
+            </view>
+            <view class="flex both" wx:if="{{item.status==1}}">
+                <view class="left AAA_28">
+                    到账时间
+                </view>
+                <view class="right AAA_28">
+                    {{item.alreadyTime}}
+                </view>
+            </view>
+            <view class="flex both" wx:if="{{item.status==2}}">
+                <view class="left AAA_28">
+                    失败原因：{{item.changeDesc}}
+                </view>
+                <view class="right">
+                    
+                </view>
+            </view>
+            <view class="flex both">
+                <view class="left AAA_28">
+                    状态
+                </view>
+                <view class="right" style="color:{{item.status==1?'#08C667':'#E9333F'}};font-size:28rpx">
+                    {{item.status==0?'充值中':item.status==1?'充值成功':'充值失败'}}
+                </view>
+            </view>
+
+        </view>
+    </view>
+    <view wx:else>
+        <view class="card" wx:for="{{orderList}}" wx:key="index">
+            <view class="flex both">
+                <view class="left">
+                    {{item.orderNo}}
+                </view>
+                <view class="right AAA_28">
+                    {{item.changeTime}}
+                </view>
+            </view>
+            <view class="flex both">
+                <view class="left">
+                    {{item.changeType==4?'退款金额':item.changeType==5?'补扣金额':'扣除金额'}}
+                </view>
+                <view class="right {{item.changeType==4?'green_34' : 'red_34'}}">
+                    {{item.changeType==4?'+':'-'}}{{item.payPoints}}
+                </view>
+            </view>
+            <view class="flex both" >
+                <view class="left AAA_28">
+                    当前余额
+                </view>
+                <view class="right AAA_28">
+                    {{item.userMoney}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="text-align:center;margin: 20rpx 0;" wx:if="{{showLoading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+</view>
+<van-toast id="van-toast" />

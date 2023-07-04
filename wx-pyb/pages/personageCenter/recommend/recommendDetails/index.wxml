@@ -1,0 +1,32 @@
+<view class="user-box">
+  <view class="user-info">
+    <text>注册账号</text>
+    <text>{{mobile}}</text>
+  </view>
+  <view class="user-info">
+    <text>注册时间</text>
+    <text>{{regdate}}</text>
+  </view>
+</view>
+<view class="order-info" wx:for="{{orderList}}" wx:key="{{item}}">
+  <view class="order-sn">
+    <view>
+      <text>订单编号：</text>
+      <text>{{item.orderNo}}</text>
+    </view>
+    <view class="copy-sn" catchtap="copyBtn" data-sn="{{item.orderNo}}">
+      <button>复制</button>
+    </view>
+  </view>
+  <view class="create-time">    
+      <view>
+        <text>下单时间：</text>
+        <text>{{item.payTime}}</text>
+      </view>
+      <view>{{item.amount}}元</view>   
+  </view>
+</view>
+<view class="total">
+  <view><text>订单数量：</text><text>{{orderCount}} 单</text></view>
+  <view><text>总金额：</text><text>{{totalAmount}} 元</text></view>
+</view>

@@ -1,0 +1,119 @@
+<!-- pages/gallery/index.wxml -->
+<view class="galleryContainer">
+    <view class="item-box swiper-box">
+        <swiper wx:if='{{Carousel.length>0}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{true}}'>
+            <swiper-item wx:for='{{Carousel}}' wx:key="index">
+                <image src="{{imageBaseUrl+item.coverPath}}" style="border-radius: 16rpx;" catchtap="skipPage" data-val="{{item.pageUrl}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <!-- 合作案例 -->
+    <view class="item-box">
+        <view class="item-title" style="position: relative;margin-top: 0;">
+            <image src="../../../image/gallery/cooperation.png" mode="widthFix" />
+            <text>合作案例</text>
+            <!-- <view class="more" catchtap="toPage" data-url="/pages/gallery/cooperation/index">
+                更多
+                <van-icon name="arrow" />
+            </view> -->
+        </view>
+        <view class="cooperation-item-box">
+            <van-grid gutter="{{ 9 }}" column-num='2'>
+                <van-grid-item use-slot wx:for="{{ exhibition }}" wx:key="index">
+                    <image class="cooperation-item-image" src="{{imageBaseUrl+item.coverPath}}" />
+                    <view class="cooperation-item-text">{{item.title}}</view>
+                </van-grid-item>
+            </van-grid>
+        </view>
+
+    </view>
+    <!-- 工厂展示  -->
+    <view class="item-box  swiper-box" style="background-color: #F5F7FE;">
+        <view class="item-title" style="position: relative;margin-top: 0;">
+            <image src="../../../image/gallery/factory.png" mode="widthFix" />
+            <text>工厂展示</text>
+        </view>
+        <swiper wx:if='{{industry.length>0}}' class='swiperView' circular interval='3000' autoplay indicator-dots='{{true}}'>
+            <swiper-item wx:for='{{industry}}' wx:key="index">
+                <image src="{{imageBaseUrl+item.coverPath}}" style="border-radius: 16rpx;" catchtap="skipPage" data-val="{{item.pageUrl}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="item-box" style="background-color: #F5F7FE;">
+        <view class="item-title" style="position: relative;margin-top: 0;">
+            <image src="../../../image/gallery/tel.png" mode="widthFix" />
+            <text>联系我们</text>
+        </view>
+        <view class="contact-box">
+            <view>
+                联系电话
+                <view>
+                    {{information.phone}}
+                </view>
+            </view>
+            <view class="tel-btn">
+                拨打电话
+            </view>
+        </view>
+        <map id="myMap" class="map" bindtap="navigation" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" enable-zoom="{{false}}" enable-scroll="{{false}}" scale="18" wx:if="{{information.longitudeLatitude}}"></map>
+        <view class="contactAddressBox">
+            <!-- <view class="contactAddress">联系地址</view> -->
+            <view class="addressContainer">
+                <image class="location" src="/image/gallery/location.png"></image>
+                <view class="addressBox">
+                    <!-- <view class="addressName">{{information.addressName}}</view> -->
+                    <!-- style="{{!information.addressName ? 'color: #333333;': 'color:#858585'}}" -->
+                    <view class="addressDetail">{{information.address}}{{ information.detailedAddress}}</view>
+                </view>
+            </view>
+        </view>
+        <!-- <view class="contact-box" style="margin-top:20rpx">
+            <view>
+                联系地址
+                <view style="margin-top:10rpx;" wx:if="{{information.province!=information.city}}">
+                    {{information.province+information.city+information.county+information.detailedAddress}}
+                </view>
+                <view wx:else style="margin-top:10rpx;">{{information.province+information.county+information.detailedAddress}}</view>
+            </view>
+        </view> -->
+        <!-- <view class="map-box">
+            <map id="myMap" style="width: 100%; height: 238px;" bindtap="test" latitude="{{latitude}}" longitude="{{longitude}}" bindmarkertap="markertap" bindcallouttap="callouttap" bindlabeltap="labeltap" markers="{{markers}}" scale="20">
+                <cover-view slot="callout">
+                    <block wx:for="{{customCalloutMarkerIds}}" wx:key="*this">
+                        <cover-view class="customCallout" marker-id="{{item}}">
+                            <cover-image class="icon" src="/image/voice.png"></cover-image>
+                            <cover-view class="content">
+                                {{num}}-{{item}}-{{index}}
+                            </cover-view>
+                        </cover-view>
+                    </block>
+                </cover-view>
+            </map>
+        </view> -->
+    </view>
+
+    <view class="item-box" style="background-color: #F5F7FE;padding-bottom: 36rpx;">
+        <view class="item-title" style="position: relative;margin-top: 0;">
+            <image src="../../../image/gallery/enterprise.png" mode="widthFix" />
+            <text>企业简介</text>
+        </view>
+        <view class="enterprise-present-box">
+            <view class="enterprise-name">
+                {{userInfo.enterprise.enterpriseName}}
+            </view>
+            <view class="enterprise-present-center">
+                <text>{{information.introduction}}</text>
+            </view>
+        </view>
+
+    </view>
+</view>
+<view class="mrginT"></view>
+<view class="btn_bg" catchtap="closePreview">
+    <view class="btn">关闭预览</view>
+</view>
+<!-- 空状态 -->
+<view class="nullBox" wx:if="{{false}}">
+    <image class="nullImg" src="{{staticFileBaseUrl}}/static/wxwt/iweitu/gallery.png"></image>
+    <view class="nullText">暂无展厅内容~~</view>
+</view>

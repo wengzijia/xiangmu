@@ -1,0 +1,15 @@
+/* pages/Confirm/ConfirmSingleOrder/logistics/index.wxss */
+page {
+  background-color: #F4F4F4;
+}
+.item {
+  background-color: #fff;
+  border-bottom: 1rpx solid #E6E6E6 ;
+  margin-left: 32rpx;
+  height: 106rpx;
+  display: flex;
+  align-items: center;
+}
+.van-radio__icon--checked {
+  background: linear-gradient(270deg, #FF0036 0%, #FF6842 100%);
+}

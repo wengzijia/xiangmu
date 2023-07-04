@@ -1,0 +1,80 @@
+/* pages/newStaffCard/index.wxss */
+/* pages/nameCardSet/index.wxss */
+page {
+  background-color: #F5F7FE;
+}
+
+.content-all {
+  margin-top: 28rpx;
+  background-color: #fff;
+  padding: 28rpx 36rpx;
+}
+
+.content_flex {
+  display: flex;
+}
+
+.mar_b {
+  margin-bottom: 56rpx;
+}
+
+.mar_t {
+  margin-top: 56rpx;
+}
+
+.sign {
+  color: #FF4D4F;
+}
+
+.flex_name {
+  width: 172rpx;
+  color: #777777;
+}
+
+.place {
+  color: #AAAAAA;
+}
+.dpi{
+  margin-left: 172rpx;
+  margin-top: 20rpx;
+  color: #AAAAAA;
+  font-size: 24rpx;
+}
+.btn_bg {
+  background-color: #fff;
+  padding: 24rpx 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 24rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+  z-index: 10;
+}
+
+.btn {
+  text-align: center;
+  margin: 0 32rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  background: #3D7EFF;
+  border-radius: 66rpx;
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.right{
+  width: 24rpx;
+  height: 24rpx;
+}
+.head{
+  width: 90rpx;
+  height: 90rpx;
+}
+.head_flex{
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}

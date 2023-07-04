@@ -1,0 +1,125 @@
+<!-- pages/infoList/index.wxml -->
+<view class="infoListContainer">
+  <!-- tab切换 -->
+  <!-- <view class="tabBox">
+    <view class="info flex_c_c  {{ tabIndex == 0 ? 'leftBgc' : '' }}" catchtap="changeType" data-index="0">设备信息</view>
+    <view class="list flex_c_c  {{ tabIndex == 1 ? 'rightBgc' : '' }}" catchtap="changeType" data-index="1">机长列表</view>
+  </view> -->
+  <!-- 提示 -->
+  <view class="hintBox" wx:if="{{isShowHint}}">
+    <view class="hint">
+      <van-icon class="warn" name="warning-o" />
+      <view class="text">请先填写设备信息</view>
+    </view>
+    <view style="height: 60rpx;background-color: #FFFFFF;opacity: 0;position: absolute;top: 60rpx;width: 100%;"></view>
+  </view>
+  <!-- 设备信息 -->
+  <view class="deviceInfoContainer" wx:if="{{tabIndex == 0}}">
+    <view class="deviceInfoBox">
+      <!-- 所在工序 -->
+      <view class="processBox" style="margin-top: 20rpx;">
+        <view class="process">所在工序:</view>
+        <view wx:if="{{statusIndex2!=1}}" class="processNameBox input" catchtap="showProcess">
+          <view class="processName">{{processname}}</view>
+          <image class="downArrow" src="../../../../image/device/downArrow.png"></image>
+        </view>
+        <view wx:else class="processNameBox input">
+          <view class="processName disabledCalss">{{processname}}</view>
+          <!-- <image class="downArrow" src="../../image/device/downArrow.png"></image> -->
+        </view>
+      </view>
+      <!-- 工序列表弹窗 -->
+      <van-popup show="{{ isShowProcess }}" round position="bottom" closeable bind:close="closeProcess">
+        <view class="processContainer">
+          <view class="whereProcess">所在工序</view>
+          <scroll-view scroll-y="true" style="height: 730rpx;">
+            <view class="processList" wx:for="{{process}}" wx:key="alias" catchtap="toggleProcess" data-processName="{{item.machining_name}}" data-processId="{{item.machining_id}}">
+              <view class="item">{{item.machining_name}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </van-popup>
+      <!-- 设备名称 -->
+      <view class="nameBox processBox">
+        <view class="name">设备名称:</view>
+        <input class="nameInput input" wx:if="{{statusIndex2!=1}}" type="text" disabled="{{statusIndex2==1}}" value="{{deviceName}}" bindinput="getDeviceName" placeholder="请输入设备名称" />
+        <view wx:else class="nameInput input disabledCalss">{{deviceName}}</view>
+      </view>
+      <!-- 设备型号 -->
+      <!-- <view class="modelBox">
+        <view class="model">设备型号:</view>
+        <input wx:if="{{statusIndex2!=1}}" class="nameInput input" type="text" value="{{deviceModel}}" bindinput="getDeviceModel" placeholder="请输入设备型号" />
+        <view wx:else class="nameInput input disabledCalss">{{deviceModel}}</view>
+      </view> -->
+       <!-- 所在工序 -->
+      <view class="processBox" wx:if="{{deviceTypeList&&deviceTypeList.length>0}}">
+        <view class="process">设备类型:</view>
+        <view wx:if="{{statusIndex2!=1}}" class="processNameBox input" catchtap="showDeviceType">
+          <view wx:if="{{device_type!==''}}" class="processName">{{device_type}}</view>
+          <view wx:else class="processName" style="color:#808080">请选择设备类型</view>
+          
+          <image class="downArrow" src="../../../../image/device/downArrow.png"></image>
+        </view>
+        <view wx:else class="processNameBox input">
+          <view class="processName disabledCalss">{{device_type!==''?device_type:'请选择设备类型'}}</view>
+          <!-- <image class="downArrow" src="../../image/device/downArrow.png"></image> -->
+        </view>
+      </view>
+      <!-- 工序列表弹窗 -->
+      <van-popup show="{{ isShowDeviceType }}" round position="bottom" closeable bind:close="closeDeviceType" >
+        <view class="processContainer">
+          <view class="whereProcess">设备类型</view>
+          <scroll-view scroll-y="true" style="height: 730rpx;">
+            <view class="processList" wx:for="{{deviceTypeList}}" wx:key="alias"  catchtap="toggleDeviceType" data-item='{{item.name}}' data-id='{{item.id}}'>
+              <view class="item">{{item.name}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </van-popup>
+       <!-- 所在工序 -->
+      <view class="processBox" wx:if="{{deviceSizeList&&deviceSizeList.length>0}}">
+        <view class="process">设备尺寸:</view>
+        <view wx:if="{{statusIndex2!=1}}" class="processNameBox input" catchtap="showDeviceSize">
+          <view wx:if="{{device_size!==''}}" class="processName">{{device_size}}</view>
+          <view wx:else class="processName" style="color:#808080">请选择设备尺寸</view>
+          <image class="downArrow" src="../../../../image/device/downArrow.png"></image>
+        </view>
+        <view wx:else class="processNameBox input">
+          <view class="processName disabledCalss">{{device_size}}</view>
+          <!-- <image class="downArrow" src="../../image/device/downArrow.png"></image> -->
+        </view>
+      </view>
+      <!-- 工序列表弹窗 -->
+      <van-popup show="{{ isShowDeviceSize }}" round position="bottom" closeable bind:close="closeDeviceSize">
+        <view class="processContainer">
+          <view class="whereProcess">设备尺寸</view>
+          <scroll-view scroll-y="true" style="height: 730rpx;">
+            <view class="processList" wx:for="{{deviceSizeList}}" wx:key="index"  catchtap="toggleDeviceSize"  data-item='{{item.name}}'  data-id='{{item.id}}'>
+              <view class="item">{{item.name}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </van-popup>
+      <!-- 状态 -->
+      <view class="statusBox flex">
+        <view class="status">状态:</view>
+        <view class="statusTextBox flex">
+          <view class="powerOn" wx:for="{{status}}" wx:key="index">
+            <image class="round" data-index="{{item.index}}" src="{{statusIndex == item.index ? '../../../../image/device/activeRound.png' : '../../../../image/device/round.png'}} " catchtap="toggleState"></image>
+            <view class="text">{{item.text}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 确认 -->
+    <button class="affirm flex_c_c" catchtap="affirm">确认</button>
+  </view>
+  <!-- 机长列表 -->
+  <view class="pilotListBox" wx:if="{{tabIndex == 1}}">
+    <view class="itemBox" wx:for="{{pilotList}}" wx:key="operator_id" data-pilotId="{{item.operator_id}}" catchtap="skip">
+      <image class="headPortrait" src="{{item.operator_url ? imageBaseUrl + item.operator_url : '../../../../image/palceOrder/avatar2.png'}}"></image>
+      <view class="name">{{item.operator_name}}</view>
+    </view>
+    <button class="addPilot flex_c_c" catchtap="jump">添加机长</button>
+  </view>
+</view>

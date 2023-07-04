@@ -1,0 +1,30 @@
+<!-- components/ywxx/index.wxml -->
+<van-popup show="{{ show=='1' }}" bind:close="onClose" round closeable position="bottom" custom-style="height: 90%; overflow: hidden;">
+  <view class="amboss-box" wx:if="cartList.length>0">
+    <view class="cart-box" id="cart-box">
+      <view class="label-title">纹理类别</view>
+      <view>
+        <button class="{{item!==cartValue?'normal_button':'checked_button'}}" catchtap="radioCart" data-cart="{{item}}" wx:for="{{cartList}}" wx:key="index">
+          {{item}}
+        </button>
+      </view>
+      <view class="label-title">纹理选择</view>
+    </view>
+    <view style="height:calc(100% - 440rpx);overflow-y:scroll" class="item-box">
+      <van-grid column-num="3" gutter="{{ 10 }}">
+        <van-grid-item use-slot wx:for="{{ ambossList }}" catchtap="radioAmbossFun" data-id='{{item.id}}' wx:key="index" wx:if="{{item.cart==cartValue}}" custom-class="{{item.id==radioAmbossId?'item-amboss-item checked-amboss-item':'item-amboss-item'}}">
+          <view style=" position: relative;    display: inline-grid;">
+            <van-icon name="expand" catchtap="expand" data-id='{{item.id}}' custom-style="position: absolute;right: 5rpx;top: 5rpx;color:#f6f6f6;" size='40rpx' />
+            <image class="amboss-img" src="{{OSSFileUrl+item.imageUrl}}" />
+            <view class="amboss-code">编号:{{item.embossTextureNo}}</view>
+          </view>
+          <text>{{item.embossTextureName2||item.embossTextureName}}</text>
+        </van-grid-item>
+      </van-grid>
+    </view>
+    <view class="confirm-box" id="confirm-box">
+      <button class="confirm-btn" catchtap="confirmAmboss">确认选择</button>
+    </view>
+    <!-- </view> -->
+  </view>
+</van-popup>

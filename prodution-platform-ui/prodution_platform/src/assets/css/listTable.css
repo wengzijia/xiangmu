@@ -1,0 +1,132 @@
+.commonTableListBox {
+  height: 100%;
+  overflow: hidden;
+  padding: 16px 24px 24px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.commonTableListBox .select_box {
+  margin-bottom: 16px;
+  padding: 20px 20px 2px 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.commonTableListBox .select_box .select_top {
+  margin-bottom: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.commonTableListBox .select_box .select_group {
+  display: flex;
+  width: 100%;
+}
+
+.commonTableListBox .select_box .select_group .selecct_item_serachBox button .el-icon {
+  margin-right: 6px;
+}
+
+.commonTableListBox .content_box {
+  padding: 37px 20px 76px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 4px;
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.commonTableListBox .content_box .add {
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+  font-weight: 400;
+  color: var(--vt-c-theme-colors);
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.commonTableListBox .content_box .add > p {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  border: 0 !important;
+  padding-left: 24px;
+  position: relative;
+}
+
+.commonTableListBox .content_box .add > p > span {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-55%);
+  font-size: 20px;
+}
+
+.commonTableListBox .content_box .table_box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.commonTableListBox .content_box .table_box .statusName {
+  position: relative;
+  padding-left: 20px;
+}
+
+.commonTableListBox .content_box .table_box .statusName::after {
+  position: absolute;
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--vt-c-theme-colors);
+  border-radius: 50%;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.commonTableListBox .content_box .table_box .edit_buttom {
+  color: var(--vt-c-theme-colors)!important;
+  background-color: #FFF!important;
+  border-color: var(--vt-c-theme-colors)!important;
+}
+
+.commonTableListBox .content_box .table_box .edit_buttom:hover {
+  opacity: 0.75;
+}
+
+.commonTableListBox .content_box :deep(.el-table--enable-row-hover) .el-table__body tr:hover > td {
+  background-color: #F7F9F8 !important;
+}
+
+.commonTableListBox .content_box :deep(.el-table__body-wrapper) .cell {
+  color: #666 !important;
+}
+
+.commonTableListBox .content_box :deep(.el-table__header) th {
+  background-color: #f2f2f2;
+}
+
+.commonTableListBox .content_box :deep(.el-table__header) .cell {
+  color: #333 !important;
+  font-weight: 500 !important;
+}
+
+.commonTableListBox .footer {
+  position: fixed;
+  right: 34px;
+  bottom: 44px;
+}

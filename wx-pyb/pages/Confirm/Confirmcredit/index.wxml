@@ -1,0 +1,17 @@
+<!--pages/Confirm/Confirmcredit/index.wxml-->
+<view class="mar_rl">
+  <view class="confirm_bg">
+    <view class="pay_text">还款金额</view>
+    <view class="money"><text>¥</text><text>{{repayment}}</text></view>
+    <view class="count">{{monthText}}月账单共 <text>{{amount}}</text> 元</view>
+  </view>
+  <view class="pay">
+    已还{{bill.repaymentAmount}}元，剩余{{surplus}}元待还
+  </view>
+</view>
+ <!-- //底部支付按钮 -->
+ <view class="btn_bg">
+    <button disabled="{{!repayment}}" class="btn_text btn_able" bindtap="bindPay" data-id="" data-status="gopay">
+      确认还款
+    </button>
+  </view>

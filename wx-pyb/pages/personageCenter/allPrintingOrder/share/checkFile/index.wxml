@@ -1,0 +1,20 @@
+<view style='text-align:center;padding:20px 0 40rpx;' >
+  <!-- <view class="order_color"><text style="color:#333">订单编号:</text>{{orderSn}}</view> -->
+  <view  style="padding-bottom:80rpx">
+  <view wx:for="{{imgList}}" wx:key="id" wx:for-index="index" class="mar_b">
+    <image  class="img" src="{{item}}" mode="aspectFit" data-url="{{item}}" catchtap='checkAll' />
+  </view>
+</view>
+  <view class='bottom-btn-box'>
+    <!-- !isAdmin&& -->
+  <button class='bottom-btn' disabled="{{notConfirm}}" wx:if="{{!isAdmin&&queryType == 'confirm'&&orderInfo.status=='noconfirm'}}"  catchtap='showDialogFun'>
+    {{btnText}}
+  </button>
+  </view>
+   <van-dialog show="{{showDialog}}" title="确认提醒" use-slot show-cancel-button bind:confirm="sendFile" confirm-button-text="确认"  >
+      <view style="padding: 20rpx 40rpx; font-size: 28rpx">
+        确认兰纸后将会出版，如需改动可能会产生版费，请知悉
+      </view>
+    </van-dialog>
+ 
+</view>

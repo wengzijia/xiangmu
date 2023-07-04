@@ -1,0 +1,86 @@
+<template>
+  <div class="guigeRt">
+    <div class="guigeRtWrap">
+      <h2 class="guigeRtH2">{{ topNav.data.name }}-{{ subNav.name }}报价</h2>
+      <div class="geRtList">
+        <h4>打样店地址</h4>
+        <div class="dayC7">
+          <p>地址：广东省深圳市龙岗区平新北路98号 DCC展览展示文化创意园10栋4楼</p>
+          <!--  <p>联系人：张先生 13480790212</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="geRtList">
+      <h4>货期规则</h4>
+      <div class="geRtSection">
+        <p>1、 数量超过10个、单个打印幅面较大、文件调整内容较多订单，货期请以客服沟通结果为准；</p>
+        <p>2、 周日休息，订单顺延至下周一处理，请提前下单，带来不便请见谅。</p>
+      </div>
+    </div>
+    <div class="flex geRtExpect">
+      <i></i>
+      <div class="geRtExpectxt">
+        <p>预计发货</p>
+        <p id="out_time">{{ priceFormData.out_time }}</p>
+      </div>
+    </div>
+    <div class="geRtList">
+      <p class="flex geRtotal">
+        总计:<span id="price_total">￥{{ priceFormData.price }}</span>
+      </p>
+      <div v-if="$route.query.cateId === '3'" style="color: red;font-size: 12px;padding-bottom: 10px">精装盒系统报价未完善，请点击右下角QQ客服人工报价</div>
+      <div class="flex geRtBtnDv">
+        <a href="javascript:void(0)" class="getBuy gobtn" @click="addCart('1')">立即购买</a>
+        <a href="javascript:void(0)" class="joinShoping btnCart" @click="addCart('0')"><i></i>加入购物车</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ACCESS_TOKEN } from '@/store/global-constant';
+import store from '@/store';
+import { strEquals } from '@/utils/strUtil';
+import { getTopNav, getSubNav } from '@/utils/cateNavsUtil';
+export default {
+  name: 'PriceRight',
+  props: {
+    priceFormData: Object,
+    addCart: Function
+  },
+  data() {
+    return {
+      currentUser: {},
+      provinceList: [],
+      cityList: [],
+      topNav: {},
+      proofCateNavs: []
+    };
+  },
+  watch: {
+    $route() {
+      this.topNav = getTopNav(this.proofCateNavs, this.$route.query.cateId);
+      this.subNav = getSubNav(this.proofCateNavs, this.$route.query.cateId, this.$route.query.subCateId);
+    }
+  },
+  created() {
+    if (localStorage.getItem(ACCESS_TOKEN) != null) {
+      if (store.getters.userInfo == null) {
+        store.dispatch('GetUserInfo').then(() => {
+          this.currentUser = store.getters.userInfo;
+        });
+      } else {
+        this.currentUser = store.getters.userInfo;
+      }
+    }
+    this.proofCateNavs = this.$store.getters.proofCateNavs;
+    this.topNav = getTopNav(this.proofCateNavs, this.$route.query.cateId);
+    this.subNav = getSubNav(this.proofCateNavs, this.$route.query.cateId, this.$route.query.subCateId);
+  },
+  methods: {
+    ...{ strEquals }
+  }
+};
+</script>
+
+<style scoped></style>

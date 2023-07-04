@@ -1,0 +1,175 @@
+/* pages/my/index.wxss */
+page{
+  background-color: #F4F5FC;
+  width: 100%;
+}
+
+/* 公共类 */
+.flex_c_c{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 头像信息 */
+.imgInfoBox{
+  text-align: center;
+  margin-top: 44rpx;
+}
+
+.imgInfoBox .myImg{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+
+.imgInfoBox .pilotName{
+  margin: auto;
+  margin-top: 32rpx;
+  font-size: 34rpx;
+  color: #262626;
+  font-weight: 700;
+  width: 400rpx;
+}
+
+.imgInfoBox .deviceName{
+  margin: auto;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #595959;
+  width: 400rpx;
+}
+
+/* 除废操作规程 */
+.jjgBox{
+  width: 718rpx;
+  height: 92rpx;
+  background-color: #FFFFFF;
+  display: flex;
+  padding: 28rpx 32rpx 30rpx 32rpx;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  margin:0 auto;
+  margin-top: 32rpx;
+}
+
+.jjgBox .inform{
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.jjgBox .jjgTitle{
+  margin-left: 16rpx;
+  color: #262626;
+}
+
+.jjgBox .cat{
+  margin-left: 296rpx;
+  color: #3D7EFF;
+}
+
+/* 下班打卡 */
+.clockOutBox{
+  width: 384rpx;
+  height: 384rpx;
+  margin: 0 auto;
+  margin-top: 180rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.closedImg{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 384rpx;
+  height: 384rpx;
+  border-radius: 50%;
+}
+
+.textBox{
+  text-align: center;
+  position: absolute;
+}
+
+.textBox .text{
+  font-size: 48rpx;
+  color: #FFFFFF;
+}
+
+.textBox .time{
+  margin-top: 8rpx;
+  font-size: 34rpx;
+  color: #8CC8FF;
+}
+
+/* 下班打卡提示 */
+.clockOutHint{
+  text-align: center;
+}
+
+.clockOutHint .warn{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+}
+
+.clockOutHint .warnInfo{
+  font-size: 26rpx;
+  color: #595959;
+  margin-left: 8rpx;
+}
+
+/* 打卡提示弹窗 */
+.ClockOutHintPop {
+  /* 去除背景色 */
+  background-color: transparent !important;
+}
+
+.clockOutHintBox{
+  width: 600rpx;
+  height: 410rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  text-align: center;
+  padding-top: 50rpx;
+  box-sizing: border-box;
+}
+
+.clockOutHintBox .cOHintTitle{
+  font-size: 40rpx;
+  color: #3D7EFF;
+  font-weight: 700;
+}
+
+.clockOutHintBox .cOHintText{
+  font-size: 30rpx;
+  color: #333333;
+  margin-top: 60rpx;
+}
+
+.cOHintBtnBox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66rpx;
+  padding:0 40rpx;
+}
+
+.clockOutHintBox .cOHintAffirm{
+  width: 220rpx;
+  height: 64rpx;
+  background: #3D7EFF;
+  border-radius: 32rpx;
+  color: #FFFFFF;
+}
+
+.clockOutHintBox .cOHintCatch{
+  width: 220rpx;
+  height: 64rpx;
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  border: 2rpx solid #3D7EFF;
+  color: #3D7EFF;
+}

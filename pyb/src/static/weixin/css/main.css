@@ -1,0 +1,18 @@
+/****
+****傲彩手机端
+****安卓开发工程师王冰冰qq:809479912@qq.com
+****联系电话:18191424883
+****官网:www.xiaocayin.com
+****/
+/*商品列表--start*/
+.wbb20171103_001_div{padding:2rem 1rem;}
+.wbb20171103_001_div .title_2017_1103{font-weight:bold;border-bottom:1px solid #ddd;padding-bottom:1rem;font-size:1.6rem;}
+.wbb20171103_001_div .fenlei_2017_1103_1402>li{padding-top:1.5rem;font-size:1.5rem;}
+.wbb20171103_001_div .spanA201711031427 a{display:inline-block;padding:0.3rem 0.5rem;border:1px solid #ddd;margin:0 0.6rem 0.8rem 0;}
+/*.wbb20171103_001_div .spanA201711031427 a:hover{color:#08d;border:1px solid #08d;}*/
+.wbb20171103_001_div .spanA201711031427 a.selected{color:#08d;border:1px solid #08d;}
+.wbbdiv_201711031517{font-size:1.5rem;padding:1rem 0;}
+.wbbP_201711031526 a{width:30%;display:inline-block;border:1px solid #eee;margin-left:1%;}
+.wbbP_201711031526 a:hover{border:1px solid #08d;}
+
+/*商品列表--end*/
